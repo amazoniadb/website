@@ -6,13 +6,14 @@ All notable changes to AmazoniaDB are documented here. Loosely follows [Keep a C
 
 ### Security
 - Re-established the public project from a reviewed snapshot with a project-only commit identity and no inherited Git history
-- Pinned every GitHub Action to an immutable commit and made source-submission automation require explicit maintainer approval
+- Pinned every GitHub Action to an immutable commit and removed the write-capable public source-submission workflow
 - Removed contributor usernames from generated catalog records and the public API
 - Removed the secondary GitHub Pages deployment surface
 - Locked the Cloudflare deployment tool and added a private vulnerability-reporting policy plus `security.txt`
 - Removed inline JavaScript from the theme bootstrap so the Content Security Policy no longer needs `unsafe-inline`
 
 ### Changed
+- Source proposals remain public issues, while only maintainers can prepare catalog changes through reviewed pull requests
 - Generated API updates now travel in the same reviewed pull request as catalog changes instead of a workflow writing directly to `main`
 - Public project links now point to the AmazoniaDB organization rather than a personal account
 

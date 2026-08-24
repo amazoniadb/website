@@ -580,14 +580,7 @@ for (const label of ["Forests & biodiversity", "Earth, water & air", "Land, fire
 for (const legacyLabel of ["Forest & biodiversity", "Earth, water & climate", "Land use & infrastructure", "Peoples, territories & culture", "Society, health & livelihoods", "Governance, rights & safeguards"]) {
   if (sourceIssueTemplate.includes(`- ${JSON.stringify(legacyLabel)}`)) fail(`new-source issue template: must not expose the legacy category label (${legacyLabel}).`);
 }
-const sourceWorkflow = await read(".github/workflows/source-submission.yml");
-for (const command of ["node scripts/build-api.mjs", "npm run check"]) {
-  if (!sourceWorkflow.includes(command)) fail(`source-submission workflow: missing ${command}.`);
-}
-if (!sourceWorkflow.includes("types: [labeled]") || !sourceWorkflow.includes("source-approved")) {
-  fail("source-submission workflow: public issues must require an explicit maintainer approval label before write access is granted.");
-}
-for (const file of [".github/workflows/check-links.yml", ".github/workflows/quality.yml", ".github/workflows/source-submission.yml", ".github/workflows/validate-catalog.yml"]) {
+for (const file of [".github/workflows/check-links.yml", ".github/workflows/quality.yml", ".github/workflows/validate-catalog.yml"]) {
   const workflow = await read(file);
   if (/uses:\s+[^\s#]+@v\d+/i.test(workflow)) fail(`${file}: actions must be pinned to immutable full commit SHAs.`);
   for (const match of workflow.matchAll(/uses:\s+[^\s#]+@([a-f0-9]+)/gi)) {

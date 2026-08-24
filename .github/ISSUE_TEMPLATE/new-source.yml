@@ -8,7 +8,7 @@ body:
       value: |
         Thanks for proposing a source. Please read CONTRIBUTING.md first — link only to the original publisher, don't submit sensitive locations or restricted knowledge, and default to Brazil unless a source is genuinely pan-Amazon or global.
 
-        This is a public GitHub issue, so your GitHub username and everything you enter here will be visible on GitHub. AmazoniaDB does not copy your username into the catalog or public API. After a maintainer reviews the proposal and applies the `source-approved` label, automation validates it and opens a draft pull request; nothing merges automatically.
+        This is a public GitHub issue, so your GitHub username and everything you enter here will be visible on GitHub. AmazoniaDB does not copy your username into the catalog or public API. A maintainer reviews every proposal and prepares any catalog change through the normal pull-request quality gate; nothing is added automatically.
   - type: input
     id: url
     attributes:

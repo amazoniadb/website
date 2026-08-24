@@ -55,20 +55,15 @@ node scripts/validate-catalog.mjs
 
 The expected fields and controlled vocabulary are also documented in `data/catalog.schema.json`.
 
-## Automated source submissions
+## Review automation
 
-Four workflows in `.github/workflows/` protect and automate the review-record process:
+Three workflows in `.github/workflows/` protect the review-record process:
 
 - `validate-catalog.yml` runs `scripts/validate-catalog.mjs` on every pull request touching `data/catalog.js`, `data/catalog.schema.json`, or the validator itself, and on push to `main`.
-- `source-submission.yml` runs only after a maintainer applies the `source-approved` label to a public "New source submission" issue (`.github/ISSUE_TEMPLATE/new-source.yml`). It parses the English, Portuguese, and Spanish source descriptions and visible optional metadata; builds the record and localized display content via `scripts/issue-to-entry.mjs`; regenerates the API mirror; runs the full quality gate; and opens a **draft** pull request if it passes. Nothing merges automatically, and the submitter's GitHub handle is not copied into the catalog or API.
 - `check-links.yml` runs `scripts/check-links.mjs` weekly (and on demand). It flags both dead links and entries whose `checked` date has gone stale (over 180 days), filing or updating one tracking issue and closing it when a recheck is healthy.
 - `quality.yml` runs `npm run check` on every pull request and every push to `main`. It checks syntax, catalog fields and duplicate URLs, the API mirror, local public-file references, the nine canonical localized pages, submission fields, translations for every visible catalog field, and placeholder content.
 
-One repository setting is required before `source-submission.yml` can open pull requests:
-
-1. **Settings → Actions → General → Workflow permissions** — enable "Allow GitHub Actions to create and approve pull requests."
-
-The workflow uses the default `GITHUB_TOKEN`, which is enough to open the draft PR, but pull requests it creates won't automatically re-trigger `validate-catalog.yml` as a separate check (GitHub blocks workflow-token-created PRs from triggering other workflows, to prevent recursive runs). This doesn't let bad data through — the catalog is already validated in the same run, before the PR is opened — it just means the PR won't show its own green check unless you swap the default token for a narrowly scoped GitHub App credential.
+The public issue form collects proposals, but no public issue triggers a write-capable workflow. A maintainer can run `scripts/issue-to-entry.mjs` locally when preparing a reviewed pull request; the submitter's GitHub handle is not copied into the catalog or API.
 
 If your default branch isn't `main`, update the `branches:` values in `validate-catalog.yml` and `quality.yml` to match.
 
