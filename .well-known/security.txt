@@ -1,0 +1,6 @@
+Contact: mailto:correcoes@amazoniadb.org
+Contact: https://github.com/amazoniadb/website/security/advisories/new
+Expires: 2027-08-24T00:00:00Z
+Preferred-Languages: pt-BR, en, es
+Canonical: https://amazoniadb.org/.well-known/security.txt
+Policy: https://github.com/amazoniadb/website/security/policy

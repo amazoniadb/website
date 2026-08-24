@@ -1,0 +1,153 @@
+name: Check catalog links
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"  # every Monday, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 22
+
+      - name: Check links
+        id: links
+        run: node scripts/check-links.mjs
+
+      - name: Publish manual-review notes
+        if: steps.links.outputs.manual_count != '0'
+        env:
+          MANUAL_BODY: ${{ steps.links.outputs.manual_body }}
+        run: |
+          echo "## Link checks needing a manual browser review" >> "$GITHUB_STEP_SUMMARY"
+          echo "Some publishers block or rate-limit automated requests. These are not treated as broken links or turned into recurring issues." >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "$MANUAL_BODY" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Find existing catalog-health issue
+        id: existing
+        if: steps.links.outputs.broken_count != '0' || steps.links.outputs.stale_count != '0'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        with:
+          result-encoding: string
+          script: |
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: "broken-links"
+            });
+            return issues.data.length ? String(issues.data[0].number) : "";
+
+      - name: Open new issue
+        if: (steps.links.outputs.broken_count != '0' || steps.links.outputs.stale_count != '0') && steps.existing.outputs.result == ''
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        env:
+          BROKEN_BODY: ${{ steps.links.outputs.broken_body }}
+          BROKEN_COUNT: ${{ steps.links.outputs.broken_count }}
+          STALE_BODY: ${{ steps.links.outputs.stale_body }}
+          STALE_COUNT: ${{ steps.links.outputs.stale_count }}
+        with:
+          script: |
+            const brokenCount = Number(process.env.BROKEN_COUNT);
+            const staleCount = Number(process.env.STALE_COUNT);
+            const titleParts = [];
+            if (brokenCount) titleParts.push(`${brokenCount} broken link${brokenCount === 1 ? "" : "s"}`);
+            if (staleCount) titleParts.push(`${staleCount} stale entr${staleCount === 1 ? "y" : "ies"}`);
+            const bodyParts = [];
+            if (brokenCount) {
+              bodyParts.push(`**Broken links** — some sites block automated checks even when they work fine for real visitors; verify by hand before removing anything.\n\n${process.env.BROKEN_BODY}`);
+            }
+            if (staleCount) {
+              bodyParts.push(`**Stale entries** — not yet checked again in a while. Worth a quick revisit to confirm the link, access terms, and description still hold.\n\n${process.env.STALE_BODY}`);
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Catalog health check: ${titleParts.join(", ")}`,
+              labels: ["broken-links"],
+              body: bodyParts.join("\n\n---\n\n")
+            });
+
+      - name: Refresh existing issue when results change
+        if: (steps.links.outputs.broken_count != '0' || steps.links.outputs.stale_count != '0') && steps.existing.outputs.result != ''
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        env:
+          BROKEN_BODY: ${{ steps.links.outputs.broken_body }}
+          BROKEN_COUNT: ${{ steps.links.outputs.broken_count }}
+          STALE_BODY: ${{ steps.links.outputs.stale_body }}
+          STALE_COUNT: ${{ steps.links.outputs.stale_count }}
+          ISSUE_NUMBER: ${{ steps.existing.outputs.result }}
+        with:
+          script: |
+            const brokenCount = Number(process.env.BROKEN_COUNT);
+            const staleCount = Number(process.env.STALE_COUNT);
+            const titleParts = [];
+            if (brokenCount) titleParts.push(`${brokenCount} broken link${brokenCount === 1 ? "" : "s"}`);
+            if (staleCount) titleParts.push(`${staleCount} stale entr${staleCount === 1 ? "y" : "ies"}`);
+            const bodyParts = [];
+            if (brokenCount) bodyParts.push(`**Broken links** — some sites block automated checks even when they work fine for real visitors; verify by hand before removing anything.\n\n${process.env.BROKEN_BODY}`);
+            if (staleCount) bodyParts.push(`**Stale entries** — not yet checked again in a while. Worth a quick revisit to confirm the link, access terms, and description still hold.\n\n${process.env.STALE_BODY}`);
+            const title = `Catalog health check: ${titleParts.join(", ")}`;
+            const body = bodyParts.join("\n\n---\n\n");
+            const existing = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number(process.env.ISSUE_NUMBER)
+            });
+            if (existing.data.title === title && existing.data.body === body) {
+              core.notice("Catalog-health issue already reflects the current actionable results.");
+              return;
+            }
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number(process.env.ISSUE_NUMBER),
+              title,
+              body
+            });
+
+      - name: Find resolved catalog-health issue
+        id: resolved
+        if: steps.links.outputs.broken_count == '0' && steps.links.outputs.stale_count == '0'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        with:
+          result-encoding: string
+          script: |
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: "broken-links"
+            });
+            return issues.data.length ? String(issues.data[0].number) : "";
+
+      - name: Close resolved catalog-health issue
+        if: steps.resolved.outputs.result != ''
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        env:
+          ISSUE_NUMBER: ${{ steps.resolved.outputs.result }}
+        with:
+          script: |
+            const issueNumber = Number(process.env.ISSUE_NUMBER);
+            const body = "No actionable broken links or stale records remain. Closing this catalog-health alert; publishers that block automation are tracked only in the workflow summary for manual review.";
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              state: "closed"
+            });

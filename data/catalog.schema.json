@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AmazoniaDB catalog record",
+  "description": "Schema for a single entry in data/catalog.js (window.AMAZONIA_CATALOG). This mirrors the rules enforced by scripts/validate-catalog.mjs. If the two ever disagree, the validator script is the source of truth — update this file to match it.",
+  "type": "object",
+  "required": ["id", "title", "provider", "category", "coverage", "formats", "access", "kind", "description", "url", "checked"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Unique, lowercase, kebab-case identifier for the record."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the dataset, repository, or portal."
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The original publishing institution or organization."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Forest & biodiversity",
+        "Earth, water & climate",
+        "Land use & infrastructure",
+        "Peoples, territories & culture",
+        "Society, health & livelihoods",
+        "Governance, rights & safeguards"
+      ],
+      "description": "Exactly one of the six approved domains. Must match this list character-for-character."
+    },
+    "coverage": {
+      "type": "string",
+      "enum": ["Pan-Amazon", "Brazil", "Peru", "Colombia", "Bolivia", "Ecuador", "Global — subsettable"],
+      "description": "Geographic scope. Note the em dash in \"Global — subsettable\"."
+    },
+    "formats": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Data forms the source is available in, e.g. GeoTIFF, CSV, API, Shapefile."
+    },
+    "access": {
+      "type": "string",
+      "enum": ["Provider terms apply", "Dataset-specific license", "Publicly available"],
+      "description": "Use 'Publicly available' only when the provider explicitly frames the resource as open/free access. Use 'Dataset-specific license' when a specific named license applies (e.g. CC-BY, PDDL). Default to 'Provider terms apply' whenever terms are unclear or mixed — do not guess toward openness."
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["Dataset", "Data portal", "Download", "Explorer"],
+      "description": "Dataset: a single, well-defined dataset. Data portal: a searchable aggregator of many records/datasets. Download: a page whose main function is a file download. Explorer: an interactive map, dashboard, or query-builder tool."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Plain-language description of what the source contains and how it's structured — not what a user might infer or do with it."
+    },
+    "url": {
+      "type": "string",
+      "pattern": "^https://",
+      "description": "Direct link to the original publisher's page, repository, or portal. Must use https and must not be a mirror."
+    },
+    "checked": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "Date this link was last confirmed live and accurate, as YYYY-MM-DD."
+    },
+    "temporalCoverage": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional. The timeframe the data covers, in the source's own terms, e.g. '1985–2024 (annual)' or 'Updated monthly'. Omit rather than guess when a source has no clear fixed range (e.g. a continuously-updated occurrence database)."
+    },
+    "spatialResolution": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional. The spatial grain of the data, e.g. '30 m (Landsat-based classification)', 'Municipality level', or 'Point occurrence records; accuracy varies per record'. Omit for sources where a fixed spatial resolution is not a meaningful concept (e.g. a qualitative profile database)."
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional. The specific named open-data license when the provider states one explicitly, e.g. 'Open Data Commons Public Domain Dedication and License (PDDL)'. This is separate from `access`: most sources have a real, checkable access note but no single named license, and `license` should stay unset for those rather than restating `access` here."
+    },
+    "methodologyUrl": {
+      "type": "string",
+      "pattern": "^https?://",
+      "description": "Optional. A direct link to the provider's methodology, technical note, or documentation — distinct from `url`, which is the dataset/portal page itself."
+    },
+    "responsibleUse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["note"],
+      "description": "Optional, reviewed context shown beside sources whose reuse can affect people, territories, species, or community knowledge. This is a limitation note, never an inferred permission or authority claim.",
+      "properties": {
+        "note": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["en", "pt-BR", "es"],
+          "properties": {
+            "en": { "type": "string", "minLength": 1 },
+            "pt-BR": { "type": "string", "minLength": 1 },
+            "es": { "type": "string", "minLength": 1 }
+          }
+        },
+        "protocolUrl": {
+          "type": "string",
+          "pattern": "^https?://",
+          "description": "Optional provider- or rights-holder-published protocol that applies to this source."
+        },
+        "communityAuthorityUrl": {
+          "type": "string",
+          "pattern": "^https?://",
+          "description": "Optional authority link, included only when explicitly published by the relevant community or rights-holder."
+        }
+      }
+    },
+    "tags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["topics", "modes", "time", "roles"],
+      "description": "Optional editorial classification for discovery. When present, every facet must use the controlled vocabulary in data/tag-presentation.js. Tags describe the source, not a claim about people or places.",
+      "properties": {
+        "topics": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["biodiversity", "forests", "forest-change", "land-use", "fire", "extractive-pressures", "infrastructure", "water", "climate", "terrain", "territories", "indigenous-peoples", "community-lands", "languages", "population", "health", "livelihoods", "food-security", "protected-areas", "tenure-and-rights", "environmental-accountability"]
+          }
+        },
+        "modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["geospatial", "remote-sensing", "field-observation", "station-observation", "administrative-record", "survey-or-census", "legal-boundary", "indicators-and-profiles", "reference-layer"]
+          }
+        },
+        "time": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["historical-series", "ongoing", "near-real-time", "static-reference", "future-scenarios"]
+          }
+        },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["baseline", "monitoring", "alert", "boundary", "context", "accountability"]
+          }
+        }
+      }
+    }
+  }
+}

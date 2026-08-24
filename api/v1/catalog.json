@@ -1,0 +1,1962 @@
+{
+  "apiVersion": 1,
+  "generated": "2026-08-24T16:07:17.386Z",
+  "count": 51,
+  "source": "https://amazoniadb.org/",
+  "recordSchema": "https://amazoniadb.org/data/catalog.schema.json",
+  "license": "All rights reserved on this index. Each record links to its original provider, who holds their own rights over the underlying data — this JSON is a convenience mirror of AmazoniaDB's curated list, not a redistribution of provider data.",
+  "records": [
+    {
+      "id": "gbif-species-occurrences",
+      "title": "GBIF Species Occurrence Data",
+      "provider": "Global Biodiversity Information Facility (GBIF)",
+      "category": "Forest & biodiversity",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "API",
+        "Darwin Core Archive",
+        "CSV"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "A global aggregator of species occurrence records — museum specimens, citizen-science observations, and survey data — searchable and filterable to the Amazon basin.",
+      "url": "https://www.gbif.org/",
+      "checked": "2026-07-14",
+      "temporalCoverage": "Museum specimens to present (continuously updated)",
+      "spatialResolution": "Point occurrence records; accuracy varies per record",
+      "methodologyUrl": "https://techdocs.gbif.org/en/",
+      "tags": {
+        "topics": [
+          "biodiversity"
+        ],
+        "modes": [
+          "field-observation",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context",
+          "monitoring"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Exact occurrence locations can expose sensitive species or local knowledge. Check geoprivacy and provider terms before republishing coordinates.",
+          "pt-BR": "Localizações exatas podem expor espécies sensíveis ou conhecimentos locais. Verifique a geoprivacidade e os termos da fonte antes de republicar coordenadas.",
+          "es": "Las ubicaciones exactas pueden exponer especies sensibles o conocimientos locales. Revise la geoprivacidad y los términos de la fuente antes de republicar coordenadas."
+        }
+      }
+    },
+    {
+      "id": "specieslink-network",
+      "title": "speciesLink Network",
+      "provider": "CRIA (Centro de Referência em Informação Ambiental)",
+      "category": "Forest & biodiversity",
+      "coverage": "Brazil",
+      "formats": [
+        "API",
+        "CSV"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "A Brazilian biodiversity data network aggregating occurrence records for plants, animals, fungi, and microorganisms, enriched with images and land-use context for each collection site.",
+      "url": "https://specieslink.net/",
+      "checked": "2026-07-14",
+      "temporalCoverage": "2002–present (continuously updated)",
+      "spatialResolution": "Point occurrence records; accuracy varies per record",
+      "methodologyUrl": "https://splink.cria.org.br/documents",
+      "tags": {
+        "topics": [
+          "biodiversity"
+        ],
+        "modes": [
+          "field-observation",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context",
+          "monitoring"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Exact occurrence locations can expose sensitive species or local knowledge. Check geoprivacy and provider terms before republishing coordinates.",
+          "pt-BR": "Localizações exatas podem expor espécies sensíveis ou conhecimentos locais. Verifique a geoprivacidade e os termos da fonte antes de republicar coordenadas.",
+          "es": "Las ubicaciones exactas pueden exponer especies sensibles o conocimientos locales. Revise la geoprivacidad y los términos de la fuente antes de republicar coordenadas."
+        }
+      }
+    },
+    {
+      "id": "ana-hidroweb",
+      "title": "Hidroweb — National Hydrometeorological Network",
+      "provider": "Agência Nacional de Águas e Saneamento Básico (ANA)",
+      "category": "Earth, water & climate",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "API"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "Station-level river level, streamflow, rainfall, and water-quality records from Brazil's National Hydrometeorological Network, run by the federal water agency.",
+      "url": "https://www.snirh.gov.br/hidroweb",
+      "checked": "2026-07-14",
+      "temporalCoverage": "Varies by station; many series since the early 2000s, some longer",
+      "spatialResolution": "Station-level (point gauges)",
+      "methodologyUrl": "https://metadados.snirh.gov.br/geonetwork/srv/api/records/6749d278-ca5e-40e9-b648-20d6382f57df/attachments/Cartilha_EstatisticasFluPlu_VF.pdf",
+      "tags": {
+        "topics": [
+          "water",
+          "climate"
+        ],
+        "modes": [
+          "station-observation",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "monitoring",
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "inmet-bdmep",
+      "title": "BDMEP — Historical Meteorological Database",
+      "provider": "Instituto Nacional de Meteorologia (INMET)",
+      "category": "Earth, water & climate",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Data portal",
+      "description": "Daily historical weather station records for Brazil since 2000 — temperature, rainfall, humidity, and wind — searchable by station or map.",
+      "url": "https://bdmep.inmet.gov.br/",
+      "checked": "2026-07-14",
+      "temporalCoverage": "Daily records since 2000; series length varies by station",
+      "spatialResolution": "Station-level (point observations)",
+      "methodologyUrl": "https://portal.inmet.gov.br/paginas/catalogoman",
+      "tags": {
+        "topics": [
+          "climate"
+        ],
+        "modes": [
+          "station-observation",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "mapbiomas-brasil",
+      "title": "MapBiomas Land Cover & Use Maps",
+      "provider": "MapBiomas (multi-institutional collaborative network)",
+      "category": "Land use & infrastructure",
+      "coverage": "Brazil",
+      "formats": [
+        "GeoTIFF",
+        "Google Earth Engine"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Explorer",
+      "description": "Annual land cover and land-use maps for Brazil since 1985, built from satellite image classification, tracking deforestation, fire, and vegetation change by year and biome.",
+      "url": "https://plataforma.mapbiomas.org/projects/mapbiomas/brazil",
+      "checked": "2026-08-17",
+      "temporalCoverage": "1985–2024 (annual)",
+      "spatialResolution": "30 m (Landsat-based classification)",
+      "methodologyUrl": "https://brasil.mapbiomas.org/wp-content/uploads/sites/4/2026/02/ATBD-Collection-10.1.pdf",
+      "tags": {
+        "topics": [
+          "forests",
+          "forest-change",
+          "land-use",
+          "fire"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "inpe-terrabrasilis",
+      "title": "TerraBrasilis — PRODES & DETER Deforestation Monitoring",
+      "provider": "Instituto Nacional de Pesquisas Espaciais (INPE)",
+      "category": "Land use & infrastructure",
+      "coverage": "Brazil",
+      "formats": [
+        "Shapefile",
+        "GeoTIFF",
+        "WMS/WFS"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Explorer",
+      "description": "Brazil's official satellite-based deforestation monitoring system, publishing annual clear-cut mapping (PRODES) and near-real-time alerts (DETER) for the Legal Amazon and other biomes.",
+      "url": "https://terrabrasilis.dpi.inpe.br/en/home-page/",
+      "checked": "2026-07-14",
+      "temporalCoverage": "PRODES annual since 1988; DETER near-real-time alerts",
+      "spatialResolution": "~30 m (PRODES, Landsat-class); down to ~250 m historically for DETER alerts",
+      "methodologyUrl": "https://terrabrasilis.dpi.inpe.br/en/about/",
+      "tags": {
+        "topics": [
+          "forests",
+          "forest-change",
+          "land-use"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "near-real-time"
+        ],
+        "roles": [
+          "monitoring",
+          "alert"
+        ]
+      }
+    },
+    {
+      "id": "funai-terras-indigenas",
+      "title": "FUNAI Indigenous Territories Geodata",
+      "provider": "Fundação Nacional dos Povos Indígenas (FUNAI)",
+      "category": "Peoples, territories & culture",
+      "coverage": "Brazil",
+      "formats": [
+        "Shapefile",
+        "KML",
+        "CSV"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Download",
+      "description": "Monthly-updated geospatial boundaries for Brazil's indigenous territories, villages, and regional coordination areas, from the federal indigenous affairs agency's mapping unit.",
+      "url": "https://www.gov.br/funai/pt-br/atuacao/terras-indigenas/geoprocessamento-e-mapas",
+      "checked": "2026-07-14",
+      "temporalCoverage": "Updated monthly",
+      "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+      "methodologyUrl": "https://www.gov.br/funai/pt-br/atuacao/terras-indigenas/geoprocessamento-e-mapas/geoserver-funai",
+      "tags": {
+        "topics": [
+          "territories",
+          "indigenous-peoples"
+        ],
+        "modes": [
+          "legal-boundary",
+          "geospatial"
+        ],
+        "time": [
+          "ongoing"
+        ],
+        "roles": [
+          "boundary",
+          "context"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "A published boundary does not establish community consent, full tenure, or permission to use a territory. Confirm the local and legal context with the peoples and communities concerned.",
+          "pt-BR": "Um limite publicado não comprova consentimento comunitário, posse plena nem autorização de uso do território. Confirme o contexto local e jurídico com os povos e comunidades envolvidos.",
+          "es": "Un límite publicado no demuestra consentimiento comunitario, tenencia plena ni autorización para usar el territorio. Confirme el contexto local y jurídico con los pueblos y comunidades involucrados."
+        }
+      }
+    },
+    {
+      "id": "isa-terras-indigenas",
+      "title": "Terras Indígenas no Brasil",
+      "provider": "Instituto Socioambiental (ISA)",
+      "category": "Peoples, territories & culture",
+      "coverage": "Brazil",
+      "formats": [
+        "HTML",
+        "PDF"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Explorer",
+      "description": "An independent, long-running database profiling Indigenous territories across Brazil — legal status, location, population, and news — maintained by a civil-society organization since the 1980s.",
+      "url": "https://terrasindigenas.org.br/",
+      "checked": "2026-07-14",
+      "temporalCoverage": "Ongoing since the 1980s (CEDI/ISA)",
+      "methodologyUrl": "https://terrasindigenas.org.br/pt-br/node/33",
+      "tags": {
+        "topics": [
+          "territories",
+          "indigenous-peoples",
+          "tenure-and-rights"
+        ],
+        "modes": [
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "A published boundary does not establish community consent, full tenure, or permission to use a territory. Confirm the local and legal context with the peoples and communities concerned.",
+          "pt-BR": "Um limite publicado não comprova consentimento comunitário, posse plena nem autorização de uso do território. Confirme o contexto local e jurídico com os povos e comunidades envolvidos.",
+          "es": "Un límite publicado no demuestra consentimiento comunitario, tenencia plena ni autorización para usar el territorio. Confirme el contexto local y jurídico con los pueblos y comunidades involucrados."
+        }
+      }
+    },
+    {
+      "id": "ibge-cidades",
+      "title": "IBGE Cidades",
+      "provider": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "category": "Society, health & livelihoods",
+      "coverage": "Brazil",
+      "formats": [
+        "HTML",
+        "CSV"
+      ],
+      "access": "Publicly available",
+      "kind": "Explorer",
+      "description": "Official municipal and state-level statistics for Brazil — population, economy, education, and health indicators — searchable by place, from the national statistics institute.",
+      "url": "https://cidades.ibge.gov.br/",
+      "checked": "2026-07-14",
+      "temporalCoverage": "Varies by indicator; many annual, some tied to Census years",
+      "spatialResolution": "Municipality and state level",
+      "methodologyUrl": "https://cidades.ibge.gov.br/pesquisas",
+      "tags": {
+        "topics": [
+          "population",
+          "health",
+          "livelihoods"
+        ],
+        "modes": [
+          "administrative-record",
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "datasus-tabnet",
+      "title": "DATASUS TABNET Health Information",
+      "provider": "DATASUS, Ministério da Saúde",
+      "category": "Society, health & livelihoods",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Explorer",
+      "description": "An interactive tabulation tool for Brazil's public health system data — mortality, births, morbidity, and health-facility records — built by the Ministry of Health.",
+      "url": "https://tabnet.datasus.gov.br/",
+      "checked": "2026-07-30",
+      "temporalCoverage": "Varies by sub-system; several series ongoing since the 1990s–2000s",
+      "spatialResolution": "Municipal and facility level",
+      "methodologyUrl": "https://tabnet.datasus.gov.br/tabnet/tabdescr.htm",
+      "tags": {
+        "topics": [
+          "health",
+          "population"
+        ],
+        "modes": [
+          "administrative-record",
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "cnuc-unidades-conservacao",
+      "title": "CNUC — National Register of Conservation Units",
+      "provider": "Ministério do Meio Ambiente e Mudança do Clima (MMA)",
+      "category": "Governance, rights & safeguards",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "Shapefile"
+      ],
+      "access": "Dataset-specific license",
+      "kind": "Download",
+      "description": "Brazil's national register of conservation units, bringing together federal, state, municipal, and private protected-area records and published boundaries. Registry status and boundaries can lag legal acts; it is not Indigenous territorial or consent data.",
+      "url": "https://dados.mma.gov.br/dataset/unidadesdeconservacao",
+      "checked": "2026-08-03",
+      "temporalCoverage": "Current registry snapshot; updated periodically",
+      "spatialResolution": "Vector boundaries (protected-area polygons)",
+      "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "methodologyUrl": "https://www.gov.br/mma/pt-br/composicao/sbio/dap/cadastro-nacional-de-ucs",
+      "tags": {
+        "topics": [
+          "protected-areas",
+          "territories"
+        ],
+        "modes": [
+          "legal-boundary",
+          "geospatial"
+        ],
+        "time": [
+          "ongoing"
+        ],
+        "roles": [
+          "boundary",
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "raisg-maps",
+      "title": "RAISG Amazon Maps",
+      "provider": "Red Amazónica de Información Socioambiental Georreferenciada (RAISG)",
+      "category": "Governance, rights & safeguards",
+      "coverage": "Pan-Amazon",
+      "formats": [
+        "Shapefile",
+        "Web map"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Explorer",
+      "description": "Pan-Amazon geospatial data on indigenous territories, protected natural areas, infrastructure projects, and resource-extraction concessions, compiled by a nine-country civil-society network.",
+      "url": "https://www.raisg.org/en/maps/",
+      "checked": "2026-07-14",
+      "temporalCoverage": "Periodic updates since 1996; latest full atlas 2020",
+      "methodologyUrl": "https://www.amazoniasocioambiental.org/es/publicacion/amazonia-bajo-presion-2020/",
+      "tags": {
+        "topics": [
+          "territories",
+          "protected-areas",
+          "infrastructure",
+          "extractive-pressures"
+        ],
+        "modes": [
+          "geospatial",
+          "reference-layer"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "context"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Mapped boundaries and pressures are contextual layers, not proof of consent, ownership, illegality, or local impact.",
+          "pt-BR": "Limites e pressões mapeados são camadas de contexto, não prova de consentimento, posse, ilegalidade ou impacto local.",
+          "es": "Los límites y presiones cartografiados son capas de contexto, no pruebas de consentimiento, propiedad, ilegalidad o impacto local."
+        }
+      }
+    },
+    {
+      "id": "geobosques-national-forest-monitoring-platform",
+      "title": "Geobosques — National Forest Monitoring Platform",
+      "provider": "Ministerio del Ambiente (MINAM), Programa Nacional de Conservación de Bosques y Clima",
+      "category": "Land use & infrastructure",
+      "coverage": "Peru",
+      "formats": [
+        "API",
+        "WMS",
+        "GeoTIFF",
+        "Web map"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Data portal",
+      "description": "Peru's national forest-loss and early-warning monitoring platform, covering the country's Amazon humid forest with annual loss maps, monthly alerts, and degradation layers.",
+      "url": "https://geobosques.minam.gob.pe/geobosque/view/index.php",
+      "checked": "2026-07-22",
+      "temporalCoverage": "Annual forest-loss maps since 2001; near-real-time early-warning alerts",
+      "spatialResolution": "30 m (Landsat); Sentinel (10 m) used for visual verification",
+      "methodologyUrl": "https://geobosques.minam.gob.pe/geobosque/descargas_geobosque/perdida/documentos/Protocolo_Metodologico_Deteccion_Perdida_de_Bosque.pdf",
+      "tags": {
+        "topics": [
+          "forests",
+          "forest-change"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "near-real-time"
+        ],
+        "roles": [
+          "monitoring",
+          "alert"
+        ]
+      }
+    },
+    {
+      "id": "imazon-sad-system",
+      "title": "SAD — Sistema de Alerta de Desmatamento",
+      "provider": "Instituto do Homem e Meio Ambiente da Amazônia (Imazon)",
+      "category": "Land use & infrastructure",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "GeoJSON",
+        "Shapefile"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Data portal",
+      "description": "Independent monthly monitoring of deforestation and forest degradation across the Brazilian Legal Amazon, produced by a non-governmental research institute using Landsat/Sentinel imagery with analyst validation. Runs in parallel to INPE's PRODES/DETER as a cross-check; alert-level data also feeds into Global Forest Watch's open data layers.",
+      "url": "https://dashboards.imazongeo.org.br/sad/",
+      "checked": "2026-07-30",
+      "temporalCoverage": "2008–present (monthly bulletins)",
+      "spatialResolution": "Landsat/Sentinel-based; minimum 1 ha detection",
+      "methodologyUrl": "https://imazongeo.org.br/sad/",
+      "tags": {
+        "topics": [
+          "forests",
+          "forest-change"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "monitoring",
+          "alert"
+        ]
+      }
+    },
+    {
+      "id": "nasa-firms-active-fire",
+      "title": "FIRMS — Fire Information for Resource Management System",
+      "provider": "NASA Earth Observing System Data and Information System (EOSDIS)",
+      "category": "Earth, water & climate",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "CSV",
+        "SHP",
+        "KML",
+        "WMS",
+        "API"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "Near-real-time active fire and thermal anomaly detections from the MODIS and VIIRS satellite instruments, distributed as point locations with confidence and brightness-temperature attributes. Widely used as an early proxy for both wildfire and agricultural/deforestation burning across the Amazon.",
+      "url": "https://firms.modaps.eosdis.nasa.gov/",
+      "checked": "2026-07-25",
+      "temporalCoverage": "2000–present (MODIS); 2012–present (VIIRS); updated multiple times daily",
+      "spatialResolution": "MODIS 1 km; VIIRS 375 m",
+      "tags": {
+        "topics": [
+          "fire"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "near-real-time"
+        ],
+        "roles": [
+          "monitoring",
+          "alert"
+        ]
+      }
+    },
+    {
+      "id": "chirps-precipitation",
+      "title": "CHIRPS — Climate Hazards Group InfraRed Precipitation with Station data",
+      "provider": "Climate Hazards Center, University of California, Santa Barbara",
+      "category": "Earth, water & climate",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "NetCDF",
+        "GeoTIFF",
+        "Google Earth Engine"
+      ],
+      "access": "Publicly available",
+      "kind": "Dataset",
+      "description": "Quasi-global daily, pentadal, and monthly gridded rainfall estimates blending satellite infrared imagery with in-situ station observations. Built specifically to support drought monitoring and hydrological modeling in data-sparse regions, and in wide use for Amazon basin precipitation trend analysis.",
+      "url": "https://www.chc.ucsb.edu/data/chirps",
+      "checked": "2026-07-25",
+      "temporalCoverage": "1981–present (daily, ~45-day latency for final product)",
+      "spatialResolution": "0.05° (~5.5 km)",
+      "tags": {
+        "topics": [
+          "climate",
+          "water"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "amazon-canopy-height-nicfi-lidar",
+      "title": "Wall-to-Wall Amazon Canopy Height Map",
+      "provider": "CTrees, in collaboration with Planet Labs NICFI program",
+      "category": "Forest & biodiversity",
+      "coverage": "Pan-Amazon",
+      "formats": [
+        "GeoTIFF"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Dataset",
+      "description": "A ~4.78 m resolution canopy height layer for the entire Amazon biome, generated by training a model on Planet NICFI satellite mosaics using airborne LiDAR as reference data. Intended to support aboveground biomass estimation and forest structure analysis at a finer grain than spaceborne LiDAR alone provides. Access to the underlying Planet NICFI base imagery is governed by Planet's non-commercial program terms.",
+      "url": "https://registry.opendata.aws/ctrees-amazon-canopy-height/",
+      "checked": "2026-07-25",
+      "temporalCoverage": "2020–2024 composite",
+      "spatialResolution": "~4.78 m",
+      "tags": {
+        "topics": [
+          "forests",
+          "biodiversity"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "static-reference"
+        ],
+        "roles": [
+          "baseline"
+        ]
+      }
+    },
+    {
+      "id": "amazon-mining-watch",
+      "title": "Amazon Mining Watch",
+      "provider": "Earth Genome, Pulitzer Center's Rainforest Investigations Network, and Amazon Conservation Association",
+      "category": "Land use & infrastructure",
+      "coverage": "Pan-Amazon",
+      "formats": [
+        "GeoTIFF",
+        "Shapefile",
+        "API"
+      ],
+      "access": "Dataset-specific license",
+      "kind": "Explorer",
+      "description": "A machine-learning-based interactive map of gold-mining scars detected in Sentinel-2 satellite imagery across all nine Amazonian countries, with layered protected-area and Indigenous-territory boundaries (from RAISG) to help distinguish likely authorized from unauthorized activity, plus an economic-impact estimator.",
+      "url": "https://source.coop/earthgenome/amazon-mining-watch",
+      "checked": "2026-07-25",
+      "temporalCoverage": "Annual 2018–2024, quarterly from Q2 2025",
+      "spatialResolution": "Sentinel-2 10–20 m derived mine-scar polygons",
+      "license": "Creative Commons Attribution 4.0 (CC-BY-4.0)",
+      "tags": {
+        "topics": [
+          "extractive-pressures",
+          "forest-change"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "gedi-forest-structure",
+      "title": "GEDI — Global Ecosystem Dynamics Investigation",
+      "provider": "University of Maryland / NASA Goddard Space Flight Center",
+      "category": "Forest & biodiversity",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "HDF5",
+        "GeoTIFF",
+        "Google Earth Engine"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "Spaceborne full-waveform LiDAR mounted on the International Space Station, producing footprint- and gridded-level measurements of canopy height, vertical canopy structure, and aboveground biomass density between 51.6°N and 51.6°S — a band that fully covers the Amazon basin.",
+      "url": "https://gedi.umd.edu/dataproducts/download/",
+      "checked": "2026-07-25",
+      "temporalCoverage": "April 2019–March 2023 (mission data collection)",
+      "spatialResolution": "~25 m footprints (L2); 1 km gridded (L4B)",
+      "tags": {
+        "topics": [
+          "forests",
+          "biodiversity"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series"
+        ],
+        "roles": [
+          "baseline"
+        ]
+      }
+    },
+    {
+      "id": "hansen-global-forest-change",
+      "title": "Global Forest Change (Hansen et al.)",
+      "provider": "University of Maryland, Global Land Analysis and Discovery (GLAD) lab",
+      "category": "Land use & infrastructure",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "GeoTIFF"
+      ],
+      "access": "Publicly available",
+      "kind": "Dataset",
+      "description": "The standard reference global tree-cover-loss dataset, derived from time-series analysis of the full Landsat archive. Layers include year-2000 tree canopy cover, annual forest loss with year attribution from 2000 onward, and 2000–2012 forest gain, updated approximately annually.",
+      "url": "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/download.html",
+      "checked": "2026-07-25",
+      "temporalCoverage": "2000–2024, annual updates",
+      "spatialResolution": "~30 m",
+      "tags": {
+        "topics": [
+          "forests",
+          "forest-change"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "terraclass-amazonia",
+      "title": "TerraClass Amazônia",
+      "provider": "Instituto Nacional de Pesquisas Espaciais (INPE) and Embrapa",
+      "category": "Land use & infrastructure",
+      "coverage": "Brazil",
+      "formats": [
+        "GeoTIFF",
+        "Shapefile"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "Biennial classification of land use and cover specifically within areas already mapped as deforested by PRODES, distinguishing pasture, agriculture, secondary vegetation regrowth, mining, urban infrastructure, and other post-clearing uses across the Brazilian Legal Amazon.",
+      "url": "https://data.inpe.br/big/web/biomasbr/terraclass-monitoramento-sistemico-de-uso-e-cobertura-da-terra/",
+      "checked": "2026-07-25",
+      "temporalCoverage": "2004, 2008, 2010, 2012, 2014, biennially through 2024",
+      "spatialResolution": "30 m (Landsat-based classification)",
+      "tags": {
+        "topics": [
+          "land-use",
+          "forest-change",
+          "forests"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "siradx-xingu-deforestation-alert",
+      "title": "SiRAD X — Sistema Remoto de Alerta de Desmatamento do Xingu",
+      "provider": "Rede Xingu+ (network coordinated with Instituto Socioambiental and local Indigenous and riverine associations)",
+      "category": "Land use & infrastructure",
+      "coverage": "Brazil",
+      "formats": [
+        "Web map",
+        "PDF reports"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Explorer",
+      "description": "A radar-based deforestation alert system covering the 26.7-million-hectare Xingu Protected Areas Corridor and the Indigenous Lands of the Volta Grande do Xingu, chosen specifically to keep detecting clearings through the cloud cover of the rainy season. Directly relevant to monitoring land-use pressure in the same Volta Grande region affected by the Belo Monte Hydroelectric Complex.",
+      "url": "https://xingumais.org.br/sirad-x",
+      "checked": "2026-07-25",
+      "temporalCoverage": "Ongoing, near-real-time alerts",
+      "spatialResolution": "SAR-based; sub-hectare alert polygons",
+      "tags": {
+        "topics": [
+          "forests",
+          "forest-change"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "ongoing",
+          "near-real-time"
+        ],
+        "roles": [
+          "monitoring",
+          "alert"
+        ]
+      }
+    },
+    {
+      "id": "inpe-bdqueimadas",
+      "title": "BDQueimadas — Banco de Dados de Queimadas",
+      "provider": "Instituto Nacional de Pesquisas Espaciais (INPE), Programa Queimadas",
+      "category": "Earth, water & climate",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "KML",
+        "Shapefile",
+        "GeoTIFF"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "Brazil's official fire and burned-area monitoring system, consolidating heat-source detections from multiple satellites (AQUA, TERRA, NOAA, GOES, NPP-Suomi) since 1998, along with burned-area extent products. Used operationally by IBAMA and state fire agencies, and academically as a long-run fire record.",
+      "url": "https://data.inpe.br/queimadas/dados-abertos/",
+      "checked": "2026-07-25",
+      "temporalCoverage": "1998–present (near-real-time, updated every 10 minutes to 3 hours depending on product)",
+      "spatialResolution": "1 km (AQUA/MODIS reference satellite)",
+      "tags": {
+        "topics": [
+          "fire"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "near-real-time"
+        ],
+        "roles": [
+          "monitoring",
+          "alert"
+        ]
+      }
+    },
+    {
+      "id": "ore-hybam-observatory",
+      "title": "HYBAM — Hydro-geochemistry of the Amazon Basin Observatory",
+      "provider": "Institut de Recherche pour le Développement (IRD), with national partner agencies in Brazil, Peru, Bolivia, Colombia, and Ecuador",
+      "category": "Earth, water & climate",
+      "coverage": "Pan-Amazon",
+      "formats": [
+        "CSV",
+        "Graphs/plots"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "A 17-station international observation network measuring river discharge, sediment load, and water geochemistry across the Amazon basin from the Andean piedmont to the Atlantic outlet, operating continuously since 2003 with standardized cross-border sampling protocols.",
+      "url": "https://hybam.obs-mip.fr/",
+      "checked": "2026-07-25",
+      "temporalCoverage": "2003–present (daily/decadal/monthly, depending on variable); some stations reconstructed back to 1902",
+      "spatialResolution": "17 point gauge/sampling stations",
+      "tags": {
+        "topics": [
+          "water",
+          "climate"
+        ],
+        "modes": [
+          "station-observation",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "ibama-fiscalizacao-dados-abertos",
+      "title": "Dados Abertos IBAMA — Fiscalização Ambiental",
+      "provider": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis (IBAMA)",
+      "category": "Governance, rights & safeguards",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "XML"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "Brazil's federal environmental enforcement records, including environmental infraction notices (autos de infração) since 2000, embargoed-area geodata, environmental licensing decisions, and related administrative sanctions issued by the federal environmental agency.",
+      "url": "https://dadosabertos.ibama.gov.br/",
+      "checked": "2026-07-25",
+      "temporalCoverage": "2000–present, periodic updates",
+      "spatialResolution": "Point/parcel-level enforcement records; polygon-level embargoed areas",
+      "tags": {
+        "topics": [
+          "environmental-accountability"
+        ],
+        "modes": [
+          "administrative-record",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "accountability"
+        ]
+      }
+    },
+    {
+      "id": "hydrosheds",
+      "title": "HydroSHEDS",
+      "provider": "World Wildlife Fund (WWF) Conservation Science Program, with USGS",
+      "category": "Earth, water & climate",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "GeoTIFF",
+        "GeoPackage",
+        "File Geodatabase"
+      ],
+      "access": "Dataset-specific license",
+      "kind": "Dataset",
+      "description": "A near-global suite of hydrographic layers — river networks, sub-basin boundaries (HydroBASINS), drainage direction, flow accumulation, and lake outlines — derived primarily from SRTM elevation data, widely used as the geospatial backbone for basin delineation in hydrological studies.",
+      "url": "https://www.hydrosheds.org/",
+      "checked": "2026-07-25",
+      "temporalCoverage": "Static (elevation-derived; no time series)",
+      "spatialResolution": "3 arc-second (~90 m) to 5 arc-minute (~10 km)",
+      "license": "HydroSHEDS License Agreement",
+      "tags": {
+        "topics": [
+          "water",
+          "terrain"
+        ],
+        "modes": [
+          "geospatial",
+          "reference-layer"
+        ],
+        "time": [
+          "static-reference"
+        ],
+        "roles": [
+          "baseline"
+        ]
+      }
+    },
+    {
+      "id": "worldclim-bioclimatic",
+      "title": "WorldClim — Global Climate and Weather Data",
+      "provider": "WorldClim (Fick & Hijmans, University of California, Davis / University of Nairobi)",
+      "category": "Earth, water & climate",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "GeoTIFF"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Dataset",
+      "description": "Interpolated global climate surfaces — monthly temperature, precipitation, solar radiation, wind speed, water vapor pressure, and 19 derived bioclimatic variables — built from weather-station records via thin-plate spline interpolation. A standard baseline layer for species distribution and climate-envelope modeling. The provider's terms do not permit redistribution of the raw data.",
+      "url": "https://www.worldclim.org/",
+      "checked": "2026-07-25",
+      "temporalCoverage": "1970–2000 climatology baseline (historical); future scenario layers also available",
+      "spatialResolution": "30 arc-seconds (~1 km) to 10 arc-minutes (~340 km)",
+      "tags": {
+        "topics": [
+          "climate",
+          "water"
+        ],
+        "modes": [
+          "geospatial",
+          "reference-layer"
+        ],
+        "time": [
+          "static-reference",
+          "future-scenarios"
+        ],
+        "roles": [
+          "baseline"
+        ]
+      }
+    },
+    {
+      "id": "copernicus-dem-glo30",
+      "title": "Copernicus DEM (GLO-30)",
+      "provider": "European Space Agency (ESA) / Copernicus Programme",
+      "category": "Earth, water & climate",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "GeoTIFF"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Dataset",
+      "description": "A global digital surface model at 30 m resolution derived from the TanDEM-X mission, used as a standard terrain layer for hydrological flow-routing, terrain correction of radar imagery, and watershed delineation.",
+      "url": "https://doi.org/10.5270/ESA-c5d3d65",
+      "checked": "2026-07-25",
+      "temporalCoverage": "Static (TanDEM-X acquisitions, ~2011–2015)",
+      "spatialResolution": "30 m",
+      "tags": {
+        "topics": [
+          "terrain",
+          "water"
+        ],
+        "modes": [
+          "geospatial",
+          "reference-layer"
+        ],
+        "time": [
+          "static-reference"
+        ],
+        "roles": [
+          "baseline"
+        ]
+      }
+    },
+    {
+      "id": "esa-worldcover",
+      "title": "ESA WorldCover",
+      "provider": "European Space Agency (ESA) WorldCover consortium",
+      "category": "Land use & infrastructure",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "GeoTIFF",
+        "WMS"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Dataset",
+      "description": "A global 10 m resolution land cover classification derived from Sentinel-1 and Sentinel-2 imagery, distinguishing 11 land cover classes including tree cover, cropland, built-up area, and open water, with annual composites available from 2020 onward.",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "checked": "2026-07-25",
+      "temporalCoverage": "2020, 2021 baseline maps; annual composites from 2020 onward",
+      "spatialResolution": "10 m",
+      "tags": {
+        "topics": [
+          "land-use",
+          "forests"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "rainfor-forestplots-amazon-network",
+      "title": "RAINFOR — Amazon Forest Inventory Network",
+      "provider": "University of Leeds, in coordination with partner institutions across Amazonian countries; data managed via ForestPlots.net",
+      "category": "Forest & biodiversity",
+      "coverage": "Pan-Amazon",
+      "formats": [
+        "CSV",
+        "API"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Data portal",
+      "description": "A long-term international network of permanent forest inventory plots spanning the Amazon basin, tracking tree growth, mortality, biomass, and species composition since 2000. Data is compiled and managed through ForestPlots.net under a data-sharing policy that credits the field teams who established and maintain each plot.",
+      "url": "https://www.forestplots.net",
+      "checked": "2026-07-26",
+      "temporalCoverage": "2000–present, plots re-censused periodically",
+      "spatialResolution": "Permanent sample plots (typically ~1 ha each) across multiple countries",
+      "tags": {
+        "topics": [
+          "forests",
+          "biodiversity"
+        ],
+        "modes": [
+          "field-observation",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "ppbio-brazil-biodiversity-research",
+      "title": "PPBio — Programa de Pesquisa em Biodiversidade",
+      "provider": "Instituto Nacional de Pesquisas da Amazônia (INPA) / Ministério da Ciência, Tecnologia e Inovação",
+      "category": "Forest & biodiversity",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "Shapefile"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "A standardized long-term biodiversity monitoring network using the RAPELD sampling design across permanent grid sites in Brazilian ecosystems, with a strong concentration of sites in the Amazon coordinated through INPA. Covers vegetation, fauna, and environmental variables at over 160 sampling grids nationwide.",
+      "url": "https://ppbio.inpa.gov.br/en",
+      "checked": "2026-07-26",
+      "temporalCoverage": "2001–present",
+      "spatialResolution": "RAPELD grids (10–72 plots per site)",
+      "tags": {
+        "topics": [
+          "biodiversity",
+          "forests"
+        ],
+        "modes": [
+          "field-observation",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "map-of-life-species-ranges",
+      "title": "Map of Life — Species Range & Distribution Indicators",
+      "provider": "Yale Center for Biodiversity and Global Change",
+      "category": "Forest & biodiversity",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "API",
+        "Shapefile",
+        "GeoTIFF"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Data portal",
+      "description": "Expert-vetted global species range maps and annually-updated conservation indicators (Species Habitat Index, Species Protection Index) integrating IUCN Red List, GBIF, and eBird data, harmonized to consistent taxonomies for mammals, birds, reptiles, amphibians, and fishes. Available for individual or batch download for non-commercial use.",
+      "url": "https://mol.org/",
+      "checked": "2026-07-26",
+      "temporalCoverage": "Continuously updated; indicators recalculated annually",
+      "spatialResolution": "Species-level range polygons; configurable by region",
+      "tags": {
+        "topics": [
+          "biodiversity",
+          "protected-areas"
+        ],
+        "modes": [
+          "geospatial",
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "otca-amazon-regional-observatory",
+      "title": "ORA — Observatório Regional Amazônico",
+      "provider": "Organização do Tratado de Cooperação Amazônica (OTCA/ACTO)",
+      "category": "Governance, rights & safeguards",
+      "coverage": "Pan-Amazon",
+      "formats": [
+        "Web map",
+        "Dashboard",
+        "CSV"
+      ],
+      "access": "Publicly available",
+      "kind": "Explorer",
+      "description": "An intergovernmental open-data platform run by the Amazon Cooperation Treaty Organization, integrating over 20 million records from the eight Amazonian member countries on biodiversity, CITES-listed species, water resources, forests, fire, and indigenous peoples into shared dashboards and geographic viewers.",
+      "url": "https://www.oraotca.org/en",
+      "checked": "2026-07-26",
+      "temporalCoverage": "Varies by module; fire module covers 2001–2025",
+      "spatialResolution": "Varies by module; national to basin-wide",
+      "tags": {
+        "topics": [
+          "biodiversity",
+          "water",
+          "forests",
+          "fire",
+          "indigenous-peoples"
+        ],
+        "modes": [
+          "geospatial",
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context",
+          "monitoring"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Mapped boundaries and pressures are contextual layers, not proof of consent, ownership, illegality, or local impact.",
+          "pt-BR": "Limites e pressões mapeados são camadas de contexto, não prova de consentimento, posse, ilegalidade ou impacto local.",
+          "es": "Los límites y presiones cartografiados son capas de contexto, no pruebas de consentimiento, propiedad, ilegalidad o impacto local."
+        }
+      }
+    },
+    {
+      "id": "landmark-indigenous-community-lands",
+      "title": "LandMark — Global Platform of Indigenous and Community Lands",
+      "provider": "World Resources Institute, in coalition with 12+ land rights organizations",
+      "category": "Governance, rights & safeguards",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "Web map",
+        "Shapefile",
+        "GeoJSON"
+      ],
+      "access": "Publicly available",
+      "kind": "Explorer",
+      "description": "An interactive global map of collectively-held Indigenous and community lands, layering legal recognition status, tenure security indicators, and pressures such as deforestation, dams, and resource concessions. Consolidates contributions from regional and national land-rights organizations rather than independently drawing boundaries.",
+      "url": "https://www.landmarkmap.org/",
+      "checked": "2026-07-26",
+      "temporalCoverage": "Continuously updated; version 2.0 released 2024",
+      "spatialResolution": "Community/territory-level polygons",
+      "tags": {
+        "topics": [
+          "territories",
+          "indigenous-peoples",
+          "community-lands",
+          "tenure-and-rights"
+        ],
+        "modes": [
+          "legal-boundary",
+          "geospatial"
+        ],
+        "time": [
+          "ongoing"
+        ],
+        "roles": [
+          "boundary",
+          "context"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "A published boundary does not establish community consent, full tenure, or permission to use a territory. Confirm the local and legal context with the peoples and communities concerned.",
+          "pt-BR": "Um limite publicado não comprova consentimento comunitário, posse plena nem autorização de uso do território. Confirme o contexto local e jurídico com os povos e comunidades envolvidos.",
+          "es": "Un límite publicado no demuestra consentimiento comunitario, tenencia plena ni autorización para usar el territorio. Confirme el contexto local y jurídico con los pueblos y comunidades involucrados."
+        }
+      }
+    },
+    {
+      "id": "rri-tenure-tracking-tool",
+      "title": "RRI Tenure Tool — Forest, Land & Resource Tenure Tracking",
+      "provider": "Rights and Resources Initiative (RRI)",
+      "category": "Governance, rights & safeguards",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "CSV",
+        "Dashboard"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "Longitudinal databases tracking legal recognition of forest, land, and water tenure rights for Indigenous Peoples, Afro-descendant Peoples, and local communities across more than 75 countries, covering roughly 92% of global forest area, continuously updated and verified by a network of national experts.",
+      "url": "https://rightsandresources.org/tenure-tracking/",
+      "checked": "2026-07-26",
+      "temporalCoverage": "2015–present, continuously updated",
+      "spatialResolution": "Country-level indicators",
+      "tags": {
+        "topics": [
+          "territories",
+          "indigenous-peoples",
+          "community-lands",
+          "tenure-and-rights"
+        ],
+        "modes": [
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Country-level tenure indicators are comparative context, not proof of a community's title, consent, or current territorial status.",
+          "pt-BR": "Indicadores nacionais de direitos territoriais oferecem contexto comparativo, não prova de titulação, consentimento ou situação territorial atual de uma comunidade.",
+          "es": "Los indicadores nacionales de derechos territoriales ofrecen contexto comparativo, no prueban la titulación, el consentimiento ni la situación territorial actual de una comunidad."
+        }
+      }
+    },
+    {
+      "id": "igarape-ecocrime-data",
+      "title": "EcoCrime Data — Amazon Environmental Crime Platform",
+      "provider": "Instituto Igarapé",
+      "category": "Governance, rights & safeguards",
+      "coverage": "Pan-Amazon",
+      "formats": [
+        "Web map",
+        "Dashboard"
+      ],
+      "access": "Publicly available",
+      "kind": "Explorer",
+      "description": "An interactive data visualization platform tracking environmental crime across all nine Amazonian countries — illegal logging, land grabbing, wildcat mining, and wildlife trafficking — combining open-source data with narrative stories produced in partnership with InSight Crime and other investigative partners.",
+      "url": "https://ecocrime.igarape.org.br/",
+      "checked": "2026-07-30",
+      "temporalCoverage": "2021–present, updated periodically",
+      "spatialResolution": "Site/incident-level points across 9 countries",
+      "tags": {
+        "topics": [
+          "environmental-accountability",
+          "extractive-pressures",
+          "tenure-and-rights"
+        ],
+        "modes": [
+          "geospatial",
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "ongoing"
+        ],
+        "roles": [
+          "accountability"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Public incident records are not a complete census or proof of local impact by themselves. Avoid using them to label communities or territories.",
+          "pt-BR": "Registros públicos de ocorrências não formam um censo completo nem comprovam impacto local por si só. Evite usá-los para rotular comunidades ou territórios.",
+          "es": "Los registros públicos de incidentes no forman un censo completo ni demuestran por sí solos un impacto local. Evite usarlos para etiquetar comunidades o territorios."
+        }
+      }
+    },
+    {
+      "id": "isa-povos-indigenas-no-brasil",
+      "title": "Povos Indígenas no Brasil (PIB)",
+      "provider": "Instituto Socioambiental (ISA)",
+      "category": "Peoples, territories & culture",
+      "coverage": "Brazil",
+      "formats": [
+        "Web encyclopedia",
+        "PDF"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "A continuously updated encyclopedia documenting the ways of life, languages, history, and rights of Brazil's 266+ Indigenous peoples, maintained by ISA since the early 1980s alongside a periodic flagship print edition. Distinct from ISA's territorial boundary geodata already in this catalog, PIB focuses on the peoples and cultures themselves.",
+      "url": "https://pib.socioambiental.org/",
+      "checked": "2026-07-26",
+      "temporalCoverage": "Early 1980s–present, continuously updated",
+      "spatialResolution": "By people/ethnic group",
+      "tags": {
+        "topics": [
+          "indigenous-peoples",
+          "languages",
+          "tenure-and-rights"
+        ],
+        "modes": [
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Public classifications and counts do not replace self-identification, local context, or community protocols.",
+          "pt-BR": "Classificações e contagens públicas não substituem autodenominação, contexto local nem protocolos comunitários.",
+          "es": "Las clasificaciones y los recuentos públicos no sustituyen la autoidentificación, el contexto local ni los protocolos comunitarios."
+        }
+      }
+    },
+    {
+      "id": "ibge-censo-indigena-2022",
+      "title": "Censo Demográfico 2022 — Povos Indígenas",
+      "provider": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "category": "Peoples, territories & culture",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "XLSX",
+        "API"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "Official census results specific to Indigenous peoples, covering 391 ethnicities and 295 languages with demographic, territorial, and socioeconomic breakdowns by municipality, Indigenous Land, and Legal Amazon subregion, accessible through IBGE's SIDRA and Interactive Geographic Platform.",
+      "url": "https://www.ibge.gov.br/estatisticas/sociais/saude/22827-censo-demografico-2022.html",
+      "checked": "2026-07-26",
+      "temporalCoverage": "Systematic collection since 1991; latest round 2022, with continued table releases",
+      "spatialResolution": "Municipality, Indigenous Land, Legal Amazon subregion",
+      "tags": {
+        "topics": [
+          "indigenous-peoples",
+          "languages",
+          "population",
+          "territories"
+        ],
+        "modes": [
+          "survey-or-census",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Public classifications and counts do not replace self-identification, local context, or community protocols.",
+          "pt-BR": "Classificações e contagens públicas não substituem autodenominação, contexto local nem protocolos comunitários.",
+          "es": "Las clasificaciones y los recuentos públicos no sustituyen la autoidentificación, el contexto local ni los protocolos comunitarios."
+        }
+      }
+    },
+    {
+      "id": "glottolog-language-catalog",
+      "title": "Glottolog — Catalogue of the World's Languages",
+      "provider": "Max Planck Institute for Evolutionary Anthropology",
+      "category": "Peoples, territories & culture",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "CSV",
+        "JSON",
+        "API"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "An open-access bibliographic and genealogical catalogue of the world's languages, including detailed classification and reference data for every documented Amazonian Indigenous language, built as a transparent, non-paywalled alternative to proprietary language databases.",
+      "url": "https://glottolog.org/",
+      "checked": "2026-07-26",
+      "temporalCoverage": "Continuously updated; version 5.3 as of 2026",
+      "spatialResolution": "Language/dialect-level point locations",
+      "tags": {
+        "topics": [
+          "languages",
+          "indigenous-peoples"
+        ],
+        "modes": [
+          "indicators-and-profiles",
+          "geospatial"
+        ],
+        "time": [
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Public classifications and counts do not replace self-identification, local context, or community protocols.",
+          "pt-BR": "Classificações e contagens públicas não substituem autodenominação, contexto local nem protocolos comunitários.",
+          "es": "Las clasificaciones y los recuentos públicos no sustituyen la autoidentificación, el contexto local ni los protocolos comunitarios."
+        }
+      }
+    },
+    {
+      "id": "cimi-observatorio-violencia-indigena",
+      "title": "Observatório da Violência contra os Povos Indígenas no Brasil",
+      "provider": "Conselho Indigenista Missionário (Cimi)",
+      "category": "Peoples, territories & culture",
+      "coverage": "Brazil",
+      "formats": [
+        "PDF",
+        "CSV"
+      ],
+      "access": "Publicly available",
+      "kind": "Dataset",
+      "description": "An annual report, published since 1996, systematizing data on violence and rights violations against Indigenous peoples in Brazil across territorial, personal, and public-omission categories, sourced from Cimi's regional networks, freedom-of-information requests, and public health surveillance systems.",
+      "url": "https://cimi.org.br/observatorio-da-violencia/o-relatorio/",
+      "checked": "2026-07-26",
+      "temporalCoverage": "1996–present, annual",
+      "spatialResolution": "Case-level, aggregated nationally and by state",
+      "tags": {
+        "topics": [
+          "indigenous-peoples",
+          "tenure-and-rights",
+          "environmental-accountability"
+        ],
+        "modes": [
+          "administrative-record",
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "accountability"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Public incident records are not a complete census or proof of local impact by themselves. Avoid using them to label communities or territories.",
+          "pt-BR": "Registros públicos de ocorrências não formam um censo completo nem comprovam impacto local por si só. Evite usá-los para rotular comunidades ou territórios.",
+          "es": "Los registros públicos de incidentes no forman un censo completo ni demuestran por sí solos un impacto local. Evite usarlos para etiquetar comunidades o territorios."
+        }
+      }
+    },
+    {
+      "id": "fcp-comunidades-quilombolas-certificadas",
+      "title": "Comunidades Quilombolas Certificadas",
+      "provider": "Fundação Cultural Palmares",
+      "category": "Peoples, territories & culture",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "XLSX"
+      ],
+      "access": "Publicly available",
+      "kind": "Dataset",
+      "description": "The official national registry of certified remnant quilombo communities (Afro-descendant traditional communities), issued through a self-declaration process under ILO Convention 169, with continuous certification since 2003. A meaningful share of Brazil's quilombola territories are in the Amazon states of Pará, Maranhão, and Tocantins.",
+      "url": "https://dados.cultura.gov.br/dataset/comunidades-quilombolas-certificadas",
+      "checked": "2026-07-26",
+      "temporalCoverage": "2003–present, continuously updated",
+      "spatialResolution": "Community-level records",
+      "tags": {
+        "topics": [
+          "community-lands",
+          "territories",
+          "tenure-and-rights"
+        ],
+        "modes": [
+          "administrative-record"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      "responsibleUse": {
+        "note": {
+          "en": "Public classifications and counts do not replace self-identification, local context, or community protocols.",
+          "pt-BR": "Classificações e contagens públicas não substituem autodenominação, contexto local nem protocolos comunitários.",
+          "es": "Las clasificaciones y los recuentos públicos no sustituyen la autoidentificación, el contexto local ni los protocolos comunitarios."
+        }
+      }
+    },
+    {
+      "id": "atlas-brasil-idhm",
+      "title": "Painel IDHM — Desenvolvimento Humano no Brasil",
+      "provider": "PNUD Brasil, Fundação João Pinheiro, IBGE",
+      "category": "Society, health & livelihoods",
+      "coverage": "Brazil",
+      "formats": [
+        "XLSX",
+        "Dashboard"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "An official UNDP panel with downloadable data and interactive views of Brazil's Municipal Human Development Index (IDHM), including 2012–2024 trends, breakdowns by sex and race/color, inequality-adjusted estimates, and 2024 rankings for states and metropolitan regions.",
+      "url": "https://www.undp.org/pt/brazil/desenvolvimento-humano/painel-idhm",
+      "checked": "2026-08-24",
+      "temporalCoverage": "2012–2024; latest release published in 2026",
+      "spatialResolution": "National, state and metropolitan-region level",
+      "methodologyUrl": "https://www.undp.org/pt/brazil/o-que-e-o-idhm",
+      "tags": {
+        "topics": [
+          "population",
+          "health",
+          "livelihoods"
+        ],
+        "modes": [
+          "administrative-record",
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "ibge-pnad-continua",
+      "title": "PNAD Contínua — Pesquisa Nacional por Amostra de Domicílios Contínua",
+      "provider": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "category": "Society, health & livelihoods",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "API"
+      ],
+      "access": "Publicly available",
+      "kind": "Dataset",
+      "description": "Brazil's ongoing quarterly household sample survey, providing detailed public microdata on employment, income, education, housing, and food security, disaggregatable to state and regional level including the Legal Amazon states.",
+      "url": "https://www.ibge.gov.br/en/statistics/social/labor/17270-pnad-continua.html",
+      "checked": "2026-07-26",
+      "temporalCoverage": "Continuous since 2012 (predecessor annual survey since 1967)",
+      "spatialResolution": "State/regional level microdata",
+      "tags": {
+        "topics": [
+          "population",
+          "livelihoods",
+          "food-security"
+        ],
+        "modes": [
+          "survey-or-census"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "cadunico-familias-inscritas",
+      "title": "Cadastro Único para Programas Sociais (CadÚnico)",
+      "provider": "Ministério do Desenvolvimento e Assistência Social, Família e Combate à Fome (MDS)",
+      "category": "Society, health & livelihoods",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "API"
+      ],
+      "access": "Publicly available",
+      "kind": "Data portal",
+      "description": "Aggregate statistics on low-income families registered in Brazil's unified social-program registry, updated daily and used to target federal, state, and municipal social assistance programs, providing a fine-grained proxy for social vulnerability by municipality.",
+      "url": "https://dados.gov.br/dados/conjuntos-dados/familias-inscritas-no-cadastro-unico",
+      "checked": "2026-07-26",
+      "temporalCoverage": "2001–present, updated daily",
+      "spatialResolution": "Municipality level",
+      "tags": {
+        "topics": [
+          "population",
+          "livelihoods",
+          "food-security"
+        ],
+        "modes": [
+          "administrative-record",
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "rede-penssan-vigisan",
+      "title": "VIGISAN — Inquérito Nacional sobre Insegurança Alimentar",
+      "provider": "Rede Brasileira de Pesquisa em Soberania e Segurança Alimentar e Nutricional (Rede PENSSAN)",
+      "category": "Society, health & livelihoods",
+      "coverage": "Brazil",
+      "formats": [
+        "PDF",
+        "CSV"
+      ],
+      "access": "Publicly available",
+      "kind": "Dataset",
+      "description": "A national household survey series measuring food insecurity using the Brazilian Food Insecurity Scale, run by an academic research network since 2020 with state-level breakdowns, filling gaps left when official food-security data collection was interrupted.",
+      "url": "https://redepenssan.org.br/",
+      "checked": "2026-07-26",
+      "temporalCoverage": "2020–present (I VIGISAN 2020/21, II VIGISAN 2021/22, ongoing)",
+      "spatialResolution": "State level",
+      "tags": {
+        "topics": [
+          "food-security",
+          "health",
+          "population"
+        ],
+        "modes": [
+          "survey-or-census"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "mapbiomas-amazonia",
+      "title": "MapBiomas Amazonia Land Cover & Water",
+      "provider": "MapBiomas Amazonia (RAISG network)",
+      "category": "Land use & infrastructure",
+      "coverage": "Pan-Amazon",
+      "formats": [
+        "GeoTIFF",
+        "Google Earth Engine",
+        "Web map"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Explorer",
+      "description": "Pan-Amazon annual land-cover and land-use maps built from Landsat imagery and a common regional legend. The project also publishes separate monthly and annual surface-water products.",
+      "url": "https://amazonia.mapbiomas.org/en/en/products/",
+      "checked": "2026-08-03",
+      "temporalCoverage": "1985–2023 (annual land cover); separate monthly/annual water products",
+      "spatialResolution": "30 m (Landsat-based classification)",
+      "methodologyUrl": "https://amazonia.mapbiomas.org/en/en/methodology-overview/",
+      "tags": {
+        "topics": [
+          "forests",
+          "forest-change",
+          "land-use",
+          "water"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "jrc-global-surface-water",
+      "title": "JRC Global Surface Water",
+      "provider": "European Commission, Joint Research Centre (JRC)",
+      "category": "Earth, water & climate",
+      "coverage": "Global — subsettable",
+      "formats": [
+        "GeoTIFF",
+        "Google Earth Engine",
+        "WMTS"
+      ],
+      "access": "Publicly available",
+      "kind": "Explorer",
+      "description": "Global Landsat-derived maps of surface-water occurrence, change, seasonality, recurrence, and transitions, which can be subset to the Amazon.",
+      "url": "https://global-surface-water.appspot.com/download",
+      "checked": "2026-08-03",
+      "temporalCoverage": "1984–2024 (annual and long-term water layers)",
+      "spatialResolution": "30 m (Landsat-derived)",
+      "tags": {
+        "topics": [
+          "water"
+        ],
+        "modes": [
+          "remote-sensing",
+          "geospatial"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "monitoring"
+        ]
+      }
+    },
+    {
+      "id": "aneel-siga",
+      "title": "SIGA — Electricity Generation Information System",
+      "provider": "Agência Nacional de Energia Elétrica (ANEEL)",
+      "category": "Land use & infrastructure",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "XML",
+        "API"
+      ],
+      "access": "Dataset-specific license",
+      "kind": "Data portal",
+      "description": "Official register of Brazilian electricity-generating enterprises with coordinates, source, operating status, capacity, municipality, and sub-basin. A facility record does not establish social or ecological impact.",
+      "url": "https://dadosabertos.aneel.gov.br/dataset/siga-sistema-de-informacoes-de-geracao-da-aneel",
+      "checked": "2026-08-03",
+      "temporalCoverage": "Updated daily/monthly (provider schedule)",
+      "spatialResolution": "Facility-level point coordinates",
+      "license": "Open Data Commons Open Database License (ODbL)",
+      "tags": {
+        "topics": [
+          "infrastructure",
+          "water"
+        ],
+        "modes": [
+          "administrative-record",
+          "geospatial"
+        ],
+        "time": [
+          "ongoing"
+        ],
+        "roles": [
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "seeg-emissions-estimates",
+      "title": "SEEG — Greenhouse Gas Emissions Estimates",
+      "provider": "Sistema de Estimativas de Emissões e Remoções de Gases de Efeito Estufa (SEEG)",
+      "category": "Earth, water & climate",
+      "coverage": "Brazil",
+      "formats": [
+        "CSV",
+        "XLSX",
+        "Web dashboard"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Data portal",
+      "description": "Annual estimates of Brazil's greenhouse-gas emissions and removals, available by sector and, for several sectors, state and municipality. These are modeled estimates, not direct local measurements.",
+      "url": "https://seeg.eco.br/dados/",
+      "checked": "2026-08-03",
+      "temporalCoverage": "1970–present by sector; municipal estimates from 2000",
+      "spatialResolution": "Municipality and state-level estimates",
+      "methodologyUrl": "https://seeg.eco.br/english/seeg-methodology/",
+      "tags": {
+        "topics": [
+          "climate",
+          "land-use",
+          "infrastructure"
+        ],
+        "modes": [
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "context"
+        ]
+      }
+    },
+    {
+      "id": "anm-sigmine",
+      "title": "SIGMINE — Mining Process Registry",
+      "provider": "Agência Nacional de Mineração (ANM)",
+      "category": "Governance, rights & safeguards",
+      "coverage": "Brazil",
+      "formats": [
+        "Shapefile",
+        "KMZ",
+        "Web map"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Explorer",
+      "description": "Official registry of Brazilian mining-process polygons, status, and administrative data. A process boundary is informational, not proof of active extraction, legal authorization, or illegality.",
+      "url": "https://geo.anm.gov.br/portal/apps/webappviewer/index.html?id=6a8f5ccc4b6a4c2bba79759aa952d908",
+      "checked": "2026-08-03",
+      "temporalCoverage": "Updated daily",
+      "spatialResolution": "Mining-process polygons (SIRGAS 2000)",
+      "tags": {
+        "topics": [
+          "extractive-pressures",
+          "infrastructure"
+        ],
+        "modes": [
+          "administrative-record",
+          "geospatial"
+        ],
+        "time": [
+          "ongoing"
+        ],
+        "roles": [
+          "context",
+          "accountability"
+        ]
+      }
+    },
+    {
+      "id": "data-zoom-amazonia",
+      "title": "Data Zoom Amazônia",
+      "provider": "Departamento de Economia da PUC-Rio / Amazônia 2030",
+      "category": "Society, health & livelihoods",
+      "coverage": "Brazil",
+      "formats": [
+        "R package",
+        "Interactive visualizations"
+      ],
+      "access": "Provider terms apply",
+      "kind": "Data portal",
+      "description": "Interactive visualizations and an open-source R package that download and prepare environmental, social, and economic data for the Brazilian Legal Amazon. The software is MIT-licensed; each underlying source keeps its own reuse terms.",
+      "url": "https://datazoom.com.br/amazonia/pt/",
+      "checked": "2026-08-11",
+      "temporalCoverage": "Varies by underlying source; maintained package and visualizations",
+      "methodologyUrl": "https://datazoompuc.github.io/datazoom.amazonia/",
+      "tags": {
+        "topics": [
+          "forest-change",
+          "infrastructure",
+          "population",
+          "health",
+          "livelihoods"
+        ],
+        "modes": [
+          "administrative-record",
+          "remote-sensing",
+          "indicators-and-profiles"
+        ],
+        "time": [
+          "historical-series",
+          "ongoing"
+        ],
+        "roles": [
+          "baseline",
+          "monitoring",
+          "context"
+        ]
+      }
+    }
+  ]
+}

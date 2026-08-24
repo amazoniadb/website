@@ -1,0 +1,11 @@
+/index.html              /                 301
+/submit.html             /submit           301
+/donate.html             /donate           301
+/en/index.html           /en/              301
+/en/submit.html          /en/submit         301
+/en/donate.html          /en/donate         301
+/es/index.html           /es/              301
+/es/submit.html          /es/submit         301
+/es/donate.html          /es/donate         301
+/pt-br                   /                 301
+/pt-br/*                 /:splat           301

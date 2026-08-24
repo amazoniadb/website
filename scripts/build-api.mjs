@@ -1,0 +1,33 @@
+// Generates api/v1/catalog.json, a plain-JSON mirror of data/catalog.js,
+// for anyone who wants to read the catalog without parsing JS. Regenerated
+// automatically by .github/workflows/validate-catalog.yml on every push to
+// main that touches the catalog — never edit api/v1/catalog.json by hand,
+// it will just be overwritten on the next push.
+//
+// Versioned path (v1, not a bare /api/catalog.json) so the response shape
+// can change later — add v2/ alongside it, deprecate v1 on a real
+// timeline — instead of silently breaking whoever's already reading it.
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import vm from "node:vm";
+
+const catalogUrl = new URL("../data/catalog.js", import.meta.url);
+const outputUrl = new URL("../api/v1/catalog.json", import.meta.url);
+
+const source = await readFile(catalogUrl, "utf8");
+const context = { window: {} };
+vm.runInNewContext(source, context);
+const records = context.window.AMAZONIA_CATALOG || [];
+
+const payload = {
+  apiVersion: 1,
+  generated: new Date().toISOString(),
+  count: records.length,
+  source: "https://amazoniadb.org/",
+  recordSchema: "https://amazoniadb.org/data/catalog.schema.json",
+  license: "All rights reserved on this index. Each record links to its original provider, who holds their own rights over the underlying data — this JSON is a convenience mirror of AmazoniaDB's curated list, not a redistribution of provider data.",
+  records
+};
+
+await mkdir(new URL("../api/v1/", import.meta.url), { recursive: true });
+await writeFile(outputUrl, JSON.stringify(payload, null, 2) + "\n");
+console.log(`Wrote api/v1/catalog.json with ${records.length} records.`);

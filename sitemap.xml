@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://amazoniadb.org/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amazoniadb.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amazoniadb.org/en/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://amazoniadb.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amazoniadb.org/"/>
+  </url>
+  <url>
+    <loc>https://amazoniadb.org/en/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amazoniadb.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amazoniadb.org/en/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://amazoniadb.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amazoniadb.org/"/>
+  </url>
+  <url>
+    <loc>https://amazoniadb.org/es/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amazoniadb.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amazoniadb.org/en/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://amazoniadb.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amazoniadb.org/"/>
+  </url>
+  <url>
+    <loc>https://amazoniadb.org/submit</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amazoniadb.org/submit"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amazoniadb.org/en/submit"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://amazoniadb.org/es/submit"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amazoniadb.org/submit"/>
+  </url>
+  <url>
+    <loc>https://amazoniadb.org/en/submit</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amazoniadb.org/submit"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amazoniadb.org/en/submit"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://amazoniadb.org/es/submit"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amazoniadb.org/submit"/>
+  </url>
+  <url>
+    <loc>https://amazoniadb.org/es/submit</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amazoniadb.org/submit"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amazoniadb.org/en/submit"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://amazoniadb.org/es/submit"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amazoniadb.org/submit"/>
+  </url>
+  <url>
+    <loc>https://amazoniadb.org/donate</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amazoniadb.org/donate"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amazoniadb.org/en/donate"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://amazoniadb.org/es/donate"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amazoniadb.org/donate"/>
+  </url>
+  <url>
+    <loc>https://amazoniadb.org/en/donate</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amazoniadb.org/donate"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amazoniadb.org/en/donate"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://amazoniadb.org/es/donate"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amazoniadb.org/donate"/>
+  </url>
+  <url>
+    <loc>https://amazoniadb.org/es/donate</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://amazoniadb.org/donate"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amazoniadb.org/en/donate"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://amazoniadb.org/es/donate"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amazoniadb.org/donate"/>
+  </url>
+</urlset>
