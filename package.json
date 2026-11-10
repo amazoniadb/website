@@ -17,6 +17,6 @@
     "verify:links": "node scripts/check-links.mjs"
   },
   "devDependencies": {
-    "wrangler": "4.125.0"
+    "wrangler": "4.160.0"
   }
 }
