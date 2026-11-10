@@ -3,7 +3,7 @@
   "title": "AmazoniaDB catalog record",
   "description": "Schema for a single entry in data/catalog.js (window.AMAZONIA_CATALOG). This mirrors the rules enforced by scripts/validate-catalog.mjs. If the two ever disagree, the validator script is the source of truth — update this file to match it.",
   "type": "object",
-  "required": ["id", "title", "provider", "category", "coverage", "formats", "access", "kind", "description", "url", "checked"],
+  "required": ["id", "title", "provider", "category", "coverage", "formats", "access", "accessUrl", "kind", "description", "url", "checked"],
   "additionalProperties": true,
   "properties": {
     "id": {
@@ -35,7 +35,7 @@
     },
     "coverage": {
       "type": "string",
-      "enum": ["Pan-Amazon", "Brazil", "Peru", "Colombia", "Bolivia", "Ecuador", "Global — subsettable"],
+      "enum": ["Pan-Amazon", "Brazil", "Peru", "Colombia", "Bolivia", "Ecuador", "Venezuela", "Guyana", "Suriname", "French Guiana", "Global — subsettable"],
       "description": "Geographic scope. Note the em dash in \"Global — subsettable\"."
     },
     "formats": {
@@ -48,6 +48,11 @@
       "type": "string",
       "enum": ["Provider terms apply", "Dataset-specific license", "Publicly available"],
       "description": "Use 'Publicly available' only when the provider explicitly frames the resource as open/free access. Use 'Dataset-specific license' when a specific named license applies (e.g. CC-BY, PDDL). Default to 'Provider terms apply' whenever terms are unclear or mixed — do not guess toward openness."
+    },
+    "accessUrl": {
+      "type": "string",
+      "pattern": "^https?://",
+      "description": "Required evidence for the access classification: the provider's terms, licence, policy, download instructions, or official source page when it is the clearest available statement. This is evidence to review, not a claim that reuse is permitted."
     },
     "kind": {
       "type": "string",
@@ -82,7 +87,7 @@
     "license": {
       "type": "string",
       "minLength": 1,
-      "description": "Optional. The specific named open-data license when the provider states one explicitly, e.g. 'Open Data Commons Public Domain Dedication and License (PDDL)'. This is separate from `access`: most sources have a real, checkable access note but no single named license, and `license` should stay unset for those rather than restating `access` here."
+      "description": "Optional. A specific named dataset-wide licence or legal agreement stated explicitly by the provider. It may be open or restrictive. This is separate from `access`: most sources have checkable access terms but no single named licence, and `license` should stay unset for those rather than restating `access` here."
     },
     "methodologyUrl": {
       "type": "string",

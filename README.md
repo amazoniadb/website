@@ -2,9 +2,29 @@
 
 AmazoniaDB is a lightweight directory of Amazon socioenvironmental datasets and repositories. It directs people to original publishers rather than mirroring source files.
 
-## Run it
+The current catalog expansion and public-release plan is in [the roadmap](docs/catalog-expansion-and-public-release-roadmap.md).
 
-The directory has no application build step. For local review, serve the repository root with any static file server so the production-style clean routes work correctly.
+## Edit page text
+
+The quickest edit is to change the text in the page's HTML file, then refresh a local preview. Search for the exact phrase if you are not sure where it lives.
+
+| Page | Portuguese (default) | English | Spanish |
+| --- | --- | --- | --- |
+| Home | `index.html` | `en/index.html` | `es/index.html` |
+| Prepare a source | `submit.html` | `en/submit.html` | `es/submit.html` |
+| Support | `donate.html` | `en/donate.html` | `es/donate.html` |
+
+For text created by the interface, use the matching source: catalog controls and localized UI messages across all three locales are unified in `app.js`; source-submission messages are in `submit.js`; guided research paths are in `data/research-paths.js`; category labels are in `data/category-presentation.js`. Catalog descriptions live in `data/catalog.js` and their translations in `data/catalog.i18n.js`.
+
+To preview edits, open a terminal in the repository folder and run:
+
+```sh
+python3 -m http.server 8000
+```
+
+Open `http://localhost:8000/index.html` and the corresponding `en/index.html`, `es/index.html`, or page file. Stop the server with `Ctrl+C`. This previews the source files directly; production-only clean URLs such as `/submit` are handled by Cloudflare.
+
+Before publishing a change, run `npm run check` from the repository folder.
 
 ## Languages and public URLs
 
@@ -39,9 +59,9 @@ Add an object to `data/catalog.js`. Every entry should have:
 - a stable `id`, clear `title`, and original `provider`;
 - one of the six approved `category` values;
 - a direct `url` to the publisher's dataset or repository page;
-- `coverage`, `formats`, `access`, `kind`, a plain-language `description`, and a `checked` date.
+- `coverage`, `formats`, `access`, an `accessUrl` supporting that access classification, `kind`, a plain-language `description`, and a `checked` date.
 
-Optionally, an entry can also carry `temporalCoverage`, `spatialResolution`, `license`, and `methodologyUrl` — each shown on the card when present, and each collected (as optional fields) by both `submit.html` and the GitHub issue submission form. A reviewer may add a localized `responsibleUse` note when a source needs a specific limitation beside it, plus `protocolUrl` or `communityAuthorityUrl` only when the relevant source or rights-holder explicitly publishes them; these fields never imply permission, consent, or community authority. When a visible metadata field is added, add its Portuguese and Spanish display text in `data/catalog.i18n.js`; formal license names may intentionally remain canonical. Omit rather than guess when one doesn't apply.
+Optionally, an entry can also carry `temporalCoverage`, `spatialResolution`, `license`, and `methodologyUrl` — each shown on the card when present, and each collected (as optional fields) by both `submit.html` and the GitHub issue submission form. `license` is used only when one named agreement clearly covers the whole record; mixed or unclear rights stay under provider terms. A reviewer may add a localized `responsibleUse` note when a source needs a specific limitation beside it, plus `protocolUrl` or `communityAuthorityUrl` only when the relevant source or rights-holder explicitly publishes them; these fields never imply permission, consent, or community authority. When a visible metadata field is added, add its Portuguese and Spanish display text in `data/catalog.i18n.js`; formal license names may intentionally remain canonical. Omit rather than guess when one doesn't apply.
 
 Reviewers may also add controlled editorial `tags` with `topics`, `modes`, `time`, and `roles`, defined in `data/tag-presentation.js`. Tags are optional for a new draft submission so a maintainer can classify it carefully before publication; they are discovery aids, not claims about people, territories, consent, or data safety.
 
@@ -53,6 +73,8 @@ Run the catalog check after an edit:
 node scripts/validate-catalog.mjs
 ```
 
+For a compact inventory of domain balance and metadata completeness, run `npm run audit:catalog`.
+
 The expected fields and controlled vocabulary are also documented in `data/catalog.schema.json`.
 
 ## Review automation
@@ -61,7 +83,7 @@ Three workflows in `.github/workflows/` protect the review-record process:
 
 - `validate-catalog.yml` runs `scripts/validate-catalog.mjs` on every pull request touching `data/catalog.js`, `data/catalog.schema.json`, or the validator itself, and on push to `main`.
 - `check-links.yml` runs `scripts/check-links.mjs` weekly (and on demand). It flags both dead links and entries whose `checked` date has gone stale (over 180 days), filing or updating one tracking issue and closing it when a recheck is healthy.
-- `quality.yml` runs `npm run check` on every pull request and every push to `main`. It checks syntax, catalog fields and duplicate URLs, the API mirror, local public-file references, the nine canonical localized pages, submission fields, translations for every visible catalog field, and placeholder content.
+- `quality.yml` runs `npm run check` on every pull request and every push to `main`. It checks syntax, catalog fields and duplicate URLs, access-evidence links, the API mirror, local public-file references, the nine canonical localized pages, submission fields, translations for every visible catalog field, and placeholder content.
 
 The public issue form collects proposals, but no public issue triggers a write-capable workflow. A maintainer can run `scripts/issue-to-entry.mjs` locally when preparing a reviewed pull request; the submitter's GitHub handle is not copied into the catalog or API.
 
@@ -82,8 +104,8 @@ Regenerate it with `npm run build:api` whenever the catalog changes. The quality
 ```json
 {
   "apiVersion": 1,
-  "generated": "2026-07-28T00:00:00.000Z",
-  "count": 51,
+  "generated": "2026-11-05T15:41:30.371Z",
+  "count": 100,
   "source": "https://amazoniadb.org/",
   "recordSchema": "https://amazoniadb.org/data/catalog.schema.json",
   "license": "...",
@@ -117,6 +139,7 @@ Analytics reports stay private. Do not publish country or referrer breakdowns wi
 
 - AmazoniaDB stores catalog metadata and links, not data files.
 - Access and reuse rules are determined by each original provider.
+- Every access label links to the provider page used as evidence. The link helps readers verify the classification; it is not a licence grant or legal conclusion.
 - Entries must retain provider attribution and a current link-review date. The date records AmazoniaDB's check of the link and catalog metadata, not scientific validation or community approval of the underlying source.
 - If a rights holder asks for a listing to be corrected or removed, remove it promptly while the issue is reviewed.
 

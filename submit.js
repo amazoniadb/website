@@ -27,6 +27,8 @@
       generatedCopy: "Copy it into the catalog or download it for a reviewer. Confirm the source terms again before publishing.",
       httpsOnly: "Use an https:// URL.",
       httpOrHttpsOnly: "Use an http:// or https:// URL.",
+      licenseRequired: "Name the dataset-wide licence or choose a different access note.",
+      licenseClassification: "Choose Dataset-specific license when naming a licence.",
       incomplete: "Complete the required source and review fields before generating a record.",
       invalidTitle: "Use a source title that contains letters or numbers.",
       generated: "Source record generated locally. Review it before adding it to the public catalog.",
@@ -41,6 +43,8 @@
       generatedCopy: "Copie-o para o catálogo ou baixe-o para uma pessoa revisora. Confirme novamente os termos da fonte antes de publicar.",
       httpsOnly: "Use uma URL com https://.",
       httpOrHttpsOnly: "Use uma URL com http:// ou https://.",
+      licenseRequired: "Informe a licença aplicável ao conjunto ou escolha outra condição de acesso.",
+      licenseClassification: "Escolha Licença específica do conjunto ao informar uma licença.",
       incomplete: "Preencha os campos obrigatórios da fonte e da revisão antes de gerar um registro.",
       invalidTitle: "Use um título de fonte com letras ou números.",
       generated: "Registro de fonte gerado localmente. Revise-o antes de adicioná-lo ao catálogo público.",
@@ -55,6 +59,8 @@
       generatedCopy: "Cópialo al catálogo o descárgalo para una persona revisora. Confirma de nuevo las condiciones de la fuente antes de publicarlo.",
       httpsOnly: "Usa una URL con https://.",
       httpOrHttpsOnly: "Usa una URL con http:// o https://.",
+      licenseRequired: "Indica la licencia aplicable al conjunto o elige otra condición de acceso.",
+      licenseClassification: "Elige Licencia específica del conjunto al indicar una licencia.",
       incomplete: "Completa los campos obligatorios de la fuente y la revisión antes de generar un registro.",
       invalidTitle: "Usa un título de fuente que contenga letras o números.",
       generated: "Registro de fuente generado localmente. Revísalo antes de añadirlo al catálogo público.",
@@ -75,6 +81,7 @@
       `  coverage: ${JSON.stringify(record.coverage)}`,
       `  formats: ${JSON.stringify(record.formats)}`,
       `  access: ${JSON.stringify(record.access)}`,
+      `  accessUrl: ${JSON.stringify(record.accessUrl)}`,
       `  kind: ${JSON.stringify(record.kind)}`,
       `  description: ${JSON.stringify(record.description)}`,
       `  url: ${JSON.stringify(record.url)}`,
@@ -97,6 +104,7 @@
       coverage: values.get("coverage"),
       formats: values.get("formats").split(",").map((item) => item.trim()).filter(Boolean),
       access: values.get("access"),
+      accessUrl: values.get("accessUrl").trim(),
       kind: values.get("kind"),
       description: values.get("description").trim(),
       url: values.get("url").trim(),
@@ -124,9 +132,18 @@
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const url = form.elements.url;
+    const accessUrl = form.elements.accessUrl;
     const methodologyUrl = form.elements.methodologyUrl;
+    const access = form.elements.access;
+    const license = form.elements.license;
     url.setCustomValidity(url.value && !url.value.startsWith("https://") ? copy.httpsOnly : "");
+    accessUrl.setCustomValidity(accessUrl.value && !/^https?:\/\//i.test(accessUrl.value) ? copy.httpOrHttpsOnly : "");
     methodologyUrl.setCustomValidity(methodologyUrl.value && !/^https?:\/\//i.test(methodologyUrl.value) ? copy.httpOrHttpsOnly : "");
+    license.setCustomValidity(access.value === "Dataset-specific license" && !license.value.trim()
+      ? copy.licenseRequired
+      : license.value.trim() && access.value !== "Dataset-specific license"
+        ? copy.licenseClassification
+        : "");
     if (!form.checkValidity()) {
       form.reportValidity();
       message.textContent = copy.incomplete;

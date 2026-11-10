@@ -1,50 +1,448 @@
 (() => {
   const catalog = window.AMAZONIA_CATALOG || [];
-  const locale = "pt-BR";
-  const i18n = (window.AMAZONIA_CATALOG_I18N && window.AMAZONIA_CATALOG_I18N["pt-BR"]) || { descriptions: {}, spatialResolution: {}, temporalCoverage: {}, licenses: {} };
+
+  const detectLocale = () => {
+    const htmlLang = (document.documentElement?.lang || "").toLowerCase();
+    if (htmlLang.startsWith("en") || window.location?.pathname?.includes("/en/")) return "en";
+    if (htmlLang.startsWith("es") || window.location?.pathname?.includes("/es/")) return "es";
+    return "pt-BR";
+  };
+
+  const locale = detectLocale();
+  const i18n = (window.AMAZONIA_CATALOG_I18N && window.AMAZONIA_CATALOG_I18N[locale]) || {
+    descriptions: {},
+    spatialResolution: {},
+    temporalCoverage: {},
+    licenses: {}
+  };
   const spatialResolutionLabels = i18n.spatialResolution || {};
   const temporalCoverageLabels = i18n.temporalCoverage || {};
   const licenseLabels = i18n.licenses || {};
 
   // `key` matches record.category/coverage/access/kind exactly as stored in
-  // ../data/catalog.js (the canonical English values required by
+  // data/catalog.js (the canonical English values required by
   // data/catalog.schema.json) — only `label`/`note` are shown to the user.
   const presentation = window.AMAZONIA_CATEGORY_PRESENTATION || {};
   const categories = Object.entries(presentation).map(([key, item]) => ({
     key,
     ...item,
-    ...(item.locales["pt-BR"] || item.locales.en || {})
+    ...(item.locales[locale] || item.locales.en || {})
   }));
   const categoryLabels = Object.fromEntries(categories.map((c) => [c.key, c.label]));
-  const coverageLabels = { "Pan-Amazon": "Pan-Amazônia", "Brazil": "Brasil", "Peru": "Peru", "Colombia": "Colômbia", "Bolivia": "Bolívia", "Ecuador": "Equador", "Global — subsettable": "Global — recortável" };
-  const accessLabels = {
-    "Provider terms apply": "Sujeito aos termos do provedor",
-    "Dataset-specific license": "Licença específica do conjunto de dados",
-    "Publicly available": "Disponível publicamente"
+
+  const LOCALE_CONFIG = {
+    "pt-BR": {
+      coverageLabels: {
+        "Pan-Amazon": "Pan-Amazônia",
+        "Brazil": "Brasil",
+        "Peru": "Peru",
+        "Colombia": "Colômbia",
+        "Bolivia": "Bolívia",
+        "Ecuador": "Equador",
+        "Venezuela": "Venezuela",
+        "Guyana": "Guiana",
+        "Suriname": "Suriname",
+        "French Guiana": "Guiana Francesa",
+        "Global — subsettable": "Global — recortável"
+      },
+      accessLabels: {
+        "Provider terms apply": "Sujeito aos termos do provedor",
+        "Dataset-specific license": "Licença específica do conjunto de dados",
+        "Publicly available": "Disponível publicamente"
+      },
+      compactAccessLabels: {
+        "Provider terms apply": "Termos do provedor",
+        "Dataset-specific license": "Licença do conjunto",
+        "Publicly available": "Acesso público"
+      },
+      kindLabels: {
+        "Dataset": "Conjunto de dados",
+        "Data portal": "Portal de dados",
+        "Download": "Download",
+        "Explorer": "Explorador"
+      },
+      formatLabels: {
+        "Dashboard": "Painel",
+        "Graphs/plots": "Gráficos",
+        "Interactive visualizations": "Visualizações interativas",
+        "PDF reports": "Relatórios PDF",
+        "R package": "Pacote R",
+        "Web dashboard": "Painel web",
+        "Web encyclopedia": "Enciclopédia web",
+        "Web map": "Mapa web"
+      },
+      detailLabels: {
+        timeframe: "Período",
+        resolution: "Resolução",
+        license: "Licença",
+        coverage: "Cobertura",
+        access: "Acesso",
+        accessEvidence: "Ver evidência de acesso",
+        review: "Revisão do link",
+        methodology: "Documentação",
+        sourcePage: "Página da fonte"
+      },
+      researchLabels: {
+        heading: "Caminho orientado",
+        topics: "Temas",
+        filterTopic: "Filtrar por tema: ",
+        clearPath: "Voltar ao diretório completo",
+        addPath: "Adicionar estas fontes",
+        pathAdded: "Fontes do caminho adicionadas à seleção.",
+        pathAlreadyPresent: "As fontes deste caminho já estão na seleção.",
+        pathPartiallyAdded: (count) => `${count} ${count === 1 ? "fonte adicionada" : "fontes adicionadas"}; o limite de 6 impediu as demais.`,
+        questionPosition: (current, total) => `Caminho ${current} de ${total}.`
+      },
+      sourceSetLabels: {
+        add: "Adicionar",
+        added: "Na seleção",
+        remove: "Remover",
+        removed: (title) => `${title} removida da seleção.`,
+        full: "Limite de 6 fontes atingido.",
+        count: (sources, areas) => `${sources} ${sources === 1 ? "fonte" : "fontes"} · ${areas} ${areas === 1 ? "área principal" : "áreas principais"}`,
+        responsible: "Cruzar fontes não comprova impacto, consentimento ou posse. Consulte os avisos de uso responsável e a documentação de cada fonte.",
+        responsibleLabel: "Uso responsável",
+        protocol: "Protocolo da fonte",
+        communityAuthority: "Autoridade comunitária",
+        formats: "Formatos",
+        facts: "Dados da fonte",
+        moreTopics: (count) => `${count} ${count === 1 ? "tema adicional" : "temas adicionais"}`,
+        copySuccess: "Link copiado",
+        copyFailure: "Não foi possível copiar",
+        reviewed: "Link revisado em",
+        emptyCountry: "Ainda não há fonte específica para este país. Tente Pan-Amazônia ou Global — recortável.",
+        emptyDefault: "Nenhuma fonte corresponde a esses filtros. Tente uma busca mais ampla."
+      },
+      selectFallbacks: {
+        topic: "Todos os temas",
+        role: "Qualquer finalidade",
+        mode: "Qualquer tipo",
+        time: "Qualquer período"
+      },
+      sourceCountLabel: (value) => `${value} ${value === 1 ? "fonte" : "fontes"}`,
+      moreFilterCountLabel: (activeCount) => activeCount ? `· ${activeCount} ${activeCount === 1 ? "ativo" : "ativos"}` : "",
+      csvFilename: "amazoniadb-conjunto-de-fontes.csv",
+      domainNavUnavailable: '<p class="empty-state">Os filtros por domínio estão temporariamente indisponíveis. Você ainda pode navegar pelo catálogo completo abaixo.</p>',
+      resultCountPartial: (shown, total) => `Mostrando ${shown} de ${total} fontes`,
+      resultCountTotal: (total) => `${total} ${total === 1 ? "fonte encontrada" : "fontes encontradas"}`,
+      showMoreText: (count) => `Mostrar mais ${count} fontes`,
+      openSourceText: "Abrir na fonte",
+      openNewTabSr: "(abre em nova aba)",
+      methodologySr: (hasMethodology) => `${hasMethodology ? "metodologia" : "página da fonte"}; abre em nova aba`,
+      citeText: "Citar",
+      citeCopied: "Copiado",
+      citeFailed: "Não foi possível copiar",
+      reportText: "Reportar problema",
+      discoveryText: (title, catLabel, covLabel) => `Mostrando ${title} — uma fonte com link revisado em ${catLabel} · ${covLabel}.`,
+      selectionCleared: "Seleção limpa.",
+      copyLinkSuccess: "Link copiado",
+      copyLinkFailure: "Não foi possível copiar",
+      citationFormat: (record, accessedDate) => `"${record.title}." ${record.provider}. Link revisado pela AmazoniaDB em ${record.checked}. Acessado em ${accessedDate}. ${record.url}`,
+      reportSubject: (title) => `Problema em uma fonte: ${title}`,
+      reportBody: (id, url) => `Entrada: ${id}\nURL: ${url}\n\nTipo de problema (não inclua localizações nem dados sensíveis nesta mensagem):\n[ ] Link\n[ ] Contexto ou metadados\n[ ] Questão territorial ou de direitos\n[ ] Informação sensível\n[ ] Pedido de protocolo, correção ou remoção\n\nDescrição:\n`,
+      schemaDescription: "Um diretório enxuto de conjuntos de dados socioambientais da Amazônia, indexados em suas fontes originais.",
+      schemaLanguages: ["pt-BR", "en", "es-419"],
+      schemaCatalogLanguage: "pt-BR",
+      activeFiltersLabel: "Filtros ativos",
+      clearAllFilters: "Limpar todos",
+      removeFilterAria: (label) => `Remover filtro: ${label}`,
+      facetNames: {
+        category: "Área",
+        coverage: "Cobertura",
+        topic: "Tema",
+        role: "Finalidade",
+        access: "Acesso",
+        mode: "Tipo",
+        time: "Período",
+        sort: "Ordem",
+        search: "Busca"
+      },
+      sortLabels: {
+        checked: "Revisão mais recente",
+        title: "Título (A–Z)",
+        provider: "Provedor (A–Z)"
+      }
+    },
+    en: {
+      coverageLabels: {
+        "Pan-Amazon": "Pan-Amazon",
+        "Brazil": "Brazil",
+        "Peru": "Peru",
+        "Colombia": "Colombia",
+        "Bolivia": "Bolivia",
+        "Ecuador": "Ecuador",
+        "Venezuela": "Venezuela",
+        "Guyana": "Guyana",
+        "Suriname": "Suriname",
+        "French Guiana": "French Guiana",
+        "Global — subsettable": "Global — subsettable"
+      },
+      accessLabels: {
+        "Provider terms apply": "Provider terms apply",
+        "Dataset-specific license": "Dataset-specific license",
+        "Publicly available": "Publicly available"
+      },
+      compactAccessLabels: {
+        "Provider terms apply": "Provider terms apply",
+        "Dataset-specific license": "Dataset-specific license",
+        "Publicly available": "Publicly available"
+      },
+      kindLabels: {
+        "Dataset": "Dataset",
+        "Data portal": "Data portal",
+        "Download": "Download",
+        "Explorer": "Explorer"
+      },
+      formatLabels: {},
+      detailLabels: {
+        timeframe: "Timeframe",
+        resolution: "Resolution",
+        license: "License",
+        coverage: "Coverage",
+        access: "Access",
+        accessEvidence: "View access evidence",
+        review: "Link review",
+        methodology: "Documentation",
+        sourcePage: "Source page"
+      },
+      researchLabels: {
+        heading: "Guided path",
+        topics: "Topics",
+        filterTopic: "Filter by topic: ",
+        clearPath: "Return to the full directory",
+        addPath: "Add these sources",
+        pathAdded: "Path sources added to the set.",
+        pathAlreadyPresent: "This path's sources are already in the set.",
+        pathPartiallyAdded: (count) => `${count} ${count === 1 ? "source was" : "sources were"} added; the six-source limit prevented the rest.`,
+        questionPosition: (current, total) => `Path ${current} of ${total}.`
+      },
+      sourceSetLabels: {
+        add: "Add",
+        added: "In set",
+        remove: "Remove",
+        removed: (title) => `${title} removed from the set.`,
+        full: "The six-source limit has been reached.",
+        count: (sources, areas) => `${sources} ${sources === 1 ? "source" : "sources"} · ${areas} primary ${areas === 1 ? "area" : "areas"}`,
+        responsible: "Cross-referencing sources does not prove impact, consent, or tenure. Read each responsible-use note and the source documentation.",
+        responsibleLabel: "Responsible use",
+        protocol: "Source protocol",
+        communityAuthority: "Community authority",
+        formats: "Formats",
+        facts: "Source facts",
+        moreTopics: (count) => `${count} additional ${count === 1 ? "topic" : "topics"}`,
+        copySuccess: "Link copied",
+        copyFailure: "Could not copy",
+        reviewed: "Link reviewed",
+        emptyCountry: "There is no country-specific source here yet. Try Pan-Amazon or Global — subsettable.",
+        emptyDefault: "No sources match those filters. Try a broader search."
+      },
+      selectFallbacks: {
+        topic: "All topics",
+        role: "Any purpose",
+        mode: "Any type",
+        time: "Any timeframe"
+      },
+      sourceCountLabel: (value) => `${value} ${value === 1 ? "source" : "sources"}`,
+      moreFilterCountLabel: (activeCount) => activeCount ? `· ${activeCount} active` : "",
+      csvFilename: "amazoniadb-source-set.csv",
+      domainNavUnavailable: '<p class="empty-state">Area filters are temporarily unavailable. You can still browse the full catalog below.</p>',
+      resultCountPartial: (shown, total) => `Showing ${shown} of ${total} sources`,
+      resultCountTotal: (total) => `${total} ${total === 1 ? "source found" : "sources found"}`,
+      showMoreText: (count) => `Show ${count} more sources`,
+      openSourceText: "Open source",
+      openNewTabSr: "(opens in a new tab)",
+      methodologySr: (hasMethodology) => `${hasMethodology ? "methodology" : "source page"}; opens in a new tab`,
+      citeText: "Cite",
+      citeCopied: "Copied",
+      citeFailed: "Could not copy",
+      reportText: "Report an issue",
+      discoveryText: (title, catLabel, covLabel) => `Showing ${title} — a reviewed source in ${catLabel} · ${covLabel}.`,
+      selectionCleared: "Selection cleared.",
+      copyLinkSuccess: "Link copied",
+      copyLinkFailure: "Could not copy",
+      citationFormat: (record, accessedDate) => `"${record.title}." ${record.provider}. Link reviewed by AmazoniaDB on ${record.checked}. Accessed on ${accessedDate}. ${record.url}`,
+      reportSubject: (title) => `Issue with a source: ${title}`,
+      reportBody: (id, url) => `Entry: ${id}\nURL: ${url}\n\nType of issue (do not include locations or sensitive data in this message):\n[ ] Link\n[ ] Context or metadata\n[ ] Territorial or rights issue\n[ ] Sensitive information\n[ ] Protocol request, correction, or removal\n\nDescription:\n`,
+      schemaDescription: "A lightweight directory of Amazon socioenvironmental datasets, indexed at their original sources.",
+      schemaLanguages: ["en", "pt-BR", "es-419"],
+      schemaCatalogLanguage: "en",
+      activeFiltersLabel: "Active filters",
+      clearAllFilters: "Clear all",
+      removeFilterAria: (label) => `Remove filter: ${label}`,
+      facetNames: {
+        category: "Area",
+        coverage: "Coverage",
+        topic: "Topic",
+        role: "Purpose",
+        access: "Access",
+        mode: "Type",
+        time: "Timeframe",
+        sort: "Sort",
+        search: "Search"
+      },
+      sortLabels: {
+        checked: "Recently reviewed",
+        title: "Title (A–Z)",
+        provider: "Provider (A–Z)"
+      }
+    },
+    es: {
+      coverageLabels: {
+        "Pan-Amazon": "Panamazonía",
+        "Brazil": "Brasil",
+        "Peru": "Perú",
+        "Colombia": "Colombia",
+        "Bolivia": "Bolivia",
+        "Ecuador": "Ecuador",
+        "Venezuela": "Venezuela",
+        "Guyana": "Guyana",
+        "Suriname": "Surinam",
+        "French Guiana": "Guayana Francesa",
+        "Global — subsettable": "Global — recortable"
+      },
+      accessLabels: {
+        "Provider terms apply": "Sujeto a los términos del proveedor",
+        "Dataset-specific license": "Licencia específica del conjunto de datos",
+        "Publicly available": "Disponible públicamente"
+      },
+      compactAccessLabels: {
+        "Provider terms apply": "Términos del proveedor",
+        "Dataset-specific license": "Licencia del conjunto",
+        "Publicly available": "Acceso público"
+      },
+      kindLabels: {
+        "Dataset": "Conjunto de datos",
+        "Data portal": "Portal de datos",
+        "Download": "Descarga",
+        "Explorer": "Explorador"
+      },
+      formatLabels: {
+        "Dashboard": "Panel",
+        "Graphs/plots": "Gráficos",
+        "Interactive visualizations": "Visualizaciones interactivas",
+        "PDF reports": "Informes PDF",
+        "R package": "Paquete R",
+        "Web dashboard": "Panel web",
+        "Web encyclopedia": "Enciclopedia web",
+        "Web map": "Mapa web"
+      },
+      detailLabels: {
+        timeframe: "Período",
+        resolution: "Resolución",
+        license: "Licencia",
+        coverage: "Cobertura",
+        access: "Acceso",
+        accessEvidence: "Ver evidencia de acceso",
+        review: "Revisión del enlace",
+        methodology: "Documentación",
+        sourcePage: "Página de la fuente"
+      },
+      researchLabels: {
+        heading: "Ruta guiada",
+        topics: "Temas",
+        filterTopic: "Filtrar por tema: ",
+        clearPath: "Volver al directorio completo",
+        addPath: "Añadir estas fuentes",
+        pathAdded: "Fuentes de la ruta añadidas a la selección.",
+        pathAlreadyPresent: "Las fuentes de esta ruta ya están en la selección.",
+        pathPartiallyAdded: (count) => `Se ${count === 1 ? "añadió 1 fuente" : `añadieron ${count} fuentes`}; el límite de seis impidió añadir las demás.`,
+        questionPosition: (current, total) => `Ruta ${current} de ${total}.`
+      },
+      sourceSetLabels: {
+        add: "Añadir",
+        added: "En selección",
+        remove: "Quitar",
+        removed: (title) => `${title} se quitó de la selección.`,
+        full: "Se alcanzó el límite de seis fuentes.",
+        count: (sources, areas) => `${sources} ${sources === 1 ? "fuente" : "fuentes"} · ${areas} ${areas === 1 ? "área principal" : "áreas principales"}`,
+        responsible: "Cruzar fuentes no demuestra impacto, consentimiento ni tenencia. Consulte los avisos de uso responsable y la documentación de cada fuente.",
+        responsibleLabel: "Uso responsable",
+        protocol: "Protocolo de la fuente",
+        communityAuthority: "Autoridad comunitaria",
+        formats: "Formatos",
+        facts: "Datos de la fuente",
+        moreTopics: (count) => `${count} ${count === 1 ? "tema adicional" : "temas adicionales"}`,
+        copySuccess: "Enlace copiado",
+        copyFailure: "No se pudo copiar",
+        reviewed: "Enlace revisado el",
+        emptyCountry: "Todavía no hay una fuente específica para este país. Prueba Panamazonía o Global — recortable.",
+        emptyDefault: "Ninguna fuente coincide con esos filtros. Prueba una búsqueda más amplia."
+      },
+      selectFallbacks: {
+        topic: "Todos los temas",
+        role: "Cualquier finalidad",
+        mode: "Cualquier tipo",
+        time: "Cualquier período"
+      },
+      sourceCountLabel: (value) => `${value} ${value === 1 ? "fuente" : "fuentes"}`,
+      moreFilterCountLabel: (activeCount) => activeCount ? `· ${activeCount} ${activeCount === 1 ? "activo" : "activos"}` : "",
+      csvFilename: "amazoniadb-conjunto-de-fuentes.csv",
+      domainNavUnavailable: '<p class="empty-state">Los filtros por dominio no están disponibles en este momento. Puede consultar el catálogo completo abajo.</p>',
+      resultCountPartial: (shown, total) => `Mostrando ${shown} de ${total} fuentes`,
+      resultCountTotal: (total) => `${total} ${total === 1 ? "fuente encontrada" : "fuentes encontradas"}`,
+      showMoreText: (count) => `Mostrar ${count} fuentes más`,
+      openSourceText: "Abrir en la fuente",
+      openNewTabSr: "(se abre en una nueva pestaña)",
+      methodologySr: (hasMethodology) => `${hasMethodology ? "metodología" : "página de la fuente"}; se abre en una nueva pestaña`,
+      citeText: "Citar",
+      citeCopied: "Copiado",
+      citeFailed: "No se pudo copiar",
+      reportText: "Reportar un problema",
+      discoveryText: (title, catLabel, covLabel) => `Mostrando ${title} — una fuente con enlace revisado en ${catLabel} · ${covLabel}.`,
+      selectionCleared: "Selección vaciada.",
+      copyLinkSuccess: "Enlace copiado",
+      copyLinkFailure: "No se pudo copiar",
+      citationFormat: (record, accessedDate) => `"${record.title}." ${record.provider}. Enlace revisado por AmazoniaDB el ${record.checked}. Consultado el ${accessedDate}. ${record.url}`,
+      reportSubject: (title) => `Problema con una fuente: ${title}`,
+      reportBody: (id, url) => `Entrada: ${id}\nURL: ${url}\n\nTipo de problema (no incluya ubicaciones ni datos sensibles en este mensaje):\n[ ] Enlace\n[ ] Contexto o metadatos\n[ ] Cuestión territorial o de derechos\n[ ] Información sensible\n[ ] Solicitud de protocolo, corrección o retirada\n\nDescripción:\n`,
+      schemaDescription: "Un directorio conciso de conjuntos de datos socioambientales de la Amazonía, indexados en sus fuentes originales.",
+      schemaLanguages: ["es-419", "pt-BR", "en"],
+      schemaCatalogLanguage: "es-419",
+      activeFiltersLabel: "Filtros activos",
+      clearAllFilters: "Limpiar todos",
+      removeFilterAria: (label) => `Quitar filtro: ${label}`,
+      facetNames: {
+        category: "Área",
+        coverage: "Cobertura",
+        topic: "Tema",
+        role: "Finalidad",
+        access: "Acceso",
+        mode: "Tipo",
+        time: "Período",
+        sort: "Orden",
+        search: "Búsqueda"
+      },
+      sortLabels: {
+        checked: "Revisión más reciente",
+        title: "Título (A–Z)",
+        provider: "Proveedor (A–Z)"
+      }
+    }
   };
-  const compactAccessLabels = {
-    "Provider terms apply": "Termos do provedor",
-    "Dataset-specific license": "Licença do conjunto",
-    "Publicly available": "Acesso público"
-  };
-  const kindLabels = { "Dataset": "Conjunto de dados", "Data portal": "Portal de dados", "Download": "Download", "Explorer": "Explorador" };
-  const formatLabels = {
-    "Dashboard": "Painel",
-    "Graphs/plots": "Gráficos",
-    "Interactive visualizations": "Visualizações interativas",
-    "PDF reports": "Relatórios PDF",
-    "R package": "Pacote R",
-    "Web dashboard": "Painel web",
-    "Web encyclopedia": "Enciclopédia web",
-    "Web map": "Mapa web"
-  };
-  const detailLabels = { timeframe: "Período", resolution: "Resolução", license: "Licença", coverage: "Cobertura", access: "Acesso", review: "Revisão do link", methodology: "Documentação", sourcePage: "Página da fonte" };
+
+  const ui = LOCALE_CONFIG[locale] || LOCALE_CONFIG["pt-BR"];
+  const {
+    coverageLabels,
+    accessLabels,
+    compactAccessLabels,
+    kindLabels,
+    formatLabels,
+    detailLabels,
+    researchLabels,
+    sourceSetLabels
+  } = ui;
+
   const compactLicenseLabels = {
     "Creative Commons Attribution 4.0 International (CC BY 4.0)": "CC BY 4.0",
-    "Creative Commons Attribution 4.0 (CC-BY-4.0)": "CC-BY-4.0",
-    "HydroSHEDS License Agreement": "Licença HydroSHEDS",
+    "Creative Commons Attribution (version not specified)": "CC BY",
+    "Creative Commons Attribution": "CC BY",
+    "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)": "CC BY-SA 4.0",
+    "Creative Commons Attribution-ShareAlike (CC BY-SA; version not specified)": "CC BY-SA",
+    "NICFI licensing agreement": "NICFI",
+    "Licence for Copernicus DEM instance COP-DEM-GLO-30-F Global 30m Full, Free & Open": "COP-DEM GLO-30",
     "Open Data Commons Open Database License (ODbL)": "ODbL"
   };
+
   const tagPresentation = window.AMAZONIA_TAG_PRESENTATION || { facets: {}, vocabulary: {} };
   const tagVocabulary = tagPresentation.vocabulary || {};
   const topicVocabulary = tagVocabulary.topics || {};
@@ -57,6 +455,12 @@
   const roleLabels = Object.fromEntries(Object.entries(roleVocabulary).map(([key, copy]) => [key, copy[locale] || copy.en || key]));
   const researchPaths = window.AMAZONIA_RESEARCH_PATHS || [];
   const localized = (copy) => typeof copy === "string" ? copy : copy?.[locale] || copy?.en || "";
+
+  const fold = (value) => String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase();
+
   const compactFactValue = (value, maxLength = 44) => {
     const shortened = String(value)
       .split(/;\s/)[0]
@@ -70,37 +474,7 @@
     const cutAt = breakAt >= Math.floor(maxLength * 0.6) ? breakAt : candidate.length;
     return `${candidate.slice(0, cutAt).replace(/[,\s·]+$/u, "")}…`;
   };
-  const researchLabels = {
-    heading: "Caminho orientado",
-    topics: "Temas",
-    filterTopic: "Filtrar por tema: ",
-    clearPath: "Voltar ao diretório completo",
-    addPath: "Adicionar estas fontes",
-    pathAdded: "Fontes do caminho adicionadas à seleção.",
-    pathAlreadyPresent: "As fontes deste caminho já estão na seleção.",
-    pathPartiallyAdded: (count) => `${count} ${count === 1 ? "fonte adicionada" : "fontes adicionadas"}; o limite de 6 impediu as demais.`,
-    questionPosition: (current, total) => `Caminho ${current} de ${total}.`
-  };
-  const sourceSetLabels = {
-    add: "Adicionar",
-    added: "Na seleção",
-    remove: "Remover",
-    removed: (title) => `${title} removida da seleção.`,
-    full: "Limite de 6 fontes atingido.",
-    count: (sources, areas) => `${sources} ${sources === 1 ? "fonte" : "fontes"} · ${areas} ${areas === 1 ? "área principal" : "áreas principais"}`,
-    responsible: "Cruzar fontes não comprova impacto, consentimento ou posse. Consulte os avisos de uso responsável e a documentação de cada fonte.",
-    responsibleLabel: "Uso responsável",
-    protocol: "Protocolo da fonte",
-    communityAuthority: "Autoridade comunitária",
-    formats: "Formatos",
-    facts: "Dados da fonte",
-    moreTopics: (count) => `${count} ${count === 1 ? "tema adicional" : "temas adicionais"}`,
-    copySuccess: "Link copiado",
-    copyFailure: "Não foi possível copiar",
-    reviewed: "Link revisado em",
-    emptyCountry: "Ainda não há fonte específica para este país. Tente Pan-Amazônia ou Global — recortável.",
-    emptyDefault: "Nenhuma fonte corresponde a esses filtros. Tente uma busca mais ampla."
-  };
+
   const detailIcons = Object.freeze({
     timeframe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>',
     resolution: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v14H5zM12 5v14M5 12h14"/></svg>',
@@ -112,8 +486,24 @@
 
   const CATALOG_PAGE_SIZE = 12;
   const SOURCE_SET_LIMIT = 6;
-  const state = { category: "", search: "", coverage: "", topic: "", role: "", access: "", mode: "", time: "", source: "", path: "", selectedIds: [], visibleLimit: CATALOG_PAGE_SIZE };
+  const state = {
+    category: "",
+    search: "",
+    coverage: "",
+    topic: "",
+    role: "",
+    access: "",
+    mode: "",
+    time: "",
+    sort: "",
+    source: "",
+    path: "",
+    selectedIds: [],
+    visibleLimit: CATALOG_PAGE_SIZE
+  };
+
   const domainNav = document.getElementById("domain-nav");
+  const coverageStrip = document.getElementById("coverage-strip");
   const grid = document.getElementById("dataset-grid");
   const emptyState = document.getElementById("empty-state");
   const resultCount = document.getElementById("result-count");
@@ -127,6 +517,7 @@
   const access = document.getElementById("access");
   const mode = document.getElementById("mode");
   const timeProfile = document.getElementById("time-profile");
+  const sortBy = document.getElementById("sort-by");
   const moreFilters = document.getElementById("more-filters");
   const moreFilterCount = document.getElementById("more-filter-count");
   const filters = document.getElementById("filters");
@@ -147,15 +538,13 @@
   const copySourceSetButton = document.getElementById("copy-source-set");
   const downloadSourceSetButton = document.getElementById("download-source-set");
   const clearSourceSetButton = document.getElementById("clear-source-set");
+  const activeFiltersBar = document.getElementById("active-filters");
 
   count.textContent = String(catalog.length);
 
   // Restore filter state from the URL (?category=&q=&coverage=&access=) so a
   // filtered view can be bookmarked or shared as a link.
   const initialParams = new URLSearchParams(window.location.search);
-  // Os valores dos filtros vêm do vocabulário controlado da interface, não
-  // apenas do catálogo atual. Assim, uma visão vazia legítima (por exemplo,
-  // Colômbia antes de ter uma entrada) continua podendo ser compartilhada.
   const valuesFromSelect = (select) => new Set(Array.from(select.options, ({ value }) => value).filter(Boolean));
   const populateControlledSelect = (select, vocabulary, labels, fallback) => {
     if (!select) return [];
@@ -165,10 +554,10 @@
     if (Array.isArray(select.options)) select.options = ["", ...values].map((value) => ({ value }));
     return values;
   };
-  const topicValues = populateControlledSelect(topic, topicVocabulary, topicLabels, "Todos os temas");
-  const roleValues = populateControlledSelect(role, roleVocabulary, roleLabels, "Qualquer finalidade");
-  const modeValues = populateControlledSelect(mode, modeVocabulary, modeLabels, "Qualquer tipo");
-  const timeValues = populateControlledSelect(timeProfile, timeVocabulary, timeLabels, "Qualquer período");
+  const topicValues = populateControlledSelect(topic, topicVocabulary, topicLabels, ui.selectFallbacks.topic);
+  const roleValues = populateControlledSelect(role, roleVocabulary, roleLabels, ui.selectFallbacks.role);
+  const modeValues = populateControlledSelect(mode, modeVocabulary, modeLabels, ui.selectFallbacks.mode);
+  const timeValues = populateControlledSelect(timeProfile, timeVocabulary, timeLabels, ui.selectFallbacks.time);
   const validCategories = new Set(categories.map((category) => category.key));
   const validCoverage = valuesFromSelect(coverage);
   const validTopics = new Set(topicValues);
@@ -176,8 +565,10 @@
   const validAccess = valuesFromSelect(access);
   const validModes = new Set(modeValues);
   const validTime = new Set(timeValues);
+  const validSort = new Set(["checked", "title", "provider"]);
   const pathsById = new Map(researchPaths.map((path) => [path.id, path]));
   const validParam = (value, allowed) => allowed.has(value) ? value : "";
+
   state.category = validParam(initialParams.get("category") || "", validCategories);
   state.search = initialParams.get("q") || "";
   state.coverage = validParam(initialParams.get("coverage") || "", validCoverage);
@@ -186,6 +577,7 @@
   state.access = validParam(initialParams.get("access") || "", validAccess);
   state.mode = validParam(initialParams.get("mode") || "", validModes);
   state.time = validParam(initialParams.get("time") || "", validTime);
+  state.sort = validParam(initialParams.get("sort") || "", validSort);
   state.source = initialParams.get("source") || "";
   state.path = pathsById.has(initialParams.get("path")) ? initialParams.get("path") : "";
   state.selectedIds = [...new Set((initialParams.get("set") || "").split(",").filter((id) => catalog.some((record) => record.id === id)))].slice(0, SOURCE_SET_LIMIT);
@@ -199,6 +591,7 @@
     state.access = "";
     state.mode = "";
     state.time = "";
+    state.sort = "";
     state.path = "";
   } else if (state.path) {
     state.category = "";
@@ -209,6 +602,7 @@
     state.access = "";
     state.mode = "";
     state.time = "";
+    state.sort = "";
   }
   let starterPathIndex = Math.max(0, researchPaths.findIndex((path) => path.id === state.path));
   search.value = state.search;
@@ -218,6 +612,7 @@
   access.value = state.access;
   if (mode) mode.value = state.mode;
   if (timeProfile) timeProfile.value = state.time;
+  if (sortBy) sortBy.value = state.sort;
 
   const syncUrl = () => {
     const params = new URLSearchParams();
@@ -229,6 +624,7 @@
     if (state.access) params.set("access", state.access);
     if (state.mode) params.set("mode", state.mode);
     if (state.time) params.set("time", state.time);
+    if (state.sort) params.set("sort", state.sort);
     if (state.source) params.set("source", state.source);
     if (state.path) params.set("path", state.path);
     if (state.selectedIds.length) params.set("set", state.selectedIds.join(","));
@@ -254,8 +650,6 @@
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
-  // Clipboard helper shared by the "copy link to this view" and "cite" buttons.
-  // Falls back to a hidden textarea + execCommand for older browsers.
   const copyToClipboard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -269,7 +663,7 @@
         document.body.appendChild(helper);
         helper.select();
         document.execCommand("copy");
-        document.body.removeChild(helper);
+        document.body.appendChild !== undefined && document.body.removeChild(helper);
         return true;
       } catch {
         return false;
@@ -287,7 +681,6 @@
     }, 1600);
   };
 
-  const sourceCountLabel = (value) => `${value} ${value === 1 ? "fonte" : "fontes"}`;
   const formatDate = (value) => {
     const date = new Date(`${value}T00:00:00Z`);
     return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeZone: "UTC" }).format(date);
@@ -307,9 +700,63 @@
 
   const updateMoreFilterSummary = () => {
     if (!moreFilterCount) return;
-    const activeCount = [state.access, state.mode, state.time].filter(Boolean).length;
-    moreFilterCount.textContent = activeCount ? `· ${activeCount} ${activeCount === 1 ? "ativo" : "ativos"}` : "";
+    const activeCount = [state.access, state.mode, state.time, state.sort].filter(Boolean).length;
+    moreFilterCount.textContent = ui.moreFilterCountLabel(activeCount);
     if (activeCount && moreFilters) moreFilters.open = true;
+  };
+
+  const renderCoverageStrip = () => {
+    if (!coverageStrip) return;
+    const counts = new Map();
+    for (const cov of validCoverage) counts.set(cov, 0);
+    for (const record of catalog) {
+      counts.set(record.coverage, (counts.get(record.coverage) || 0) + 1);
+    }
+    const orderedCoverage = [...validCoverage].sort((a, b) => (counts.get(b) || 0) - (counts.get(a) || 0));
+    coverageStrip.innerHTML = orderedCoverage.map((cov) => {
+      const count = counts.get(cov) || 0;
+      const label = coverageLabels[cov] || cov;
+      return `<button class="coverage-pill" type="button" data-coverage-pill="${escapeHtml(cov)}" aria-pressed="${state.coverage === cov}"><span>${escapeHtml(label)}</span><span class="coverage-pill-count">${count}</span></button>`;
+    }).join("");
+  };
+
+  const renderActiveFilters = () => {
+    if (!activeFiltersBar) return;
+    const chips = [];
+    if (state.category) {
+      chips.push({ facet: "category", label: `${ui.facetNames.category}: ${categoryLabels[state.category] || state.category}` });
+    }
+    if (state.coverage) {
+      chips.push({ facet: "coverage", label: `${ui.facetNames.coverage}: ${coverageLabels[state.coverage] || state.coverage}` });
+    }
+    if (state.topic) {
+      chips.push({ facet: "topic", label: `${ui.facetNames.topic}: ${topicLabels[state.topic] || state.topic}` });
+    }
+    if (state.role) {
+      chips.push({ facet: "role", label: `${ui.facetNames.role}: ${roleLabels[state.role] || state.role}` });
+    }
+    if (state.access) {
+      chips.push({ facet: "access", label: `${ui.facetNames.access}: ${compactAccessLabels[state.access] || state.access}` });
+    }
+    if (state.mode) {
+      chips.push({ facet: "mode", label: `${ui.facetNames.mode}: ${modeLabels[state.mode] || state.mode}` });
+    }
+    if (state.time) {
+      chips.push({ facet: "time", label: `${ui.facetNames.time}: ${timeLabels[state.time] || state.time}` });
+    }
+    if (state.sort) {
+      chips.push({ facet: "sort", label: `${ui.facetNames.sort}: ${ui.sortLabels[state.sort] || state.sort}` });
+    }
+    if (state.search.trim()) {
+      chips.push({ facet: "search", label: `${ui.facetNames.search}: “${state.search.trim()}”` });
+    }
+    activeFiltersBar.hidden = chips.length === 0;
+    if (!chips.length) {
+      activeFiltersBar.innerHTML = "";
+      return;
+    }
+    const chipItems = chips.map((chip) => `<button class="active-filter-chip" type="button" data-clear-facet="${escapeHtml(chip.facet)}" aria-label="${escapeHtml(ui.removeFilterAria(chip.label))}"><span>${escapeHtml(chip.label)}</span><span class="chip-close" aria-hidden="true">×</span></button>`).join("");
+    activeFiltersBar.innerHTML = `<div class="active-filters-list" role="group" aria-label="${escapeHtml(ui.activeFiltersLabel)}">${chipItems}</div><button class="text-button active-filters-clear" type="button" data-clear-all-facets>${escapeHtml(ui.clearAllFilters)}</button>`;
   };
 
   const renderSourceSet = () => {
@@ -342,7 +789,7 @@
     if (!records.length) return;
     const exportedAt = new Date().toISOString();
     const setUrl = sourceSetUrl();
-    const fields = ["exportedAt", "sourceSetUrl", "id", "title", "description", "provider", "category", "coverage", "kind", "formats", "access", "temporalCoverage", "spatialResolution", "license", "methodologyUrl", "topics", "modes", "time", "roles", "sourceUrl", "linkChecked", "responsibleUse", "protocolUrl", "communityAuthorityUrl"];
+    const fields = ["exportedAt", "sourceSetUrl", "id", "title", "description", "provider", "category", "coverage", "kind", "formats", "access", "accessUrl", "temporalCoverage", "spatialResolution", "license", "methodologyUrl", "topics", "modes", "time", "roles", "sourceUrl", "linkChecked", "responsibleUse", "protocolUrl", "communityAuthorityUrl"];
     const rows = records.map((record) => [
       exportedAt,
       setUrl,
@@ -355,8 +802,9 @@
       record.kind,
       record.formats.join(" | "),
       record.access,
+      record.accessUrl,
       temporalCoverageLabels[record.id] || record.temporalCoverage || "",
-      spatialResolutionLabels[record.spatialResolution] || record.spatialResolution || "",
+      spatialResolutionLabels[record.id] || spatialResolutionLabels[record.spatialResolution] || record.spatialResolution || "",
       licenseLabels[record.id] || record.license || "",
       record.methodologyUrl || "",
       (record.tags?.topics || []).join(" | "),
@@ -374,7 +822,7 @@
     const href = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = href;
-    link.download = "amazoniadb-conjunto-de-fontes.csv";
+    link.download = ui.csvFilename;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -405,7 +853,7 @@
 
   const renderDomains = () => {
     if (!categories.length) {
-      domainNav.innerHTML = '<p class="empty-state">Os filtros por domínio estão temporariamente indisponíveis. Você ainda pode navegar pelo catálogo completo abaixo.</p>';
+      domainNav.innerHTML = ui.domainNavUnavailable;
       return;
     }
     domainNav.innerHTML = categories.map((category) => {
@@ -414,19 +862,53 @@
         <button class="domain-button" type="button" data-category="${escapeHtml(category.key)}" data-domain="${escapeHtml(category.id)}" aria-pressed="${state.category === category.key}">
           <span class="domain-icon">${category.icon}</span>
           <span class="domain-copy"><strong>${escapeHtml(category.label)}</strong><span>${escapeHtml(category.note)}</span></span>
-          <span class="domain-count">${sourceCountLabel(sourceCount)}</span>
+          <span class="domain-count">${ui.sourceCountLabel(sourceCount)}</span>
         </button>`;
     }).join("");
   };
 
+  const buildRecordSearchText = (record) => {
+    const tagTerms = Object.entries(record.tags || {}).flatMap(([facet, values]) =>
+      Array.isArray(values) ? values.flatMap((value) => [value, tagLabel(facet, value)]) : []
+    );
+    return fold([
+      record.title,
+      record.provider,
+      record.category,
+      categoryLabels[record.category],
+      record.coverage,
+      coverageLabels[record.coverage],
+      record.description,
+      i18n.descriptions[record.id],
+      record.temporalCoverage,
+      temporalCoverageLabels[record.id],
+      record.spatialResolution,
+      spatialResolutionLabels[record.id] || spatialResolutionLabels[record.spatialResolution],
+      record.license,
+      licenseLabels[record.id],
+      ...record.formats,
+      ...record.formats.map((format) => formatLabels[format] || format),
+      ...tagTerms
+    ].join(" "));
+  };
+
   const getVisibleRecords = () => {
-    const query = state.search.trim().toLocaleLowerCase();
+    const foldedSearch = fold(state.search.trim());
+    const searchTokens = foldedSearch.split(/\s+/).filter(Boolean);
     const activePath = getActivePath();
+
+    // Check if the exact folded phrase occurs in any catalog entry. If not,
+    // multi-word queries fall back to matching all individual tokens.
+    const hasExactPhraseMatch = !foldedSearch || catalog.some((record) => buildRecordSearchText(record).includes(foldedSearch));
+
     const records = catalog.filter((record) => {
-      const tagTerms = Object.entries(record.tags || {}).flatMap(([facet, values]) => Array.isArray(values) ? values.flatMap((value) => [value, tagLabel(facet, value)]) : []);
-      const searchText = [record.title, record.provider, record.category, record.coverage, record.description, i18n.descriptions[record.id], record.temporalCoverage, temporalCoverageLabels[record.id], record.spatialResolution, spatialResolutionLabels[record.spatialResolution], record.license, licenseLabels[record.id], ...record.formats, ...record.formats.map((format) => formatLabels[format] || format), ...tagTerms]
-        .join(" ")
-        .toLocaleLowerCase();
+      const searchText = buildRecordSearchText(record);
+      const matchesSearch = !foldedSearch || (
+        hasExactPhraseMatch
+          ? searchText.includes(foldedSearch)
+          : searchTokens.every((token) => searchText.includes(token))
+      );
+
       return (!state.source || record.id === state.source)
         && (!activePath || activePath.records.some((entry) => entry.id === record.id))
         && (!state.category || record.category === state.category)
@@ -436,44 +918,57 @@
         && (!state.access || record.access === state.access)
         && (!state.mode || record.tags?.modes?.includes(state.mode))
         && (!state.time || record.tags?.time?.includes(state.time))
-        && (!query || searchText.includes(query));
+        && matchesSearch;
     });
-    if (!activePath) return records;
-    const order = new Map(activePath.records.map((entry, index) => [entry.id, index]));
-    return records.sort((a, b) => order.get(a.id) - order.get(b.id));
+    if (activePath) {
+      const order = new Map(activePath.records.map((entry, index) => [entry.id, index]));
+      return records.sort((a, b) => order.get(a.id) - order.get(b.id));
+    }
+    if (state.sort === "checked") {
+      return [...records].sort((a, b) => b.checked.localeCompare(a.checked) || a.title.localeCompare(b.title, locale));
+    }
+    if (state.sort === "title") {
+      return [...records].sort((a, b) => a.title.localeCompare(b.title, locale));
+    }
+    if (state.sort === "provider") {
+      return [...records].sort((a, b) => a.provider.localeCompare(b.provider, locale) || a.title.localeCompare(b.title, locale));
+    }
+    return records;
   };
 
   const renderCatalog = () => {
     const activePath = getActivePath();
     const allRecords = getVisibleRecords();
-    const isUnfiltered = !activePath && !state.category && !state.search.trim() && !state.coverage && !state.topic && !state.role && !state.access && !state.mode && !state.time && !state.source;
+    const isUnfiltered = !activePath && !state.category && !state.search.trim() && !state.coverage && !state.topic && !state.role && !state.access && !state.mode && !state.time && !state.sort && !state.source;
     const records = isUnfiltered ? allRecords.slice(0, state.visibleLimit) : allRecords;
     resultCount.textContent = isUnfiltered && records.length < allRecords.length
-      ? `Mostrando ${records.length} de ${allRecords.length} fontes`
-      : `${allRecords.length} ${allRecords.length === 1 ? "fonte encontrada" : "fontes encontradas"}`;
+      ? ui.resultCountPartial(records.length, allRecords.length)
+      : ui.resultCountTotal(allRecords.length);
     emptyState.hidden = allRecords.length !== 0;
     if (!allRecords.length) {
-      emptyState.textContent = ["Colombia", "Bolivia", "Ecuador"].includes(state.coverage) ? sourceSetLabels.emptyCountry : sourceSetLabels.emptyDefault;
+      emptyState.textContent = ["Colombia", "Bolivia", "Ecuador", "Venezuela", "Guyana", "Suriname", "French Guiana"].includes(state.coverage) ? sourceSetLabels.emptyCountry : sourceSetLabels.emptyDefault;
     }
     if (showMorePanel && showMoreButton) {
       const remaining = allRecords.length - records.length;
       showMorePanel.hidden = remaining <= 0;
-      showMoreButton.textContent = `Mostrar mais ${Math.min(CATALOG_PAGE_SIZE, remaining)} fontes`;
+      showMoreButton.textContent = ui.showMoreText(Math.min(CATALOG_PAGE_SIZE, remaining));
     }
+    renderCoverageStrip();
+    renderActiveFilters();
     grid.innerHTML = records.map((record) => {
-      const detailItem = (icon, label, value, visibleValue = value) => `<li data-fact="${escapeHtml(icon)}" aria-label="${escapeHtml(`${label}: ${value}`)}"><span class="detail-icon" aria-hidden="true">${detailIcons[icon]}</span><span${visibleValue !== value ? ` title="${escapeHtml(value)}"` : ""}>${escapeHtml(visibleValue)}</span></li>`;
+      const detailItem = (icon, label, value, visibleValue = value, href = "", linkLabel = "") => `<li data-fact="${escapeHtml(icon)}" aria-label="${escapeHtml(`${label}: ${value}`)}"><span class="detail-icon" aria-hidden="true">${detailIcons[icon]}</span><span${visibleValue !== value ? ` title="${escapeHtml(value)}"` : ""}>${href ? `<a class="fact-evidence-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${label}: ${value}. ${linkLabel}`)}">${escapeHtml(visibleValue)}</a>` : escapeHtml(visibleValue)}</span></li>`;
       const reviewDate = formatDate(record.checked);
       const reviewItem = `<li data-fact="review" aria-label="${escapeHtml(`${detailLabels.review}: ${reviewDate}`)}"><span class="detail-icon" aria-hidden="true">${detailIcons.review}</span><span>${escapeHtml(sourceSetLabels.reviewed)} <time datetime="${escapeHtml(record.checked)}">${escapeHtml(reviewDate)}</time></span></li>`;
       const fullLicense = record.license ? licenseLabels[record.id] || record.license : "";
       const temporalValue = record.temporalCoverage ? temporalCoverageLabels[record.id] || record.temporalCoverage : "";
-      const resolutionValue = record.spatialResolution ? spatialResolutionLabels[record.spatialResolution] || record.spatialResolution : "";
+      const resolutionValue = record.spatialResolution ? spatialResolutionLabels[record.id] || spatialResolutionLabels[record.spatialResolution] || record.spatialResolution : "";
       const accessValue = accessLabels[record.access] || record.access;
       const factItems = [
         temporalValue ? detailItem("timeframe", detailLabels.timeframe, temporalValue, compactFactValue(temporalValue)) : "",
         resolutionValue ? detailItem("resolution", detailLabels.resolution, resolutionValue, compactFactValue(resolutionValue)) : "",
         record.license ? detailItem("license", detailLabels.license, fullLicense, compactLicenseLabels[record.license] || fullLicense) : "",
         detailItem("coverage", detailLabels.coverage, coverageLabels[record.coverage] || record.coverage),
-        detailItem("access", detailLabels.access, accessValue, compactAccessLabels[record.access] || accessValue),
+        detailItem("access", detailLabels.access, accessValue, compactAccessLabels[record.access] || accessValue, record.accessUrl, detailLabels.accessEvidence),
         reviewItem
       ].filter(Boolean).join("");
       const pathEntry = activePath?.records.find((entry) => entry.id === record.id);
@@ -507,12 +1002,12 @@
         ${responsibleUse}
         <div class="card-actions">
           <div class="card-links">
-            <a class="dataset-link" href="${escapeHtml(record.url)}" target="_blank" rel="noopener noreferrer">Abrir na fonte <span class="sr-only">(abre em nova aba)</span></a>
-            <a class="methodology-link" href="${escapeHtml(record.methodologyUrl || record.url)}" target="_blank" rel="noopener noreferrer">${record.methodologyUrl ? detailLabels.methodology : detailLabels.sourcePage} <span class="sr-only">${record.methodologyUrl ? "metodologia" : "página da fonte"}; abre em nova aba</span></a>
+            <a class="dataset-link" href="${escapeHtml(record.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(ui.openSourceText)} <span class="sr-only">${escapeHtml(ui.openNewTabSr)}</span></a>
+            <a class="methodology-link" href="${escapeHtml(record.methodologyUrl || record.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(record.methodologyUrl ? detailLabels.methodology : detailLabels.sourcePage)} <span class="sr-only">${escapeHtml(ui.methodologySr(Boolean(record.methodologyUrl)))}</span></a>
           </div>
           <div class="card-tools">
-            <button class="cite-button" type="button" data-cite-id="${escapeHtml(record.id)}">Citar</button>
-            <button class="cite-button" type="button" data-report-id="${escapeHtml(record.id)}">Reportar problema</button>
+            <button class="cite-button" type="button" data-cite-id="${escapeHtml(record.id)}">${escapeHtml(ui.citeText)}</button>
+            <button class="cite-button" type="button" data-report-id="${escapeHtml(record.id)}">${escapeHtml(ui.reportText)}</button>
           </div>
         </div>
       </article>`;
@@ -551,7 +1046,11 @@
       return;
     }
     const category = categories.find((entry) => entry.key === record.category);
-    discoveryResult.textContent = `Mostrando ${record.title} — uma fonte com link revisado em ${category?.label || record.category} · ${coverageLabels[record.coverage] || record.coverage}.`;
+    discoveryResult.textContent = ui.discoveryText(
+      record.title,
+      category?.label || record.category,
+      coverageLabels[record.coverage] || record.coverage
+    );
   };
 
   const updateDiscoverControl = () => {
@@ -571,16 +1070,16 @@
           "@id": "https://amazoniadb.org/#website",
           "name": "AmazoniaDB",
           "url": "https://amazoniadb.org/",
-          "description": "Um diretório enxuto de conjuntos de dados socioambientais da Amazônia, indexados em suas fontes originais.",
-          "inLanguage": ["pt-BR", "en", "es-419"]
+          "description": ui.schemaDescription,
+          "inLanguage": ui.schemaLanguages
         },
         {
           "@type": "DataCatalog",
           "@id": "https://amazoniadb.org/#catalog",
           "name": "AmazoniaDB",
-          "description": "Um diretório enxuto de conjuntos de dados socioambientais da Amazônia, indexados em suas fontes originais.",
+          "description": ui.schemaDescription,
           "url": "https://amazoniadb.org/",
-          "inLanguage": "pt-BR",
+          "inLanguage": ui.schemaCatalogLanguage,
           "isPartOf": { "@id": "https://amazoniadb.org/#website" }
         }
       ]
@@ -604,6 +1103,50 @@
     updateDiscoverControl();
     syncUrl();
     document.getElementById("catalog").scrollIntoView({ behavior: getScrollBehavior(), block: "start" });
+  });
+
+  coverageStrip?.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-coverage-pill]");
+    if (!button) return;
+    const cov = button.dataset.coveragePill;
+    state.coverage = state.coverage === cov ? "" : cov;
+    coverage.value = state.coverage;
+    state.source = "";
+    state.path = "";
+    renderCatalog();
+    renderResearchPath();
+    renderDiscovery();
+    updateDiscoverControl();
+    syncUrl();
+  });
+
+  activeFiltersBar?.addEventListener("click", (event) => {
+    const clearFacetButton = event.target.closest("button[data-clear-facet]");
+    if (clearFacetButton) {
+      const facet = clearFacetButton.dataset.clearFacet;
+      if (facet === "category") state.category = "";
+      else if (facet === "coverage") { state.coverage = ""; coverage.value = ""; }
+      else if (facet === "topic") { state.topic = ""; if (topic) topic.value = ""; }
+      else if (facet === "role") { state.role = ""; if (role) role.value = ""; }
+      else if (facet === "access") { state.access = ""; access.value = ""; }
+      else if (facet === "mode") { state.mode = ""; if (mode) mode.value = ""; }
+      else if (facet === "time") { state.time = ""; if (timeProfile) timeProfile.value = ""; }
+      else if (facet === "sort") { state.sort = ""; if (sortBy) sortBy.value = ""; }
+      else if (facet === "search") { state.search = ""; search.value = ""; }
+      state.source = "";
+      state.path = "";
+      renderDomains();
+      renderCatalog();
+      renderResearchPath();
+      renderDiscovery();
+      updateDiscoverControl();
+      updateMoreFilterSummary();
+      syncUrl();
+      return;
+    }
+    if (event.target.closest("button[data-clear-all-facets]")) {
+      filters.reset();
+    }
   });
 
   search.addEventListener("input", () => {
@@ -686,6 +1229,18 @@
     syncUrl();
   });
 
+  sortBy?.addEventListener("change", () => {
+    state.sort = sortBy.value;
+    state.source = "";
+    state.path = "";
+    renderCatalog();
+    renderResearchPath();
+    renderDiscovery();
+    updateDiscoverControl();
+    updateMoreFilterSummary();
+    syncUrl();
+  });
+
   filters.addEventListener("submit", (event) => {
     event.preventDefault();
   });
@@ -699,6 +1254,7 @@
       state.access = "";
       state.mode = "";
       state.time = "";
+      state.sort = "";
       state.category = "";
       state.source = "";
       state.path = "";
@@ -706,6 +1262,7 @@
       if (role) role.value = "";
       if (mode) mode.value = "";
       if (timeProfile) timeProfile.value = "";
+      if (sortBy) sortBy.value = "";
       renderDomains();
       renderCatalog();
       renderResearchPath();
@@ -729,6 +1286,7 @@
     state.access = "";
     state.mode = "";
     state.time = "";
+    state.sort = "";
     state.source = record.id;
     state.path = "";
     search.value = "";
@@ -738,6 +1296,7 @@
     access.value = "";
     if (mode) mode.value = "";
     if (timeProfile) timeProfile.value = "";
+    if (sortBy) sortBy.value = "";
     renderDomains();
     renderCatalog();
     renderResearchPath();
@@ -761,6 +1320,7 @@
     state.access = "";
     state.mode = "";
     state.time = "";
+    state.sort = "";
     state.source = "";
     state.path = pathId;
     search.value = "";
@@ -770,6 +1330,7 @@
     access.value = "";
     if (mode) mode.value = "";
     if (timeProfile) timeProfile.value = "";
+    if (sortBy) sortBy.value = "";
     renderDomains();
     renderResearchStarter();
     renderCatalog();
@@ -841,7 +1402,7 @@
   });
   clearSourceSetButton?.addEventListener("click", () => {
     state.selectedIds = [];
-    if (sourceSetStatus) sourceSetStatus.textContent = "Seleção limpa.";
+    if (sourceSetStatus) sourceSetStatus.textContent = ui.selectionCleared;
     renderCatalog();
     renderSourceSet();
     syncUrl();
@@ -858,7 +1419,7 @@
   copyLinkButton?.addEventListener("click", async () => {
     const original = copyLinkButton.textContent;
     const ok = await copyToClipboard(window.location.href);
-    flashConfirmation(copyLinkButton, ok ? "Link copiado" : "Não foi possível copiar", original);
+    flashConfirmation(copyLinkButton, ok ? ui.copyLinkSuccess : ui.copyLinkFailure, original);
   });
 
   grid.addEventListener("click", async (event) => {
@@ -897,9 +1458,9 @@
     if (citeButton) {
       const record = catalog.find((entry) => entry.id === citeButton.dataset.citeId);
       if (!record) return;
-      const citation = `"${record.title}." ${record.provider}. Link revisado pela AmazoniaDB em ${record.checked}. Acessado em ${formatDate(new Date().toISOString().slice(0, 10))}. ${record.url}`;
+      const citation = ui.citationFormat(record, formatDate(new Date().toISOString().slice(0, 10)));
       const ok = await copyToClipboard(citation);
-      flashConfirmation(citeButton, ok ? "Copiado" : "Não foi possível copiar", "Citar");
+      flashConfirmation(citeButton, ok ? ui.citeCopied : ui.citeFailed, ui.citeText);
       return;
     }
 
@@ -907,8 +1468,8 @@
     if (reportButton) {
       const record = catalog.find((entry) => entry.id === reportButton.dataset.reportId);
       if (!record) return;
-      const subject = encodeURIComponent(`Problema em uma fonte: ${record.title}`);
-      const body = encodeURIComponent(`Entrada: ${record.id}\nURL: ${record.url}\n\nTipo de problema (não inclua localizações nem dados sensíveis nesta mensagem):\n[ ] Link\n[ ] Contexto ou metadados\n[ ] Questão territorial ou de direitos\n[ ] Informação sensível\n[ ] Pedido de protocolo, correção ou remoção\n\nDescrição:\n`);
+      const subject = encodeURIComponent(ui.reportSubject(record.title));
+      const body = encodeURIComponent(ui.reportBody(record.id, record.url));
       window.location.href = `mailto:correcoes@amazoniadb.org?subject=${subject}&body=${body}`;
     }
   });

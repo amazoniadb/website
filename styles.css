@@ -162,7 +162,13 @@ input::placeholder { color: var(--placeholder); }
 .more-filters { grid-column: 1 / -1; margin-top: 3px; border-top: 1px solid var(--line); padding-top: 10px; }
 .more-filters summary { display: inline-flex; min-height: 44px; align-items: center; gap: 6px; color: var(--forest); font-size: 0.82rem; font-weight: 720; cursor: pointer; }
 .more-filters summary::marker { color: var(--moss); }
-.more-filter-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; max-width: 760px; padding: 8px 0 4px; }
+.more-filter-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 11px; max-width: 960px; padding: 8px 0 4px; }
+.coverage-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0 0 18px; }
+.coverage-strip[hidden] { display: none; }
+.coverage-pill { display: inline-flex; min-height: 36px; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; background: var(--surface); color: var(--quiet); font-size: 0.76rem; font-weight: 680; transition: border-color 140ms ease, background-color 140ms ease, color 140ms ease; }
+.coverage-pill:hover { border-color: var(--forest); color: var(--forest); background: var(--sand); }
+.coverage-pill[aria-pressed="true"] { border-color: var(--forest); background: var(--forest); color: var(--paper); }
+.coverage-pill-count { font-size: 0.7rem; opacity: 0.82; }
 .source-set-panel { display: grid; min-width: 0; gap: 15px; margin: 0 0 27px; padding: 20px 22px; border: 1px solid var(--forest); border-radius: var(--radius); background: var(--sand); }
 .source-set-panel[hidden] { display: none; }
 .source-set-panel > * { min-width: 0; }
@@ -179,6 +185,14 @@ input::placeholder { color: var(--placeholder); }
 .source-set-caution { margin: 0; border-left: 3px solid var(--focus); padding: 7px 0 7px 11px; color: var(--quiet); font-size: 0.78rem; line-height: 1.45; }
 .source-set-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; }
 .source-set-actions .button { min-height: 44px; font-size: 0.82rem; }
+.active-filters { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin: 0 0 20px; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--sand); }
+.active-filters[hidden] { display: none; }
+.active-filters-list { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.active-filter-chip { display: inline-flex; min-height: 36px; align-items: center; gap: 7px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--surface); color: var(--forest); font-size: 0.76rem; font-weight: 700; transition: border-color 140ms ease, background-color 140ms ease; }
+.active-filter-chip:hover { border-color: var(--forest); background: var(--paper); }
+.active-filter-chip .chip-close { color: var(--quiet); font-size: 0.95rem; line-height: 1; }
+.active-filter-chip:hover .chip-close { color: var(--forest); }
+.active-filters-clear { min-height: 36px; font-size: 0.78rem; }
 .dataset-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 14px; }
 .catalog-more { display: flex; justify-content: center; margin-top: 26px; }
 .catalog-more[hidden] { display: none; }
@@ -212,6 +226,8 @@ input::placeholder { color: var(--placeholder); }
 .dataset-link:hover { color: var(--focus); }
 .dataset-facts { display: grid; gap: 6px; margin: 2px 0 0; padding: 0; list-style: none; }
 .dataset-facts li { display: grid; grid-template-columns: 17px minmax(0, 1fr); align-items: start; gap: 8px; color: var(--quiet); font-size: 0.76rem; line-height: 1.4; text-wrap: pretty; }
+.dataset-facts a { color: inherit; text-decoration-line: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+.dataset-facts a:hover { color: var(--forest); text-decoration-style: solid; }
 .detail-icon { display: grid; width: 17px; height: 17px; flex: 0 0 17px; place-items: center; color: var(--moss); }
 .detail-icon svg { width: 15px; height: 15px; }
 .format-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 12px; padding: 0; list-style: none; }

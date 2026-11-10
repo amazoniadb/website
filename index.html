@@ -66,7 +66,7 @@
           <a class="button button-primary" href="#catalog">Explorar o diretório</a>
         </div>
         <dl class="site-stats" aria-label="Resumo do diretório">
-          <div><dt id="dataset-count">51</dt><dd>fontes selecionadas</dd></div>
+          <div><dt id="dataset-count">100</dt><dd>fontes selecionadas</dd></div>
           <div><dt>6</dt><dd>áreas de conhecimento</dd></div>
         </dl>
       </section>
@@ -118,6 +118,7 @@
         </div>
 
         <aside id="research-path-panel" class="research-path-panel" hidden></aside>
+        <div id="coverage-strip" class="coverage-strip" role="group" aria-label="Filtrar por país ou cobertura"></div>
 
         <form id="filters" class="filters" role="search">
           <label class="search-field" for="search">
@@ -137,6 +138,10 @@
               <option value="Colombia">Colômbia</option>
               <option value="Bolivia">Bolívia</option>
               <option value="Ecuador">Equador</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Guyana">Guiana</option>
+              <option value="Suriname">Suriname</option>
+              <option value="French Guiana">Guiana Francesa</option>
               <option value="Global — subsettable">Global — recortável</option>
             </select>
           </label>
@@ -177,6 +182,15 @@
                   <option value="">Qualquer período</option>
                 </select>
               </label>
+              <label for="sort-by">
+                <span>Ordenar por</span>
+                <select id="sort-by" name="sort">
+                  <option value="">Ordem curada</option>
+                  <option value="checked">Revisão mais recente</option>
+                  <option value="title">Título (A–Z)</option>
+                  <option value="provider">Provedor (A–Z)</option>
+                </select>
+              </label>
             </div>
           </details>
         </form>
@@ -198,6 +212,7 @@
           </div>
         </aside>
         <p id="source-set-status" class="sr-only" role="status" aria-live="polite"></p>
+        <div id="active-filters" class="active-filters" hidden></div>
 
         <div id="dataset-grid" class="dataset-grid"></div>
         <div id="catalog-more" class="catalog-more" hidden>

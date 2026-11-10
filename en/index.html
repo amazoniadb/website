@@ -66,7 +66,7 @@
           <a class="button button-primary" href="#catalog">Browse the directory</a>
         </div>
         <dl class="site-stats" aria-label="Directory summary">
-          <div><dt id="dataset-count">51</dt><dd>curated sources</dd></div>
+          <div><dt id="dataset-count">100</dt><dd>curated sources</dd></div>
           <div><dt>6</dt><dd>areas of knowledge</dd></div>
         </dl>
       </section>
@@ -118,6 +118,7 @@
         </div>
 
         <aside id="research-path-panel" class="research-path-panel" hidden></aside>
+        <div id="coverage-strip" class="coverage-strip" role="group" aria-label="Filter by country or coverage"></div>
 
         <form id="filters" class="filters" role="search">
           <label class="search-field" for="search">
@@ -137,6 +138,10 @@
               <option value="Colombia">Colombia</option>
               <option value="Bolivia">Bolivia</option>
               <option value="Ecuador">Ecuador</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Guyana">Guyana</option>
+              <option value="Suriname">Suriname</option>
+              <option value="French Guiana">French Guiana</option>
               <option value="Global — subsettable">Global — subsettable</option>
             </select>
           </label>
@@ -177,6 +182,15 @@
                   <option value="">Any timeframe</option>
                 </select>
               </label>
+              <label for="sort-by">
+                <span>Sort by</span>
+                <select id="sort-by" name="sort">
+                  <option value="">Curated order</option>
+                  <option value="checked">Recently reviewed</option>
+                  <option value="title">Title (A–Z)</option>
+                  <option value="provider">Provider (A–Z)</option>
+                </select>
+              </label>
             </div>
           </details>
         </form>
@@ -198,6 +212,7 @@
           </div>
         </aside>
         <p id="source-set-status" class="sr-only" role="status" aria-live="polite"></p>
+        <div id="active-filters" class="active-filters" hidden></div>
 
         <div id="dataset-grid" class="dataset-grid"></div>
         <div id="catalog-more" class="catalog-more" hidden>
@@ -235,6 +250,6 @@
     <script src="../data/tag-presentation.js"></script>
     <script src="../data/catalog.js"></script>
     <script src="../data/research-paths.js"></script>
-    <script src="app.js"></script>
+    <script src="../app.js"></script>
   </body>
 </html>

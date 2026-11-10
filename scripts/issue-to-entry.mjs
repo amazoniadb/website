@@ -59,6 +59,7 @@ const toCatalogObject = (record) => {
     `    coverage: ${JSON.stringify(record.coverage)}`,
     `    formats: ${JSON.stringify(record.formats)}`,
     `    access: ${JSON.stringify(record.access)}`,
+    `    accessUrl: ${JSON.stringify(record.accessUrl)}`,
     `    kind: ${JSON.stringify(record.kind)}`,
     `    description: ${JSON.stringify(record.description)}`,
     `    url: ${JSON.stringify(record.url)}`,
@@ -107,7 +108,8 @@ const insertI18nEntry = (source, locale, section, key, value) => {
   const objectEnd = findObjectEnd(source, objectStart);
   const content = source.slice(objectStart + 1, objectEnd).trim();
   const beforeEnd = source.slice(0, objectEnd).replace(/\s*$/, "");
-  const insertion = `${content ? "," : ""}\n      ${JSON.stringify(key)}: ${JSON.stringify(value)}`;
+  const separator = content && !content.endsWith(",") ? "," : "";
+  const insertion = `${separator}\n      ${JSON.stringify(key)}: ${JSON.stringify(value)}`;
   return `${beforeEnd}${insertion}\n    ${source.slice(objectEnd)}`;
 };
 
@@ -142,6 +144,7 @@ const record = {
     .map((item) => item.trim())
     .filter(Boolean),
   access: (fields.access || "").trim(),
+  accessUrl: (fields.access_url || "").trim(),
   kind: (fields.kind || "").trim(),
   description: (fields.description || "").trim(),
   url: (fields.url || "").trim(),
@@ -224,6 +227,14 @@ if (license) {
   record.license = license;
 } else if (Object.values(localizedLicense).some(Boolean)) {
   console.error("License display text was provided without a named license.");
+  process.exit(1);
+}
+if (record.access === "Dataset-specific license" && !license) {
+  console.error("Dataset-specific license requires a named dataset-wide license or agreement.");
+  process.exit(1);
+}
+if (license && record.access !== "Dataset-specific license") {
+  console.error("A named license requires the Dataset-specific license access classification.");
   process.exit(1);
 }
 
