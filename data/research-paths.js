@@ -258,6 +258,278 @@
           )
         })
       ])
+    }),
+    Object.freeze({
+      id: "pan-amazon-forest-mining-pressures",
+      locales: Object.freeze({
+        shortTitle: copy(
+          "Pan-Amazon forest & pressures",
+          "Floresta e pressões pan-amazônicas",
+          "Bosque y presiones panamazónicas"
+        ),
+        selectorSummary: copy(
+          "Pan-Amazon · 4 sources on regional territories, land cover, mining scars and active fire.",
+          "Pan-Amazônia · 4 fontes sobre territórios regionais, cobertura do solo, cicatrizes de garimpo e fogo ativo.",
+          "Panamazonía · 4 fuentes sobre territorios regionales, cobertura del suelo, cicatrices mineras y fuego activo."
+        ),
+        title: copy(
+          "Explore cross-border forest change and extractive pressures across the Amazon",
+          "Explore transformação florestal e pressões extrativas transfronteiriças na Amazônia",
+          "Explora cambio forestal y presiones extractivas transfronterizas en la Amazonía"
+        ),
+        summary: copy(
+          "A starting set of four basin-wide sources combining harmonized territorial maps, annual land cover, mining-scar detections and active-fire monitoring.",
+          "Um conjunto inicial de quatro fontes de escala regional combinando mapas territoriais harmonizados, cobertura anual do solo, detecções de cicatrizes de garimpo e monitoramento de fogo ativo.",
+          "Un conjunto inicial de cuatro fuentes a escala de cuenca que combinan mapas territoriales armonizados, cobertura anual del suelo, detecciones de cicatrices mineras y monitoreo de fuego activo."
+        ),
+        caution: copy(
+          "Cross-border layers harmonize national sources with different legal regimes, update dates and detection thresholds. Remote-sensing detections and mapped boundaries are context, not proof of legality, ownership or community consent.",
+          "Camadas transfronteiriças harmonizam fontes nacionais com diferentes regimes jurídicos, datas de atualização e limiares de detecção. Detecções por satélite e limites mapeados oferecem contexto, não prova de legalidade, posse ou consentimento comunitário.",
+          "Las capas transfronterizas armonizan fuentes nacionales con distintos regímenes jurídicos, fechas de actualización y umbrales de detección. Las detecciones satelitales y los límites cartografiados aportan contexto, no prueba de legalidad, propiedad ni consentimiento comunitario."
+        )
+      }),
+      records: Object.freeze([
+        Object.freeze({
+          id: "raisg-maps",
+          role: copy("Regional territorial context", "Contexto territorial regional", "Contexto territorial regional"),
+          reason: copy(
+            "Start with harmonized pan-Amazon layers for Indigenous territories, protected areas and infrastructure.",
+            "Comece por camadas pan-amazônicas harmonizadas de territórios indígenas, áreas protegidas e infraestrutura.",
+            "Empieza con capas panamazónicas armonizadas de territorios indígenas, áreas protegidas e infraestructura."
+          )
+        }),
+        Object.freeze({
+          id: "mapbiomas-amazonia",
+          role: copy("Basin-wide land cover", "Cobertura do solo na bacia", "Cobertura del suelo en la cuenca"),
+          reason: copy(
+            "Add annual pan-Amazon land-cover and surface-water maps built with a shared regional legend.",
+            "Acrescente mapas anuais pan-amazônicos de cobertura do solo e água superficial com legenda regional comum.",
+            "Añade mapas anuales panamazónicos de cobertura del suelo y agua superficial con una leyenda regional común."
+          )
+        }),
+        Object.freeze({
+          id: "amazon-mining-watch",
+          role: copy("Mining-scar detections", "Detecções de cicatrizes de garimpo", "Detecciones de cicatrices mineras"),
+          reason: copy(
+            "Inspect satellite-detected probable open-pit mining scars across all Amazonian jurisdictions.",
+            "Examine detecções por satélite de prováveis cicatrizes de mineração a céu aberto nas jurisdições amazônicas.",
+            "Examina detecciones satelitales de probables cicatrices de minería a cielo abierto en las jurisdicciones amazónicas."
+          )
+        }),
+        Object.freeze({
+          id: "nasa-firms-active-fire",
+          role: copy("Active-fire detections", "Detecções de fogo ativo", "Detecciones de fuego activo"),
+          reason: copy(
+            "Add near-real-time and historical thermal anomalies from MODIS and VIIRS across borders.",
+            "Acrescente anomalias térmicas históricas e quase em tempo real do MODIS e VIIRS além das fronteiras nacionais.",
+            "Añade anomalías térmicas históricas y casi en tiempo real de MODIS y VIIRS a través de las fronteras."
+          )
+        })
+      ])
+    }),
+    Object.freeze({
+      id: "andean-amazon-forests-territories",
+      locales: Object.freeze({
+        shortTitle: copy(
+          "Andean-Amazon forests & lands",
+          "Florestas da Amazônia Andina",
+          "Bosques de la Amazonía Andina"
+        ),
+        selectorSummary: copy(
+          "Colombia, Peru, Bolivia & Ecuador · 4 national forest and land-cover monitoring systems.",
+          "Colômbia, Peru, Bolívia e Equador · 4 sistemas nacionais de monitoramento florestal e de uso do solo.",
+          "Colombia, Perú, Bolivia y Ecuador · 4 sistemas nacionales de monitoreo forestal y de uso del suelo."
+        ),
+        title: copy(
+          "Compare forest and land-use monitoring across Andean-Amazon countries",
+          "Compare o monitoramento florestal e de uso do solo nos países da Amazônia Andina",
+          "Compara el monitoreo forestal y de uso del suelo en los países de la Amazonía Andina"
+        ),
+        summary: copy(
+          "A starting set of four national monitoring platforms covering Colombia, Peru, Bolivia and Ecuador.",
+          "Um conjunto inicial de quatro plataformas nacionais de monitoramento cobrindo Colômbia, Peru, Bolívia e Equador.",
+          "Un conjunto inicial de cuatro plataformas nacionales de monitoreo que cubren Colombia, Perú, Bolivia y Ecuador."
+        ),
+        caution: copy(
+          "Each country defines forest baselines, minimum mapping units and alert cadences differently. Compare national methodologies before aggregating figures across borders.",
+          "Cada país define linhas de base florestais, áreas mínimas de mapeamento e frequências de alerta de modo distinto. Compare as metodologias nacionais antes de somar números entre fronteiras.",
+          "Cada país define líneas base forestales, unidades mínimas de mapeo y frecuencias de alerta de manera distinta. Compara las metodologías nacionales antes de agregar cifras entre fronteras."
+        )
+      }),
+      records: Object.freeze([
+        Object.freeze({
+          id: "ideam-smbyc",
+          role: copy("Colombia forest monitoring", "Monitoramento florestal na Colômbia", "Monitoreo forestal en Colombia"),
+          reason: copy(
+            "Review IDEAM's official forest-cover series, early-warning alerts and methodological reports for Colombia.",
+            "Consulte a série oficial de cobertura florestal, alertas precoces e relatórios metodológicos do IDEAM para a Colômbia.",
+            "Consulta la serie oficial de cobertura forestal, alertas tempranas e informes metodológicos del IDEAM para Colombia."
+          )
+        }),
+        Object.freeze({
+          id: "geobosques-national-forest-monitoring-platform",
+          role: copy("Peru forest loss & alerts", "Perda florestal e alertas no Peru", "Pérdida forestal y alertas en Perú"),
+          reason: copy(
+            "Compare MINAM's annual forest-loss maps and weekly early-warning alerts for the Peruvian Amazon.",
+            "Compare os mapas anuais de perda florestal e alertas semanais do MINAM para a Amazônia peruana.",
+            "Compara los mapas anuales de pérdida forestal y las alertas semanales del MINAM para la Amazonía peruana."
+          )
+        }),
+        Object.freeze({
+          id: "simb-bolivia-forest-monitor",
+          role: copy("Bolivia forest geovisor", "Geovisor florestal da Bolívia", "Geovisor forestal de Bolivia"),
+          reason: copy(
+            "Inspect Bolivia's official forest-cover, deforestation and fire monitoring layers in SIMB.",
+            "Examine as camadas oficiais de cobertura florestal, desmatamento e fogo da Bolívia no SIMB.",
+            "Examina las capas oficiales de cobertura forestal, deforestación y fuego de Bolivia en el SIMB."
+          )
+        }),
+        Object.freeze({
+          id: "mapbiomas-ecuador-land-cover",
+          role: copy("Ecuador land-cover series", "Série de uso do solo no Equador", "Serie de uso del suelo en Ecuador"),
+          reason: copy(
+            "Add multi-decade 30 m land-cover, vegetation-loss and surface-water classifications for Ecuador.",
+            "Acrescente classificações multidecadais de 30 m de uso do solo, perda de vegetação e água para o Equador.",
+            "Añade clasificaciones multidecadales de 30 m de uso del suelo, pérdida de vegetación y agua para Ecuador."
+          )
+        })
+      ])
+    }),
+    Object.freeze({
+      id: "pan-amazon-rivers-waters-climate",
+      locales: Object.freeze({
+        shortTitle: copy(
+          "Pan-Amazon rivers & waters",
+          "Rios e águas pan-amazônicas",
+          "Ríos y aguas panamazónicas"
+        ),
+        selectorSummary: copy(
+          "Pan-Amazon · 4 sources on cross-border river gauges, sediments, rainfall and aquatic ecosystems.",
+          "Pan-Amazônia · 4 fontes sobre estações fluviais transfronteiriças, sedimentos, chuva e ecossistemas aquáticos.",
+          "Panamazonía · 4 fuentes sobre estaciones fluviales transfronterizas, sedimentos, lluvia y ecosistemas acuáticos."
+        ),
+        title: copy(
+          "Explore rivers, rainfall and aquatic ecosystems across the Amazon basin",
+          "Explore rios, chuva e ecossistemas aquáticos em toda a bacia amazônica",
+          "Explora ríos, lluvia y ecosistemas acuáticos en toda la cuenca amazónica"
+        ),
+        summary: copy(
+          "A starting set of four regional sources connecting cross-border hydrometric stations, gridded rainfall and sub-basin aquatic monitoring.",
+          "Um conjunto inicial de quatro fontes regionais conectando estações hidrométricas transfronteiriças, precipitação em grade e monitoramento aquático por sub-bacia.",
+          "Un conjunto inicial de cuatro fuentes regionales que conectan estaciones hidrométricas transfronterizas, precipitación en cuadrícula y monitoreo acuático por subcuenca."
+        ),
+        caution: copy(
+          "Gauge density and record periods vary across countries and tributaries, and community aquatic observations are aggregated by sub-basin to protect local contributors. Check station metadata and aggregation rules before comparing sub-basins.",
+          "A densidade de estações e os períodos de registro variam entre países e tributários, e observações aquáticas comunitárias são agregadas por sub-bacia para proteger colaboradores locais. Verifique metadados e regras de agregação antes de comparar sub-bacias.",
+          "La densidad de estaciones y los períodos de registro varían entre países y afluentes, y las observaciones acuáticas comunitarias se agregan por subcuenca para proteger a quienes colaboran localmente. Revisa los metadatos y reglas de agregación antes de comparar subcuencas."
+        )
+      }),
+      records: Object.freeze([
+        Object.freeze({
+          id: "ore-hybam-observatory",
+          role: copy("Cross-border river gauges", "Estações fluviais na bacia", "Estaciones fluviales en la cuenca"),
+          reason: copy(
+            "Start with standardized discharge, sediment and geochemistry series from the Andes to the Atlantic.",
+            "Comece por séries padronizadas de vazão, sedimentos e geoquímica dos Andes ao Atlântico.",
+            "Empieza con series estandarizadas de caudal, sedimentos y geoquímica desde los Andes hasta el Atlántico."
+          )
+        }),
+        Object.freeze({
+          id: "acto-amazon-networks-water-module",
+          role: copy("Regional water network", "Rede hídrica regional", "Red hídrica regional"),
+          reason: copy(
+            "Add member-country hydrometeorological and water-quality stations integrated by ACTO/OTCA.",
+            "Acrescente estações hidrometeorológicas e de qualidade da água dos países-membros integradas pela OTCA.",
+            "Añade estaciones hidrometeorológicas y de calidad del agua de los países miembros integradas por la OTCA."
+          )
+        }),
+        Object.freeze({
+          id: "amazon-waters-observatory",
+          role: copy("Sub-basin aquatic records", "Registros aquáticos por sub-bacia", "Registros acuáticos por subcuenca"),
+          reason: copy(
+            "Add sub-basin fish, fisheries and aquatic-ecosystem monitoring from partner and citizen-science networks.",
+            "Acrescente monitoramento de peixes, pesca e ecossistemas aquáticos por sub-bacia de redes parceiras e ciência cidadã.",
+            "Añade monitoreo de peces, pesca y ecosistemas acuáticos por subcuenca de redes socias y ciencia ciudadana."
+          )
+        }),
+        Object.freeze({
+          id: "chirps-precipitation",
+          role: copy("Gridded rainfall baseline", "Série de chuva em grade", "Serie de lluvia en cuadrícula"),
+          reason: copy(
+            "Combine station records with long-term gridded precipitation estimates across data-sparse watersheds.",
+            "Combine registros de estações com estimativas históricas de precipitação em grade em bacias com poucos postos.",
+            "Combina registros de estaciones con estimaciones históricas de precipitación en cuadrícula en cuencas con pocos datos."
+          )
+        })
+      ])
+    }),
+    Object.freeze({
+      id: "guiana-shield-forests-land",
+      locales: Object.freeze({
+        shortTitle: copy(
+          "Guiana Shield forests & land",
+          "Florestas do Escudo das Guianas",
+          "Bosques del Escudo Guayanés"
+        ),
+        selectorSummary: copy(
+          "Guyana, Suriname, French Guiana & Venezuela · 4 sources on forest monitoring and land cover.",
+          "Guiana, Suriname, Guiana Francesa e Venezuela · 4 fontes sobre monitoramento florestal e cobertura do solo.",
+          "Guyana, Surinam, Guayana Francesa y Venezuela · 4 fuentes sobre monitoreo forestal y cobertura del suelo."
+        ),
+        title: copy(
+          "Explore forest monitoring and land cover across the Guiana Shield",
+          "Explore monitoramento florestal e cobertura do solo no Escudo das Guianas",
+          "Explora el monitoreo forestal y la cobertura del suelo en el Escudo Guayanés"
+        ),
+        summary: copy(
+          "A starting set of four public sources covering Guyana, Suriname, French Guiana and Venezuela.",
+          "Um conjunto inicial de quatro fontes públicas cobrindo Guiana, Suriname, Guiana Francesa e Venezuela.",
+          "Un conjunto inicial de cuatro fuentes públicas que cubren Guyana, Surinam, Guayana Francesa y Venezuela."
+        ),
+        caution: copy(
+          "National monitoring systems across the Guiana Shield use different reporting cycles, sensor archives and access terms. Review each agency's technical notes and licensing before combining layers across jurisdictions.",
+          "Os sistemas nacionais de monitoramento no Escudo das Guianas utilizam diferentes ciclos de relatório, acervos de sensores e termos de acesso. Revise as notas técnicas e licenças de cada órgão antes de combinar camadas entre jurisdições.",
+          "Los sistemas nacionales de monitoreo en el Escudo Guayanés utilizan distintos ciclos de reporte, archivos de sensores y condiciones de acceso. Revisa las notas técnicas y licencias de cada organismo antes de combinar capas entre jurisdicciones."
+        )
+      }),
+      records: Object.freeze([
+        Object.freeze({
+          id: "guyana-mrvs",
+          role: copy("Guyana MRVS assessments", "Avaliações MRVS da Guiana", "Evaluaciones MRVS de Guyana"),
+          reason: copy(
+            "Review Guyana's annual forest-change, carbon and driver assessments published through the national MRVS.",
+            "Consulte as avaliações anuais de mudança florestal, carbono e vetores publicadas pelo MRVS da Guiana.",
+            "Consulta las evaluaciones anuales de cambio forestal, carbono y motores publicadas por el MRVS de Guyana."
+          )
+        }),
+        Object.freeze({
+          id: "gonini-suriname-land-monitoring",
+          role: copy("Suriname land monitoring", "Monitoramento do solo no Suriname", "Monitoreo del suelo en Surinam"),
+          reason: copy(
+            "Explore Suriname's national land-monitoring geoportal and forest-cover layers maintained by SBB.",
+            "Explore o geoportal nacional de monitoramento do solo e as camadas florestais mantidas pela SBB no Suriname.",
+            "Explora el geoportal nacional de monitoreo territorial y las capas forestales mantenidas por SBB en Surinam."
+          )
+        }),
+        Object.freeze({
+          id: "seas-guyane-satellite-data",
+          role: copy("French Guiana satellite archive", "Acervo orbital da Guiana Francesa", "Archivo satelital de Guayana Francesa"),
+          reason: copy(
+            "Add multi-sensor satellite imagery and territorial monitoring products from SEAS Guyane.",
+            "Acrescente imagens de satélite multissensor e produtos de monitoramento territorial do SEAS Guyane.",
+            "Añade imágenes satelitales multisensor y productos de monitoreo territorial de SEAS Guyane."
+          )
+        }),
+        Object.freeze({
+          id: "mapbiomas-venezuela-land-cover",
+          role: copy("Venezuela land-cover series", "Série de uso do solo na Venezuela", "Serie de uso del suelo en Venezuela"),
+          reason: copy(
+            "Add annual 30 m land-cover maps and transition statistics for Venezuelan Amazon and Guiana Shield watersheds.",
+            "Acrescente mapas anuais de 30 m de uso do solo e estatísticas de transição para a Amazônia e Guayana venezuelana.",
+            "Añade mapas anuales de 30 m de uso del suelo y estadísticas de transición para la Amazonía y Guayana venezolana."
+          )
+        })
+      ])
     })
   ]);
 })();

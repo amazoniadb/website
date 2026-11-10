@@ -64,7 +64,8 @@ window.AMAZONIA_CATALOG = [
     url: "https://bdmep.inmet.gov.br/",
     checked: "2026-08-24",
     temporalCoverage: "Varies by conventional station; daily records, updated every 90 days",
-    spatialResolution: "Station-level (point observations)"
+    spatialResolution: "Station-level (point observations)",
+    methodologyUrl: "https://portal.inmet.gov.br/servicos/bdmep-dados-historicos"
   },
   {
     id: "mapbiomas-brasil",
@@ -200,7 +201,9 @@ window.AMAZONIA_CATALOG = [
     description: "Pan-Amazon geospatial layers on Indigenous territories, protected areas, infrastructure and extractive concessions, compiled and harmonized from government, member-organization and other civil-society sources.",
     url: "https://www.raisg.org/en/maps/",
     checked: "2026-08-24",
-    temporalCoverage: "Reference layers updated through June 2025; historical coverage varies by layer and source"
+    temporalCoverage: "Reference layers updated through June 2025; historical coverage varies by layer and source",
+    spatialResolution: "Vector boundaries (polygon/point), not a fixed pixel resolution",
+    methodologyUrl: "https://www.raisg.org/en/terms-of-use/"
   },
   {
     id: "geobosques-national-forest-monitoring-platform",
@@ -338,7 +341,8 @@ window.AMAZONIA_CATALOG = [
     checked: "2026-08-24",
     temporalCoverage: "2000–2024, annual updates",
     spatialResolution: "~30 m",
-    license: "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+    license: "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    methodologyUrl: "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/download.html"
   },
   {
     id: "terraclass-amazonia",
@@ -371,7 +375,8 @@ window.AMAZONIA_CATALOG = [
     url: "https://xingumais.org.br/sirad-x",
     checked: "2026-08-24",
     temporalCoverage: "2018–present (monthly reports)",
-    spatialResolution: "Vector alert polygons derived from Sentinel-1, with Sentinel-2 and Landsat-9 used for visual review"
+    spatialResolution: "Vector alert polygons derived from Sentinel-1, with Sentinel-2 and Landsat-9 used for visual review",
+    methodologyUrl: "https://xingumais.org.br/sirad-x"
   },
   {
     id: "inpe-bdqueimadas",
@@ -421,7 +426,8 @@ window.AMAZONIA_CATALOG = [
     url: "https://dadosabertos.ibama.gov.br/",
     checked: "2026-08-24",
     temporalCoverage: "Infraction notices from 1980; embargo coverage includes all terms registered in the enforcement system; updated daily",
-    spatialResolution: "Infraction notices use reference points; embargo records include reference points and vector polygons"
+    spatialResolution: "Infraction notices use reference points; embargo records include reference points and vector polygons",
+    methodologyUrl: "https://www.gov.br/ibama/pt-br/servicos/consultas/autuacoes-e-embargos/areas-embargadas/2025-10-10_tutorial_autos_embargos_apreensoes_suspensoes_e_destruicoes_a_b.pdf"
   },
   {
     id: "hydrosheds",
@@ -558,7 +564,8 @@ window.AMAZONIA_CATALOG = [
     url: "https://www.oraotca.org/es",
     checked: "2026-08-24",
     temporalCoverage: "Varies by module and upstream source; monitoring products are updated on their own schedules",
-    spatialResolution: "Varies by module; national to basin-wide"
+    spatialResolution: "Varies by module; national to basin-wide",
+    methodologyUrl: "https://otca.org/el-observatorio-regional-amazonico-impulsa-la-conservacion-a-traves-de-datos-abiertos/"
   },
   {
     id: "landmark-indigenous-community-lands",
@@ -592,7 +599,8 @@ window.AMAZONIA_CATALOG = [
     url: "https://rightsandresources.org/rri-tenure-tool/",
     checked: "2026-08-24",
     temporalCoverage: "Varies by database: forest-area series 2002–2017; land-area series 2015–2020; current forest legal assessment through December 2024",
-    spatialResolution: "Country- and community-based tenure-regime indicators; no boundary geodata"
+    spatialResolution: "Country- and community-based tenure-regime indicators; no boundary geodata",
+    methodologyUrl: "https://rightsandresources.org/tenure-tracking/"
   },
   {
     id: "igarape-ecocrime-data",
@@ -608,7 +616,8 @@ window.AMAZONIA_CATALOG = [
     url: "https://ecocrime.igarape.org.br/",
     checked: "2026-08-24",
     temporalCoverage: "Platform launched in 2021; documented content updates through 2022",
-    spatialResolution: "Selected mapped locations; Brazilian operation points may represent a municipality or protected area rather than exact crime coordinates"
+    spatialResolution: "Selected mapped locations; Brazilian operation points may represent a municipality or protected area rather than exact crime coordinates",
+    methodologyUrl: "https://igarape.org.br/en/ecocrime-data/"
   },
   {
     id: "isa-povos-indigenas-no-brasil",
@@ -746,7 +755,8 @@ window.AMAZONIA_CATALOG = [
     checked: "2026-08-24",
     temporalCoverage: "Published monthly municipal records currently cover 2012–2025",
     spatialResolution: "Municipality level",
-    license: "Creative Commons Attribution"
+    license: "Creative Commons Attribution",
+    methodologyUrl: "https://www.gov.br/mds/pt-br/acoes-e-programas/cadastro-unico"
   },
   {
     id: "rede-penssan-vigisan",
@@ -762,7 +772,8 @@ window.AMAZONIA_CATALOG = [
     url: "https://redepenssan.org.br/olheparaafome/",
     checked: "2026-08-24",
     temporalCoverage: "Two survey rounds: 2020 and November 2021–April 2022",
-    spatialResolution: "National and five macroregions, with urban/rural strata; II VIGISAN also provides state/DF estimates"
+    spatialResolution: "National and five macroregions, with urban/rural strata; II VIGISAN also provides state/DF estimates",
+    methodologyUrl: "https://redepenssan.org.br/olheparaafome/"
   },
   {
     id: "mapbiomas-amazonia",
@@ -885,7 +896,9 @@ window.AMAZONIA_CATALOG = [
     "description": "IDEAM's forest and carbon monitoring system publishes forest-cover and deforestation information, early-warning products, methods, and geospatial resources for Colombia.",
     "url": "https://www.ideam.gov.co/nuestra-entidad/ecosistemas-e-informacion-ambiental/sistema-monitoreo-bosques-carbono",
     "checked": "2026-11-05",
-    "temporalCoverage": "Varies by product; annual monitoring and ongoing alerts"
+    "temporalCoverage": "Varies by product; annual monitoring and ongoing alerts",
+    "spatialResolution": "30 m (Landsat-based classification)",
+    "methodologyUrl": "https://www.ideam.gov.co/nuestra-entidad/ecosistemas-e-informacion-ambiental/sistema-monitoreo-bosques-carbono"
   },
   {
     "id": "ideam-dhime",
@@ -905,7 +918,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://www.ideam.gov.co/dhime",
     "checked": "2026-11-05",
     "temporalCoverage": "Varies by station and variable; series are updated as available",
-    "spatialResolution": "Station-level (point observations)"
+    "spatialResolution": "Station-level (point observations)",
+    "methodologyUrl": "https://www.ideam.gov.co/dhime"
   },
   {
     "id": "siatac-amazonia-colombia",
@@ -925,7 +939,9 @@ window.AMAZONIA_CATALOG = [
     "description": "SIAT-AC organizes environmental monitoring, land-cover, fire, restoration, territorial-planning, and indicator resources for the Colombian Amazon, with a geospatial viewer and downloads.",
     "url": "https://siatac.co/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Varies by layer; includes multitemporal monitoring products"
+    "temporalCoverage": "Varies by layer; includes multitemporal monitoring products",
+    "spatialResolution": "Varies by layer; vector boundaries and raster monitoring products",
+    "methodologyUrl": "https://siatac.co/"
   },
   {
     "id": "colombia-national-forest-inventory-fam",
@@ -946,6 +962,7 @@ window.AMAZONIA_CATALOG = [
     "url": "https://microdata.fao.org/index.php/catalog/2830",
     "checked": "2026-11-05",
     "temporalCoverage": "Field data collected 2015–2023",
+    "spatialResolution": "Sampled field plots across biogeographic regions (coordinates anonymized)",
     "methodologyUrl": "https://www.ideam.gov.co/sala-de-prensa/informes/Inventario-Forestal-Nacional-IFN"
   },
   {
@@ -990,6 +1007,7 @@ window.AMAZONIA_CATALOG = [
     "checked": "2026-11-05",
     "temporalCoverage": "Current published layer; update dates vary",
     "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+    "methodologyUrl": "https://sigi.igac.gov.co/colombia-mapas/preguntas-frecuentes-faq/index.html"
   },
   {
     "id": "anla-information-assets",
@@ -1009,7 +1027,9 @@ window.AMAZONIA_CATALOG = [
     "description": "A catalog of information assets held by Colombia's environmental licensing authority, published through the national open-data platform with an OData endpoint.",
     "url": "https://www.datos.gov.co/en/en/Environment-and-Sustainable-Development/Activos-de-Informaci-n-de-la-ANLA/s2my-4tjy",
     "checked": "2026-11-05",
-    "temporalCoverage": "Catalog metadata updated periodically; listed assets vary"
+    "temporalCoverage": "Catalog metadata updated periodically; listed assets vary",
+    "spatialResolution": "Project and administrative-unit level (national registry)",
+    "methodologyUrl": "https://www.datos.gov.co/en/en/Environment-and-Sustainable-Development/Activos-de-Informaci-n-de-la-ANLA/s2my-4tjy"
   },
   {
     "id": "colombia-runap-protected-areas",
@@ -1030,7 +1050,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://mapas.parquesnacionales.gov.co/arcgis/rest/services/pnn/runap/FeatureServer/0",
     "checked": "2026-11-05",
     "temporalCoverage": "Continuously synchronized; consult the published update date",
-    "spatialResolution": "Vector boundaries (protected-area polygons)"
+    "spatialResolution": "Vector boundaries (protected-area polygons)",
+    "methodologyUrl": "https://sites.google.com/parquesnacionales.gov.co/manual-usuario-externo-runap/informaci%C3%B3n-general"
   },
   {
     "id": "sinia-peru-open-data",
@@ -1050,7 +1071,9 @@ window.AMAZONIA_CATALOG = [
     "description": "SINIA is MINAM's environmental open-data catalog, linking datasets from the ministry and participating agencies on topics such as water, air, soils, biodiversity, and protected areas.",
     "url": "https://sinia.minam.gob.pe/portal/datos-abiertos/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Varies by dataset; catalog content is maintained over time"
+    "temporalCoverage": "Varies by dataset; catalog content is maintained over time",
+    "spatialResolution": "National, departmental, and district level",
+    "methodologyUrl": "https://sinia.minam.gob.pe/portal/datos-abiertos/"
   },
   {
     "id": "siamazonia-iiap",
@@ -1070,7 +1093,9 @@ window.AMAZONIA_CATALOG = [
     "description": "IIAP's Amazon information service brings together biodiversity and species resources, maps, research materials, and specialist information focused on the Peruvian Amazon.",
     "url": "https://www.gob.pe/13895-acceder-al-siamazonia-del-iiap",
     "checked": "2026-11-05",
-    "temporalCoverage": "Varies by resource; records and publications span different periods"
+    "temporalCoverage": "Varies by resource; records and publications span different periods",
+    "spatialResolution": "Point occurrence records; accuracy varies per record",
+    "methodologyUrl": "https://www.iiap.gob.pe/"
   },
   {
     "id": "iiap-amazon-soil-profiles",
@@ -1112,7 +1137,8 @@ window.AMAZONIA_CATALOG = [
     "checked": "2026-11-05",
     "temporalCoverage": "Published monitoring records include 2022–2023 observations",
     "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
-    "license": "Open Data Commons Attribution License (ODC-BY)"
+    "license": "Open Data Commons Attribution License (ODC-BY)",
+    "methodologyUrl": "https://www.datosabiertos.gob.pe/dataset/registro-de-monitoreo-de-la-deforestaci%C3%B3n-en-el-%C3%A1mbito-de-las-%C3%A1reas-naturales-protegidas-%E2%80%93-0"
   },
   {
     "id": "inei-peru-census-2017-redatam",
@@ -1154,7 +1180,9 @@ window.AMAZONIA_CATALOG = [
     "description": "Bolivia's official forest geovisor brings together forest-cover, deforestation, fire, and land-use monitoring products, including downloads and editable sector statistics.",
     "url": "https://simb.planificacion.gob.bo/simb/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Annual and dry-season monitoring; system is updated continuously"
+    "temporalCoverage": "Annual and dry-season monitoring; system is updated continuously",
+    "spatialResolution": "30 m (Landsat-based classification)",
+    "methodologyUrl": "https://simb.planificacion.gob.bo/simb/"
   },
   {
     "id": "geobolivia-national-geospatial-portal",
@@ -1175,7 +1203,9 @@ window.AMAZONIA_CATALOG = [
     "description": "GeoBolivia's national spatial data infrastructure provides a searchable catalog, metadata, base layers, maps, and downloads from participating public institutions.",
     "url": "https://geobolivia.planificacion.gob.bo/ide-epb/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Varies by contributing dataset and layer"
+    "temporalCoverage": "Varies by contributing dataset and layer",
+    "spatialResolution": "Varies by layer; vector boundaries and raster monitoring products",
+    "methodologyUrl": "https://geobolivia.planificacion.gob.bo/ide-epb/"
   },
   {
     "id": "mapbiomas-bolivia-land-cover",
@@ -1195,7 +1225,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://bolivia.mapbiomas.org/",
     "checked": "2026-11-05",
     "temporalCoverage": "Annual historical collection; period varies by current product release",
-    "spatialResolution": "30 m (Landsat-based classification)"
+    "spatialResolution": "30 m (Landsat-based classification)",
+    "methodologyUrl": "https://bolivia.mapbiomas.org/iniciativas-y-productos/metodologia-mapbiomas/"
   },
   {
     "id": "bolivia-ine-census-2024",
@@ -1235,7 +1266,9 @@ window.AMAZONIA_CATALOG = [
     "description": "OEP publishes maps for Indigenous Native Peasant autonomous territories and processes, including several Amazonian TIOC areas. The maps document electoral and autonomy processes rather than a complete national land-tenure register.",
     "url": "https://web.oep.org.bo/aioc/via-territorio/mapas/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Published territory maps; update frequency varies"
+    "temporalCoverage": "Published territory maps; update frequency varies",
+    "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+    "methodologyUrl": "https://web.oep.org.bo/aioc/via-territorio/mapas/"
   },
   {
     "id": "senamhi-bolivia-hydromet-export",
@@ -1255,7 +1288,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://onsc.senamhi.gob.bo/public/public-stations-info-export",
     "checked": "2026-11-05",
     "temporalCoverage": "Varies by station, variable, and selected period",
-    "spatialResolution": "Station-level (point observations)"
+    "spatialResolution": "Station-level (point observations)",
+    "methodologyUrl": "https://onsc.senamhi.gob.bo/public/public-stations-info-export"
   },
   {
     "id": "sib-ecuador-biodiversity",
@@ -1274,7 +1308,9 @@ window.AMAZONIA_CATALOG = [
     "description": "SiB-Ec is Ecuador's national biodiversity information system for discovering species, natural-heritage records, and related biodiversity resources.",
     "url": "https://biodiversidad.ambiente.gob.ec/biodiversidad-web/inicio/index.html",
     "checked": "2026-11-05",
-    "temporalCoverage": "Record dates vary; catalog content is updated over time"
+    "temporalCoverage": "Record dates vary; catalog content is updated over time",
+    "spatialResolution": "Point occurrence records; accuracy varies per record",
+    "methodologyUrl": "https://biodiversidad.ambiente.gob.ec/biodiversidad-web/inicio/index.html"
   },
   {
     "id": "inamhi-open-geoservices",
@@ -1295,7 +1331,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://geoservicios.inamhi.gob.ec/",
     "checked": "2026-11-05",
     "temporalCoverage": "Varies by station, product, and dashboard",
-    "spatialResolution": "Station-level (point observations)"
+    "spatialResolution": "Station-level (point observations)",
+    "methodologyUrl": "https://geoservicios.inamhi.gob.ec/"
   },
   {
     "id": "mapbiomas-ecuador-land-cover",
@@ -1315,7 +1352,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://ecuador.mapbiomas.org/iniciativas-y-productos/cobertura-y-uso-del-suelo/cobertura-30m/",
     "checked": "2026-11-05",
     "temporalCoverage": "1985–2025 (annual, Collection 4.0)",
-    "spatialResolution": "30 m (Landsat-based classification)"
+    "spatialResolution": "30 m (Landsat-based classification)",
+    "methodologyUrl": "https://ecuador.mapbiomas.org/iniciativas-y-productos/metodologia-mapbiomas/vision-general/"
   },
   {
     "id": "ecuador-census-2022-results",
@@ -1359,7 +1397,9 @@ window.AMAZONIA_CATALOG = [
     "url": "https://www.geoportaligm.gob.ec/proyecto_nacional/",
     "checked": "2026-11-05",
     "temporalCoverage": "Reference layers and survey dates vary by product",
-    "license": "Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)"
+    "spatialResolution": "National topographic and thematic layers (1:5,000 to 1:250,000 scale)",
+    "license": "Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)",
+    "methodologyUrl": "https://www.geoportaligm.gob.ec/proyecto_nacional/"
   },
   {
     "id": "ecuador-snap-protected-areas",
@@ -1379,7 +1419,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://geovisorm.controlrecursosyenergia.gob.ec/arcgis/rest/services/MAAE_WGS84_17S/MapServer/0",
     "checked": "2026-11-05",
     "temporalCoverage": "Current service snapshot; source update date is not stated on the layer page",
-    "spatialResolution": "Vector boundaries (protected-area polygons)"
+    "spatialResolution": "Vector boundaries (protected-area polygons)",
+    "methodologyUrl": "https://geovisorm.controlrecursosyenergia.gob.ec/arcgis/rest/services/MAAE_WGS84_17S/MapServer/0"
   },
   {
     "id": "mapbiomas-venezuela-land-cover",
@@ -1402,6 +1443,7 @@ window.AMAZONIA_CATALOG = [
     "temporalCoverage": "1985–2024 (annual, Collection 3)",
     "spatialResolution": "30 m (Landsat-based classification)",
     "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "methodologyUrl": "https://venezuela.mapbiomas.org/descargas/estadisticas/"
   },
   {
     "id": "provita-venezuela-biodiversity-portal",
@@ -1421,7 +1463,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://bioportal.provita.org.ve/",
     "checked": "2026-11-05",
     "temporalCoverage": "Occurrence dates vary; records are updated as sources are integrated",
-    "spatialResolution": "Point occurrence records; accuracy varies per record"
+    "spatialResolution": "Point occurrence records; accuracy varies per record",
+    "methodologyUrl": "https://geoportal.provita.org.ve/en/faq/"
   },
   {
     "id": "provita-venezuela-protected-areas",
@@ -1439,7 +1482,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://geoportalp-files.s3-us-east-2.amazonaws.com/files/shapefile/230729_ANP_VEN_WGS84.zip",
     "checked": "2026-11-05",
     "temporalCoverage": "Layer dated 2023; update frequency is not stated",
-    "spatialResolution": "Vector boundaries (protected-area polygons)"
+    "spatialResolution": "Vector boundaries (protected-area polygons)",
+    "methodologyUrl": "https://geoportal.provita.org.ve/en/faq/"
   },
   {
     "id": "provita-venezuela-hydrographic-basins",
@@ -1457,7 +1501,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://geoportalp-files.s3-us-east-2.amazonaws.com/files/shapefile/241115_Cuencas_hidrograficas_WGS84.zip",
     "checked": "2026-11-05",
     "temporalCoverage": "Layer updated November 2024",
-    "spatialResolution": "River basin polygons; source map scale 1:2,000,000"
+    "spatialResolution": "River basin polygons; source map scale 1:2,000,000",
+    "methodologyUrl": "https://geoportal.provita.org.ve/en/faq/"
   },
   {
     "id": "provita-venezuela-indigenous-territories",
@@ -1475,7 +1520,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://geoportalp-files.s3-us-east-2.amazonaws.com/files/shapefile/240808_TI_VEN_WGS84.zip",
     "checked": "2026-11-05",
     "temporalCoverage": "Layer dated August 2024",
-    "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution"
+    "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+    "methodologyUrl": "https://geoportal.provita.org.ve/en/faq/"
   },
   {
     "id": "guyana-mrvs",
@@ -1494,7 +1540,9 @@ window.AMAZONIA_CATALOG = [
     "description": "The GFC's MRVS publishes annual forest-change and carbon-monitoring assessments, with methods and outputs on deforestation, degradation, and related drivers.",
     "url": "https://forestry.gov.gy/the-redd-mrv/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Annual assessments from 2010; latest reporting period varies by publication"
+    "temporalCoverage": "Annual assessments from 2010; latest reporting period varies by publication",
+    "spatialResolution": "Landsat/Sentinel-based; minimum 1 ha detection",
+    "methodologyUrl": "https://forestry.gov.gy/guyana-monitoring-reporting-verification-systemmrvs-assessment-report/"
   },
   {
     "id": "guyana-hydromet-statistics",
@@ -1513,7 +1561,9 @@ window.AMAZONIA_CATALOG = [
     "description": "Published national tables summarize rainfall, temperature, humidity, and sunshine observations from Guyana meteorological stations; the rainfall series identified on the page covers coastal regions.",
     "url": "https://statisticsguyana.gov.gy/subjects/hydrometeorological/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Series vary by variable; published examples run from 1981 to 2026"
+    "temporalCoverage": "Series vary by variable; published examples run from 1981 to 2026",
+    "spatialResolution": "Station-level (point observations)",
+    "methodologyUrl": "https://statisticsguyana.gov.gy/subjects/hydrometeorological/"
   },
   {
     "id": "guyana-census-2022",
@@ -1533,7 +1583,9 @@ window.AMAZONIA_CATALOG = [
     "description": "The Bureau's census archive includes the 2022 preliminary population report, earlier census compendia, and downloadable village-level population and household files for prior census rounds.",
     "url": "https://statisticsguyana.gov.gy/census/page/2/",
     "checked": "2026-11-05",
-    "temporalCoverage": "2022 preliminary results; archive includes 2002 and 2012 village files"
+    "temporalCoverage": "2022 preliminary results; archive includes 2002 and 2012 village files",
+    "spatialResolution": "National, regional, and village level",
+    "methodologyUrl": "https://statisticsguyana.gov.gy/census/page/2/"
   },
   {
     "id": "ggmc-gmaps-geophysical-data",
@@ -1551,7 +1603,9 @@ window.AMAZONIA_CATALOG = [
     "description": "GGMC's GMAPS release provides downloadable magnetic, radiometric, and gravity grids covering surveyed areas of Guyana, combining new 2025 coverage with reprocessed legacy surveys.",
     "url": "https://www.ggmc.gov.gy/request-for-mineral-mapping-information/",
     "checked": "2026-11-05",
-    "temporalCoverage": "New survey data from 2025 plus reprocessed legacy surveys"
+    "temporalCoverage": "New survey data from 2025 plus reprocessed legacy surveys",
+    "spatialResolution": "Airborne geophysical survey grids and regional map blocks",
+    "methodologyUrl": "https://www.ggmc.gov.gy/miners-can-now-access-updated-mineral-data/"
   },
   {
     "id": "guyana-redd-safeguard-information-system",
@@ -1570,7 +1624,9 @@ window.AMAZONIA_CATALOG = [
     "description": "Guyana's REDD+ safeguard system organizes periodic public reporting on how environmental and social safeguards are addressed, including indicators, agency roles, and review procedures.",
     "url": "https://forestry.gov.gy/overview-of-the-safeguard-information-system/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Annual reporting cycle; published summaries vary by year"
+    "temporalCoverage": "Annual reporting cycle; published summaries vary by year",
+    "spatialResolution": "National and regional safeguard indicators",
+    "methodologyUrl": "https://forestry.gov.gy/what-is-the-safeguard-information-system/"
   },
   {
     "id": "gonini-suriname-land-monitoring",
@@ -1589,7 +1645,9 @@ window.AMAZONIA_CATALOG = [
     "description": "GONINI is Suriname's national interactive land-monitoring geoportal, with current forest, land-cover, and land-use information assembled by SBB and partners.",
     "url": "https://gonini.sbb.sr/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Current layers vary; forest-change products include historical mapping"
+    "temporalCoverage": "Current layers vary; forest-change products include historical mapping",
+    "spatialResolution": "30 m (Landsat-based classification)",
+    "methodologyUrl": "https://sbb.sr/"
   },
   {
     "id": "kopi-suriname-forest-statistics",
@@ -1608,7 +1666,9 @@ window.AMAZONIA_CATALOG = [
     "description": "KOPI displays statistical information produced through Suriname's National Forest Monitoring System for research, planning, and policy use.",
     "url": "https://kopi.sbb.sr/index.php",
     "checked": "2026-11-05",
-    "temporalCoverage": "Updated as new National Forest Monitoring System statistics are produced"
+    "temporalCoverage": "Updated as new National Forest Monitoring System statistics are produced",
+    "spatialResolution": "National and district-level forest statistics",
+    "methodologyUrl": "https://sbb.sr/"
   },
   {
     "id": "suriname-census-2012",
@@ -1628,7 +1688,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://statistics-suriname.org/census-statistics-2012/",
     "checked": "2026-11-05",
     "temporalCoverage": "Census reference year 2012",
-    "spatialResolution": "District and ressort level, depending on table"
+    "spatialResolution": "District and ressort level, depending on table",
+    "methodologyUrl": "https://statistics-suriname.org/census-statistics-2012/"
   },
   {
     "id": "act-guianas-biodiversity-database",
@@ -1647,7 +1708,9 @@ window.AMAZONIA_CATALOG = [
     "description": "A regional biocultural database documents selected animal, plant, and fungi species with scientific and local names, images, and information from Suriname and neighboring Guianas.",
     "url": "https://biodb.act-suriname.org/",
     "checked": "2026-11-05",
-    "temporalCoverage": "Continuously expanded; species and community coverage varies"
+    "temporalCoverage": "Continuously expanded; species and community coverage varies",
+    "spatialResolution": "Community-level records",
+    "methodologyUrl": "https://biodb.act-suriname.org/"
   },
   {
     "id": "guyane-hydrometric-stations",
@@ -1669,7 +1732,8 @@ window.AMAZONIA_CATALOG = [
     "checked": "2026-11-05",
     "temporalCoverage": "Station inventory snapshot last updated in 2022; measurements continue in linked services",
     "spatialResolution": "Station-level (point gauges)",
-    "license": "Licence Ouverte / Open Licence version 2.0"
+    "license": "Licence Ouverte / Open Licence version 2.0",
+    "methodologyUrl": "https://www.data.gouv.fr/datasets/stations-hydrometriques-guyane"
   },
   {
     "id": "seas-guyane-satellite-data",
@@ -1690,7 +1754,9 @@ window.AMAZONIA_CATALOG = [
     "description": "SEAS Guyane catalogs satellite imagery and territorial information for environmental monitoring, land planning, and risk work; access conditions can vary by image and product.",
     "url": "https://www.seasguyane.org/en",
     "checked": "2026-11-05",
-    "temporalCoverage": "Satellite archive includes products from 2015 onward; availability varies by sensor"
+    "temporalCoverage": "Satellite archive includes products from 2015 onward; availability varies by sensor",
+    "spatialResolution": "Multi-sensor satellite scenes (1.5 m SPOT to 10–30 m Sentinel/Landsat)",
+    "methodologyUrl": "https://www.seasguyane.org/en"
   },
   {
     "id": "parc-amazonien-guyane-biodiversity-atlas",
@@ -1710,7 +1776,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://biodiversite.parc-amazonien-guyane.fr/",
     "checked": "2026-11-05",
     "temporalCoverage": "Observations since 2007; content is updated as records are added",
-    "spatialResolution": "Point occurrence records; accuracy varies per record"
+    "spatialResolution": "Point occurrence records; accuracy varies per record",
+    "methodologyUrl": "https://biodiversite.parc-amazonien-guyane.fr/static_pages/presentation"
   },
   {
     "id": "incra-certified-rural-properties",
@@ -1732,7 +1799,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://acervofundiario.incra.gov.br/geodownload/geodados.php",
     "checked": "2026-11-05",
     "temporalCoverage": "SIGEF certifications since 2013; download packages updated fortnightly",
-    "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution"
+    "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+    "methodologyUrl": "https://www.gov.br/pt-br/servicos/obter-coordenadas-e-baixar-os-arquivos-dos-imoveis-ruras-certificados?id=11964&origem=servico"
   },
   {
     "id": "inep-brazil-school-census-microdata",
@@ -1752,7 +1820,9 @@ window.AMAZONIA_CATALOG = [
     "description": "Annual education microdata describe schools, classes, enrollments, and teaching staff across Brazil and can be filtered to Amazon states using published geographic identifiers.",
     "url": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar",
     "checked": "2026-11-05",
-    "temporalCoverage": "1995–2025 (annual editions available)"
+    "temporalCoverage": "1995–2025 (annual editions available)",
+    "spatialResolution": "School, municipal, and state level",
+    "methodologyUrl": "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-escolar"
   },
   {
     "id": "brazil-national-forest-inventory",
@@ -1773,6 +1843,7 @@ window.AMAZONIA_CATALOG = [
     "url": "https://snif.florestal.gov.br/pt-br/temas-florestais/ifn",
     "checked": "2026-11-05",
     "temporalCoverage": "Dynamic inventory; products updated as new collection and analysis are released",
+    "spatialResolution": "Systematic 20 × 20 km national grid of field sample plots",
     "methodologyUrl": "https://www.gov.br/florestal/pt-br/assuntos/ifn"
   },
   {
@@ -1794,7 +1865,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://observatorio.aguasamazonicas.org/en/about/faq/",
     "checked": "2026-11-05",
     "temporalCoverage": "Updated as datasets and new versions are integrated",
-    "spatialResolution": "Sub-basin aggregates in public views"
+    "spatialResolution": "Sub-basin aggregates in public views",
+    "methodologyUrl": "https://aguasamazonicas.org/"
   },
   {
     "id": "acto-amazon-networks-water-module",
@@ -1814,7 +1886,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://aguasamazonicas.otca.org/environmental-and-water-resources-monitoring/ora-amazon-networks-module/?lang=en",
     "checked": "2026-11-05",
     "temporalCoverage": "Station and variable periods differ; monitoring is ongoing",
-    "spatialResolution": "Station-level (point observations)"
+    "spatialResolution": "Station-level (point observations)",
+    "methodologyUrl": "https://www.oraotca.org/es"
   },
   {
     "id": "protected-planet-wdpa",
@@ -1836,7 +1909,8 @@ window.AMAZONIA_CATALOG = [
     "url": "https://www.protectedplanet.net/en",
     "checked": "2026-11-05",
     "temporalCoverage": "Monthly releases; historical legal dates vary by protected area",
-    "spatialResolution": "Vector boundaries (protected-area polygons)"
+    "spatialResolution": "Vector boundaries (protected-area polygons)",
+    "methodologyUrl": "https://www.protectedplanet.net/en/news-and-stories/why-do-we-have-different-versions-of-the-wdpa"
   },
   {
     "id": "worldpop-global-population",
@@ -1857,7 +1931,8 @@ window.AMAZONIA_CATALOG = [
     "checked": "2026-11-05",
     "temporalCoverage": "2015–2030 (annual product series; release-specific estimates)",
     "spatialResolution": "100 m country grids and 1 km global grids",
-    "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+    "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "methodologyUrl": "https://www.worldpop.org/faq/"
   }
 ];
 

@@ -28,7 +28,7 @@
       icon: icon('<path d="M4 24 12 11l5 8 3-5 8 10H4Z"/><path d="M18 24c0-4 1-7 5-10"/><path d="M23 14h4"/>'),
       locales: Object.freeze({
         en: { label: "Land, fire & change", note: "Land use, fire, infrastructure" },
-        "pt-BR": { label: "Terra, fogo e transformação", note: "Uso da terra, fogo e infraestrutura" },
+        "pt-BR": { label: "Solo, fogo e transformação", note: "Uso do solo, fogo e infraestrutura" },
         es: { label: "Tierra, fuego y cambio", note: "Uso del suelo, fuego e infraestructura" }
       })
     }),
