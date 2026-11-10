@@ -2,6 +2,16 @@
 
 All notable changes to AmazoniaDB are documented here. Loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.11.0] — 2026-11-10
+
+### Added
+- Four cross-border and pan-Amazon Guided Research Paths (`pan-amazon-forest-mining-pressures`, `andean-amazon-forests-territories`, `pan-amazon-rivers-waters-climate`, `guiana-shield-forests-land`), expanding the reviewed research starter to 8 paths spanning all 9 Amazonian jurisdictions
+- Complete spatial-resolution (`100/100`) and methodology/documentation URL (`100/100`) coverage across the 100-record catalog, with full `pt-BR` and `es` translations in `data/catalog.i18n.js`
+
+### Changed
+- Differentiated Portuguese (`pt-BR`) terminology between Earth (`Terra, água e ar`) and Land/Soil (`Solo, fogo e transformação` and `Uso do solo`) across `data/category-presentation.js`, `data/tag-presentation.js`, and `submit.html`
+- Restored the canonical `"Earth, water & climate"` domain key in `data/catalog.schema.json` and regenerated `api/v1/catalog.json`
+
 ## [1.10.0] — 2026-11-10
 
 ### Added

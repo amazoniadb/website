@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "generated": "2026-11-05T15:41:30.371Z",
+  "generated": "2026-11-10T22:05:53.860Z",
   "count": 100,
   "source": "https://amazoniadb.org/",
   "recordSchema": "https://amazoniadb.org/data/catalog.schema.json",
@@ -150,6 +150,7 @@
       "checked": "2026-08-24",
       "temporalCoverage": "Varies by conventional station; daily records, updated every 90 days",
       "spatialResolution": "Station-level (point observations)",
+      "methodologyUrl": "https://portal.inmet.gov.br/servicos/bdmep-dados-historicos",
       "tags": {
         "topics": [
           "climate"
@@ -473,6 +474,8 @@
       "url": "https://www.raisg.org/en/maps/",
       "checked": "2026-08-24",
       "temporalCoverage": "Reference layers updated through June 2025; historical coverage varies by layer and source",
+      "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+      "methodologyUrl": "https://www.raisg.org/en/terms-of-use/",
       "tags": {
         "topics": [
           "territories",
@@ -789,6 +792,7 @@
       "temporalCoverage": "2000–2024, annual updates",
       "spatialResolution": "~30 m",
       "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "methodologyUrl": "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/download.html",
       "tags": {
         "topics": [
           "forests",
@@ -865,6 +869,7 @@
       "checked": "2026-08-24",
       "temporalCoverage": "2018–present (monthly reports)",
       "spatialResolution": "Vector alert polygons derived from Sentinel-1, with Sentinel-2 and Landsat-9 used for visual review",
+      "methodologyUrl": "https://xingumais.org.br/sirad-x",
       "tags": {
         "topics": [
           "forests",
@@ -979,6 +984,7 @@
       "checked": "2026-08-24",
       "temporalCoverage": "Infraction notices from 1980; embargo coverage includes all terms registered in the enforcement system; updated daily",
       "spatialResolution": "Infraction notices use reference points; embargo records include reference points and vector polygons",
+      "methodologyUrl": "https://www.gov.br/ibama/pt-br/servicos/consultas/autuacoes-e-embargos/areas-embargadas/2025-10-10_tutorial_autos_embargos_apreensoes_suspensoes_e_destruicoes_a_b.pdf",
       "tags": {
         "topics": [
           "environmental-accountability"
@@ -1276,6 +1282,7 @@
       "checked": "2026-08-24",
       "temporalCoverage": "Varies by module and upstream source; monitoring products are updated on their own schedules",
       "spatialResolution": "Varies by module; national to basin-wide",
+      "methodologyUrl": "https://otca.org/el-observatorio-regional-amazonico-impulsa-la-conservacion-a-traves-de-datos-abiertos/",
       "tags": {
         "topics": [
           "biodiversity",
@@ -1371,6 +1378,7 @@
       "checked": "2026-08-24",
       "temporalCoverage": "Varies by database: forest-area series 2002–2017; land-area series 2015–2020; current forest legal assessment through December 2024",
       "spatialResolution": "Country- and community-based tenure-regime indicators; no boundary geodata",
+      "methodologyUrl": "https://rightsandresources.org/tenure-tracking/",
       "tags": {
         "topics": [
           "territories",
@@ -1415,6 +1423,7 @@
       "checked": "2026-08-24",
       "temporalCoverage": "Platform launched in 2021; documented content updates through 2022",
       "spatialResolution": "Selected mapped locations; Brazilian operation points may represent a municipality or protected area rather than exact crime coordinates",
+      "methodologyUrl": "https://igarape.org.br/en/ecocrime-data/",
       "tags": {
         "topics": [
           "environmental-accountability",
@@ -1762,6 +1771,7 @@
       "temporalCoverage": "Published monthly municipal records currently cover 2012–2025",
       "spatialResolution": "Municipality level",
       "license": "Creative Commons Attribution",
+      "methodologyUrl": "https://www.gov.br/mds/pt-br/acoes-e-programas/cadastro-unico",
       "tags": {
         "topics": [
           "population",
@@ -1798,6 +1808,7 @@
       "checked": "2026-08-24",
       "temporalCoverage": "Two survey rounds: 2020 and November 2021–April 2022",
       "spatialResolution": "National and five macroregions, with urban/rural strata; II VIGISAN also provides state/DF estimates",
+      "methodologyUrl": "https://redepenssan.org.br/olheparaafome/",
       "tags": {
         "topics": [
           "food-security",
@@ -2074,6 +2085,8 @@
       "url": "https://www.ideam.gov.co/nuestra-entidad/ecosistemas-e-informacion-ambiental/sistema-monitoreo-bosques-carbono",
       "checked": "2026-11-05",
       "temporalCoverage": "Varies by product; annual monitoring and ongoing alerts",
+      "spatialResolution": "30 m (Landsat-based classification)",
+      "methodologyUrl": "https://www.ideam.gov.co/nuestra-entidad/ecosistemas-e-informacion-ambiental/sistema-monitoreo-bosques-carbono",
       "tags": {
         "topics": [
           "forests",
@@ -2112,6 +2125,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Varies by station and variable; series are updated as available",
       "spatialResolution": "Station-level (point observations)",
+      "methodologyUrl": "https://www.ideam.gov.co/dhime",
       "tags": {
         "topics": [
           "water",
@@ -2150,6 +2164,8 @@
       "url": "https://siatac.co/",
       "checked": "2026-11-05",
       "temporalCoverage": "Varies by layer; includes multitemporal monitoring products",
+      "spatialResolution": "Varies by layer; vector boundaries and raster monitoring products",
+      "methodologyUrl": "https://siatac.co/",
       "tags": {
         "topics": [
           "forests",
@@ -2190,6 +2206,7 @@
       "url": "https://microdata.fao.org/index.php/catalog/2830",
       "checked": "2026-11-05",
       "temporalCoverage": "Field data collected 2015–2023",
+      "spatialResolution": "Sampled field plots across biogeographic regions (coordinates anonymized)",
       "methodologyUrl": "https://www.ideam.gov.co/sala-de-prensa/informes/Inventario-Forestal-Nacional-IFN",
       "tags": {
         "topics": [
@@ -2276,6 +2293,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Current published layer; update dates vary",
       "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+      "methodologyUrl": "https://sigi.igac.gov.co/colombia-mapas/preguntas-frecuentes-faq/index.html",
       "tags": {
         "topics": [
           "territories",
@@ -2321,6 +2339,8 @@
       "url": "https://www.datos.gov.co/en/en/Environment-and-Sustainable-Development/Activos-de-Informaci-n-de-la-ANLA/s2my-4tjy",
       "checked": "2026-11-05",
       "temporalCoverage": "Catalog metadata updated periodically; listed assets vary",
+      "spatialResolution": "Project and administrative-unit level (national registry)",
+      "methodologyUrl": "https://www.datos.gov.co/en/en/Environment-and-Sustainable-Development/Activos-de-Informaci-n-de-la-ANLA/s2my-4tjy",
       "tags": {
         "topics": [
           "environmental-accountability",
@@ -2359,6 +2379,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Continuously synchronized; consult the published update date",
       "spatialResolution": "Vector boundaries (protected-area polygons)",
+      "methodologyUrl": "https://sites.google.com/parquesnacionales.gov.co/manual-usuario-externo-runap/informaci%C3%B3n-general",
       "tags": {
         "topics": [
           "protected-areas",
@@ -2396,6 +2417,8 @@
       "url": "https://sinia.minam.gob.pe/portal/datos-abiertos/",
       "checked": "2026-11-05",
       "temporalCoverage": "Varies by dataset; catalog content is maintained over time",
+      "spatialResolution": "National, departmental, and district level",
+      "methodologyUrl": "https://sinia.minam.gob.pe/portal/datos-abiertos/",
       "tags": {
         "topics": [
           "water",
@@ -2436,6 +2459,8 @@
       "url": "https://www.gob.pe/13895-acceder-al-siamazonia-del-iiap",
       "checked": "2026-11-05",
       "temporalCoverage": "Varies by resource; records and publications span different periods",
+      "spatialResolution": "Point occurrence records; accuracy varies per record",
+      "methodologyUrl": "https://www.iiap.gob.pe/",
       "tags": {
         "topics": [
           "biodiversity",
@@ -2514,6 +2539,7 @@
       "temporalCoverage": "Published monitoring records include 2022–2023 observations",
       "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
       "license": "Open Data Commons Attribution License (ODC-BY)",
+      "methodologyUrl": "https://www.datosabiertos.gob.pe/dataset/registro-de-monitoreo-de-la-deforestaci%C3%B3n-en-el-%C3%A1mbito-de-las-%C3%A1reas-naturales-protegidas-%E2%80%93-0",
       "tags": {
         "topics": [
           "protected-areas",
@@ -2602,6 +2628,8 @@
       "url": "https://simb.planificacion.gob.bo/simb/",
       "checked": "2026-11-05",
       "temporalCoverage": "Annual and dry-season monitoring; system is updated continuously",
+      "spatialResolution": "30 m (Landsat-based classification)",
+      "methodologyUrl": "https://simb.planificacion.gob.bo/simb/",
       "tags": {
         "topics": [
           "forests",
@@ -2643,6 +2671,8 @@
       "url": "https://geobolivia.planificacion.gob.bo/ide-epb/",
       "checked": "2026-11-05",
       "temporalCoverage": "Varies by contributing dataset and layer",
+      "spatialResolution": "Varies by layer; vector boundaries and raster monitoring products",
+      "methodologyUrl": "https://geobolivia.planificacion.gob.bo/ide-epb/",
       "tags": {
         "topics": [
           "infrastructure",
@@ -2682,6 +2712,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Annual historical collection; period varies by current product release",
       "spatialResolution": "30 m (Landsat-based classification)",
+      "methodologyUrl": "https://bolivia.mapbiomas.org/iniciativas-y-productos/metodologia-mapbiomas/",
       "tags": {
         "topics": [
           "land-use",
@@ -2759,6 +2790,8 @@
       "url": "https://web.oep.org.bo/aioc/via-territorio/mapas/",
       "checked": "2026-11-05",
       "temporalCoverage": "Published territory maps; update frequency varies",
+      "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+      "methodologyUrl": "https://web.oep.org.bo/aioc/via-territorio/mapas/",
       "tags": {
         "topics": [
           "territories",
@@ -2804,6 +2837,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Varies by station, variable, and selected period",
       "spatialResolution": "Station-level (point observations)",
+      "methodologyUrl": "https://onsc.senamhi.gob.bo/public/public-stations-info-export",
       "tags": {
         "topics": [
           "water",
@@ -2841,6 +2875,8 @@
       "url": "https://biodiversidad.ambiente.gob.ec/biodiversidad-web/inicio/index.html",
       "checked": "2026-11-05",
       "temporalCoverage": "Record dates vary; catalog content is updated over time",
+      "spatialResolution": "Point occurrence records; accuracy varies per record",
+      "methodologyUrl": "https://biodiversidad.ambiente.gob.ec/biodiversidad-web/inicio/index.html",
       "tags": {
         "topics": [
           "biodiversity",
@@ -2880,6 +2916,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Varies by station, product, and dashboard",
       "spatialResolution": "Station-level (point observations)",
+      "methodologyUrl": "https://geoservicios.inamhi.gob.ec/",
       "tags": {
         "topics": [
           "water",
@@ -2919,6 +2956,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "1985–2025 (annual, Collection 4.0)",
       "spatialResolution": "30 m (Landsat-based classification)",
+      "methodologyUrl": "https://ecuador.mapbiomas.org/iniciativas-y-productos/metodologia-mapbiomas/vision-general/",
       "tags": {
         "topics": [
           "land-use",
@@ -3009,7 +3047,9 @@
       "url": "https://www.geoportaligm.gob.ec/proyecto_nacional/",
       "checked": "2026-11-05",
       "temporalCoverage": "Reference layers and survey dates vary by product",
+      "spatialResolution": "National topographic and thematic layers (1:5,000 to 1:250,000 scale)",
       "license": "Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)",
+      "methodologyUrl": "https://www.geoportaligm.gob.ec/proyecto_nacional/",
       "tags": {
         "topics": [
           "terrain",
@@ -3050,6 +3090,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Current service snapshot; source update date is not stated on the layer page",
       "spatialResolution": "Vector boundaries (protected-area polygons)",
+      "methodologyUrl": "https://geovisorm.controlrecursosyenergia.gob.ec/arcgis/rest/services/MAAE_WGS84_17S/MapServer/0",
       "tags": {
         "topics": [
           "protected-areas",
@@ -3089,6 +3130,7 @@
       "temporalCoverage": "1985–2024 (annual, Collection 3)",
       "spatialResolution": "30 m (Landsat-based classification)",
       "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "methodologyUrl": "https://venezuela.mapbiomas.org/descargas/estadisticas/",
       "tags": {
         "topics": [
           "land-use",
@@ -3129,6 +3171,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Occurrence dates vary; records are updated as sources are integrated",
       "spatialResolution": "Point occurrence records; accuracy varies per record",
+      "methodologyUrl": "https://geoportal.provita.org.ve/en/faq/",
       "tags": {
         "topics": [
           "biodiversity"
@@ -3171,6 +3214,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Layer dated 2023; update frequency is not stated",
       "spatialResolution": "Vector boundaries (protected-area polygons)",
+      "methodologyUrl": "https://geoportal.provita.org.ve/en/faq/",
       "tags": {
         "topics": [
           "protected-areas",
@@ -3206,6 +3250,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Layer updated November 2024",
       "spatialResolution": "River basin polygons; source map scale 1:2,000,000",
+      "methodologyUrl": "https://geoportal.provita.org.ve/en/faq/",
       "tags": {
         "topics": [
           "water",
@@ -3241,6 +3286,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Layer dated August 2024",
       "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+      "methodologyUrl": "https://geoportal.provita.org.ve/en/faq/",
       "tags": {
         "topics": [
           "territories",
@@ -3285,6 +3331,8 @@
       "url": "https://forestry.gov.gy/the-redd-mrv/",
       "checked": "2026-11-05",
       "temporalCoverage": "Annual assessments from 2010; latest reporting period varies by publication",
+      "spatialResolution": "Landsat/Sentinel-based; minimum 1 ha detection",
+      "methodologyUrl": "https://forestry.gov.gy/guyana-monitoring-reporting-verification-systemmrvs-assessment-report/",
       "tags": {
         "topics": [
           "forests",
@@ -3323,6 +3371,8 @@
       "url": "https://statisticsguyana.gov.gy/subjects/hydrometeorological/",
       "checked": "2026-11-05",
       "temporalCoverage": "Series vary by variable; published examples run from 1981 to 2026",
+      "spatialResolution": "Station-level (point observations)",
+      "methodologyUrl": "https://statisticsguyana.gov.gy/subjects/hydrometeorological/",
       "tags": {
         "topics": [
           "climate",
@@ -3361,6 +3411,8 @@
       "url": "https://statisticsguyana.gov.gy/census/page/2/",
       "checked": "2026-11-05",
       "temporalCoverage": "2022 preliminary results; archive includes 2002 and 2012 village files",
+      "spatialResolution": "National, regional, and village level",
+      "methodologyUrl": "https://statisticsguyana.gov.gy/census/page/2/",
       "tags": {
         "topics": [
           "population",
@@ -3404,6 +3456,8 @@
       "url": "https://www.ggmc.gov.gy/request-for-mineral-mapping-information/",
       "checked": "2026-11-05",
       "temporalCoverage": "New survey data from 2025 plus reprocessed legacy surveys",
+      "spatialResolution": "Airborne geophysical survey grids and regional map blocks",
+      "methodologyUrl": "https://www.ggmc.gov.gy/miners-can-now-access-updated-mineral-data/",
       "tags": {
         "topics": [
           "terrain",
@@ -3440,6 +3494,8 @@
       "url": "https://forestry.gov.gy/overview-of-the-safeguard-information-system/",
       "checked": "2026-11-05",
       "temporalCoverage": "Annual reporting cycle; published summaries vary by year",
+      "spatialResolution": "National and regional safeguard indicators",
+      "methodologyUrl": "https://forestry.gov.gy/what-is-the-safeguard-information-system/",
       "tags": {
         "topics": [
           "environmental-accountability",
@@ -3477,6 +3533,8 @@
       "url": "https://gonini.sbb.sr/",
       "checked": "2026-11-05",
       "temporalCoverage": "Current layers vary; forest-change products include historical mapping",
+      "spatialResolution": "30 m (Landsat-based classification)",
+      "methodologyUrl": "https://sbb.sr/",
       "tags": {
         "topics": [
           "forests",
@@ -3515,6 +3573,8 @@
       "url": "https://kopi.sbb.sr/index.php",
       "checked": "2026-11-05",
       "temporalCoverage": "Updated as new National Forest Monitoring System statistics are produced",
+      "spatialResolution": "National and district-level forest statistics",
+      "methodologyUrl": "https://sbb.sr/",
       "tags": {
         "topics": [
           "forests",
@@ -3553,6 +3613,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Census reference year 2012",
       "spatialResolution": "District and ressort level, depending on table",
+      "methodologyUrl": "https://statistics-suriname.org/census-statistics-2012/",
       "tags": {
         "topics": [
           "population",
@@ -3590,6 +3651,8 @@
       "url": "https://biodb.act-suriname.org/",
       "checked": "2026-11-05",
       "temporalCoverage": "Continuously expanded; species and community coverage varies",
+      "spatialResolution": "Community-level records",
+      "methodologyUrl": "https://biodb.act-suriname.org/",
       "tags": {
         "topics": [
           "biodiversity",
@@ -3636,6 +3699,7 @@
       "temporalCoverage": "Station inventory snapshot last updated in 2022; measurements continue in linked services",
       "spatialResolution": "Station-level (point gauges)",
       "license": "Licence Ouverte / Open Licence version 2.0",
+      "methodologyUrl": "https://www.data.gouv.fr/datasets/stations-hydrometriques-guyane",
       "tags": {
         "topics": [
           "water"
@@ -3673,6 +3737,8 @@
       "url": "https://www.seasguyane.org/en",
       "checked": "2026-11-05",
       "temporalCoverage": "Satellite archive includes products from 2015 onward; availability varies by sensor",
+      "spatialResolution": "Multi-sensor satellite scenes (1.5 m SPOT to 10–30 m Sentinel/Landsat)",
+      "methodologyUrl": "https://www.seasguyane.org/en",
       "tags": {
         "topics": [
           "land-use",
@@ -3712,6 +3778,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Observations since 2007; content is updated as records are added",
       "spatialResolution": "Point occurrence records; accuracy varies per record",
+      "methodologyUrl": "https://biodiversite.parc-amazonien-guyane.fr/static_pages/presentation",
       "tags": {
         "topics": [
           "biodiversity",
@@ -3752,6 +3819,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "SIGEF certifications since 2013; download packages updated fortnightly",
       "spatialResolution": "Vector boundaries (polygon/point), not a fixed pixel resolution",
+      "methodologyUrl": "https://www.gov.br/pt-br/servicos/obter-coordenadas-e-baixar-os-arquivos-dos-imoveis-ruras-certificados?id=11964&origem=servico",
       "tags": {
         "topics": [
           "land-use",
@@ -3798,6 +3866,8 @@
       "url": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar",
       "checked": "2026-11-05",
       "temporalCoverage": "1995–2025 (annual editions available)",
+      "spatialResolution": "School, municipal, and state level",
+      "methodologyUrl": "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-escolar",
       "tags": {
         "topics": [
           "population",
@@ -3836,6 +3906,7 @@
       "url": "https://snif.florestal.gov.br/pt-br/temas-florestais/ifn",
       "checked": "2026-11-05",
       "temporalCoverage": "Dynamic inventory; products updated as new collection and analysis are released",
+      "spatialResolution": "Systematic 20 × 20 km national grid of field sample plots",
       "methodologyUrl": "https://www.gov.br/florestal/pt-br/assuntos/ifn",
       "tags": {
         "topics": [
@@ -3876,6 +3947,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Updated as datasets and new versions are integrated",
       "spatialResolution": "Sub-basin aggregates in public views",
+      "methodologyUrl": "https://aguasamazonicas.org/",
       "tags": {
         "topics": [
           "biodiversity",
@@ -3923,6 +3995,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Station and variable periods differ; monitoring is ongoing",
       "spatialResolution": "Station-level (point observations)",
+      "methodologyUrl": "https://www.oraotca.org/es",
       "tags": {
         "topics": [
           "water",
@@ -3964,6 +4037,7 @@
       "checked": "2026-11-05",
       "temporalCoverage": "Monthly releases; historical legal dates vary by protected area",
       "spatialResolution": "Vector boundaries (protected-area polygons)",
+      "methodologyUrl": "https://www.protectedplanet.net/en/news-and-stories/why-do-we-have-different-versions-of-the-wdpa",
       "tags": {
         "topics": [
           "protected-areas",
@@ -4003,6 +4077,7 @@
       "temporalCoverage": "2015–2030 (annual product series; release-specific estimates)",
       "spatialResolution": "100 m country grids and 1 km global grids",
       "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "methodologyUrl": "https://www.worldpop.org/faq/",
       "tags": {
         "topics": [
           "population",

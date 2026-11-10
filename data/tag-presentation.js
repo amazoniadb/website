@@ -9,7 +9,7 @@
       biodiversity: label("Biodiversity", "Biodiversidade", "Biodiversidad"),
       forests: label("Forests", "Florestas", "Bosques"),
       "forest-change": label("Forest change", "Transformação florestal", "Cambio forestal"),
-      "land-use": label("Land use", "Uso da terra", "Uso del suelo"),
+      "land-use": label("Land use", "Uso do solo", "Uso del suelo"),
       fire: label("Fire", "Fogo", "Fuego"),
       "extractive-pressures": label("Extractive pressures", "Pressões extrativas", "Presiones extractivas"),
       infrastructure: label("Infrastructure", "Infraestrutura", "Infraestructura"),

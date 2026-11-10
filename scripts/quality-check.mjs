@@ -600,7 +600,7 @@ for (const [file, expectedScript] of [
   if (!html.includes(`src="${expectedScript}"`)) fail(`${file}: does not load ${expectedScript}.`);
 }
 const submitCategoryLabels = {
-  "submit.html": ["Florestas e biodiversidade", "Terra, água e ar", "Terra, fogo e transformação", "Povos e territórios", "Saúde e meios de vida", "Direitos e governança"],
+  "submit.html": ["Florestas e biodiversidade", "Terra, água e ar", "Solo, fogo e transformação", "Povos e territórios", "Saúde e meios de vida", "Direitos e governança"],
   "en/submit.html": ["Forests &amp; biodiversity", "Earth, water &amp; air", "Land, fire &amp; change", "Peoples &amp; territories", "Health &amp; livelihoods", "Rights &amp; governance"],
   "es/submit.html": ["Bosques y biodiversidad", "Tierra, agua y aire", "Tierra, fuego y cambio", "Pueblos y territorios", "Salud y medios de vida", "Derechos y gobernanza"]
 };
@@ -692,7 +692,7 @@ for (const record of catalog) {
   }
 }
 
-if (!Array.isArray(researchPaths) || researchPaths.length !== 4) fail("data/research-paths.js must define exactly four reviewed research paths.");
+if (!Array.isArray(researchPaths) || researchPaths.length !== 8) fail("data/research-paths.js must define exactly eight reviewed research paths.");
 const catalogById = new Map(catalog.map((record) => [record.id, record]));
 for (const path of researchPaths || []) {
   if (!path.id || !Array.isArray(path.records) || path.records.length < 3 || new Set(path.records.map((entry) => entry.id)).size !== path.records.length) {
@@ -711,7 +711,7 @@ for (const path of researchPaths || []) {
   for (const entry of path.records || []) {
     const record = catalogById.get(entry.id);
     if (!record) fail(`research path ${path.id}: ${entry.id} is not a catalog record.`);
-    if (record && record.coverage !== "Brazil") fail(`research path ${path.id}: ${entry.id} must remain Brazil-scoped until the guide is broadened by review.`);
+    if (record && path.id.endsWith("-brazil") && record.coverage !== "Brazil") fail(`research path ${path.id}: ${entry.id} must remain Brazil-scoped for a Brazil-specific path.`);
     for (const key of ["role", "reason"]) {
       for (const locale of ["en", "pt-BR", "es"]) {
         if (!entry[key]?.[locale]) fail(`research path ${path.id}: ${entry.id} ${key} is missing ${locale} copy.`);
