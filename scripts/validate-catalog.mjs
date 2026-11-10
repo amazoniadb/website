@@ -9,10 +9,10 @@ const validCategories = new Set([
   "Society, health & livelihoods",
   "Governance, rights & safeguards"
 ]);
-const validCoverage = new Set(["Pan-Amazon", "Brazil", "Peru", "Colombia", "Bolivia", "Ecuador", "Global — subsettable"]);
+const validCoverage = new Set(["Pan-Amazon", "Brazil", "Peru", "Colombia", "Bolivia", "Ecuador", "Venezuela", "Guyana", "Suriname", "French Guiana", "Global — subsettable"]);
 const validAccess = new Set(["Provider terms apply", "Dataset-specific license", "Publicly available"]);
 const validKinds = new Set(["Dataset", "Data portal", "Download", "Explorer"]);
-const requiredFields = ["id", "title", "provider", "category", "coverage", "formats", "access", "kind", "description", "url", "checked"];
+const requiredFields = ["id", "title", "provider", "category", "coverage", "formats", "access", "accessUrl", "kind", "description", "url", "checked"];
 const currentDate = new Date().toISOString().slice(0, 10);
 
 const normalizeHttpsUrl = (value) => {
@@ -99,7 +99,7 @@ for (const [index, record] of (catalog || []).entries()) {
       issues.push(`${label}: missing ${field}.`);
     }
   }
-  for (const field of ["id", "title", "provider", "category", "coverage", "access", "kind", "description", "url", "checked"]) {
+  for (const field of ["id", "title", "provider", "category", "coverage", "access", "accessUrl", "kind", "description", "url", "checked"]) {
     if (field in record && typeof record[field] !== "string") issues.push(`${label}: ${field} must be a string.`);
   }
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(record.id || "")) issues.push(`${label}: id must be lowercase kebab-case.`);
@@ -108,6 +108,7 @@ for (const [index, record] of (catalog || []).entries()) {
   if (!validCategories.has(record.category)) issues.push(`${label}: category is not one of the six approved domains.`);
   if (!validCoverage.has(record.coverage)) issues.push(`${label}: coverage is not in the controlled vocabulary.`);
   if (!validAccess.has(record.access)) issues.push(`${label}: access is not in the controlled vocabulary.`);
+  if (!isHttpUrl(record.accessUrl)) issues.push(`${label}: accessUrl must be a valid http:// or https:// URL.`);
   if (!validKinds.has(record.kind)) issues.push(`${label}: kind is not in the controlled vocabulary.`);
   if (!Array.isArray(record.formats) || record.formats.length === 0) {
     issues.push(`${label}: formats must be a non-empty array.`);
@@ -131,6 +132,12 @@ for (const [index, record] of (catalog || []).entries()) {
     if (record[field] != null && (typeof record[field] !== "string" || !record[field].trim())) {
       issues.push(`${label}: ${field} must be a non-empty string when present.`);
     }
+  }
+  if (record.access === "Dataset-specific license" && !record.license) {
+    issues.push(`${label}: Dataset-specific license requires a named license.`);
+  }
+  if (record.license && record.access !== "Dataset-specific license") {
+    issues.push(`${label}: a named license requires access to be Dataset-specific license.`);
   }
   if (record.methodologyUrl != null && !isHttpUrl(record.methodologyUrl)) {
     issues.push(`${label}: methodologyUrl must be a valid http:// or https:// URL.`);

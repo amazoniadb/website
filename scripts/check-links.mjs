@@ -67,9 +67,16 @@ const context = { window: {} };
 vm.runInNewContext(source, context);
 const catalog = context.window.AMAZONIA_CATALOG || [];
 const references = catalog.flatMap((record) => {
-  const sourceReference = { id: record.id, title: record.title, type: "source", url: record.url };
-  if (!record.methodologyUrl || record.methodologyUrl === record.url) return [sourceReference];
-  return [sourceReference, { id: record.id, title: record.title, type: "documentation", url: record.methodologyUrl }];
+  const seen = new Set();
+  return [
+    { id: record.id, title: record.title, type: "source", url: record.url },
+    { id: record.id, title: record.title, type: "access evidence", url: record.accessUrl },
+    record.methodologyUrl ? { id: record.id, title: record.title, type: "documentation", url: record.methodologyUrl } : null
+  ].filter((reference) => {
+    if (!reference?.url || seen.has(reference.url)) return false;
+    seen.add(reference.url);
+    return true;
+  });
 });
 
 const results = await checkAll(references);

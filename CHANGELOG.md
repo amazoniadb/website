@@ -2,6 +2,48 @@
 
 All notable changes to AmazoniaDB are documented here. Loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.10.0] — 2026-11-10
+
+### Added
+- Diacritic-insensitive (NFD) search normalization so unaccented queries (`amazonia`, `indigena`, `agua`) match accented Portuguese and Spanish catalog records
+- Multi-token fallback search so multi-word queries (`inpe prodes`, `gbif occurrence`) match across separate metadata fields when no exact phrase match exists
+- Interactive active-filter chips bar (`#active-filters`) above the dataset grid for inspecting and clearing individual active filters or resetting all at once
+- Interactive pan-Amazon geography strip (`#coverage-strip`) displaying live source counts per country/scope with one-click geographic filtering
+- Shareable catalog sorting (`?sort=checked|title|provider`) inside the filter controls
+
+### Changed
+- Consolidated `app.js`, `en/app.js`, and `es/app.js` into a single locale-aware `app.js` serving `pt-BR`, `en`, and `es`, eliminating ~1,800 lines of duplicated client code
+- Standardized `spatialResolution` lookup in `app.js` to support both record-ID keys and canonical phrase keys
+- Synchronized static HTML initial source counters (`#dataset-count`) across all three locale homepages with the 100-record catalog
+
+## [1.9.0] — 2026-11-05
+
+### Added
+- 49 reviewed source cards across Colombia, Peru, Bolivia, Ecuador, Venezuela, Guyana, Suriname, French Guiana, Brazil, and pan-Amazon/global coverage, bringing the working catalog to 100 records
+- Portuguese and Spanish descriptions and timeframes, controlled discovery tags, and responsible-use notes where territorial, species, census, or community knowledge needs context
+
+### Changed
+- Regenerated the local versioned API mirror with all 100 records and updated the catalog expansion roadmap and remaining-source queue
+- Updated the coverage-link quality check now that the formerly empty Colombia filter has sources; hardened source-submission translation insertion for maps with trailing commas
+- Replaced three stale source links and refreshed the MapBiomas Ecuador and Venezuela collection details from current publisher pages
+- Deployed the 100-record site to Cloudflare and verified the live API, localized pages, and repository-path protections
+
+## [1.8.0] — 2026-08-24
+
+### Added
+- A provider-controlled evidence URL for every access classification, linked from the existing access fact on each card and included in source-set CSV exports and the public API
+- Country and territory coverage values for Venezuela, Guyana, Suriname, and French Guiana, preparing the catalog for deliberate geographic expansion
+- A local catalog evidence report covering domain balance, geography, documentation, access evidence, time, spatial grain, licences, and discovery tags
+
+### Changed
+- Re-audited all 51 sources against provider-controlled pages, refreshed every review date, and corrected stale descriptions, formats, timeframes, spatial grain, source links, and access classifications where primary evidence supported a change
+- Increased direct methodology or technical-document coverage from 18 to 41 sources while leaving ten mixed portals or unstable document links without a misleading one-size-fits-all methodology target
+- Tightened the catalog contract so a named licence and the `Dataset-specific license` classification must agree
+- Source proposals now require the official page used to assess access or reuse conditions
+- Link monitoring now checks distinct source, documentation, and access-evidence URLs without sending duplicate requests
+- Corrected MapBiomas Amazonia's publisher links and deferred its reuse label to provider terms after finding conflicting reuse wording on current publisher pages
+- Corrected contribution guidance to match the review-only public issue workflow
+
 ## [1.7.0] — 2026-08-24
 
 ### Security

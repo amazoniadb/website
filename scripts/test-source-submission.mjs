@@ -24,7 +24,8 @@ const form = {
   category: "Earth, water & air",
   coverage: "Brazil",
   kind: "Dataset",
-  access: "Publicly available",
+  access: "Dataset-specific license",
+  access_url: "https://example.org/quality-fixture/terms",
   formats: "CSV, API",
   description: "A deterministic fixture used only to validate the source-submission record builder.",
   description_pt_br: "Um registro de teste determinístico usado apenas para validar o gerador de registros de submissão.",
@@ -62,6 +63,7 @@ try {
   const record = catalogContext.window.AMAZONIA_CATALOG.find((entry) => entry.id === "quality-fixture-source");
   if (!record) throw new Error("The generated catalog record is missing.");
   if (record.category !== "Earth, water & climate") throw new Error("The public V2 category label was not mapped to its canonical catalog value.");
+  if (record.accessUrl !== form.access_url) throw new Error("The generated access evidence URL is missing.");
   if (record.temporalCoverage !== form.temporal_coverage) throw new Error("The generated temporal coverage is missing.");
   if (record.spatialResolution !== form.spatial_resolution) throw new Error("The generated spatial resolution is missing.");
   if (record.license !== form.license) throw new Error("The generated license is missing.");

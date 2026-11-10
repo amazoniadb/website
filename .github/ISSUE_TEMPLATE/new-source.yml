@@ -55,6 +55,10 @@ body:
         - "Colombia"
         - "Bolivia"
         - "Ecuador"
+        - "Venezuela"
+        - "Guyana"
+        - "Suriname"
+        - "French Guiana"
         - "Global — subsettable"
     validations:
       required: true
@@ -78,6 +82,14 @@ body:
         - "Provider terms apply"
         - "Dataset-specific license"
         - "Publicly available"
+    validations:
+      required: true
+  - type: input
+    id: access_url
+    attributes:
+      label: Terms or licence URL
+      description: Link to the provider page supporting the access note above. The source page is acceptable when it is the clearest official evidence. Must start with https:// or http://
+      placeholder: "https://provider.org/terms"
     validations:
       required: true
   - type: input
@@ -169,8 +181,8 @@ body:
     id: license
     attributes:
       label: Named license (optional)
-      description: Only fill this in when the provider explicitly names a specific open-data license (e.g. CC-BY-4.0, PDDL, ODbL). Leave blank if there's just a general terms note — that's what the access dropdown above is for.
-      placeholder: "e.g. Open Data Commons Public Domain Dedication and License (PDDL)"
+      description: Fill this in only when one named licence or legal agreement clearly applies to the whole record. Select "Dataset-specific license" above when you do. Leave it blank for mixed or general provider terms.
+      placeholder: "e.g. Creative Commons Attribution 4.0 International (CC BY 4.0)"
     validations:
       required: false
   - type: input

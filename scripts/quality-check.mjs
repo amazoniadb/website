@@ -10,8 +10,8 @@ const root = new URL("../", import.meta.url);
 const publicBase = "https://amazoniadb.org";
 const canonicalPages = [
   { file: "index.html", app: "app.js", locale: "pt-BR", url: `${publicBase}/` },
-  { file: "en/index.html", app: "en/app.js", locale: "en", url: `${publicBase}/en/` },
-  { file: "es/index.html", app: "es/app.js", locale: "es", url: `${publicBase}/es/` },
+  { file: "en/index.html", app: "app.js", locale: "en", url: `${publicBase}/en/` },
+  { file: "es/index.html", app: "app.js", locale: "es", url: `${publicBase}/es/` },
   { file: "donate.html", locale: "pt-BR", url: `${publicBase}/donate` },
   { file: "en/donate.html", locale: "en", url: `${publicBase}/en/donate` },
   { file: "es/donate.html", locale: "es", url: `${publicBase}/es/donate` },
@@ -120,14 +120,16 @@ const makeLanguageLink = (href) => ({
 const runExplorerSmokeTest = async (page, browserData) => {
   const ids = [
     "domain-nav", "dataset-grid", "empty-state", "result-count", "dataset-count",
-    "search", "coverage", "topic", "role", "access", "mode", "time-profile", "more-filters", "more-filter-count", "filters", "discover-source", "discovery-result",
+    "search", "coverage", "topic", "role", "access", "mode", "time-profile", "sort-by", "more-filters", "more-filter-count", "filters", "discover-source", "discovery-result",
     "catalog", "copy-view-link", "catalog-more", "show-more-sources", "research-path-panel", "open-research-path", "research-path-choice",
     "next-research-path", "research-path-summary", "research-path-position", "source-set-panel", "source-set-summary", "source-set-items",
-    "source-set-caution", "source-set-status", "copy-source-set", "download-source-set", "clear-source-set"
+    "source-set-caution", "source-set-status", "copy-source-set", "download-source-set", "clear-source-set",
+    "active-filters", "coverage-strip"
   ];
   const elements = Object.fromEntries(ids.map((id) => [id, makeElement()]));
   elements.coverage.options = controlledFilterValues.coverage.map((value) => ({ value }));
   elements.access.options = controlledFilterValues.access.map((value) => ({ value }));
+  elements["sort-by"].options = ["", "checked", "title", "provider"].map((value) => ({ value }));
   elements.topic.options = [{ value: "" }];
   elements.topic.dataset.defaultOption = "All topics";
   for (const id of ["role", "mode", "time-profile"]) {
@@ -141,6 +143,7 @@ const runExplorerSmokeTest = async (page, browserData) => {
   const document = {
     head,
     body,
+    documentElement: { lang: page.locale },
     activeElement: null,
     getElementById(id) { return elements[id] || makeElement(); },
     querySelectorAll(selector) { return selector === ".lang-switch a" ? languageLinks : []; },
@@ -214,7 +217,7 @@ const runExplorerSmokeTest = async (page, browserData) => {
   }
   elements["download-source-set"].listener("click")?.();
   const exportedCsv = downloadedBlob ? await downloadedBlob.text() : "";
-  for (const requiredCsvText of ['"exportedAt"', '"sourceSetUrl"', '"description"', '"protocolUrl"', '"communityAuthorityUrl"', '"ana-hidroweb"']) {
+  for (const requiredCsvText of ['"exportedAt"', '"sourceSetUrl"', '"description"', '"accessUrl"', '"protocolUrl"', '"communityAuthorityUrl"', '"ana-hidroweb"']) {
     if (!exportedCsv.includes(requiredCsvText)) fail(`${page.file}: source-set CSV is missing ${requiredCsvText}.`);
   }
   const structuredScript = head.children.find((node) => node.type === "application/ld+json");
@@ -290,6 +293,8 @@ const runExplorerSmokeTest = async (page, browserData) => {
   if (formatGroups !== browserData.AMAZONIA_CATALOG.length) fail(`${page.file}: every source card must expose its available formats.`);
   const factGroups = (elements["dataset-grid"].innerHTML.match(/class="dataset-facts"/g) || []).length;
   if (factGroups !== browserData.AMAZONIA_CATALOG.length) fail(`${page.file}: every source card must expose one continuous facts list.`);
+  const accessEvidenceLinks = (elements["dataset-grid"].innerHTML.match(/class="fact-evidence-link"/g) || []).length;
+  if (accessEvidenceLinks !== browserData.AMAZONIA_CATALOG.length) fail(`${page.file}: every access classification must link to its provider evidence.`);
   const reviewFacts = (elements["dataset-grid"].innerHTML.match(/data-fact="review"/g) || []).length;
   const reviewTimes = (elements["dataset-grid"].innerHTML.match(/<time datetime="[^"]+">/g) || []).length;
   if (reviewFacts !== browserData.AMAZONIA_CATALOG.length || reviewTimes !== browserData.AMAZONIA_CATALOG.length) {
@@ -407,18 +412,58 @@ const runExplorerSmokeTest = async (page, browserData) => {
     if (visibleDetailRecords !== expectedDetailRecords) fail(`${page.file}: ${detail} must be searchable.`);
   }
 
-  // Empty results are valid when a filter value is offered by the UI/schema.
-  // They must survive a reload instead of silently expanding to the full list.
-  location.search = "?coverage=Colombia";
+  // Coverage views must survive a reload and show exactly the records that
+  // match the selected geography. The former empty-result fixture became
+  // populated as the catalog expanded across Amazonian countries.
+  const selectedCoverage = browserData.AMAZONIA_CATALOG.find((record) => record.coverage)?.coverage || "";
+  const expectedCoverageRecords = browserData.AMAZONIA_CATALOG.filter((record) => record.coverage === selectedCoverage).length;
+  location.search = `?coverage=${encodeURIComponent(selectedCoverage)}`;
   location.hash = "";
   history.replacements = [];
   vm.runInNewContext(await read(page.app), context, { filename: `${page.app}:empty-valid-url` });
-  const emptyValidUrlRecords = (elements["dataset-grid"].innerHTML.match(/<article\b/g) || []).length;
-  if (emptyValidUrlRecords !== 0 || elements.coverage.value !== "Colombia") {
-    fail(`${page.file}: a valid empty coverage URL must preserve its selected filter.`);
+  const selectedCoverageRecords = (elements["dataset-grid"].innerHTML.match(/<article\b/g) || []).length;
+  if (selectedCoverageRecords !== expectedCoverageRecords || elements.coverage.value !== selectedCoverage) {
+    fail(`${page.file}: a valid coverage URL must preserve its selected filter and show its matching records.`);
   }
-  if (!history.replacements.at(-1)?.includes("coverage=Colombia")) {
-    fail(`${page.file}: a valid empty coverage URL was not preserved.`);
+  const normalizedCoverage = new URL(history.replacements.at(-1) || publicBase, publicBase).searchParams.get("coverage");
+  if (normalizedCoverage !== selectedCoverage) {
+    fail(`${page.file}: a valid coverage URL was not preserved.`);
+  }
+  if (elements["active-filters"].hidden || !elements["active-filters"].innerHTML.includes('data-clear-facet="coverage"')) {
+    fail(`${page.file}: active filter chips must render when a coverage filter is selected.`);
+  }
+  const renderedCoveragePills = (elements["coverage-strip"].innerHTML.match(/data-coverage-pill="/g) || []).length;
+  if (renderedCoveragePills !== controlledFilterValues.coverage.length - 1) {
+    fail(`${page.file}: coverage strip must expose all pan-Amazon geographies.`);
+  }
+
+  // Diacritic-insensitive search must match accented terms with unaccented queries.
+  location.search = "?q=indigena";
+  location.hash = "";
+  vm.runInNewContext(await read(page.app), context, { filename: `${page.app}:diacritic-search` });
+  const diacriticRecords = (elements["dataset-grid"].innerHTML.match(/<article\b/g) || []).length;
+  if (diacriticRecords < 1) {
+    fail(`${page.file}: unaccented search queries must match accented catalog descriptions and tags.`);
+  }
+
+  // Multi-token search must match across separate fields when no exact phrase match exists.
+  location.search = "?q=inpe+prodes";
+  location.hash = "";
+  vm.runInNewContext(await read(page.app), context, { filename: `${page.app}:multi-token-search` });
+  const multiTokenRecords = (elements["dataset-grid"].innerHTML.match(/<article\b/g) || []).length;
+  if (multiTokenRecords < 1 || !elements["dataset-grid"].innerHTML.includes('data-record-id="inpe-terrabrasilis"')) {
+    fail(`${page.file}: multi-token search must match records across separate fields.`);
+  }
+
+  // Sort parameter must order catalog cards deterministically and remain shareable.
+  location.search = "?sort=title";
+  location.hash = "";
+  history.replacements = [];
+  vm.runInNewContext(await read(page.app), context, { filename: `${page.app}:sort-url` });
+  const sortedTitles = [...elements["dataset-grid"].innerHTML.matchAll(/<h3 id="source-[^"]+-title">([^<]+)<\/h3>/g)].map((m) => decodeHtml(m[1]).replaceAll("&#039;", "'"));
+  const expectedSortedTitles = [...browserData.AMAZONIA_CATALOG].map((r) => r.title).sort((a, b) => a.localeCompare(b, page.locale));
+  if (JSON.stringify(sortedTitles) !== JSON.stringify(expectedSortedTitles) || !history.replacements.at(-1)?.includes("sort=title")) {
+    fail(`${page.file}: ?sort=title must order all catalog records alphabetically and preserve the sort parameter.`);
   }
 };
 
@@ -525,7 +570,7 @@ for (const page of homePages) {
   const tagIndex = html.indexOf(`src="${prefix}data/tag-presentation.js"`);
   const catalogIndex = html.indexOf(`src="${prefix}data/catalog.js"`);
   const pathIndex = html.indexOf(`src="${prefix}data/research-paths.js"`);
-  const appIndex = html.indexOf(`src="${page.app.replace(/^.*\//, "")}"`);
+  const appIndex = html.indexOf(`src="${prefix}${page.app.replace(/^.*\//, "")}"`);
   if (!(categoryIndex >= 0 && categoryIndex < tagIndex && tagIndex < catalogIndex && catalogIndex < pathIndex && pathIndex < appIndex)) {
     fail(`${page.file}: category, tag, catalog, research-path, and app scripts must load in that order.`);
   }
@@ -548,6 +593,7 @@ for (const [file, expectedScript] of [
   ["submit.html", "submit.js"], ["en/submit.html", "../submit.js"], ["es/submit.html", "../submit.js"]
 ]) {
   const html = await read(file);
+  if (!/name=["']accessUrl["'][^>]*required/.test(html)) fail(`${file}: missing required accessUrl input.`);
   for (const name of ["temporalCoverage", "spatialResolution", "license", "methodologyUrl"]) {
     if (!new RegExp(`name=["']${name}["']`).test(html)) fail(`${file}: missing optional ${name} input.`);
   }
@@ -564,13 +610,17 @@ for (const [file, labels] of Object.entries(submitCategoryLabels)) {
     if (!html.includes(`>${label}</option>`)) fail(`${file}: category option must use the V2 public taxonomy (${label}).`);
   }
 }
-if (!(await read("submit.js")).includes("methodologyUrl.setCustomValidity")) fail("submit.js: methodology URL must be validated before a local source record is generated.");
+const submitScript = await read("submit.js");
+if (!submitScript.includes("accessUrl.setCustomValidity")) fail("submit.js: access evidence URL must be validated before a local source record is generated.");
+if (!submitScript.includes("methodologyUrl.setCustomValidity")) fail("submit.js: methodology URL must be validated before a local source record is generated.");
+if (!submitScript.includes("license.setCustomValidity")) fail("submit.js: named licences and access classification must be checked together.");
 
 for (const file of ["es/index.html", "es/donate.html", "es/submit.html"]) {
   if (!/<html\s+lang=["']es-419["']/.test(await read(file))) fail(`${file}: Spanish document language must be es-419.`);
 }
 
 const sourceIssueTemplate = await read(".github/ISSUE_TEMPLATE/new-source.yml");
+if (!sourceIssueTemplate.includes("id: access_url")) fail("new-source issue template: missing access_url.");
 for (const id of ["description_pt_br", "description_es", "temporal_coverage_pt_br", "temporal_coverage_es", "spatial_resolution_pt_br", "spatial_resolution_es", "license_pt_br", "license_es"]) {
   if (!sourceIssueTemplate.includes(`id: ${id}`)) fail(`new-source issue template: missing ${id}.`);
 }
