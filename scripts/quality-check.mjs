@@ -783,20 +783,15 @@ if (pathsApi.count !== researchPaths.length || JSON.stringify(pathsApi.paths) !=
 }
 
 const llmsTxt = await read("llms.txt");
-for (const requiredLlmsText of [
-  "# AmazoniaDB",
-  "https://amazoniadb.org/api/v1/catalog.json",
-  "https://amazoniadb.org/api/v1/research-paths.json",
-  "https://amazoniadb.org/CITATION.cff"
-]) {
-  if (!llmsTxt.includes(requiredLlmsText)) fail(`llms.txt: missing ${requiredLlmsText}.`);
+if (!llmsTxt.startsWith("# AmazoniaDB") || !/^-\s+Catalog JSON API[^\n]*\/api\/v1\/catalog\.json$/m.test(llmsTxt) || !/^-\s+Guided Research Paths JSON API[^\n]*\/api\/v1\/research-paths\.json$/m.test(llmsTxt) || !/^-\s+Citation File Format[^\n]*\/CITATION\.cff$/m.test(llmsTxt)) {
+  fail("llms.txt: missing required canonical headers or endpoint declarations.");
 }
 for (const record of catalog) {
   if (!llmsTxt.includes(`(\`${record.id}\`)`)) fail(`llms.txt: missing catalog record ${record.id}.`);
 }
 
 const citationCff = await read("CITATION.cff");
-if (!citationCff.includes("cff-version: 1.2.0") || !citationCff.includes("https://amazoniadb.org/")) {
+if (!citationCff.includes("cff-version: 1.2.0") || !/^url:\s*"https:\/\/amazoniadb\.org\/"$/m.test(citationCff)) {
   fail("CITATION.cff: missing cff-version 1.2.0 or canonical URL.");
 }
 
