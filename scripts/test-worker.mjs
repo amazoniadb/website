@@ -36,6 +36,16 @@ const api = await worker.fetch(new Request("https://amazoniadb.org/api/v1/catalo
 assert(api.headers.get("access-control-allow-origin") === "*", "public API must allow cross-origin reads");
 assert(api.headers.get("cache-control")?.includes("max-age=300"), "public API needs explicit short caching");
 
+const pathsApi = await worker.fetch(new Request("https://amazoniadb.org/api/v1/research-paths.json"), { ASSETS: assets });
+assert(pathsApi.headers.get("access-control-allow-origin") === "*", "research-paths API must allow cross-origin reads");
+
+const llms = await worker.fetch(new Request("https://amazoniadb.org/llms.txt"), { ASSETS: assets });
+assert(llms.headers.get("access-control-allow-origin") === "*", "llms.txt must allow cross-origin reads");
+
+const cff = await worker.fetch(new Request("https://amazoniadb.org/CITATION.cff"), { ASSETS: assets });
+assert(cff.headers.get("access-control-allow-origin") === "*", "CITATION.cff must allow cross-origin reads");
+assert(cff.headers.get("content-type") === "text/yaml; charset=utf-8", "CITATION.cff must serve YAML content-type");
+
 const options = await worker.fetch(new Request("https://amazoniadb.org/api/v1/catalog.json", { method: "OPTIONS" }), { ASSETS: assets });
 assert(options.status === 204 && options.headers.get("access-control-allow-methods")?.includes("GET"), "API preflight must be handled");
 

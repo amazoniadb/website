@@ -1,0 +1,19 @@
+{
+  "name": "AmazoniaDB — Dados socioambientais da Amazônia na fonte",
+  "short_name": "AmazoniaDB",
+  "description": "Diretório independente de interesse público para encontrar conjuntos de dados socioambientais da Amazônia em suas fontes originais, online ou offline.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f3ec",
+  "theme_color": "#1d3b2a",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

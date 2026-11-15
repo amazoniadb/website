@@ -91,7 +91,8 @@
         pathAdded: "Fontes do caminho adicionadas à seleção.",
         pathAlreadyPresent: "As fontes deste caminho já estão na seleção.",
         pathPartiallyAdded: (count) => `${count} ${count === 1 ? "fonte adicionada" : "fontes adicionadas"}; o limite de 6 impediu as demais.`,
-        questionPosition: (current, total) => `Caminho ${current} de ${total}.`
+        questionPosition: (current, total) => `Caminho ${current} de ${total}.`,
+        comparabilitySummary: "Comparabilidade metodológica e limites"
       },
       sourceSetLabels: {
         add: "Adicionar",
@@ -122,6 +123,7 @@
       sourceCountLabel: (value) => `${value} ${value === 1 ? "fonte" : "fontes"}`,
       moreFilterCountLabel: (activeCount) => activeCount ? `· ${activeCount} ${activeCount === 1 ? "ativo" : "ativos"}` : "",
       csvFilename: "amazoniadb-conjunto-de-fontes.csv",
+      bibtexFilename: "amazoniadb-fontes.bib",
       domainNavUnavailable: '<p class="empty-state">Os filtros por domínio estão temporariamente indisponíveis. Você ainda pode navegar pelo catálogo completo abaixo.</p>',
       resultCountPartial: (shown, total) => `Mostrando ${shown} de ${total} fontes`,
       resultCountTotal: (total) => `${total} ${total === 1 ? "fonte encontrada" : "fontes encontradas"}`,
@@ -214,7 +216,8 @@
         pathAdded: "Path sources added to the set.",
         pathAlreadyPresent: "This path's sources are already in the set.",
         pathPartiallyAdded: (count) => `${count} ${count === 1 ? "source was" : "sources were"} added; the six-source limit prevented the rest.`,
-        questionPosition: (current, total) => `Path ${current} of ${total}.`
+        questionPosition: (current, total) => `Path ${current} of ${total}.`,
+        comparabilitySummary: "Methodological comparability & limits"
       },
       sourceSetLabels: {
         add: "Add",
@@ -245,6 +248,7 @@
       sourceCountLabel: (value) => `${value} ${value === 1 ? "source" : "sources"}`,
       moreFilterCountLabel: (activeCount) => activeCount ? `· ${activeCount} active` : "",
       csvFilename: "amazoniadb-source-set.csv",
+      bibtexFilename: "amazoniadb-sources.bib",
       domainNavUnavailable: '<p class="empty-state">Area filters are temporarily unavailable. You can still browse the full catalog below.</p>',
       resultCountPartial: (shown, total) => `Showing ${shown} of ${total} sources`,
       resultCountTotal: (total) => `${total} ${total === 1 ? "source found" : "sources found"}`,
@@ -346,7 +350,8 @@
         pathAdded: "Fuentes de la ruta añadidas a la selección.",
         pathAlreadyPresent: "Las fuentes de esta ruta ya están en la selección.",
         pathPartiallyAdded: (count) => `Se ${count === 1 ? "añadió 1 fuente" : `añadieron ${count} fuentes`}; el límite de seis impidió añadir las demás.`,
-        questionPosition: (current, total) => `Ruta ${current} de ${total}.`
+        questionPosition: (current, total) => `Ruta ${current} de ${total}.`,
+        comparabilitySummary: "Comparabilidad metodológica y límites"
       },
       sourceSetLabels: {
         add: "Añadir",
@@ -377,6 +382,7 @@
       sourceCountLabel: (value) => `${value} ${value === 1 ? "fuente" : "fuentes"}`,
       moreFilterCountLabel: (activeCount) => activeCount ? `· ${activeCount} ${activeCount === 1 ? "activo" : "activos"}` : "",
       csvFilename: "amazoniadb-conjunto-de-fuentes.csv",
+      bibtexFilename: "amazoniadb-fuentes.bib",
       domainNavUnavailable: '<p class="empty-state">Los filtros por dominio no están disponibles en este momento. Puede consultar el catálogo completo abajo.</p>',
       resultCountPartial: (shown, total) => `Mostrando ${shown} de ${total} fuentes`,
       resultCountTotal: (total) => `${total} ${total === 1 ? "fuente encontrada" : "fuentes encontradas"}`,
@@ -537,6 +543,7 @@
   const sourceSetStatus = document.getElementById("source-set-status");
   const copySourceSetButton = document.getElementById("copy-source-set");
   const downloadSourceSetButton = document.getElementById("download-source-set");
+  const downloadSourceSetBibtexButton = document.getElementById("download-source-set-bibtex");
   const clearSourceSetButton = document.getElementById("clear-source-set");
   const activeFiltersBar = document.getElementById("active-filters");
 
@@ -829,6 +836,58 @@
     window.setTimeout(() => URL.revokeObjectURL(href), 0);
   };
 
+  const escapeBibtex = (value) => String(value ?? "").replaceAll("\\", "\\\\").replaceAll("{", "\\{").replaceAll("}", "\\}");
+  const downloadSourceSetBibtex = () => {
+    const records = getSelectedRecords();
+    if (!records.length) return;
+    const exportedDate = new Date().toISOString().slice(0, 10);
+    const setUrl = sourceSetUrl();
+    const indexEntry = [
+      "@misc{amazoniadb_source_set,",
+      "  title = {{AmazoniaDB — Curated Source Set}},",
+      "  author = {{AmazoniaDB}},",
+      `  year = {${exportedDate.slice(0, 4)}},`,
+      `  url = {${escapeBibtex(setUrl)}},`,
+      `  note = {Exported ${exportedDate}; ${records.length} curated socioenvironmental sources indexed at their original providers.}`,
+      "}"
+    ].join("\n");
+    const recordEntries = records.map((record) => {
+      const citeKey = record.id.replace(/[^a-zA-Z0-9_-]/g, "_");
+      const year = (record.checked || exportedDate).slice(0, 4);
+      const temporal = temporalCoverageLabels[record.id] || record.temporalCoverage || "";
+      const spatial = spatialResolutionLabels[record.id] || spatialResolutionLabels[record.spatialResolution] || record.spatialResolution || "";
+      const noteParts = [
+        `Coverage: ${coverageLabels[record.coverage] || record.coverage}`,
+        temporal ? `Timeframe: ${temporal}` : "",
+        spatial ? `Spatial resolution: ${spatial}` : "",
+        `Access: ${accessLabels[record.access] || record.access} (${record.accessUrl})`,
+        record.methodologyUrl ? `Documentation: ${record.methodologyUrl}` : "",
+        `Link reviewed by AmazoniaDB on ${record.checked}`,
+        record.responsibleUse?.note ? `Responsible use: ${localized(record.responsibleUse.note)}` : ""
+      ].filter(Boolean).join(". ");
+      return [
+        `@misc{${citeKey},`,
+        `  title = {{${escapeBibtex(record.title)}}},`,
+        `  author = {{${escapeBibtex(record.provider)}}},`,
+        `  year = {${year}},`,
+        `  url = {${escapeBibtex(record.url)}},`,
+        `  howpublished = {${escapeBibtex(kindLabels[record.kind] || record.kind)}},`,
+        `  note = {${escapeBibtex(noteParts)}}`,
+        "}"
+      ].join("\n");
+    });
+    const bibtex = `${[indexEntry, ...recordEntries].join("\n\n")}\n`;
+    const blob = new Blob([bibtex], { type: "application/x-bibtex;charset=utf-8" });
+    const href = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = href;
+    link.download = ui.bibtexFilename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.setTimeout(() => URL.revokeObjectURL(href), 0);
+  };
+
   const renderResearchStarter = () => {
     if (!researchPathChoice || !researchPathButton) return;
     const activePath = researchPaths[starterPathIndex] || researchPaths[0];
@@ -1023,6 +1082,14 @@
       return;
     }
     const copy = activePath.locales || {};
+    const comp = copy.comparability;
+    const compPoints = Array.isArray(comp?.points)
+      ? comp.points.map((point) => `<li>${escapeHtml(localized(point))}</li>`).join("")
+      : "";
+    const compSynthesis = comp?.synthesis ? `<p class="research-comparability-synthesis">${escapeHtml(localized(comp.synthesis))}</p>` : "";
+    const compMarkup = compPoints
+      ? `<details class="research-comparability"><summary>${escapeHtml(researchLabels.comparabilitySummary)}</summary><div class="research-comparability-body"><ul>${compPoints}</ul>${compSynthesis}</div></details>`
+      : "";
     researchPathPanel.setAttribute("aria-label", researchLabels.heading);
     researchPathPanel.innerHTML = `
       <div>
@@ -1030,6 +1097,7 @@
         <h3>${escapeHtml(localized(copy.title))}</h3>
         <p>${escapeHtml(localized(copy.summary))}</p>
         <p class="research-caution">${escapeHtml(localized(copy.caution))}</p>
+        ${compMarkup}
       </div>
       <div class="research-path-actions">
         <button class="button button-secondary" type="button" data-add-path>${escapeHtml(researchLabels.addPath)}</button>
@@ -1414,6 +1482,7 @@
     flashConfirmation(copySourceSetButton, ok ? sourceSetLabels.copySuccess : sourceSetLabels.copyFailure, original);
   });
   downloadSourceSetButton?.addEventListener("click", downloadSourceSet);
+  downloadSourceSetBibtexButton?.addEventListener("click", downloadSourceSetBibtex);
 
   const copyLinkButton = document.getElementById("copy-view-link");
   copyLinkButton?.addEventListener("click", async () => {
@@ -1493,4 +1562,7 @@
   updateMoreFilterSummary();
   syncUrl();
   injectStructuredData();
+  if (typeof navigator !== "undefined" && "serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  }
 })();

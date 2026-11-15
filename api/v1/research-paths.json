@@ -1,0 +1,846 @@
+{
+  "apiVersion": 1,
+  "generated": "2026-11-15T07:51:12.416Z",
+  "count": 8,
+  "source": "https://amazoniadb.org/",
+  "paths": [
+    {
+      "id": "forest-change-territory-brazil",
+      "locales": {
+        "shortTitle": {
+          "en": "Forest & territory",
+          "pt-BR": "Floresta e território",
+          "es": "Bosque y territorio"
+        },
+        "selectorSummary": {
+          "en": "Brazil · 4 sources on territory boundaries, land cover, forest loss and fire.",
+          "pt-BR": "Brasil · 4 fontes sobre limites territoriais, cobertura da terra, perda florestal e fogo.",
+          "es": "Brasil · 4 fuentes sobre límites territoriales, cobertura del suelo, pérdida forestal y fuego."
+        },
+        "title": {
+          "en": "Explore forest change around a territory in Brazil",
+          "pt-BR": "Explore a transformação florestal no entorno de um território no Brasil",
+          "es": "Explora el cambio forestal alrededor de un territorio en Brasil"
+        },
+        "summary": {
+          "en": "A starting set of four public sources, chosen for complementary roles.",
+          "pt-BR": "Um conjunto inicial de quatro fontes públicas, escolhido por funções complementares.",
+          "es": "Un conjunto inicial de cuatro fuentes públicas, elegido por funciones complementarias."
+        },
+        "caution": {
+          "en": "This is a starting set, not a finding or an automatic analysis. Check methods, dates, terms and local knowledge before drawing conclusions. Public territory data is not blanket permission to make claims about people or places.",
+          "pt-BR": "Este é um ponto de partida, não um resultado ou uma análise automática. Verifique métodos, datas, termos e conhecimento local antes de tirar conclusões. Dados territoriais públicos não são autorização geral para fazer afirmações sobre pessoas ou territórios.",
+          "es": "Este es un punto de partida, no un resultado ni un análisis automático. Verifica métodos, fechas, términos y conocimiento local antes de sacar conclusiones. Los datos territoriales públicos no son una autorización general para hacer afirmaciones sobre personas o territorios."
+        },
+        "comparability": {
+          "points": [
+            {
+              "en": "INPE PRODES maps cumulative primary-forest clear-cutting (>6.25 ha) for an August–July reference year, whereas DETER issues rapid operational alerts (>3 ha) for enforcement that are not official annual area totals.",
+              "pt-BR": "O PRODES/INPE mapeia o corte raso acumulado de floresta primária (>6,25 ha) no ano-referência agosto–julho, enquanto o DETER emite alertas operacionais rápidos (>3 ha) para fiscalização que não equivalem à taxa anual oficial.",
+              "es": "PRODES/INPE cartografía la tala rasa acumulada de bosque primario (>6,25 ha) en el año de referencia agosto–julio, mientras que DETER emite alertas operativas rápidas (>3 ha) que no equivalen a la tasa oficial anual."
+            },
+            {
+              "en": "MapBiomas Brasil classifies all land-cover and land-use transitions pixel-by-pixel at 30 m per calendar year (Jan–Dec), including secondary regrowth and non-forest native vegetation.",
+              "pt-BR": "O MapBiomas Brasil classifica todas as transições de cobertura e uso do solo pixel a pixel em 30 m por ano civil (jan–dez), incluindo vegetação secundária e formações não florestais.",
+              "es": "MapBiomas Brasil clasifica todas las transiciones de cobertura y uso del suelo píxel a píxel a 30 m por año calendario (ene–dic), incluyendo vegetación secundaria y formaciones no forestales."
+            },
+            {
+              "en": "BDQueimadas records active thermal anomalies at satellite overpass time (375 m–1 km), indicating heat sources rather than burned area Scar polygons, and FUNAI polygons reflect published administrative stages.",
+              "pt-BR": "O BDQueimadas registra focos térmicos ativos na passagem do satélite (375 m–1 km), indicando fontes de calor e não área queimada, e os polígonos da FUNAI refletem fases administrativas publicadas.",
+              "es": "BDQueimadas registra focos térmicos activos al paso del satélite (375 m–1 km), indicando calor y no área quemada, y los polígonos de FUNAI reflejan etapas administrativas publicadas."
+            }
+          ],
+          "synthesis": {
+            "en": "Use PRODES for official primary-forest loss baselines, MapBiomas for multi-decade land-use transitions and regrowth, and DETER/BDQueimadas for seasonal pressure timing around published FUNAI boundaries.",
+            "pt-BR": "Use o PRODES para a linha de base oficial de perda de floresta primária, o MapBiomas para transições de uso do solo e regeneração, e DETER/BDQueimadas para a sazonalidade de pressões no entorno dos limites publicados pela FUNAI.",
+            "es": "Usa PRODES para la línea base oficial de pérdida de bosque primario, MapBiomas para transiciones de uso del suelo y regeneración, y DETER/BDQueimadas para la estacionalidad de presiones alrededor de los límites publicados por FUNAI."
+          }
+        }
+      },
+      "records": [
+        {
+          "id": "funai-terras-indigenas",
+          "role": {
+            "en": "Published boundary",
+            "pt-BR": "Limite publicado",
+            "es": "Límite publicado"
+          },
+          "reason": {
+            "en": "Locate a published Indigenous Territory boundary. It does not replace community-led territorial knowledge.",
+            "pt-BR": "Localize um limite publicado de Terra Indígena. Ele não substitui o conhecimento territorial produzido e conduzido pelas comunidades.",
+            "es": "Ubica un límite publicado de Tierra Indígena. No sustituye el conocimiento territorial producido y dirigido por las comunidades."
+          }
+        },
+        {
+          "id": "mapbiomas-brasil",
+          "role": {
+            "en": "Land-cover context",
+            "pt-BR": "Contexto de cobertura da terra",
+            "es": "Contexto de cobertura del suelo"
+          },
+          "reason": {
+            "en": "Add annual land-cover context from 1985 onward.",
+            "pt-BR": "Acrescente contexto anual de cobertura da terra desde 1985.",
+            "es": "Añade contexto anual de cobertura del suelo desde 1985."
+          }
+        },
+        {
+          "id": "inpe-terrabrasilis",
+          "role": {
+            "en": "Forest loss and alerts",
+            "pt-BR": "Perda florestal e alertas",
+            "es": "Pérdida forestal y alertas"
+          },
+          "reason": {
+            "en": "Compare official annual forest-loss mapping and alerts.",
+            "pt-BR": "Compare mapeamentos oficiais anuais de perda florestal e alertas.",
+            "es": "Compara mapas oficiales anuales de pérdida forestal y alertas."
+          }
+        },
+        {
+          "id": "inpe-bdqueimadas",
+          "role": {
+            "en": "Fire context",
+            "pt-BR": "Contexto de fogo",
+            "es": "Contexto de fuego"
+          },
+          "reason": {
+            "en": "Add reported fire activity as context for periods of burning.",
+            "pt-BR": "Acrescente atividade de fogo reportada para contextualizar períodos de queimada.",
+            "es": "Añade actividad de fuego reportada para contextualizar períodos de quema."
+          }
+        }
+      ]
+    },
+    {
+      "id": "water-basin-brazil",
+      "locales": {
+        "shortTitle": {
+          "en": "Rivers & rainfall by basin",
+          "pt-BR": "Rios e chuva por bacia",
+          "es": "Ríos y lluvia por cuenca"
+        },
+        "selectorSummary": {
+          "en": "Brazil · 3 sources on rivers, rainfall, weather stations and land cover.",
+          "pt-BR": "Brasil · 3 fontes sobre rios, chuva, estações meteorológicas e cobertura da terra.",
+          "es": "Brasil · 3 fuentes sobre ríos, lluvia, estaciones meteorológicas y cobertura del suelo."
+        },
+        "title": {
+          "en": "Explore river and rainfall conditions in a basin in Brazil",
+          "pt-BR": "Explore as condições de rios e chuva em uma bacia no Brasil",
+          "es": "Explora las condiciones de ríos y lluvia en una cuenca de Brasil"
+        },
+        "summary": {
+          "en": "A starting set of three public sources for station observations and land-cover context.",
+          "pt-BR": "Um conjunto inicial de três fontes públicas para observações em estações e contexto de cobertura da terra.",
+          "es": "Un conjunto inicial de tres fuentes públicas para observaciones de estaciones y contexto de cobertura del suelo."
+        },
+        "caution": {
+          "en": "Station records describe where and when instruments operated. Do not treat gaps as conditions across an entire basin; check methods, dates, terms and local knowledge before drawing conclusions.",
+          "pt-BR": "Registros de estações descrevem onde e quando os instrumentos operaram. Não trate lacunas como condições de toda uma bacia; verifique métodos, datas, termos e conhecimento local antes de tirar conclusões.",
+          "es": "Los registros de estaciones describen dónde y cuándo funcionaron los instrumentos. No trates las lagunas como condiciones de toda una cuenca; verifica métodos, fechas, términos y conocimiento local antes de sacar conclusiones."
+        },
+        "comparability": {
+          "points": [
+            {
+              "en": "ANA HidroWeb gauge series combine raw telemetric readings and historical audited ('consistido') level/discharge records; stage-discharge rating curves shift with riverbed changes.",
+              "pt-BR": "As séries da ANA HidroWeb combinam leituras telemétricas brutas e dados históricos consistidos de cota e vazão; curvas-chave mudam conforme a calha do rio se altera.",
+              "es": "Las series de ANA HidroWeb combinan lecturas telemétricas brutas y registros históricos validados de nivel y caudal; las curvas de gasto cambian con el lecho del río."
+            },
+            {
+              "en": "INMET BDMEP weather stations are sparse across Amazonian headwaters and record point meteorological conditions that may miss localized convective rainfall cells.",
+              "pt-BR": "As estações do INMET BDMEP têm baixa densidade nas cabeceiras amazônicas e medem condições pontuais que podem não capturar células convectivas locais de chuva.",
+              "es": "Las estaciones de INMET BDMEP tienen baja densidad en las cabeceras amazónicas y miden condiciones puntuales que pueden no captar celdas convectivas locales."
+            },
+            {
+              "en": "MapBiomas annual 30 m land-cover composites summarize each calendar year, whereas hydrological extremes follow seasonal flood pulses (cheia/vazante) across upstream drainage areas.",
+              "pt-BR": "Os mosaicos anuais de 30 m do MapBiomas resumem o ano civil, enquanto extremos hidrológicos seguem o pulso sazonal de cheia e vazante em toda a bacia de drenagem a montante.",
+              "es": "Los mosaicos anuales de 30 m de MapBiomas resumen el año calendario, mientras que los extremos hidrológicos siguen el pulso estacional de crecida y estiaje aguas arriba."
+            }
+          ],
+          "synthesis": {
+            "en": "Verify whether ANA station records are raw or quality-controlled, pair them with upstream watershed boundaries rather than municipal borders, and treat MapBiomas land-cover trends as long-term basin context.",
+            "pt-BR": "Verifique se os registros da ANA são brutos ou consistidos, articule-os pelo recorte da bacia a montante (e não por limites municipais) e trate o MapBiomas como contexto de longo prazo.",
+            "es": "Verifica si los registros de ANA son brutos o validados, vincúlalos con la cuenca hidrográfica aguas arriba (no con límites municipales) y trata MapBiomas como contexto a largo plazo."
+          }
+        }
+      },
+      "records": [
+        {
+          "id": "ana-hidroweb",
+          "role": {
+            "en": "River gauges",
+            "pt-BR": "Estações hidrológicas",
+            "es": "Estaciones hidrológicas"
+          },
+          "reason": {
+            "en": "Start with reported river level, discharge, rainfall and water-quality observations from station gauges.",
+            "pt-BR": "Comece por observações reportadas de nível, vazão, chuva e qualidade da água em estações.",
+            "es": "Empieza con observaciones reportadas de nivel, caudal, lluvia y calidad del agua en estaciones."
+          }
+        },
+        {
+          "id": "inmet-bdmep",
+          "role": {
+            "en": "Weather stations",
+            "pt-BR": "Estações meteorológicas",
+            "es": "Estaciones meteorológicas"
+          },
+          "reason": {
+            "en": "Add daily rainfall and weather observations from nearby stations.",
+            "pt-BR": "Acrescente observações diárias de chuva e tempo de estações próximas.",
+            "es": "Añade observaciones diarias de lluvia y tiempo de estaciones cercanas."
+          }
+        },
+        {
+          "id": "mapbiomas-brasil",
+          "role": {
+            "en": "Land-cover context",
+            "pt-BR": "Contexto de cobertura da terra",
+            "es": "Contexto de cobertura del suelo"
+          },
+          "reason": {
+            "en": "Add annual land-cover context without assuming it explains a hydrological change.",
+            "pt-BR": "Acrescente contexto anual de cobertura da terra sem supor que ele explica uma mudança hidrológica.",
+            "es": "Añade contexto anual de cobertura del suelo sin suponer que explica un cambio hidrológico."
+          }
+        }
+      ]
+    },
+    {
+      "id": "biodiversity-records-brazil",
+      "locales": {
+        "shortTitle": {
+          "en": "Biodiversity by region",
+          "pt-BR": "Biodiversidade por região",
+          "es": "Biodiversidad por región"
+        },
+        "selectorSummary": {
+          "en": "Brazil · 3 sources on species records, research networks and protected areas.",
+          "pt-BR": "Brasil · 3 fontes sobre registros de espécies, redes de pesquisa e áreas protegidas.",
+          "es": "Brasil · 3 fuentes sobre registros de especies, redes de investigación y áreas protegidas."
+        },
+        "title": {
+          "en": "Explore biodiversity records available for a region in Brazil",
+          "pt-BR": "Explore registros de biodiversidade disponíveis para uma região no Brasil",
+          "es": "Explora los registros de biodiversidad disponibles para una región de Brasil"
+        },
+        "summary": {
+          "en": "A starting set of three public sources for records, research-network context and protected-area context.",
+          "pt-BR": "Um conjunto inicial de três fontes públicas para registros, contexto de redes de pesquisa e contexto de áreas protegidas.",
+          "es": "Un conjunto inicial de tres fuentes públicas para registros, contexto de redes de investigación y contexto de áreas protegidas."
+        },
+        "caution": {
+          "en": "Available records are not a complete account of life in a place. Respect location precision, licenses and collection context; never turn public records into directions to sensitive species or sites.",
+          "pt-BR": "Registros disponíveis não são uma descrição completa da vida em um lugar. Respeite a precisão da localização, as licenças e o contexto de coleta; nunca transforme registros públicos em instruções para encontrar espécies ou locais sensíveis.",
+          "es": "Los registros disponibles no son una descripción completa de la vida en un lugar. Respeta la precisión de ubicación, las licencias y el contexto de recolección; nunca conviertas registros públicos en indicaciones para encontrar especies o sitios sensibles."
+        },
+        "comparability": {
+          "points": [
+            {
+              "en": "speciesLink aggregates museum and herbarium vouchers collected opportunistically over decades, so record density strongly reflects proximity to rivers, roads and research institutions.",
+              "pt-BR": "O speciesLink agrega exsicatas e espécimes coletados de forma oportunística ao longo de décadas; a densidade de registros reflete a proximidade de rios, estradas e centros de pesquisa.",
+              "es": "speciesLink agrega especímenes de museos y herbarios recolectados de forma oportunista durante décadas; la densidad de registros refleja la cercanía a ríos, carreteras y centros de investigación."
+            },
+            {
+              "en": "PPBio sites use standardized RAPELD plots and transects with documented sampling effort, allowing abundance and richness comparisons within monitored grids.",
+              "pt-BR": "Os sítios do PPBio utilizam parcelas e grades RAPELD padronizadas com esforço amostral documentado, permitindo comparar riqueza e abundância dentro das áreas monitoradas.",
+              "es": "Los sitios de PPBio utilizan parcelas y grillas RAPELD estandarizadas con esfuerzo de muestreo documentado, permitiendo comparar riqueza y abundancia dentro de las áreas monitoreadas."
+            },
+            {
+              "en": "CNUC boundaries represent legal conservation-unit designations (strict protection vs. sustainable use) and vary in date of decree, management plan status and field survey coverage.",
+              "pt-BR": "Os polígonos do CNUC representam categorias legais de unidades de conservação (proteção integral vs. uso sustentável) e variam quanto à data de criação e cobertura de inventários.",
+              "es": "Los polígonos del CNUC representan categorías legales de áreas protegidas (protección estricta vs. uso sostenible) y varían en fecha de creación y cobertura de inventarios."
+            }
+          ],
+          "synthesis": {
+            "en": "Never interpret low voucher density in speciesLink as biological absence; pair museum records with PPBio standardized sampling plots and CNUC legal boundaries to separate sampling bias from protection status.",
+            "pt-BR": "Nunca interprete baixa densidade no speciesLink como ausência biológica; combine acervos de coleções com parcelas padronizadas do PPBio e limites do CNUC para distinguir viés amostral de status de proteção.",
+            "es": "Nunca interpretes una baja densidad en speciesLink como ausencia biológica; combina registros de colecciones con parcelas estandarizadas de PPBio y límites del CNUC para separar el sesgo de muestreo de la protección."
+          }
+        }
+      },
+      "records": [
+        {
+          "id": "specieslink-network",
+          "role": {
+            "en": "Occurrence records",
+            "pt-BR": "Registros de ocorrência",
+            "es": "Registros de ocurrencia"
+          },
+          "reason": {
+            "en": "Locate Brazilian occurrence records and inspect the collection and record-level context.",
+            "pt-BR": "Localize registros brasileiros de ocorrência e examine o contexto da coleção e de cada registro.",
+            "es": "Ubica registros brasileños de ocurrencia y examina el contexto de la colección y de cada registro."
+          }
+        },
+        {
+          "id": "ppbio-brazil-biodiversity-research",
+          "role": {
+            "en": "Research-network context",
+            "pt-BR": "Contexto de rede de pesquisa",
+            "es": "Contexto de red de investigación"
+          },
+          "reason": {
+            "en": "Add the context of long-term, standardized biodiversity monitoring sites.",
+            "pt-BR": "Acrescente o contexto de sítios de monitoramento de biodiversidade de longo prazo e padronizados.",
+            "es": "Añade el contexto de sitios estandarizados de monitoreo de biodiversidad a largo plazo."
+          }
+        },
+        {
+          "id": "cnuc-unidades-conservacao",
+          "role": {
+            "en": "Protected-area context",
+            "pt-BR": "Contexto de área protegida",
+            "es": "Contexto de área protegida"
+          },
+          "reason": {
+            "en": "Use published conservation-unit boundaries as context, not as a claim about ecological conditions.",
+            "pt-BR": "Use limites publicados de unidades de conservação como contexto, não como uma afirmação sobre condições ecológicas.",
+            "es": "Usa límites publicados de unidades de conservación como contexto, no como una afirmación sobre condiciones ecológicas."
+          }
+        }
+      ]
+    },
+    {
+      "id": "environmental-pressure-municipality-brazil",
+      "locales": {
+        "shortTitle": {
+          "en": "Municipal environmental pressure",
+          "pt-BR": "Pressão ambiental municipal",
+          "es": "Presión ambiental municipal"
+        },
+        "selectorSummary": {
+          "en": "Brazil · 4 sources on forest monitoring, fire, enforcement and municipal indicators.",
+          "pt-BR": "Brasil · 4 fontes sobre monitoramento florestal, fogo, fiscalização e indicadores municipais.",
+          "es": "Brasil · 4 fuentes sobre monitoreo forestal, fuego, fiscalización e indicadores municipales."
+        },
+        "title": {
+          "en": "Explore public environmental-pressure records for a municipality in Brazil",
+          "pt-BR": "Explore registros públicos de pressões ambientais em um município no Brasil",
+          "es": "Explora registros públicos de presiones ambientales en un municipio de Brasil"
+        },
+        "summary": {
+          "en": "A starting set of four public sources for reported monitoring, fire, enforcement and municipal context.",
+          "pt-BR": "Um conjunto inicial de quatro fontes públicas para monitoramento reportado, fogo, fiscalização e contexto municipal.",
+          "es": "Un conjunto inicial de cuatro fuentes públicas para monitoreo reportado, fuego, fiscalización y contexto municipal."
+        },
+        "caution": {
+          "en": "Public records can be incomplete and reflect reporting or enforcement practices. They are not proof of responsibility or a complete map of harm; check methods, dates, terms and local context before making claims.",
+          "pt-BR": "Registros públicos podem ser incompletos e refletir práticas de reporte ou fiscalização. Eles não são prova de responsabilidade nem um mapa completo de danos; verifique métodos, datas, termos e contexto local antes de fazer afirmações.",
+          "es": "Los registros públicos pueden ser incompletos y reflejar prácticas de reporte o fiscalización. No son prueba de responsabilidad ni un mapa completo de daños; verifica métodos, fechas, términos y contexto local antes de hacer afirmaciones."
+        },
+        "comparability": {
+          "points": [
+            {
+              "en": "IBAMA open records reflect federal administrative actions (notices of infraction and embargoed areas) whose volume depends on inspection operations and legal review stages.",
+              "pt-BR": "Os dados abertos do IBAMA refletem atos administrativos federais (autos de infração e termos de embargo) cujo volume depende de operações de fiscalização e fases processuais.",
+              "es": "Los datos abiertos de IBAMA reflejan actos administrativos federales (actas de infracción y áreas embargadas) cuyo volumen depende de operativos de fiscalización y etapas procesales."
+            },
+            {
+              "en": "TerraBrasilis (PRODES/DETER) and BDQueimadas measure physical satellite detections across the municipality regardless of land tenure or jurisdictional competence.",
+              "pt-BR": "O TerraBrasilis (PRODES/DETER) e o BDQueimadas medem detecções físicas por satélite no município independentemente da malha fundiária ou da esfera de competência administrativa.",
+              "es": "TerraBrasilis (PRODES/DETER) y BDQueimadas miden detecciones físicas satelitales en el municipio independientemente de la tenencia de la tierra o la competencia administrativa."
+            },
+            {
+              "en": "IBGE Cidades indicators mix decennial census baselines (2010/2022) with annual municipal estimates (GDP, population, agricultural production) that follow distinct reference periods.",
+              "pt-BR": "Os indicadores do IBGE Cidades combinam bases censitárias decenais (2010/2022) com estimativas municipais anuais (PIB, população, produção agrícola) de períodos distintos.",
+              "es": "Los indicadores de IBGE Cidades combinan censos decenales (2010/2022) con estimaciones municipales anuales (PIB, población, producción agrícola) de distintos períodos."
+            }
+          ],
+          "synthesis": {
+            "en": "Compare satellite detections (TerraBrasilis, BDQueimadas) with IBAMA records to understand how physical pressures relate to federal inspection presence, not as a direct ratio of legality.",
+            "pt-BR": "Compare detecções por satélite (TerraBrasilis, BDQueimadas) com registros do IBAMA para entender a relação entre pressões físicas e presença fiscalizatória federal, sem tratá-los como razão direta de legalidade.",
+            "es": "Compara las detecciones satelitales (TerraBrasilis, BDQueimadas) con los registros de IBAMA para entender la relación entre presiones físicas y presencia inspectiva federal, no como proporción directa de legalidad."
+          }
+        }
+      },
+      "records": [
+        {
+          "id": "inpe-terrabrasilis",
+          "role": {
+            "en": "Forest monitoring",
+            "pt-BR": "Monitoramento florestal",
+            "es": "Monitoreo forestal"
+          },
+          "reason": {
+            "en": "Compare official annual forest-loss mapping and alerts.",
+            "pt-BR": "Compare mapeamentos oficiais anuais de perda florestal e alertas.",
+            "es": "Compara mapas oficiales anuales de pérdida forestal y alertas."
+          }
+        },
+        {
+          "id": "inpe-bdqueimadas",
+          "role": {
+            "en": "Fire context",
+            "pt-BR": "Contexto de fogo",
+            "es": "Contexto de fuego"
+          },
+          "reason": {
+            "en": "Add reported fire activity as context for periods of burning.",
+            "pt-BR": "Acrescente atividade de fogo reportada para contextualizar períodos de queimada.",
+            "es": "Añade actividad de fuego reportada para contextualizar períodos de quema."
+          }
+        },
+        {
+          "id": "ibama-fiscalizacao-dados-abertos",
+          "role": {
+            "en": "Environmental enforcement",
+            "pt-BR": "Fiscalização ambiental",
+            "es": "Fiscalización ambiental"
+          },
+          "reason": {
+            "en": "Review published federal enforcement records and their administrative limits.",
+            "pt-BR": "Examine registros publicados de fiscalização federal e seus limites administrativos.",
+            "es": "Revisa registros publicados de fiscalización federal y sus límites administrativos."
+          }
+        },
+        {
+          "id": "ibge-cidades",
+          "role": {
+            "en": "Municipal context",
+            "pt-BR": "Contexto municipal",
+            "es": "Contexto municipal"
+          },
+          "reason": {
+            "en": "Add official municipal indicators as context without inferring cause or responsibility.",
+            "pt-BR": "Acrescente indicadores municipais oficiais como contexto, sem inferir causa ou responsabilidade.",
+            "es": "Añade indicadores municipales oficiales como contexto, sin inferir causa o responsabilidad."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pan-amazon-forest-mining-pressures",
+      "locales": {
+        "shortTitle": {
+          "en": "Pan-Amazon forest & pressures",
+          "pt-BR": "Floresta e pressões pan-amazônicas",
+          "es": "Bosque y presiones panamazónicas"
+        },
+        "selectorSummary": {
+          "en": "Pan-Amazon · 4 sources on regional territories, land cover, mining scars and active fire.",
+          "pt-BR": "Pan-Amazônia · 4 fontes sobre territórios regionais, cobertura do solo, cicatrizes de garimpo e fogo ativo.",
+          "es": "Panamazonía · 4 fuentes sobre territorios regionales, cobertura del suelo, cicatrices mineras y fuego activo."
+        },
+        "title": {
+          "en": "Explore cross-border forest change and extractive pressures across the Amazon",
+          "pt-BR": "Explore transformação florestal e pressões extrativas transfronteiriças na Amazônia",
+          "es": "Explora cambio forestal y presiones extractivas transfronterizas en la Amazonía"
+        },
+        "summary": {
+          "en": "A starting set of four basin-wide sources combining harmonized territorial maps, annual land cover, mining-scar detections and active-fire monitoring.",
+          "pt-BR": "Um conjunto inicial de quatro fontes de escala regional combinando mapas territoriais harmonizados, cobertura anual do solo, detecções de cicatrizes de garimpo e monitoramento de fogo ativo.",
+          "es": "Un conjunto inicial de cuatro fuentes a escala de cuenca que combinan mapas territoriales armonizados, cobertura anual del suelo, detecciones de cicatrices mineras y monitoreo de fuego activo."
+        },
+        "caution": {
+          "en": "Cross-border layers harmonize national sources with different legal regimes, update dates and detection thresholds. Remote-sensing detections and mapped boundaries are context, not proof of legality, ownership or community consent.",
+          "pt-BR": "Camadas transfronteiriças harmonizam fontes nacionais com diferentes regimes jurídicos, datas de atualização e limiares de detecção. Detecções por satélite e limites mapeados oferecem contexto, não prova de legalidade, posse ou consentimento comunitário.",
+          "es": "Las capas transfronterizas armonizan fuentes nacionales con distintos regímenes jurídicos, fechas de actualización y umbrales de detección. Las detecciones satelitales y los límites cartografiados aportan contexto, no prueba de legalidad, propiedad ni consentimiento comunitario."
+        },
+        "comparability": {
+          "points": [
+            {
+              "en": "RAISG harmonizes Indigenous territories and protected areas across 9 jurisdictions where recognition status (titled, demarcated, claimed, reserve) carries different national legal meanings.",
+              "pt-BR": "A RAISG harmoniza territórios indígenas e áreas protegidas em 9 jurisdições onde o status de reconhecimento (titulado, homologado, demandado, reserva) tem efeitos jurídicos distintos.",
+              "es": "RAISG armoniza territorios indígenas y áreas protegidas en 9 jurisdicciones donde el estado de reconocimiento (titulado, demarcado, solicitado, reserva) tiene efectos legales distintos."
+            },
+            {
+              "en": "MapBiomas Amazonía applies a unified 30 m Landsat annual legend across the basin (1985–present), whereas Amazon Mining Watch uses Sentinel-2 machine-learning models (~10 m, 2018+) focused on open-pit scars.",
+              "pt-BR": "O MapBiomas Amazônia aplica uma legenda anual unificada de 30 m (Landsat, 1985+) na bacia, enquanto o Amazon Mining Watch usa modelos sobre Sentinel-2 (~10 m, 2018+) focados em cicatrizes abertas.",
+              "es": "MapBiomas Amazonía aplica una leyenda anual unificada de 30 m (Landsat, 1985+) en la cuenca, mientras que Amazon Mining Watch usa modelos sobre Sentinel-2 (~10 m, 2018+) enfocados en cicatrices abiertas."
+            },
+            {
+              "en": "NASA FIRMS combines 375 m VIIRS and 1 km MODIS active-fire pixels; persistent industrial flares or sun-glint on water/sandbanks must be filtered using confidence flags.",
+              "pt-BR": "O NASA FIRMS combina pixels de fogo ativo VIIRS (375 m) e MODIS (1 km); queimas industriais contínuas ou reflexos solares em bancos de areia exigem filtro por nível de confiança.",
+              "es": "NASA FIRMS combina píxeles de fuego activo VIIRS (375 m) y MODIS (1 km); las antorchas industriales continuas o reflejos solares en bancos de arena requieren filtrar por nivel de confianza."
+            }
+          ],
+          "synthesis": {
+            "en": "Use MapBiomas Amazonía for long-term basin-wide land-cover baselines, cross-check mining footprints between MapBiomas and Amazon Mining Watch from 2018 onward, and inspect RAISG attribute tables for country-specific legal tenure.",
+            "pt-BR": "Use o MapBiomas Amazônia para a série histórica de uso do solo na bacia, cruze cicatrizes de mineração entre MapBiomas e Amazon Mining Watch a partir de 2018 e consulte a tabela de atributos da RAISG para o regime jurídico de cada país.",
+            "es": "Usa MapBiomas Amazonía para la serie histórica de cobertura del suelo en la cuenca, cruza las huellas mineras entre MapBiomas y Amazon Mining Watch desde 2018 y revisa los atributos de RAISG para el régimen legal de cada país."
+          }
+        }
+      },
+      "records": [
+        {
+          "id": "raisg-maps",
+          "role": {
+            "en": "Regional territorial context",
+            "pt-BR": "Contexto territorial regional",
+            "es": "Contexto territorial regional"
+          },
+          "reason": {
+            "en": "Start with harmonized pan-Amazon layers for Indigenous territories, protected areas and infrastructure.",
+            "pt-BR": "Comece por camadas pan-amazônicas harmonizadas de territórios indígenas, áreas protegidas e infraestrutura.",
+            "es": "Empieza con capas panamazónicas armonizadas de territorios indígenas, áreas protegidas e infraestructura."
+          }
+        },
+        {
+          "id": "mapbiomas-amazonia",
+          "role": {
+            "en": "Basin-wide land cover",
+            "pt-BR": "Cobertura do solo na bacia",
+            "es": "Cobertura del suelo en la cuenca"
+          },
+          "reason": {
+            "en": "Add annual pan-Amazon land-cover and surface-water maps built with a shared regional legend.",
+            "pt-BR": "Acrescente mapas anuais pan-amazônicos de cobertura do solo e água superficial com legenda regional comum.",
+            "es": "Añade mapas anuales panamazónicos de cobertura del suelo y agua superficial con una leyenda regional común."
+          }
+        },
+        {
+          "id": "amazon-mining-watch",
+          "role": {
+            "en": "Mining-scar detections",
+            "pt-BR": "Detecções de cicatrizes de garimpo",
+            "es": "Detecciones de cicatrices mineras"
+          },
+          "reason": {
+            "en": "Inspect satellite-detected probable open-pit mining scars across all Amazonian jurisdictions.",
+            "pt-BR": "Examine detecções por satélite de prováveis cicatrizes de mineração a céu aberto nas jurisdições amazônicas.",
+            "es": "Examina detecciones satelitales de probables cicatrices de minería a cielo abierto en las jurisdicciones amazónicas."
+          }
+        },
+        {
+          "id": "nasa-firms-active-fire",
+          "role": {
+            "en": "Active-fire detections",
+            "pt-BR": "Detecções de fogo ativo",
+            "es": "Detecciones de fuego activo"
+          },
+          "reason": {
+            "en": "Add near-real-time and historical thermal anomalies from MODIS and VIIRS across borders.",
+            "pt-BR": "Acrescente anomalias térmicas históricas e quase em tempo real do MODIS e VIIRS além das fronteiras nacionais.",
+            "es": "Añade anomalías térmicas históricas y casi en tiempo real de MODIS y VIIRS a través de las fronteras."
+          }
+        }
+      ]
+    },
+    {
+      "id": "andean-amazon-forests-territories",
+      "locales": {
+        "shortTitle": {
+          "en": "Andean-Amazon forests & lands",
+          "pt-BR": "Florestas da Amazônia Andina",
+          "es": "Bosques de la Amazonía Andina"
+        },
+        "selectorSummary": {
+          "en": "Colombia, Peru, Bolivia & Ecuador · 4 national forest and land-cover monitoring systems.",
+          "pt-BR": "Colômbia, Peru, Bolívia e Equador · 4 sistemas nacionais de monitoramento florestal e de uso do solo.",
+          "es": "Colombia, Perú, Bolivia y Ecuador · 4 sistemas nacionales de monitoreo forestal y de uso del suelo."
+        },
+        "title": {
+          "en": "Compare forest and land-use monitoring across Andean-Amazon countries",
+          "pt-BR": "Compare o monitoramento florestal e de uso do solo nos países da Amazônia Andina",
+          "es": "Compara el monitoreo forestal y de uso del suelo en los países de la Amazonía Andina"
+        },
+        "summary": {
+          "en": "A starting set of four national monitoring platforms covering Colombia, Peru, Bolivia and Ecuador.",
+          "pt-BR": "Um conjunto inicial de quatro plataformas nacionais de monitoramento cobrindo Colômbia, Peru, Bolívia e Equador.",
+          "es": "Un conjunto inicial de cuatro plataformas nacionales de monitoreo que cubren Colombia, Perú, Bolivia y Ecuador."
+        },
+        "caution": {
+          "en": "Each country defines forest baselines, minimum mapping units and alert cadences differently. Compare national methodologies before aggregating figures across borders.",
+          "pt-BR": "Cada país define linhas de base florestais, áreas mínimas de mapeamento e frequências de alerta de modo distinto. Compare as metodologias nacionais antes de somar números entre fronteiras.",
+          "es": "Cada país define líneas base forestales, unidades mínimas de mapeo y frecuencias de alerta de manera distinta. Compara las metodologías nacionales antes de agregar cifras entre fronteras."
+        },
+        "comparability": {
+          "points": [
+            {
+              "en": "Colombia's IDEAM SMBYC tracks natural forest/non-forest cover and quarterly early-warning bulletins from 1990 onward using national canopy-cover and minimum-area definitions.",
+              "pt-BR": "O SMBYC do IDEAM (Colômbia) monitora cobertura de floresta/não-floresta e boletins trimestrais de alerta desde 1990 segundo definições nacionais de dossel e área mínima.",
+              "es": "El SMBYC del IDEAM (Colombia) monitorea cobertura de bosque/no bosque y boletines trimestrales de alerta desde 1990 según definiciones nacionales de dosel y área mínima."
+            },
+            {
+              "en": "Peru's Geobosques (MINAM) reports annual humid-forest loss from a 2001 baseline alongside weekly GLAD/optical-radar early-warning alerts for rapid field verification.",
+              "pt-BR": "O Geobosques do MINAM (Peru) reporta perda anual de floresta úmida a partir da linha de base de 2001, além de alertas semanais precoces para verificação rápida.",
+              "es": "Geobosques del MINAM (Perú) reporta pérdida anual de bosque húmedo desde la línea base de 2001, junto con alertas tempranas semanales para verificación rápida."
+            },
+            {
+              "en": "Bolivia's SIMB integrates multi-sensor forest and fire layers since 2000 under national administrative criteria, while MapBiomas Ecuador provides annual 30 m multi-class transitions (1985–present).",
+              "pt-BR": "O SIMB (Bolívia) integra camadas de floresta e fogo desde 2000 sob critérios nacionais, enquanto o MapBiomas Equador fornece transições anuais multiclasse de 30 m (1985–presente).",
+              "es": "El SIMB (Bolivia) integra capas de bosque y fuego desde 2000 bajo criterios nacionales, mientras que MapBiomas Ecuador ofrece transiciones anuales multiclase de 30 m (1985–presente)."
+            }
+          ],
+          "synthesis": {
+            "en": "Cite each national platform (IDEAM, Geobosques, SIMB) when reporting official domestic statistics or policy compliance, and pair them with MapBiomas Amazonía when a single harmonized cross-border legend is required.",
+            "pt-BR": "Cite cada plataforma nacional (IDEAM, Geobosques, SIMB) ao reportar estatísticas oficiais domésticas ou metas públicas, e combine-as com o MapBiomas Amazônia quando precisar de uma legenda transfronteiriça única.",
+            "es": "Cita cada plataforma nacional (IDEAM, Geobosques, SIMB) al reportar estadísticas oficiales internas o cumplimiento de políticas, y combínalas con MapBiomas Amazonía cuando se requiera una leyenda transfronteriza armonizada."
+          }
+        }
+      },
+      "records": [
+        {
+          "id": "ideam-smbyc",
+          "role": {
+            "en": "Colombia forest monitoring",
+            "pt-BR": "Monitoramento florestal na Colômbia",
+            "es": "Monitoreo forestal en Colombia"
+          },
+          "reason": {
+            "en": "Review IDEAM's official forest-cover series, early-warning alerts and methodological reports for Colombia.",
+            "pt-BR": "Consulte a série oficial de cobertura florestal, alertas precoces e relatórios metodológicos do IDEAM para a Colômbia.",
+            "es": "Consulta la serie oficial de cobertura forestal, alertas tempranas e informes metodológicos del IDEAM para Colombia."
+          }
+        },
+        {
+          "id": "geobosques-national-forest-monitoring-platform",
+          "role": {
+            "en": "Peru forest loss & alerts",
+            "pt-BR": "Perda florestal e alertas no Peru",
+            "es": "Pérdida forestal y alertas en Perú"
+          },
+          "reason": {
+            "en": "Compare MINAM's annual forest-loss maps and weekly early-warning alerts for the Peruvian Amazon.",
+            "pt-BR": "Compare os mapas anuais de perda florestal e alertas semanais do MINAM para a Amazônia peruana.",
+            "es": "Compara los mapas anuales de pérdida forestal y las alertas semanales del MINAM para la Amazonía peruana."
+          }
+        },
+        {
+          "id": "simb-bolivia-forest-monitor",
+          "role": {
+            "en": "Bolivia forest geovisor",
+            "pt-BR": "Geovisor florestal da Bolívia",
+            "es": "Geovisor forestal de Bolivia"
+          },
+          "reason": {
+            "en": "Inspect Bolivia's official forest-cover, deforestation and fire monitoring layers in SIMB.",
+            "pt-BR": "Examine as camadas oficiais de cobertura florestal, desmatamento e fogo da Bolívia no SIMB.",
+            "es": "Examina las capas oficiales de cobertura forestal, deforestación y fuego de Bolivia en el SIMB."
+          }
+        },
+        {
+          "id": "mapbiomas-ecuador-land-cover",
+          "role": {
+            "en": "Ecuador land-cover series",
+            "pt-BR": "Série de uso do solo no Equador",
+            "es": "Serie de uso del suelo en Ecuador"
+          },
+          "reason": {
+            "en": "Add multi-decade 30 m land-cover, vegetation-loss and surface-water classifications for Ecuador.",
+            "pt-BR": "Acrescente classificações multidecadais de 30 m de uso do solo, perda de vegetação e água para o Equador.",
+            "es": "Añade clasificaciones multidecadales de 30 m de uso del suelo, pérdida de vegetación y agua para Ecuador."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pan-amazon-rivers-waters-climate",
+      "locales": {
+        "shortTitle": {
+          "en": "Pan-Amazon rivers & waters",
+          "pt-BR": "Rios e águas pan-amazônicas",
+          "es": "Ríos y aguas panamazónicas"
+        },
+        "selectorSummary": {
+          "en": "Pan-Amazon · 4 sources on cross-border river gauges, sediments, rainfall and aquatic ecosystems.",
+          "pt-BR": "Pan-Amazônia · 4 fontes sobre estações fluviais transfronteiriças, sedimentos, chuva e ecossistemas aquáticos.",
+          "es": "Panamazonía · 4 fuentes sobre estaciones fluviales transfronterizas, sedimentos, lluvia y ecosistemas acuáticos."
+        },
+        "title": {
+          "en": "Explore rivers, rainfall and aquatic ecosystems across the Amazon basin",
+          "pt-BR": "Explore rios, chuva e ecossistemas aquáticos em toda a bacia amazônica",
+          "es": "Explora ríos, lluvia y ecosistemas acuáticos en toda la cuenca amazónica"
+        },
+        "summary": {
+          "en": "A starting set of four regional sources connecting cross-border hydrometric stations, gridded rainfall and sub-basin aquatic monitoring.",
+          "pt-BR": "Um conjunto inicial de quatro fontes regionais conectando estações hidrométricas transfronteiriças, precipitação em grade e monitoramento aquático por sub-bacia.",
+          "es": "Un conjunto inicial de cuatro fuentes regionales que conectan estaciones hidrométricas transfronterizas, precipitación en cuadrícula y monitoreo acuático por subcuenca."
+        },
+        "caution": {
+          "en": "Gauge density and record periods vary across countries and tributaries, and community aquatic observations are aggregated by sub-basin to protect local contributors. Check station metadata and aggregation rules before comparing sub-basins.",
+          "pt-BR": "A densidade de estações e os períodos de registro variam entre países e tributários, e observações aquáticas comunitárias são agregadas por sub-bacia para proteger colaboradores locais. Verifique metadados e regras de agregação antes de comparar sub-bacias.",
+          "es": "La densidad de estaciones y los períodos de registro varían entre países y afluentes, y las observaciones acuáticas comunitarias se agregan por subcuenca para proteger a quienes colaboran localmente. Revisa los metadatos y reglas de agregación antes de comparar subcuencas."
+        },
+        "comparability": {
+          "points": [
+            {
+              "en": "ORE HYBAM curates research-grade discharge, suspended-sediment and geochemical series at key mainstem and tributary stations, whereas ACTO/OTCA aggregates operational national gauge networks.",
+              "pt-BR": "O ORE HYBAM mantém séries científicas padronizadas de vazão, sedimentos em suspensão e geoquímica em estações-chave, enquanto a OTCA integra redes hidrometeorológicas operacionais nacionais.",
+              "es": "ORE HYBAM mantiene series científicas estandarizadas de caudal, sedimentos en suspensión y geoquímica en estaciones clave, mientras que la OTCA integra redes hidrometeorológicas operativas nacionales."
+            },
+            {
+              "en": "CHIRPS v2.0 blends thermal-infrared satellite cold-cloud duration with station data at ~5.5 km (0.05°) from 1981 onward, smoothing local extremes where rain gauges are sparse.",
+              "pt-BR": "O CHIRPS v2.0 combina estimativas infravermelhas por satélite com dados de estações em ~5,5 km (0,05°) desde 1981, suavizando extremos locais onde há poucos pluviômetros.",
+              "es": "CHIRPS v2.0 combina estimaciones infrarrojas satelitales con estaciones a ~5,5 km (0,05°) desde 1981, suavizando extremos locales donde hay pocos pluviómetros."
+            },
+            {
+              "en": "Amazon Waters Observatory aggregates fish, fisheries and water observations by sub-basin (BL3/BL4) to protect local fishers and community monitors.",
+              "pt-BR": "O Observatório Águas Amazônicas agrega observações de peixes, pesca e qualidade da água por sub-bacia (BL3/BL4) para proteger pescadores e monitores comunitários.",
+              "es": "El Observatorio Aguas Amazónicas agrega observaciones de peces, pesca y agua por subcuenca (BL3/BL4) para proteger a pescadores y monitores comunitarios."
+            }
+          ],
+          "synthesis": {
+            "en": "Align point river gauges (HYBAM, ACTO) with sub-basin polygons (Amazon Waters) and upstream CHIRPS rainfall anomalies rather than overlaying point coordinates directly onto aggregated community records.",
+            "pt-BR": "Articule estações fluviais pontuais (HYBAM, OTCA) com os polígonos de sub-bacia (Águas Amazônicas) e anomalias de chuva a montante (CHIRPS), evitando sobrepor coordenadas pontuais diretamente a dados comunitários agregados.",
+            "es": "Articula las estaciones fluviales puntuales (HYBAM, OTCA) con los polígonos de subcuenca (Aguas Amazónicas) y las anomalías de lluvia aguas arriba (CHIRPS), evitando superponer coordenadas puntuales directamente sobre registros comunitarios agregados."
+          }
+        }
+      },
+      "records": [
+        {
+          "id": "ore-hybam-observatory",
+          "role": {
+            "en": "Cross-border river gauges",
+            "pt-BR": "Estações fluviais na bacia",
+            "es": "Estaciones fluviales en la cuenca"
+          },
+          "reason": {
+            "en": "Start with standardized discharge, sediment and geochemistry series from the Andes to the Atlantic.",
+            "pt-BR": "Comece por séries padronizadas de vazão, sedimentos e geoquímica dos Andes ao Atlântico.",
+            "es": "Empieza con series estandarizadas de caudal, sedimentos y geoquímica desde los Andes hasta el Atlántico."
+          }
+        },
+        {
+          "id": "acto-amazon-networks-water-module",
+          "role": {
+            "en": "Regional water network",
+            "pt-BR": "Rede hídrica regional",
+            "es": "Red hídrica regional"
+          },
+          "reason": {
+            "en": "Add member-country hydrometeorological and water-quality stations integrated by ACTO/OTCA.",
+            "pt-BR": "Acrescente estações hidrometeorológicas e de qualidade da água dos países-membros integradas pela OTCA.",
+            "es": "Añade estaciones hidrometeorológicas y de calidad del agua de los países miembros integradas por la OTCA."
+          }
+        },
+        {
+          "id": "amazon-waters-observatory",
+          "role": {
+            "en": "Sub-basin aquatic records",
+            "pt-BR": "Registros aquáticos por sub-bacia",
+            "es": "Registros acuáticos por subcuenca"
+          },
+          "reason": {
+            "en": "Add sub-basin fish, fisheries and aquatic-ecosystem monitoring from partner and citizen-science networks.",
+            "pt-BR": "Acrescente monitoramento de peixes, pesca e ecossistemas aquáticos por sub-bacia de redes parceiras e ciência cidadã.",
+            "es": "Añade monitoreo de peces, pesca y ecosistemas acuáticos por subcuenca de redes socias y ciencia ciudadana."
+          }
+        },
+        {
+          "id": "chirps-precipitation",
+          "role": {
+            "en": "Gridded rainfall baseline",
+            "pt-BR": "Série de chuva em grade",
+            "es": "Serie de lluvia en cuadrícula"
+          },
+          "reason": {
+            "en": "Combine station records with long-term gridded precipitation estimates across data-sparse watersheds.",
+            "pt-BR": "Combine registros de estações com estimativas históricas de precipitação em grade em bacias com poucos postos.",
+            "es": "Combina registros de estaciones con estimaciones históricas de precipitación en cuadrícula en cuencas con pocos datos."
+          }
+        }
+      ]
+    },
+    {
+      "id": "guiana-shield-forests-land",
+      "locales": {
+        "shortTitle": {
+          "en": "Guiana Shield forests & land",
+          "pt-BR": "Florestas do Escudo das Guianas",
+          "es": "Bosques del Escudo Guayanés"
+        },
+        "selectorSummary": {
+          "en": "Guyana, Suriname, French Guiana & Venezuela · 4 sources on forest monitoring and land cover.",
+          "pt-BR": "Guiana, Suriname, Guiana Francesa e Venezuela · 4 fontes sobre monitoramento florestal e cobertura do solo.",
+          "es": "Guyana, Surinam, Guayana Francesa y Venezuela · 4 fuentes sobre monitoreo forestal y cobertura del suelo."
+        },
+        "title": {
+          "en": "Explore forest monitoring and land cover across the Guiana Shield",
+          "pt-BR": "Explore monitoramento florestal e cobertura do solo no Escudo das Guianas",
+          "es": "Explora el monitoreo forestal y la cobertura del suelo en el Escudo Guayanés"
+        },
+        "summary": {
+          "en": "A starting set of four public sources covering Guyana, Suriname, French Guiana and Venezuela.",
+          "pt-BR": "Um conjunto inicial de quatro fontes públicas cobrindo Guiana, Suriname, Guiana Francesa e Venezuela.",
+          "es": "Un conjunto inicial de cuatro fuentes públicas que cubren Guyana, Surinam, Guayana Francesa y Venezuela."
+        },
+        "caution": {
+          "en": "National monitoring systems across the Guiana Shield use different reporting cycles, sensor archives and access terms. Review each agency's technical notes and licensing before combining layers across jurisdictions.",
+          "pt-BR": "Os sistemas nacionais de monitoramento no Escudo das Guianas utilizam diferentes ciclos de relatório, acervos de sensores e termos de acesso. Revise as notas técnicas e licenças de cada órgão antes de combinar camadas entre jurisdições.",
+          "es": "Los sistemas nacionales de monitoreo en el Escudo Guayanés utilizan distintos ciclos de reporte, archivos de sensores y condiciones de acceso. Revisa las notas técnicas y licencias de cada organismo antes de combinar capas entre jurisdicciones."
+        },
+        "comparability": {
+          "points": [
+            {
+              "en": "Guyana's MRVS publishes REDD+ national forest-change and driver assessments calibrated with high-resolution satellite and Lidar/field plots since 2009.",
+              "pt-BR": "O MRVS da Guiana publica avaliações nacionais REDD+ de mudança florestal e vetores calibradas com imagens de alta resolução, Lidar e parcelas de campo desde 2009.",
+              "es": "El MRVS de Guyana publica evaluaciones nacionales REDD+ de cambio forestal y motores calibradas con imágenes de alta resolución, Lidar y parcelas de campo desde 2009."
+            },
+            {
+              "en": "Suriname's GONINI (SBB) serves national forest-cover, deforestation and concession layers from 2000 onward under national forestry definitions.",
+              "pt-BR": "O geoportal GONINI (SBB, Suriname) disponibiliza camadas nacionais de cobertura florestal, desmatamento e concessões desde 2000 segundo definições florestais nacionais.",
+              "es": "El geoportal GONINI (SBB, Surinam) ofrece capas nacionales de cobertura forestal, deforestación y concesiones desde 2000 bajo definiciones forestales nacionales."
+            },
+            {
+              "en": "SEAS Guyane provides multi-sensor orbital imagery and coastal/forest products for French Guiana, while MapBiomas Venezuela supplies annual 30 m land-cover classifications (1985–present).",
+              "pt-BR": "O SEAS Guyane fornece imagens orbitais multissensor e produtos costeiros/florestais para a Guiana Francesa, enquanto o MapBiomas Venezuela traz classificações anuais de 30 m (1985–presente).",
+              "es": "SEAS Guyane provee imágenes orbitales multisensor y productos costeros/forestales para Guayana Francesa, mientras que MapBiomas Venezuela aporta clasificaciones anuales de 30 m (1985–presente)."
+            }
+          ],
+          "synthesis": {
+            "en": "Use MRVS, GONINI and SEAS Guyane for jurisdiction-specific forest governance, concessions and high-resolution driver analysis, and pair them with MapBiomas Venezuela/Amazonía for harmonized 30 m cross-border trajectories.",
+            "pt-BR": "Use MRVS, GONINI e SEAS Guyane para análises de governança florestal, concessões e vetores de alta resolução em cada jurisdição, combinando-os com o MapBiomas Venezuela/Amazônia para trajetórias transfronteiriças harmonizadas em 30 m.",
+            "es": "Usa MRVS, GONINI y SEAS Guyane para análisis de gobernanza forestal, concesiones y motores de alta resolución en cada jurisdicción, combinándolos con MapBiomas Venezuela/Amazonía para trayectorias transfronterizas armonizadas a 30 m."
+          }
+        }
+      },
+      "records": [
+        {
+          "id": "guyana-mrvs",
+          "role": {
+            "en": "Guyana MRVS assessments",
+            "pt-BR": "Avaliações MRVS da Guiana",
+            "es": "Evaluaciones MRVS de Guyana"
+          },
+          "reason": {
+            "en": "Review Guyana's annual forest-change, carbon and driver assessments published through the national MRVS.",
+            "pt-BR": "Consulte as avaliações anuais de mudança florestal, carbono e vetores publicadas pelo MRVS da Guiana.",
+            "es": "Consulta las evaluaciones anuales de cambio forestal, carbono y motores publicadas por el MRVS de Guyana."
+          }
+        },
+        {
+          "id": "gonini-suriname-land-monitoring",
+          "role": {
+            "en": "Suriname land monitoring",
+            "pt-BR": "Monitoramento do solo no Suriname",
+            "es": "Monitoreo del suelo en Surinam"
+          },
+          "reason": {
+            "en": "Explore Suriname's national land-monitoring geoportal and forest-cover layers maintained by SBB.",
+            "pt-BR": "Explore o geoportal nacional de monitoramento do solo e as camadas florestais mantidas pela SBB no Suriname.",
+            "es": "Explora el geoportal nacional de monitoreo territorial y las capas forestales mantenidas por SBB en Surinam."
+          }
+        },
+        {
+          "id": "seas-guyane-satellite-data",
+          "role": {
+            "en": "French Guiana satellite archive",
+            "pt-BR": "Acervo orbital da Guiana Francesa",
+            "es": "Archivo satelital de Guayana Francesa"
+          },
+          "reason": {
+            "en": "Add multi-sensor satellite imagery and territorial monitoring products from SEAS Guyane.",
+            "pt-BR": "Acrescente imagens de satélite multissensor e produtos de monitoramento territorial do SEAS Guyane.",
+            "es": "Añade imágenes satelitales multisensor y productos de monitoreo territorial de SEAS Guyane."
+          }
+        },
+        {
+          "id": "mapbiomas-venezuela-land-cover",
+          "role": {
+            "en": "Venezuela land-cover series",
+            "pt-BR": "Série de uso do solo na Venezuela",
+            "es": "Serie de uso del suelo en Venezuela"
+          },
+          "reason": {
+            "en": "Add annual 30 m land-cover maps and transition statistics for Venezuelan Amazon and Guiana Shield watersheds.",
+            "pt-BR": "Acrescente mapas anuais de 30 m de uso do solo e estatísticas de transição para a Amazônia e Guayana venezuelana.",
+            "es": "Añade mapas anuales de 30 m de uso del suelo y estadísticas de transición para la Amazonía y Guayana venezolana."
+          }
+        }
+      ]
+    }
+  ]
+}

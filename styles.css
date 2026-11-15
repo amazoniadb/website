@@ -143,6 +143,14 @@ h2 { margin-bottom: 0; font-family: Georgia, "Times New Roman", serif; color: va
 .research-path-panel h3 { margin: 0 0 8px; color: var(--forest); font-family: Georgia, serif; font-size: 1.45rem; font-weight: 500; line-height: 1.1; letter-spacing: -0.025em; }
 .research-path-panel p { max-width: 780px; margin: 0; color: var(--quiet); font-size: 0.9rem; line-height: 1.5; }
 .research-path-panel .research-caution { margin-top: 10px; font-size: 0.8rem; }
+.research-comparability { max-width: 780px; margin-top: 12px; }
+.research-comparability summary { display: inline-flex; min-height: 38px; align-items: center; gap: 7px; color: var(--forest); font-size: 0.8rem; font-weight: 740; cursor: pointer; list-style: none; }
+.research-comparability summary::-webkit-details-marker { display: none; }
+.research-comparability summary::before { content: "›"; color: var(--focus); font-size: 1.15rem; line-height: 1; transform: rotate(0deg); transition: transform 140ms ease; }
+.research-comparability[open] summary::before { transform: rotate(90deg); }
+.research-comparability-body { display: grid; gap: 8px; margin-top: 4px; border-left: 2px solid var(--moss); border-radius: 0 8px 8px 0; padding: 10px 13px; background: var(--surface); }
+.research-comparability-body ul { display: grid; gap: 6px; margin: 0; padding: 0 0 0 16px; color: var(--quiet); font-size: 0.79rem; line-height: 1.46; }
+.research-comparability-synthesis { margin: 2px 0 0 !important; border-top: 1px solid var(--line); padding-top: 8px; color: var(--ink) !important; font-size: 0.79rem !important; font-weight: 620; line-height: 1.46 !important; }
 .research-path-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; }
 .filters { display: grid; grid-template-columns: minmax(230px, 2fr) repeat(3, minmax(140px, 1fr)) auto; gap: 11px; align-items: end; margin-bottom: 27px; padding-bottom: 25px; border-bottom: 1px solid var(--line); }
 .filters label { display: grid; gap: 6px; color: var(--quiet); font-size: 0.77rem; font-weight: 720; }
