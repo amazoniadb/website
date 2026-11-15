@@ -319,7 +319,13 @@ const runExplorerSmokeTest = async (page, browserData) => {
   if (renderedDetailIcons !== expectedDetailIcons) fail(`${page.file}: every visible source fact must use the shared compact icon system.`);
   const compactFactMatches = [...elements["dataset-grid"].innerHTML.matchAll(/<li data-fact="(?:timeframe|resolution)"[^>]*><span class="detail-icon"[^>]*>[\s\S]*?<\/span><span(?: title="[^"]*")?>([^<]*)<\/span><\/li>/g)];
   const expectedCompactFacts = browserData.AMAZONIA_CATALOG.reduce((total, record) => total + [record.temporalCoverage, record.spatialResolution].filter(Boolean).length, 0);
-  const decodeHtml = (value) => value.replaceAll("&amp;", "&").replaceAll("&quot;", '"').replaceAll("&#39;", "'").replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+  const decodeHtml = (value) => value
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#039;", "'")
+    .replaceAll("&#39;", "'")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;", "&");
   if (compactFactMatches.length !== expectedCompactFacts || compactFactMatches.some((match) => [...decodeHtml(match[1])].length > 44)) {
     fail(`${page.file}: visible timeframe and resolution summaries must stay concise while full values remain accessible.`);
   }
@@ -469,7 +475,7 @@ const runExplorerSmokeTest = async (page, browserData) => {
   location.hash = "";
   history.replacements = [];
   vm.runInNewContext(await read(page.app), context, { filename: `${page.app}:sort-url` });
-  const sortedTitles = [...elements["dataset-grid"].innerHTML.matchAll(/<h3 id="source-[^"]+-title">([^<]+)<\/h3>/g)].map((m) => decodeHtml(m[1]).replaceAll("&#039;", "'"));
+  const sortedTitles = [...elements["dataset-grid"].innerHTML.matchAll(/<h3 id="source-[^"]+-title">([^<]+)<\/h3>/g)].map((m) => decodeHtml(m[1]));
   const expectedSortedTitles = [...browserData.AMAZONIA_CATALOG].map((r) => r.title).sort((a, b) => a.localeCompare(b, page.locale));
   if (JSON.stringify(sortedTitles) !== JSON.stringify(expectedSortedTitles) || !history.replacements.at(-1)?.includes("sort=title")) {
     fail(`${page.file}: ?sort=title must order all catalog records alphabetically and preserve the sort parameter.`);
