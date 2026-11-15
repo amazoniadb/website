@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+title: "AmazoniaDB: Independent Public-Interest Directory of Amazon Socioenvironmental Data"
+message: "If you use AmazoniaDB to discover, compare, or assemble socioenvironmental sources, please cite the original data providers first and cite AmazoniaDB using this metadata."
+type: dataset
+authors:
+  - name: "AmazoniaDB"
+    website: "https://amazoniadb.org/"
+    email: "contato@amazoniadb.org"
+repository-code: "https://github.com/amazoniadb/website"
+url: "https://amazoniadb.org/"
+abstract: "A trilingual (Portuguese, English, Spanish), public-interest index of 100 human-reviewed socioenvironmental datasets, geoportals, and monitoring platforms across all nine jurisdictions of the Amazon basin, with explicit access-evidence URLs, technical documentation links, spatial/temporal metadata, responsible-use guidance, and cross-border methodological comparability briefs."
+keywords:
+  - Amazonia
+  - socioenvironmental data
+  - remote sensing
+  - deforestation monitoring
+  - Indigenous territories
+  - biodiversity
+  - hydrology
+  - open data directory
+license: MIT
+version: "1.12.0"
+date-released: "2026-11-15"

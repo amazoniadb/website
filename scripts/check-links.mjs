@@ -97,10 +97,13 @@ const stale = catalog
   .filter((r) => Number.isFinite(r.daysSince) && r.daysSince > STALE_DAYS)
   .sort((a, b) => b.daysSince - a.daysSince);
 
+const waybackUrl = (url) => `https://web.archive.org/web/*/${url}`;
+
 console.log(`Checked ${results.length} links: ${broken.length} broken, ${manual.length} need a manual browser review.`);
 for (const r of results) {
   const state = r.ok ? "OK " : needsManualReview(r) ? "CHECK" : "BAD";
-  console.log(`  ${state} ${r.id} (${r.type}): ${r.status ?? r.error}`);
+  const fallback = r.ok ? "" : ` — archive fallback: ${waybackUrl(r.url)}`;
+  console.log(`  ${state} ${r.id} (${r.type}): ${r.status ?? r.error}${fallback}`);
 }
 console.log(`${stale.length} record(s) haven't been reverified in over ${STALE_DAYS} days.`);
 for (const r of stale) {
@@ -110,10 +113,10 @@ for (const r of stale) {
 const ghOutput = process.env.GITHUB_OUTPUT;
 if (ghOutput) {
   const brokenBody = broken
-    .map((r) => `- **${r.title}** — ${r.type} (\`${r.id}\`): ${r.url} — ${r.status ? `HTTP ${r.status}` : r.error}`)
+    .map((r) => `- **${r.title}** — ${r.type} (\`${r.id}\`): ${r.url} — ${r.status ? `HTTP ${r.status}` : r.error} ([Internet Archive fallback](${waybackUrl(r.url)}))`)
     .join("\n");
   const manualBody = manual
-    .map((r) => `- **${r.title}** — ${r.type} (\`${r.id}\`): ${r.url} — ${r.status ? `HTTP ${r.status}` : r.error}`)
+    .map((r) => `- **${r.title}** — ${r.type} (\`${r.id}\`): ${r.url} — ${r.status ? `HTTP ${r.status}` : r.error} ([Internet Archive fallback](${waybackUrl(r.url)}))`)
     .join("\n");
   const staleBody = stale
     .map((r) => `- **${r.title}** (\`${r.id}\`): last checked ${r.checked} — ${r.daysSince} days ago`)

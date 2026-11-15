@@ -123,7 +123,7 @@ const runExplorerSmokeTest = async (page, browserData) => {
     "search", "coverage", "topic", "role", "access", "mode", "time-profile", "sort-by", "more-filters", "more-filter-count", "filters", "discover-source", "discovery-result",
     "catalog", "copy-view-link", "catalog-more", "show-more-sources", "research-path-panel", "open-research-path", "research-path-choice",
     "next-research-path", "research-path-summary", "research-path-position", "source-set-panel", "source-set-summary", "source-set-items",
-    "source-set-caution", "source-set-status", "copy-source-set", "download-source-set", "clear-source-set",
+    "source-set-caution", "source-set-status", "copy-source-set", "download-source-set", "download-source-set-bibtex", "clear-source-set",
     "active-filters", "coverage-strip"
   ];
   const elements = Object.fromEntries(ids.map((id) => [id, makeElement()]));
@@ -220,6 +220,12 @@ const runExplorerSmokeTest = async (page, browserData) => {
   for (const requiredCsvText of ['"exportedAt"', '"sourceSetUrl"', '"description"', '"accessUrl"', '"protocolUrl"', '"communityAuthorityUrl"', '"ana-hidroweb"']) {
     if (!exportedCsv.includes(requiredCsvText)) fail(`${page.file}: source-set CSV is missing ${requiredCsvText}.`);
   }
+  downloadedBlob = null;
+  elements["download-source-set-bibtex"].listener("click")?.();
+  const exportedBibtex = downloadedBlob ? await downloadedBlob.text() : "";
+  for (const requiredBibtexText of ["@misc{amazoniadb_source_set,", "@misc{ana-hidroweb,", "author = {{Agência Nacional de Águas e Saneamento Básico (ANA)}}", "Documentation:"]) {
+    if (!exportedBibtex.includes(requiredBibtexText)) fail(`${page.file}: source-set BibTeX is missing ${requiredBibtexText}.`);
+  }
   const structuredScript = head.children.find((node) => node.type === "application/ld+json");
   const structuredData = structuredScript?.textContent ? JSON.parse(structuredScript.textContent) : null;
   const structuredTypes = new Set((structuredData?.["@graph"] || []).map((item) => item["@type"]));
@@ -313,7 +319,13 @@ const runExplorerSmokeTest = async (page, browserData) => {
   if (renderedDetailIcons !== expectedDetailIcons) fail(`${page.file}: every visible source fact must use the shared compact icon system.`);
   const compactFactMatches = [...elements["dataset-grid"].innerHTML.matchAll(/<li data-fact="(?:timeframe|resolution)"[^>]*><span class="detail-icon"[^>]*>[\s\S]*?<\/span><span(?: title="[^"]*")?>([^<]*)<\/span><\/li>/g)];
   const expectedCompactFacts = browserData.AMAZONIA_CATALOG.reduce((total, record) => total + [record.temporalCoverage, record.spatialResolution].filter(Boolean).length, 0);
-  const decodeHtml = (value) => value.replaceAll("&amp;", "&").replaceAll("&quot;", '"').replaceAll("&#39;", "'").replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+  const decodeHtml = (value) => value
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#039;", "'")
+    .replaceAll("&#39;", "'")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;", "&");
   if (compactFactMatches.length !== expectedCompactFacts || compactFactMatches.some((match) => [...decodeHtml(match[1])].length > 44)) {
     fail(`${page.file}: visible timeframe and resolution summaries must stay concise while full values remain accessible.`);
   }
@@ -391,6 +403,9 @@ const runExplorerSmokeTest = async (page, browserData) => {
     if (guidedRecords !== expectedOrder.length || JSON.stringify(guidedOrder) !== JSON.stringify(expectedOrder) || elements["research-path-panel"].hidden) {
       fail(`${page.file}: a guided path must show its reviewed sources in the declared order with a visible caution panel.`);
     }
+    if (!elements["research-path-panel"].innerHTML.includes('class="research-comparability"')) {
+      fail(`${page.file}: a guided path must render its methodological comparability brief (${guidedPath.id}).`);
+    }
     if (!history.replacements.at(-1)?.includes(`path=${guidedPath.id}`) || history.replacements.at(-1).includes("coverage=")) {
       fail(`${page.file}: a guided path must normalize conflicting filters while preserving the path.`);
     }
@@ -460,7 +475,7 @@ const runExplorerSmokeTest = async (page, browserData) => {
   location.hash = "";
   history.replacements = [];
   vm.runInNewContext(await read(page.app), context, { filename: `${page.app}:sort-url` });
-  const sortedTitles = [...elements["dataset-grid"].innerHTML.matchAll(/<h3 id="source-[^"]+-title">([^<]+)<\/h3>/g)].map((m) => decodeHtml(m[1]).replaceAll("&#039;", "'"));
+  const sortedTitles = [...elements["dataset-grid"].innerHTML.matchAll(/<h3 id="source-[^"]+-title">([^<]+)<\/h3>/g)].map((m) => decodeHtml(m[1]));
   const expectedSortedTitles = [...browserData.AMAZONIA_CATALOG].map((r) => r.title).sort((a, b) => a.localeCompare(b, page.locale));
   if (JSON.stringify(sortedTitles) !== JSON.stringify(expectedSortedTitles) || !history.replacements.at(-1)?.includes("sort=title")) {
     fail(`${page.file}: ?sort=title must order all catalog records alphabetically and preserve the sort parameter.`);
@@ -562,7 +577,7 @@ for (const page of homePages) {
   if (/how-it-works|principles-section|We index|Nós indexamos|Indexamos\./i.test(html)) {
     fail(`${page.file}: the removed self-explainer section or one of its links has returned.`);
   }
-  for (const id of ["domain-nav", "discover-source", "dataset-grid", "catalog-more", "show-more-sources", "topic", "role", "access", "mode", "time-profile", "more-filters", "more-filter-count", "research-path-panel", "open-research-path", "research-path-choice", "next-research-path", "research-path-summary", "research-path-position", "source-set-panel", "source-set-summary", "source-set-items", "source-set-caution", "source-set-status", "copy-source-set", "download-source-set", "clear-source-set"]) {
+  for (const id of ["domain-nav", "discover-source", "dataset-grid", "catalog-more", "show-more-sources", "topic", "role", "access", "mode", "time-profile", "more-filters", "more-filter-count", "research-path-panel", "open-research-path", "research-path-choice", "next-research-path", "research-path-summary", "research-path-position", "source-set-panel", "source-set-summary", "source-set-items", "source-set-caution", "source-set-status", "copy-source-set", "download-source-set", "download-source-set-bibtex", "clear-source-set"]) {
     if (!new RegExp(`id=["']${id}["']`).test(html)) fail(`${page.file}: missing #${id}.`);
   }
   const prefix = page.file.includes("/") ? "../" : "";
@@ -707,6 +722,13 @@ for (const path of researchPaths || []) {
     if ([...(path.locales?.shortTitle?.[locale] || "")].length > 34) {
       fail(`research path ${path.id}: ${locale} shortTitle exceeds the 34-character selector limit.`);
     }
+    const compPoints = path.locales?.comparability?.points;
+    if (!Array.isArray(compPoints) || compPoints.length < 3 || compPoints.some((point) => !point?.[locale])) {
+      fail(`research path ${path.id}: comparability.points needs at least three localized points for ${locale}.`);
+    }
+    if (!path.locales?.comparability?.synthesis?.[locale]) {
+      fail(`research path ${path.id}: comparability.synthesis is missing ${locale} copy.`);
+    }
   }
   for (const entry of path.records || []) {
     const record = catalogById.get(entry.id);
@@ -753,6 +775,35 @@ if (api.$schema) fail("api/v1/catalog.json: record schema must not be used as an
 if (api.source !== "https://amazoniadb.org/" || api.recordSchema !== "https://amazoniadb.org/data/catalog.schema.json") fail("api/v1/catalog.json: canonical source or recordSchema is missing or incorrect.");
 if (api.count !== catalog.length || !Array.isArray(api.records) || api.records.length !== catalog.length) fail("api/v1/catalog.json: count and records must match data/catalog.js.");
 if (JSON.stringify(api.records) !== JSON.stringify(catalog)) fail("api/v1/catalog.json: record content or order does not match data/catalog.js.");
+
+const pathsApi = JSON.parse(await read("api/v1/research-paths.json"));
+if (pathsApi.apiVersion !== 1 || pathsApi.source !== "https://amazoniadb.org/") fail("api/v1/research-paths.json: apiVersion and canonical source must be set.");
+if (pathsApi.count !== researchPaths.length || JSON.stringify(pathsApi.paths) !== JSON.stringify(researchPaths)) {
+  fail("api/v1/research-paths.json: paths content or order does not match data/research-paths.js.");
+}
+
+const llmsTxt = await read("llms.txt");
+if (!llmsTxt.startsWith("# AmazoniaDB") || !/^-\s+Catalog JSON API[^\n]*\/api\/v1\/catalog\.json$/m.test(llmsTxt) || !/^-\s+Guided Research Paths JSON API[^\n]*\/api\/v1\/research-paths\.json$/m.test(llmsTxt) || !/^-\s+Citation File Format[^\n]*\/CITATION\.cff$/m.test(llmsTxt)) {
+  fail("llms.txt: missing required canonical headers or endpoint declarations.");
+}
+for (const record of catalog) {
+  if (!llmsTxt.includes(`(\`${record.id}\`)`)) fail(`llms.txt: missing catalog record ${record.id}.`);
+}
+
+const citationCff = await read("CITATION.cff");
+if (!citationCff.includes("cff-version: 1.2.0") || !/^url:\s*"https:\/\/amazoniadb\.org\/"$/m.test(citationCff)) {
+  fail("CITATION.cff: missing cff-version 1.2.0 or canonical URL.");
+}
+
+const webManifest = JSON.parse(await read("manifest.webmanifest"));
+if (webManifest.short_name !== "AmazoniaDB" || webManifest.start_url !== "/") {
+  fail("manifest.webmanifest: short_name and start_url must be configured.");
+}
+
+const serviceWorker = await read("sw.js");
+for (const coreAsset of ["/api/v1/catalog.json", "/api/v1/research-paths.json", "/data/catalog.js", "/data/research-paths.js"]) {
+  if (!serviceWorker.includes(`"${coreAsset}"`)) fail(`sw.js: must cache ${coreAsset} for offline resilience.`);
+}
 
 await Promise.all(homePages.map((page) => runExplorerSmokeTest(page, browserData)));
 

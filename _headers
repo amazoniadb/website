@@ -11,3 +11,19 @@
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Methods: GET, HEAD, OPTIONS
   Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+/llms.txt
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+/CITATION.cff
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Content-Type: text/yaml; charset=utf-8
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+/data/catalog.schema.json
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400

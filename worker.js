@@ -29,11 +29,18 @@ const securityHeaders = {
   "X-Frame-Options": "DENY"
 };
 
-const isPublicApi = (pathname) => pathname.startsWith("/api/v1/");
+const isPublicApi = (pathname) =>
+  pathname.startsWith("/api/v1/")
+  || pathname === "/llms.txt"
+  || pathname === "/CITATION.cff"
+  || pathname === "/data/catalog.schema.json";
 
 const responseHeaders = (response, pathname) => {
   const headers = new Headers(response.headers);
   for (const [name, value] of Object.entries(securityHeaders)) headers.set(name, value);
+  if (pathname === "/CITATION.cff") {
+    headers.set("Content-Type", "text/yaml; charset=utf-8");
+  }
   if (isPublicApi(pathname)) {
     headers.set("Access-Control-Allow-Origin", "*");
     headers.set("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");

@@ -1,0 +1,846 @@
+# AmazoniaDB — Find Amazon Socioenvironmental Data at the Source
+
+> AmazoniaDB (https://amazoniadb.org/) is an independent, public-interest directory of 100 human-reviewed socioenvironmental datasets, geoportals, and monitoring platforms across the nine jurisdictions of the Amazon basin (Brazil, Peru, Colombia, Bolivia, Ecuador, Venezuela, Guyana, Suriname, and French Guiana). AmazoniaDB is an index, not a repository: data remain with their original publishers.
+
+## Canonical Machine-Readable Endpoints
+- Catalog JSON API (v1, 100 records): https://amazoniadb.org/api/v1/catalog.json
+- Guided Research Paths JSON API (v1, 8 paths): https://amazoniadb.org/api/v1/research-paths.json
+- Catalog JSON Schema (Draft 2020-12): https://amazoniadb.org/data/catalog.schema.json
+- Citation File Format (CFF 1.2.0): https://amazoniadb.org/CITATION.cff
+- Portuguese (pt-BR) Explorer: https://amazoniadb.org/
+- English (en) Explorer: https://amazoniadb.org/en/
+- Spanish (es-419) Explorer: https://amazoniadb.org/es/
+
+## Citation & Responsible-Use Rules for Researchers and AI Systems
+1. **Cite the original provider first**: Always cite the primary institution (`provider`), official dataset (`url`), methodology (`methodologyUrl`), and access terms (`accessUrl`). Cite AmazoniaDB as the discovery and methodological index.
+2. **Respect data sovereignty and community authority**: Publicly available territorial polygons, species occurrences, and socioenvironmental indicators are not blanket permission to make claims about Indigenous Peoples, traditional communities, or local tenure.
+3. **Do not conflate methodologies across borders or sensors**: Check minimum mapping units, temporal baselines (e.g., August–July PRODES year vs. calendar-year MapBiomas), and administrative stages before aggregating numbers.
+4. **Never expose sensitive locations**: Do not combine records to pinpoint threatened species, isolated peoples, or non-public community sites.
+
+## Guided Research Paths & Cross-Border Methodological Comparability (8 Paths)
+
+### Explore forest change around a territory in Brazil (`?path=forest-change-territory-brazil`)
+- **Scope**: Brazil · 4 sources on territory boundaries, land cover, forest loss and fire.
+- **Explorer URL**: https://amazoniadb.org/en/?path=forest-change-territory-brazil#catalog
+- **Sources**: `funai-terras-indigenas` (Published boundary), `mapbiomas-brasil` (Land-cover context), `inpe-terrabrasilis` (Forest loss and alerts), `inpe-bdqueimadas` (Fire context)
+- **Comparability**: INPE PRODES maps cumulative primary-forest clear-cutting (>6.25 ha) for an August–July reference year, whereas DETER issues rapid operational alerts (>3 ha) for enforcement that are not official annual area totals.
+- **Comparability**: MapBiomas Brasil classifies all land-cover and land-use transitions pixel-by-pixel at 30 m per calendar year (Jan–Dec), including secondary regrowth and non-forest native vegetation.
+- **Comparability**: BDQueimadas records active thermal anomalies at satellite overpass time (375 m–1 km), indicating heat sources rather than burned area Scar polygons, and FUNAI polygons reflect published administrative stages.
+- **Synthesis**: Use PRODES for official primary-forest loss baselines, MapBiomas for multi-decade land-use transitions and regrowth, and DETER/BDQueimadas for seasonal pressure timing around published FUNAI boundaries.
+- **Caution**: This is a starting set, not a finding or an automatic analysis. Check methods, dates, terms and local knowledge before drawing conclusions. Public territory data is not blanket permission to make claims about people or places.
+
+### Explore river and rainfall conditions in a basin in Brazil (`?path=water-basin-brazil`)
+- **Scope**: Brazil · 3 sources on rivers, rainfall, weather stations and land cover.
+- **Explorer URL**: https://amazoniadb.org/en/?path=water-basin-brazil#catalog
+- **Sources**: `ana-hidroweb` (River gauges), `inmet-bdmep` (Weather stations), `mapbiomas-brasil` (Land-cover context)
+- **Comparability**: ANA HidroWeb gauge series combine raw telemetric readings and historical audited ('consistido') level/discharge records; stage-discharge rating curves shift with riverbed changes.
+- **Comparability**: INMET BDMEP weather stations are sparse across Amazonian headwaters and record point meteorological conditions that may miss localized convective rainfall cells.
+- **Comparability**: MapBiomas annual 30 m land-cover composites summarize each calendar year, whereas hydrological extremes follow seasonal flood pulses (cheia/vazante) across upstream drainage areas.
+- **Synthesis**: Verify whether ANA station records are raw or quality-controlled, pair them with upstream watershed boundaries rather than municipal borders, and treat MapBiomas land-cover trends as long-term basin context.
+- **Caution**: Station records describe where and when instruments operated. Do not treat gaps as conditions across an entire basin; check methods, dates, terms and local knowledge before drawing conclusions.
+
+### Explore biodiversity records available for a region in Brazil (`?path=biodiversity-records-brazil`)
+- **Scope**: Brazil · 3 sources on species records, research networks and protected areas.
+- **Explorer URL**: https://amazoniadb.org/en/?path=biodiversity-records-brazil#catalog
+- **Sources**: `specieslink-network` (Occurrence records), `ppbio-brazil-biodiversity-research` (Research-network context), `cnuc-unidades-conservacao` (Protected-area context)
+- **Comparability**: speciesLink aggregates museum and herbarium vouchers collected opportunistically over decades, so record density strongly reflects proximity to rivers, roads and research institutions.
+- **Comparability**: PPBio sites use standardized RAPELD plots and transects with documented sampling effort, allowing abundance and richness comparisons within monitored grids.
+- **Comparability**: CNUC boundaries represent legal conservation-unit designations (strict protection vs. sustainable use) and vary in date of decree, management plan status and field survey coverage.
+- **Synthesis**: Never interpret low voucher density in speciesLink as biological absence; pair museum records with PPBio standardized sampling plots and CNUC legal boundaries to separate sampling bias from protection status.
+- **Caution**: Available records are not a complete account of life in a place. Respect location precision, licenses and collection context; never turn public records into directions to sensitive species or sites.
+
+### Explore public environmental-pressure records for a municipality in Brazil (`?path=environmental-pressure-municipality-brazil`)
+- **Scope**: Brazil · 4 sources on forest monitoring, fire, enforcement and municipal indicators.
+- **Explorer URL**: https://amazoniadb.org/en/?path=environmental-pressure-municipality-brazil#catalog
+- **Sources**: `inpe-terrabrasilis` (Forest monitoring), `inpe-bdqueimadas` (Fire context), `ibama-fiscalizacao-dados-abertos` (Environmental enforcement), `ibge-cidades` (Municipal context)
+- **Comparability**: IBAMA open records reflect federal administrative actions (notices of infraction and embargoed areas) whose volume depends on inspection operations and legal review stages.
+- **Comparability**: TerraBrasilis (PRODES/DETER) and BDQueimadas measure physical satellite detections across the municipality regardless of land tenure or jurisdictional competence.
+- **Comparability**: IBGE Cidades indicators mix decennial census baselines (2010/2022) with annual municipal estimates (GDP, population, agricultural production) that follow distinct reference periods.
+- **Synthesis**: Compare satellite detections (TerraBrasilis, BDQueimadas) with IBAMA records to understand how physical pressures relate to federal inspection presence, not as a direct ratio of legality.
+- **Caution**: Public records can be incomplete and reflect reporting or enforcement practices. They are not proof of responsibility or a complete map of harm; check methods, dates, terms and local context before making claims.
+
+### Explore cross-border forest change and extractive pressures across the Amazon (`?path=pan-amazon-forest-mining-pressures`)
+- **Scope**: Pan-Amazon · 4 sources on regional territories, land cover, mining scars and active fire.
+- **Explorer URL**: https://amazoniadb.org/en/?path=pan-amazon-forest-mining-pressures#catalog
+- **Sources**: `raisg-maps` (Regional territorial context), `mapbiomas-amazonia` (Basin-wide land cover), `amazon-mining-watch` (Mining-scar detections), `nasa-firms-active-fire` (Active-fire detections)
+- **Comparability**: RAISG harmonizes Indigenous territories and protected areas across 9 jurisdictions where recognition status (titled, demarcated, claimed, reserve) carries different national legal meanings.
+- **Comparability**: MapBiomas Amazonía applies a unified 30 m Landsat annual legend across the basin (1985–present), whereas Amazon Mining Watch uses Sentinel-2 machine-learning models (~10 m, 2018+) focused on open-pit scars.
+- **Comparability**: NASA FIRMS combines 375 m VIIRS and 1 km MODIS active-fire pixels; persistent industrial flares or sun-glint on water/sandbanks must be filtered using confidence flags.
+- **Synthesis**: Use MapBiomas Amazonía for long-term basin-wide land-cover baselines, cross-check mining footprints between MapBiomas and Amazon Mining Watch from 2018 onward, and inspect RAISG attribute tables for country-specific legal tenure.
+- **Caution**: Cross-border layers harmonize national sources with different legal regimes, update dates and detection thresholds. Remote-sensing detections and mapped boundaries are context, not proof of legality, ownership or community consent.
+
+### Compare forest and land-use monitoring across Andean-Amazon countries (`?path=andean-amazon-forests-territories`)
+- **Scope**: Colombia, Peru, Bolivia & Ecuador · 4 national forest and land-cover monitoring systems.
+- **Explorer URL**: https://amazoniadb.org/en/?path=andean-amazon-forests-territories#catalog
+- **Sources**: `ideam-smbyc` (Colombia forest monitoring), `geobosques-national-forest-monitoring-platform` (Peru forest loss & alerts), `simb-bolivia-forest-monitor` (Bolivia forest geovisor), `mapbiomas-ecuador-land-cover` (Ecuador land-cover series)
+- **Comparability**: Colombia's IDEAM SMBYC tracks natural forest/non-forest cover and quarterly early-warning bulletins from 1990 onward using national canopy-cover and minimum-area definitions.
+- **Comparability**: Peru's Geobosques (MINAM) reports annual humid-forest loss from a 2001 baseline alongside weekly GLAD/optical-radar early-warning alerts for rapid field verification.
+- **Comparability**: Bolivia's SIMB integrates multi-sensor forest and fire layers since 2000 under national administrative criteria, while MapBiomas Ecuador provides annual 30 m multi-class transitions (1985–present).
+- **Synthesis**: Cite each national platform (IDEAM, Geobosques, SIMB) when reporting official domestic statistics or policy compliance, and pair them with MapBiomas Amazonía when a single harmonized cross-border legend is required.
+- **Caution**: Each country defines forest baselines, minimum mapping units and alert cadences differently. Compare national methodologies before aggregating figures across borders.
+
+### Explore rivers, rainfall and aquatic ecosystems across the Amazon basin (`?path=pan-amazon-rivers-waters-climate`)
+- **Scope**: Pan-Amazon · 4 sources on cross-border river gauges, sediments, rainfall and aquatic ecosystems.
+- **Explorer URL**: https://amazoniadb.org/en/?path=pan-amazon-rivers-waters-climate#catalog
+- **Sources**: `ore-hybam-observatory` (Cross-border river gauges), `acto-amazon-networks-water-module` (Regional water network), `amazon-waters-observatory` (Sub-basin aquatic records), `chirps-precipitation` (Gridded rainfall baseline)
+- **Comparability**: ORE HYBAM curates research-grade discharge, suspended-sediment and geochemical series at key mainstem and tributary stations, whereas ACTO/OTCA aggregates operational national gauge networks.
+- **Comparability**: CHIRPS v2.0 blends thermal-infrared satellite cold-cloud duration with station data at ~5.5 km (0.05°) from 1981 onward, smoothing local extremes where rain gauges are sparse.
+- **Comparability**: Amazon Waters Observatory aggregates fish, fisheries and water observations by sub-basin (BL3/BL4) to protect local fishers and community monitors.
+- **Synthesis**: Align point river gauges (HYBAM, ACTO) with sub-basin polygons (Amazon Waters) and upstream CHIRPS rainfall anomalies rather than overlaying point coordinates directly onto aggregated community records.
+- **Caution**: Gauge density and record periods vary across countries and tributaries, and community aquatic observations are aggregated by sub-basin to protect local contributors. Check station metadata and aggregation rules before comparing sub-basins.
+
+### Explore forest monitoring and land cover across the Guiana Shield (`?path=guiana-shield-forests-land`)
+- **Scope**: Guyana, Suriname, French Guiana & Venezuela · 4 sources on forest monitoring and land cover.
+- **Explorer URL**: https://amazoniadb.org/en/?path=guiana-shield-forests-land#catalog
+- **Sources**: `guyana-mrvs` (Guyana MRVS assessments), `gonini-suriname-land-monitoring` (Suriname land monitoring), `seas-guyane-satellite-data` (French Guiana satellite archive), `mapbiomas-venezuela-land-cover` (Venezuela land-cover series)
+- **Comparability**: Guyana's MRVS publishes REDD+ national forest-change and driver assessments calibrated with high-resolution satellite and Lidar/field plots since 2009.
+- **Comparability**: Suriname's GONINI (SBB) serves national forest-cover, deforestation and concession layers from 2000 onward under national forestry definitions.
+- **Comparability**: SEAS Guyane provides multi-sensor orbital imagery and coastal/forest products for French Guiana, while MapBiomas Venezuela supplies annual 30 m land-cover classifications (1985–present).
+- **Synthesis**: Use MRVS, GONINI and SEAS Guyane for jurisdiction-specific forest governance, concessions and high-resolution driver analysis, and pair them with MapBiomas Venezuela/Amazonía for harmonized 30 m cross-border trajectories.
+- **Caution**: National monitoring systems across the Guiana Shield use different reporting cycles, sensor archives and access terms. Review each agency's technical notes and licensing before combining layers across jurisdictions.
+
+## Curated Dataset Directory (100 Reviewed Sources)
+
+### Forest & biodiversity (19 sources)
+
+- **GBIF Species Occurrence Data** (`gbif-species-occurrences`) — *Global Biodiversity Information Facility (GBIF)*
+  - Coverage: Global — subsettable | Kind: Data portal | Timeframe: Museum specimens to present (continuously updated) | Resolution: Point occurrence records; accuracy varies per record
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://www.gbif.org/
+  - Documentation URL: https://techdocs.gbif.org/en/data-processing/
+  - Access Evidence URL: https://www.gbif.org/terms
+  - Description: A global aggregator of species occurrence records — museum specimens, citizen-science observations, and survey data — searchable and filterable to the Amazon basin.
+  - Responsible Use: Exact occurrence locations can expose sensitive species or local knowledge. Check geoprivacy and provider terms before republishing coordinates.
+- **speciesLink Network** (`specieslink-network`) — *CRIA (Centro de Referência em Informação Ambiental)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: 2002–present (continuously updated) | Resolution: Point occurrence records; accuracy varies per record
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://specieslink.net/
+  - Documentation URL: https://specieslink.net/search/docs/manual-busca-specieslink-pt.pdf
+  - Access Evidence URL: https://specieslink.net/data_sharing_policy
+  - Description: A Brazilian biodiversity data network aggregating occurrence records for plants, animals, fungi, and microorganisms, enriched with images and land-use context for each collection site.
+  - Responsible Use: Exact occurrence locations can expose sensitive species or local knowledge. Check geoprivacy and provider terms before republishing coordinates.
+- **Wall-to-Wall Amazon Canopy Height Map** (`amazon-canopy-height-nicfi-lidar`) — *CTrees, in collaboration with Planet Labs NICFI program*
+  - Coverage: Pan-Amazon | Kind: Dataset | Timeframe: 2020–2024 composite | Resolution: ~4.78 m
+  - Access: Dataset-specific license (NICFI licensing agreement) | Reviewed: 2026-08-24
+  - Source URL: https://registry.opendata.aws/ctrees-amazon-canopy-height/
+  - Documentation URL: https://doi.org/10.48550/arXiv.2501.10600
+  - Access Evidence URL: https://planet.widen.net/s/zfdpf8qxwk/participantlicenseagreement_nicfi_2024
+  - Description: A 4.78 m mean canopy-height composite for the Amazon forest, produced from 2020–2024 Planet NICFI imagery with a LiDAR-informed deep-learning model. The map is a derivative of Planet NICFI imagery and follows the NICFI licensing agreement.
+- **GEDI — Global Ecosystem Dynamics Investigation** (`gedi-forest-structure`) — *University of Maryland / NASA Goddard Space Flight Center*
+  - Coverage: Global — subsettable | Kind: Data portal | Timeframe: 4 April 2019–16 March 2023; resumed 26 April 2024 and ongoing | Resolution: ~25 m footprints (L2); 1 km gridded (L4B)
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://gedi.umd.edu/dataproducts/download/
+  - Documentation URL: https://gedi.umd.edu/dataproducts/documents/
+  - Access Evidence URL: https://registry.opendata.aws/nasa-gedi02a/
+  - Description: Spaceborne full-waveform LiDAR mounted on the International Space Station, producing footprint- and gridded-level measurements of canopy height, vertical canopy structure, and aboveground biomass density between 51.6°N and 51.6°S — a band that fully covers the Amazon basin.
+- **RAINFOR — Amazon Forest Inventory Network** (`rainfor-forestplots-amazon-network`) — *University of Leeds, in coordination with partner institutions across Amazonian countries; data managed via ForestPlots.net*
+  - Coverage: Pan-Amazon | Kind: Data portal | Timeframe: 2000–present, plots re-censused periodically | Resolution: Permanent sample plots (typically ~1 ha each) across multiple countries
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://www.forestplots.net
+  - Documentation URL: https://forestplots.net/upload/publication-store/itm_141/RAINFOR_field_manual_EN.pdf
+  - Access Evidence URL: https://forestplots.net/en/join-forestplots/working-with-data
+  - Description: A long-term network of permanent Amazon forest inventory plots tracking tree growth, mortality, biomass, and species composition. ForestPlots.net publishes some DOI-linked packages and provides some records to registered non-commercial users; further records require a collaboration request.
+- **PPBio — Programa de Pesquisa em Biodiversidade** (`ppbio-brazil-biodiversity-research`) — *Instituto Nacional de Pesquisas da Amazônia (INPA) / Ministério da Ciência, Tecnologia e Inovação*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: 2001–present | Resolution: RAPELD grids (10–72 plots per site)
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://ppbio.inpa.gov.br/en
+  - Documentation URL: https://ppbio.inpa.gov.br/en/Methods/RAPELD
+  - Access Evidence URL: https://ppbio.inpa.gov.br/sites/default/files/politica_dou.pdf
+  - Description: A standardized long-term biodiversity monitoring network using the RAPELD sampling design across permanent grid sites in Brazilian ecosystems, with a strong concentration of sites in the Amazon coordinated through INPA. Covers vegetation, fauna, and environmental variables at over 160 sampling grids nationwide.
+- **Map of Life — Species Range & Distribution Indicators** (`map-of-life-species-ranges`) — *Yale Center for Biodiversity and Global Change*
+  - Coverage: Global — subsettable | Kind: Data portal | Timeframe: Continuously updated; indicators recalculated annually | Resolution: Species range maps; conservation indicators calculated on 1 km² pixels
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://mol.org/
+  - Documentation URL: https://mol.org/resources/indicators/shi
+  - Access Evidence URL: https://mol.org/
+  - Description: Global species range products and annually updated conservation indicators, including the Species Habitat Index and Species Protection Index. They integrate expert range information, habitat preferences, environmental layers, and occurrence records under harmonized taxonomies.
+- **Sistema de Monitoreo de Bosques y Carbono (SMByC)** (`ideam-smbyc`) — *Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM)*
+  - Coverage: Colombia | Kind: Data portal | Timeframe: Varies by product; annual monitoring and ongoing alerts | Resolution: 30 m (Landsat-based classification)
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://www.ideam.gov.co/nuestra-entidad/ecosistemas-e-informacion-ambiental/sistema-monitoreo-bosques-carbono
+  - Documentation URL: https://www.ideam.gov.co/nuestra-entidad/ecosistemas-e-informacion-ambiental/sistema-monitoreo-bosques-carbono
+  - Access Evidence URL: https://www.ideam.gov.co/nuestra-entidad/ecosistemas-e-informacion-ambiental/sistema-monitoreo-bosques-carbono
+  - Description: IDEAM's forest and carbon monitoring system publishes forest-cover and deforestation information, early-warning products, methods, and geospatial resources for Colombia.
+- **Colombia National Forest Inventory (IFN), 2015–2023** (`colombia-national-forest-inventory-fam`) — *IDEAM, SINCHI, and Alexander von Humboldt Biological Resources Research Institute; catalogued by FAO*
+  - Coverage: Colombia | Kind: Dataset | Timeframe: Field data collected 2015–2023 | Resolution: Sampled field plots across biogeographic regions (coordinates anonymized)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://microdata.fao.org/index.php/catalog/2830
+  - Documentation URL: https://www.ideam.gov.co/sala-de-prensa/informes/Inventario-Forestal-Nacional-IFN
+  - Access Evidence URL: https://microdata.fao.org/index.php/catalog/2830
+  - Description: A field-sample inventory of forest structure, species composition, biomass, soil carbon, and related variables. Its regional sampling includes the Colombian Amazon; plot coordinates are anonymized.
+  - Responsible Use: Forest inventory cluster coordinates are randomized or anonymized. Do not attempt to reconstruct precise sample sites or publish sensitive locations.
+- **SIAMAZONIA Information Service** (`siamazonia-iiap`) — *Instituto de Investigaciones de la Amazonía Peruana (IIAP)*
+  - Coverage: Peru | Kind: Data portal | Timeframe: Varies by resource; records and publications span different periods | Resolution: Point occurrence records; accuracy varies per record
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://www.gob.pe/13895-acceder-al-siamazonia-del-iiap
+  - Documentation URL: https://www.iiap.gob.pe/
+  - Access Evidence URL: https://www.gob.pe/13895-acceder-al-siamazonia-del-iiap
+  - Description: IIAP's Amazon information service brings together biodiversity and species resources, maps, research materials, and specialist information focused on the Peruvian Amazon.
+- **Bolivia Forest Information and Monitoring System (SIMB)** (`simb-bolivia-forest-monitor`) — *Dirección General de Gestión y Desarrollo Forestal, Ministerio de Planificación del Desarrollo y Medio Ambiente*
+  - Coverage: Bolivia | Kind: Explorer | Timeframe: Annual and dry-season monitoring; system is updated continuously | Resolution: 30 m (Landsat-based classification)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://simb.planificacion.gob.bo/simb/
+  - Documentation URL: https://simb.planificacion.gob.bo/simb/
+  - Access Evidence URL: https://simb.planificacion.gob.bo/simb/
+  - Description: Bolivia's official forest geovisor brings together forest-cover, deforestation, fire, and land-use monitoring products, including downloads and editable sector statistics.
+- **SiB-Ec Biodiversity Information System** (`sib-ecuador-biodiversity`) — *Ministerio del Ambiente, Agua y Transición Ecológica (MAATE), Ecuador*
+  - Coverage: Ecuador | Kind: Data portal | Timeframe: Record dates vary; catalog content is updated over time | Resolution: Point occurrence records; accuracy varies per record
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://biodiversidad.ambiente.gob.ec/biodiversidad-web/inicio/index.html
+  - Documentation URL: https://biodiversidad.ambiente.gob.ec/biodiversidad-web/inicio/index.html
+  - Access Evidence URL: https://biodiversidad.ambiente.gob.ec/biodiversidad-web/inicio/index.html
+  - Description: SiB-Ec is Ecuador's national biodiversity information system for discovering species, natural-heritage records, and related biodiversity resources.
+- **Provita Biodiversity Portal** (`provita-venezuela-biodiversity-portal`) — *Provita*
+  - Coverage: Venezuela | Kind: Data portal | Timeframe: Occurrence dates vary; records are updated as sources are integrated | Resolution: Point occurrence records; accuracy varies per record
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://bioportal.provita.org.ve/
+  - Documentation URL: https://geoportal.provita.org.ve/en/faq/
+  - Access Evidence URL: https://bioportal.provita.org.ve/
+  - Description: Provita's biodiversity portal brings together Venezuelan species occurrence data, combining records from GBIF with additional records from Provita projects and collections.
+  - Responsible Use: Exact occurrence locations can expose sensitive species or local knowledge. Check geoprivacy and provider terms before republishing coordinates.
+- **Guyana Forest Monitoring, Reporting and Verification System (MRVS)** (`guyana-mrvs`) — *Guyana Forestry Commission (GFC)*
+  - Coverage: Guyana | Kind: Data portal | Timeframe: Annual assessments from 2010; latest reporting period varies by publication | Resolution: Landsat/Sentinel-based; minimum 1 ha detection
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://forestry.gov.gy/the-redd-mrv/
+  - Documentation URL: https://forestry.gov.gy/guyana-monitoring-reporting-verification-systemmrvs-assessment-report/
+  - Access Evidence URL: https://forestry.gov.gy/guyana-monitoring-reporting-verification-systemmrvs-assessment-report/
+  - Description: The GFC's MRVS publishes annual forest-change and carbon-monitoring assessments, with methods and outputs on deforestation, degradation, and related drivers.
+- **KOPI National Forest Monitoring Statistics** (`kopi-suriname-forest-statistics`) — *Stichting voor Bosbeheer en Bostoezicht (SBB), Suriname*
+  - Coverage: Suriname | Kind: Explorer | Timeframe: Updated as new National Forest Monitoring System statistics are produced | Resolution: National and district-level forest statistics
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://kopi.sbb.sr/index.php
+  - Documentation URL: https://sbb.sr/
+  - Access Evidence URL: https://kopi.sbb.sr/index.php
+  - Description: KOPI displays statistical information produced through Suriname's National Forest Monitoring System for research, planning, and policy use.
+- **Biodiversity of the Guianas: Cross-Cultural Names and Information** (`act-guianas-biodiversity-database`) — *Amazon Conservation Team Guianas*
+  - Coverage: Suriname | Kind: Data portal | Timeframe: Continuously expanded; species and community coverage varies | Resolution: Community-level records
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://biodb.act-suriname.org/
+  - Documentation URL: https://biodb.act-suriname.org/
+  - Access Evidence URL: https://biodb.act-suriname.org/
+  - Description: A regional biocultural database documents selected animal, plant, and fungi species with scientific and local names, images, and information from Suriname and neighboring Guianas.
+  - Responsible Use: Local names and knowledge are attributed within the source, but public visibility does not imply unrestricted reuse. Follow its attribution requirements and the relevant community protocols.
+- **Parc Amazonien de Guyane Biodiversity Atlas** (`parc-amazonien-guyane-biodiversity-atlas`) — *Parc Amazonien de Guyane and French biodiversity partners*
+  - Coverage: French Guiana | Kind: Explorer | Timeframe: Observations since 2007; content is updated as records are added | Resolution: Point occurrence records; accuracy varies per record
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://biodiversite.parc-amazonien-guyane.fr/
+  - Documentation URL: https://biodiversite.parc-amazonien-guyane.fr/static_pages/presentation
+  - Access Evidence URL: https://biodiversite.parc-amazonien-guyane.fr/static_pages/presentation
+  - Description: The park's public atlas presents species observations and biodiversity syntheses for French Guiana, with sensitive records generalized to protect species and sites; some detailed data require a request.
+- **Brazil National Forest Inventory (IFN)** (`brazil-national-forest-inventory`) — *Serviço Florestal Brasileiro (SFB), Sistema Nacional de Informações Florestais (SNIF)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Dynamic inventory; products updated as new collection and analysis are released | Resolution: Systematic 20 × 20 km national grid of field sample plots
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://snif.florestal.gov.br/pt-br/temas-florestais/ifn
+  - Documentation URL: https://www.gov.br/florestal/pt-br/assuntos/ifn
+  - Access Evidence URL: https://snif.florestal.gov.br/pt-br/temas-florestais/ifn
+  - Description: The federal field inventory publishes botanical, biophysical, biomass, carbon, and socioenvironmental measurements from sampled forest plots across Brazilian states and biomes.
+- **Amazon Waters Observatory** (`amazon-waters-observatory`) — *Amazon Waters Alliance*
+  - Coverage: Pan-Amazon | Kind: Data portal | Timeframe: Updated as datasets and new versions are integrated | Resolution: Sub-basin aggregates in public views
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://observatorio.aguasamazonicas.org/en/about/faq/
+  - Documentation URL: https://aguasamazonicas.org/
+  - Access Evidence URL: https://observatorio.aguasamazonicas.org/en/about/faq/
+  - Description: The observatory publishes fish, fisheries, and aquatic-ecosystem information from community, citizen-science, and partner monitoring; public records are aggregated to sub-basins to protect people and sites.
+  - Responsible Use: The public view aggregates community monitoring observations by sub-basin and omits personal data. Preserve this aggregation and respect contributor and community protocols when reusing records.
+
+### Earth, water & climate (19 sources)
+
+- **Hidroweb — National Hydrometeorological Network** (`ana-hidroweb`) — *Agência Nacional de Águas e Saneamento Básico (ANA)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Varies by station; many series since the early 2000s, some longer | Resolution: Station-level (point gauges)
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://www.snirh.gov.br/hidroweb
+  - Documentation URL: https://metadados.snirh.gov.br/geonetwork/srv/api/records/6749d278-ca5e-40e9-b648-20d6382f57df/attachments/Cartilha_EstatisticasFluPlu_VF.pdf
+  - Access Evidence URL: https://www.snirh.gov.br/hidroweb
+  - Description: Station-level river level, streamflow, rainfall, and water-quality records from Brazil's National Hydrometeorological Network, run by the federal water agency.
+- **BDMEP — Historical Meteorological Database** (`inmet-bdmep`) — *Instituto Nacional de Meteorologia (INMET)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Varies by conventional station; daily records, updated every 90 days | Resolution: Station-level (point observations)
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://bdmep.inmet.gov.br/
+  - Documentation URL: https://portal.inmet.gov.br/servicos/bdmep-dados-historicos
+  - Access Evidence URL: https://portal.inmet.gov.br/servicos/bdmep-dados-historicos
+  - Description: Historical daily weather observations from INMET conventional stations — temperature, rainfall, humidity, and wind — searchable by station or map.
+- **FIRMS — Fire Information for Resource Management System** (`nasa-firms-active-fire`) — *NASA Earth Observing System Data and Information System (EOSDIS)*
+  - Coverage: Global — subsettable | Kind: Data portal | Timeframe: 2000–present (MODIS); 2012–present (VIIRS); updated multiple times daily | Resolution: MODIS 1 km; VIIRS 375 m
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://firms.modaps.eosdis.nasa.gov/
+  - Documentation URL: https://www.earthdata.nasa.gov/data/tools/firms/faq
+  - Access Evidence URL: https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance
+  - Description: Near-real-time active fire and thermal anomaly detections from the MODIS and VIIRS satellite instruments, distributed as point locations with confidence and brightness-temperature attributes. Widely used as an early proxy for both wildfire and agricultural/deforestation burning across the Amazon.
+- **CHIRPS — Climate Hazards Group InfraRed Precipitation with Station data** (`chirps-precipitation`) — *Climate Hazards Center, University of California, Santa Barbara*
+  - Coverage: Global — subsettable | Kind: Dataset | Timeframe: 1981–present (daily, ~45-day latency for final product) | Resolution: 0.05° (~5.5 km)
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://www.chc.ucsb.edu/data/chirps3
+  - Documentation URL: https://data.chc.ucsb.edu/products/CHIRPS/v3.0/README-CHIRPSv3.0.txt
+  - Access Evidence URL: https://www.chc.ucsb.edu/data/chirps3
+  - Description: Quasi-global daily, pentadal, and monthly gridded rainfall estimates blending satellite infrared imagery with in-situ station observations. Built specifically to support drought monitoring and hydrological modeling in data-sparse regions, and in wide use for Amazon basin precipitation trend analysis.
+- **BDQueimadas — Banco de Dados de Queimadas** (`inpe-bdqueimadas`) — *Instituto Nacional de Pesquisas Espaciais (INPE), Programa Queimadas*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: 1998–present (near-real-time, updated every 10 minutes to 3 hours depending on product) | Resolution: Active-fire pixels: 375 m to about 5 × 4 km, depending on sensor; burned-area products have separate resolutions
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://www.terrabrasilis.dpi.inpe.br/queimadas/portal/pages/secao_downloads/dados-abertos/index.html
+  - Documentation URL: https://terrabrasilis.dpi.inpe.br/queimadas/portal/pages/secao_informacoes/faq/
+  - Access Evidence URL: https://www.terrabrasilis.dpi.inpe.br/queimadas/portal/pages/secao_downloads/dados-abertos/index.html
+  - Description: Brazil's official fire and burned-area monitoring system, consolidating heat-source detections from multiple satellites (AQUA, TERRA, NOAA, GOES, NPP-Suomi) since 1998, along with burned-area extent products. Used operationally by IBAMA and state fire agencies, and academically as a long-run fire record.
+- **HYBAM — Hydro-geochemistry of the Amazon Basin Observatory** (`ore-hybam-observatory`) — *Institut de Recherche pour le Développement (IRD), with national partner agencies in Brazil, Peru, Bolivia, Colombia, and Ecuador*
+  - Coverage: Pan-Amazon | Kind: Data portal | Timeframe: 2003–present (daily/decadal/monthly, depending on variable); some stations reconstructed back to 1902 | Resolution: 17 point gauge/sampling stations
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://hybam.obs-mip.fr/
+  - Documentation URL: https://hybam.obs-mip.fr/protocoles/
+  - Access Evidence URL: https://hybam.obs-mip.fr/2024/03/07/article-1/
+  - Description: A 17-station international observation network measuring river discharge, sediment load, and water geochemistry across the Amazon basin from the Andean piedmont to the Atlantic outlet, operating continuously since 2003 with standardized cross-border sampling protocols.
+- **HydroSHEDS** (`hydrosheds`) — *World Wildlife Fund (WWF) Conservation Science Program, with USGS*
+  - Coverage: Global — subsettable | Kind: Dataset | Timeframe: Static (elevation-derived; no time series) | Resolution: HydroSHEDS v2 Americas: 1 arc-second (~30 m); v1 core: 3 arc-seconds (~90 m) to 6 arc-minutes (~11 km)
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://www.hydrosheds.org/
+  - Documentation URL: https://www.hydrosheds.org/hydrosheds-v2
+  - Access Evidence URL: https://www.hydrosheds.org/terms-of-use
+  - Description: A hydrography product family with elevation-derived flow layers and related river, basin, and lake products. HydroSHEDS v1 is based mainly on SRTM/HYDRO1k and is near-global; TanDEM-X-derived HydroSHEDS v2 is currently available for the Americas.
+- **WorldClim — Global Climate and Weather Data** (`worldclim-bioclimatic`) — *WorldClim (Fick & Hijmans, University of California, Davis / University of Nairobi)*
+  - Coverage: Global — subsettable | Kind: Dataset | Timeframe: 1970–2000 climatology baseline (historical); future scenario layers also available | Resolution: 30 arc-seconds (~1 km) to 10 arc-minutes (~340 km)
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://worldclim.org/data/worldclim21.html
+  - Documentation URL: https://doi.org/10.1002/joc.5086
+  - Access Evidence URL: https://worldclim.org/about.html
+  - Description: Interpolated global climate surfaces — monthly temperature, precipitation, solar radiation, wind speed, water vapor pressure, and 19 derived bioclimatic variables — built from weather-station records via thin-plate spline interpolation. A standard baseline layer for species distribution and climate-envelope modeling. The provider's terms do not permit redistribution of the raw data.
+- **Copernicus DEM (GLO-30)** (`copernicus-dem-glo30`) — *European Space Agency (ESA) / Copernicus Programme*
+  - Coverage: Global — subsettable | Kind: Dataset | Timeframe: Static (TanDEM-X acquisitions, ~2011–2015) | Resolution: 30 m
+  - Access: Dataset-specific license (Licence for Copernicus DEM instance COP-DEM-GLO-30-F Global 30m Full, Free & Open) | Reviewed: 2026-08-24
+  - Source URL: https://doi.org/10.5270/ESA-c5d3d65
+  - Documentation URL: https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf
+  - Access Evidence URL: https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf
+  - Description: A global 30 m digital surface model derived from TanDEM-X, representing the top-reflective surface including buildings, infrastructure, and vegetation. It is used for flow routing, radar terrain correction, and watershed delineation.
+- **JRC Global Surface Water** (`jrc-global-surface-water`) — *European Commission, Joint Research Centre (JRC)*
+  - Coverage: Global — subsettable | Kind: Explorer | Timeframe: 1984–2024 (annual and long-term water layers) | Resolution: 30 m (Landsat-derived)
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://global-surface-water.appspot.com/download
+  - Documentation URL: https://storage.googleapis.com/water-world/downloads_ancillary/DataUsersGuidev2024_v.5.pdf
+  - Access Evidence URL: https://global-surface-water.appspot.com/download
+  - Description: Global Landsat-derived maps of surface-water occurrence, change, seasonality, recurrence, and transitions, which can be subset to the Amazon.
+- **SEEG — Greenhouse Gas Emissions Estimates** (`seeg-emissions-estimates`) — *Sistema de Estimativas de Emissões e Remoções de Gases de Efeito Estufa (SEEG)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: 1970–2024 for most national/state sectors; land-use change 1990–2024; municipal estimates 2000–2024 | Resolution: National, biome, state and municipality-level estimates; availability varies by sector
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://seeg.eco.br/dados/
+  - Documentation URL: https://seeg.eco.br/english/seeg-methodology/
+  - Access Evidence URL: https://seeg.eco.br/dados/
+  - Description: Annual estimates of Brazil's greenhouse-gas emissions and removals, available by sector and, for several sectors, state and municipality. These are modeled estimates, not direct local measurements.
+- **DHIME Hydrometeorological Data Portal** (`ideam-dhime`) — *Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM)*
+  - Coverage: Colombia | Kind: Data portal | Timeframe: Varies by station and variable; series are updated as available | Resolution: Station-level (point observations)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://www.ideam.gov.co/dhime
+  - Documentation URL: https://www.ideam.gov.co/dhime
+  - Access Evidence URL: https://www.ideam.gov.co/dhime
+  - Description: DHIME lets users search IDEAM hydrometeorological stations and request or download time series for rainfall, river flow, water quality, and other measured variables.
+- **IIAP Soil Profiles in San Martín, Loreto, Madre de Dios, and Ucayali** (`iiap-amazon-soil-profiles`) — *Instituto de Investigaciones de la Amazonía Peruana (IIAP)*
+  - Coverage: Peru | Kind: Dataset | Timeframe: 2005–2017 | Resolution: Soil profile and horizon level
+  - Access: Dataset-specific license (Open Data Commons Attribution License (ODC-BY)) | Reviewed: 2026-11-05
+  - Source URL: https://www.datosabiertos.gob.pe/dataset/perfiles-de-suelo-de-san-mart%C3%ADn-loreto-madre-de-dios-y-ucayali-iiap-2005-2017
+  - Documentation URL: https://visores.iiap.gob.pe/inventarios/
+  - Access Evidence URL: https://www.datosabiertos.gob.pe/dataset/perfiles-de-suelo-de-san-mart%C3%ADn-loreto-madre-de-dios-y-ucayali-iiap-2005-2017
+  - Description: Soil-pit and horizon observations from four Peruvian Amazon departments, published by IIAP with site descriptions and an open data dictionary.
+- **SENAMHI Bolivia Hydrometeorological Station Data Export** (`senamhi-bolivia-hydromet-export`) — *Servicio Nacional de Meteorología e Hidrología (SENAMHI), Bolivia*
+  - Coverage: Bolivia | Kind: Explorer | Timeframe: Varies by station, variable, and selected period | Resolution: Station-level (point observations)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://onsc.senamhi.gob.bo/public/public-stations-info-export
+  - Documentation URL: https://onsc.senamhi.gob.bo/public/public-stations-info-export
+  - Access Evidence URL: https://onsc.senamhi.gob.bo/public/public-stations-info-export
+  - Description: SENAMHI's public export form queries national hydrometeorological stations by area, station, variable, data type, and period, with spreadsheet and GIS export options.
+- **INAMHI Open Hydrometeorological Geoservices** (`inamhi-open-geoservices`) — *Instituto Nacional de Meteorología e Hidrología (INAMHI), Ecuador*
+  - Coverage: Ecuador | Kind: Data portal | Timeframe: Varies by station, product, and dashboard | Resolution: Station-level (point observations)
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://geoservicios.inamhi.gob.ec/
+  - Documentation URL: https://geoservicios.inamhi.gob.ec/
+  - Access Evidence URL: https://geoservicios.inamhi.gob.ec/
+  - Description: INAMHI's public geospatial node provides hydrometeorological datasets, maps, documents, and dashboards from the national meteorology and hydrology institute.
+- **Hydrographic Basins of Venezuela** (`provita-venezuela-hydrographic-basins`) — *Provita, based on MINEC source mapping*
+  - Coverage: Venezuela | Kind: Download | Timeframe: Layer updated November 2024 | Resolution: River basin polygons; source map scale 1:2,000,000
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://geoportalp-files.s3-us-east-2.amazonaws.com/files/shapefile/241115_Cuencas_hidrograficas_WGS84.zip
+  - Documentation URL: https://geoportal.provita.org.ve/en/faq/
+  - Access Evidence URL: https://geoportal.provita.org.ve/en/faq/
+  - Description: A shapefile delineates the main river basins across Venezuela. It uses the 2014 MINEC hydrographic-regions map with topographic and drainage updates published in 2024.
+- **Guyana Hydrometeorological Statistics** (`guyana-hydromet-statistics`) — *Guyana Bureau of Statistics, using Hydrometeorological Service data*
+  - Coverage: Guyana | Kind: Data portal | Timeframe: Series vary by variable; published examples run from 1981 to 2026 | Resolution: Station-level (point observations)
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://statisticsguyana.gov.gy/subjects/hydrometeorological/
+  - Documentation URL: https://statisticsguyana.gov.gy/subjects/hydrometeorological/
+  - Access Evidence URL: https://statisticsguyana.gov.gy/subjects/hydrometeorological/
+  - Description: Published national tables summarize rainfall, temperature, humidity, and sunshine observations from Guyana meteorological stations; the rainfall series identified on the page covers coastal regions.
+- **French Guiana Hydrometric Stations** (`guyane-hydrometric-stations`) — *Système d'Information sur l'Eau, French Government*
+  - Coverage: French Guiana | Kind: Dataset | Timeframe: Station inventory snapshot last updated in 2022; measurements continue in linked services | Resolution: Station-level (point gauges)
+  - Access: Dataset-specific license (Licence Ouverte / Open Licence version 2.0) | Reviewed: 2026-11-05
+  - Source URL: https://www.data.gouv.fr/datasets/stations-hydrometriques-guyane
+  - Documentation URL: https://www.data.gouv.fr/datasets/stations-hydrometriques-guyane
+  - Access Evidence URL: https://www.data.gouv.fr/datasets/stations-hydrometriques-guyane
+  - Description: A national water-information dataset locates hydrometric stations in French Guiana and links users to the services that publish river-level and discharge measurements.
+- **ACTO Amazon Regional Observatory Networks Module** (`acto-amazon-networks-water-module`) — *Amazon Cooperation Treaty Organization (ACTO)*
+  - Coverage: Pan-Amazon | Kind: Explorer | Timeframe: Station and variable periods differ; monitoring is ongoing | Resolution: Station-level (point observations)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://aguasamazonicas.otca.org/environmental-and-water-resources-monitoring/ora-amazon-networks-module/?lang=en
+  - Documentation URL: https://www.oraotca.org/es
+  - Access Evidence URL: https://aguasamazonicas.otca.org/environmental-and-water-resources-monitoring/ora-amazon-networks-module/?lang=en
+  - Description: The Amazon Regional Observatory's networks module brings together member-country and HYBAM stations measuring rainfall, river level and flow, and surface-water quality across the basin.
+
+### Land use & infrastructure (19 sources)
+
+- **MapBiomas Land Cover & Use Maps** (`mapbiomas-brasil`) — *MapBiomas (multi-institutional collaborative network)*
+  - Coverage: Brazil | Kind: Explorer | Timeframe: 1985–2025 (annual) | Resolution: 30 m (Landsat-based classification)
+  - Access: Dataset-specific license (Creative Commons Attribution 4.0 International (CC BY 4.0)) | Reviewed: 2026-08-24
+  - Source URL: https://brasil.mapbiomas.org/iniciativas-e-produtos/cobertura-e-uso-da-terra/cobertura-30m/cobertura/
+  - Documentation URL: https://brasil.mapbiomas.org/downloads/documentos-e-notas-tecnicas/
+  - Access Evidence URL: https://brasil.mapbiomas.org/comunicacao/
+  - Description: Annual land cover and land-use maps for Brazil since 1985, built from satellite image classification, tracking deforestation, fire, and vegetation change by year and biome.
+- **TerraBrasilis — PRODES & DETER Deforestation Monitoring** (`inpe-terrabrasilis`) — *Instituto Nacional de Pesquisas Espaciais (INPE)*
+  - Coverage: Brazil | Kind: Explorer | Timeframe: PRODES annual since 1988; DETER near-real-time alerts | Resolution: ~30 m (PRODES, Landsat-class); DETER-B uses 56–64 m source imagery and publishes alerts from 6.25 ha
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://terrabrasilis.dpi.inpe.br/en/home-page/
+  - Documentation URL: https://data.inpe.br/biomasbr/metodologia-prodes-e-deter-amazonia-2a-edicao/
+  - Access Evidence URL: https://terrabrasilis.dpi.inpe.br/en/download-files/
+  - Description: Brazil's official satellite-based deforestation monitoring system, publishing annual clear-cut mapping (PRODES) and near-real-time alerts (DETER) for the Legal Amazon and other biomes.
+- **Geobosques — National Forest Monitoring Platform** (`geobosques-national-forest-monitoring-platform`) — *Ministerio del Ambiente (MINAM), Programa Nacional de Conservación de Bosques y Clima*
+  - Coverage: Peru | Kind: Data portal | Timeframe: Annual forest-loss maps 2001–2025; weekly early-warning alerts since 2017 | Resolution: 30 m (Landsat-derived annual forest-loss maps)
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://geobosques.minam.gob.pe/geobosque/view/index.php
+  - Documentation URL: https://geobosques.minam.gob.pe/geobosque/descargas_geobosque/perdida/documentos/Protocolo_Metodologico_Deteccion_Perdida_de_Bosque.pdf
+  - Access Evidence URL: https://geobosques.minam.gob.pe/geobosque/view/servicios.php
+  - Description: Peru's national forest-loss and early-warning monitoring platform, covering the country's Amazon humid forest with annual loss maps, weekly alerts, and degradation layers.
+- **SAD — Sistema de Alerta de Desmatamento** (`imazon-sad-system`) — *Instituto do Homem e Meio Ambiente da Amazônia (Imazon)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: 2008–present (monthly bulletins) | Resolution: Landsat/Sentinel-based; minimum 1 ha detection
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://dashboards.imazongeo.org.br/SAD/SAD.html
+  - Documentation URL: https://imazongeo.org.br/sad/
+  - Access Evidence URL: https://dashboards.imazongeo.org.br/SAD/SAD.html
+  - Description: Independent monthly monitoring of deforestation and forest degradation across the Brazilian Legal Amazon, produced by a non-governmental research institute using Landsat/Sentinel imagery with analyst validation. Runs in parallel to INPE's PRODES/DETER as a cross-check; alert-level data also feeds into Global Forest Watch's open data layers.
+- **Amazon Mining Watch** (`amazon-mining-watch`) — *Earth Genome, Pulitzer Center's Rainforest Investigations Network, and Amazon Conservation Association*
+  - Coverage: Pan-Amazon | Kind: Explorer | Timeframe: 2018–2025 (annual); quarterly from 2025 onward | Resolution: 10 m scar-mask pixels; detections derived from overlapping ~480 m Sentinel-2 image patches
+  - Access: Dataset-specific license (Creative Commons Attribution 4.0 International (CC BY 4.0)) | Reviewed: 2026-08-24
+  - Source URL: https://source.coop/earthgenome/amazon-mining-watch
+  - Documentation URL: https://github.com/earthrise-media/mining-detector
+  - Access Evidence URL: https://source.coop/earthgenome/amazon-mining-watch
+  - Description: A machine-learning-based map of probable gold-mining scars detected in Sentinel-2 imagery across the Amazon basin, with downloadable detections and 10 m scar masks. Protected-area and Indigenous-territory overlays provide geographic context but do not establish legal status.
+- **Global Forest Change (Hansen et al.)** (`hansen-global-forest-change`) — *University of Maryland, Global Land Analysis and Discovery (GLAD) lab*
+  - Coverage: Global — subsettable | Kind: Dataset | Timeframe: 2000–2024, annual updates | Resolution: ~30 m
+  - Access: Dataset-specific license (Creative Commons Attribution 4.0 International (CC BY 4.0)) | Reviewed: 2026-08-24
+  - Source URL: https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/download.html
+  - Documentation URL: https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/download.html
+  - Access Evidence URL: https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/download.html
+  - Description: The standard reference global tree-cover-loss dataset, derived from time-series analysis of the full Landsat archive. Layers include year-2000 tree canopy cover, annual forest loss with year attribution from 2000 onward, and 2000–2012 forest gain, updated approximately annually.
+- **TerraClass Amazônia** (`terraclass-amazonia`) — *Instituto Nacional de Pesquisas Espaciais (INPE) and Embrapa*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Historical mappings from 2004; current portal series includes 2008, 2010, 2012, 2014, 2018, 2020, 2022 and 2024 | Resolution: 10 m for the Sentinel-2-based 2018–2024 series; earlier products are Landsat-based at 30 m
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://www.terraclass.gov.br/
+  - Documentation URL: https://data.inpe.br/wp-content/uploads/2024/08/Nota-Tecnica-TerraClass_Lancamento.pdf
+  - Access Evidence URL: https://www.terraclass.gov.br/download-de-dados
+  - Description: Biennial classification of land use and cover specifically within areas already mapped as deforested by PRODES, distinguishing pasture, agriculture, secondary vegetation regrowth, mining, urban infrastructure, and other post-clearing uses across the Brazilian Legal Amazon.
+- **SiRAD X — Sistema Remoto de Alerta de Desmatamento do Xingu** (`siradx-xingu-deforestation-alert`) — *Rede Xingu+ (network coordinated with Instituto Socioambiental and local Indigenous and riverine associations)*
+  - Coverage: Brazil | Kind: Explorer | Timeframe: 2018–present (monthly reports) | Resolution: Vector alert polygons derived from Sentinel-1, with Sentinel-2 and Landsat-9 used for visual review
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://xingumais.org.br/sirad-x
+  - Documentation URL: https://xingumais.org.br/sirad-x
+  - Access Evidence URL: https://xingumais.org.br/sirad-x
+  - Description: A radar-based deforestation alert system covering the 26.7-million-hectare Xingu Protected Areas Corridor and the Indigenous Lands of the Volta Grande do Xingu, chosen specifically to keep detecting clearings through the cloud cover of the rainy season. Directly relevant to monitoring land-use pressure in the same Volta Grande region affected by the Belo Monte Hydroelectric Complex.
+- **ESA WorldCover** (`esa-worldcover`) — *European Space Agency (ESA) WorldCover consortium*
+  - Coverage: Global — subsettable | Kind: Dataset | Timeframe: Reference years 2020 and 2021; different algorithm versions | Resolution: 10 m
+  - Access: Dataset-specific license (Creative Commons Attribution 4.0 International (CC BY 4.0)) | Reviewed: 2026-08-24
+  - Source URL: https://esa-worldcover.org/en/data-access
+  - Documentation URL: https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/docs/WorldCover_PUM_V2.0.pdf
+  - Access Evidence URL: https://esa-worldcover.org/en/data-access
+  - Description: Global 10 m land-cover maps for the 2020 and 2021 reference years, derived from Sentinel-1 and Sentinel-2 imagery and distinguishing 11 classes. The two maps use different algorithm versions and should not be treated as a consistent change series.
+- **MapBiomas Amazonia Land Cover & Water** (`mapbiomas-amazonia`) — *MapBiomas Amazonia (RAISG network)*
+  - Coverage: Pan-Amazon | Kind: Explorer | Timeframe: 1985–2023 (annual land cover); separate monthly/annual water products | Resolution: 30 m (Landsat-based classification)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://amazonia.mapbiomas.org/descargas/
+  - Documentation URL: https://amazonia.mapbiomas.org/iniciativas-y-productos/cobertura-y-uso-del-suelo/notas-metodologicas/
+  - Access Evidence URL: https://amazonia.mapbiomas.org/faq/?tema=datos
+  - Description: Pan-Amazon annual land-cover and land-use maps built from Landsat imagery and a common regional legend. The project also publishes separate monthly and annual surface-water products.
+- **SIGA — Electricity Generation Information System** (`aneel-siga`) — *Agência Nacional de Energia Elétrica (ANEEL)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Updated daily/monthly (provider schedule) | Resolution: Facility-level point coordinates
+  - Access: Dataset-specific license (Open Data Commons Open Database License (ODbL)) | Reviewed: 2026-08-24
+  - Source URL: https://dadosabertos.aneel.gov.br/dataset/siga-sistema-de-informacoes-de-geracao-da-aneel
+  - Documentation URL: https://dadosabertos.aneel.gov.br/dataset/siga-sistema-de-informacoes-de-geracao-da-aneel/resource/25722a60-194d-4234-ab3b-b71354078402
+  - Access Evidence URL: https://dadosabertos.aneel.gov.br/dataset/siga-sistema-de-informacoes-de-geracao-da-aneel
+  - Description: Official register of Brazilian electricity-generating enterprises with coordinates, source, operating status, capacity, municipality, and sub-basin. A facility record does not establish social or ecological impact.
+- **MapBiomas Bolivia Land Cover and Use** (`mapbiomas-bolivia-land-cover`) — *MapBiomas Bolivia collaborative network*
+  - Coverage: Bolivia | Kind: Explorer | Timeframe: Annual historical collection; period varies by current product release | Resolution: 30 m (Landsat-based classification)
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://bolivia.mapbiomas.org/
+  - Documentation URL: https://bolivia.mapbiomas.org/iniciativas-y-productos/metodologia-mapbiomas/
+  - Access Evidence URL: https://bolivia.mapbiomas.org/
+  - Description: Annual satellite-classification products map land cover and use across Bolivia, with country-level views of vegetation, agriculture, water, mining, and other mapped classes.
+- **MapBiomas Ecuador Land Cover and Use Maps** (`mapbiomas-ecuador-land-cover`) — *MapBiomas Ecuador collaborative network*
+  - Coverage: Ecuador | Kind: Explorer | Timeframe: 1985–2025 (annual, Collection 4.0) | Resolution: 30 m (Landsat-based classification)
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://ecuador.mapbiomas.org/iniciativas-y-productos/cobertura-y-uso-del-suelo/cobertura-30m/
+  - Documentation URL: https://ecuador.mapbiomas.org/iniciativas-y-productos/metodologia-mapbiomas/vision-general/
+  - Access Evidence URL: https://ecuador.mapbiomas.org/iniciativas-y-productos/cobertura-y-uso-del-suelo/cobertura-30m/
+  - Description: Annual 30 m Landsat-based maps classify land cover and land use across Ecuador, with derived products for secondary vegetation, vegetation loss, and surface water. Collection 4.0 covers 1985–2025.
+- **Ecuador National Geodata Downloads (IGM)** (`ecuador-igm-geodata`) — *Instituto Geográfico Militar (IGM), Ecuador*
+  - Coverage: Ecuador | Kind: Data portal | Timeframe: Reference layers and survey dates vary by product | Resolution: National topographic and thematic layers (1:5,000 to 1:250,000 scale)
+  - Access: Dataset-specific license (Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)) | Reviewed: 2026-11-05
+  - Source URL: https://www.geoportaligm.gob.ec/proyecto_nacional/
+  - Documentation URL: https://www.geoportaligm.gob.ec/proyecto_nacional/
+  - Access Evidence URL: https://www.geoportaligm.gob.ec/proyecto_nacional/
+  - Description: IGM's national geodata portal provides downloadable topographic and thematic layers, including terrain, hydrology, land resources, infrastructure, and socioeconomic mapping.
+- **MapBiomas Venezuela Land Cover and Use** (`mapbiomas-venezuela-land-cover`) — *MapBiomas Venezuela collaborative network*
+  - Coverage: Venezuela | Kind: Explorer | Timeframe: 1985–2024 (annual, Collection 3) | Resolution: 30 m (Landsat-based classification)
+  - Access: Dataset-specific license (Creative Commons Attribution 4.0 International (CC BY 4.0)) | Reviewed: 2026-11-05
+  - Source URL: https://venezuela.mapbiomas.org/descargas/mapas-de-las-colecciones/
+  - Documentation URL: https://venezuela.mapbiomas.org/descargas/estadisticas/
+  - Access Evidence URL: https://venezuela.mapbiomas.org/descargas/estadisticas/
+  - Description: Annual Landsat-based maps and derived statistics describe land cover and land-use change across Venezuela. Collection 3 covers 1985–2024 and can be explored or downloaded by year and territory.
+- **Guyana GMAPS Airborne Geophysics Data** (`ggmc-gmaps-geophysical-data`) — *Guyana Geology and Mines Commission (GGMC)*
+  - Coverage: Guyana | Kind: Download | Timeframe: New survey data from 2025 plus reprocessed legacy surveys | Resolution: Airborne geophysical survey grids and regional map blocks
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://www.ggmc.gov.gy/request-for-mineral-mapping-information/
+  - Documentation URL: https://www.ggmc.gov.gy/miners-can-now-access-updated-mineral-data/
+  - Access Evidence URL: https://www.ggmc.gov.gy/miners-can-now-access-updated-mineral-data/
+  - Description: GGMC's GMAPS release provides downloadable magnetic, radiometric, and gravity grids covering surveyed areas of Guyana, combining new 2025 coverage with reprocessed legacy surveys.
+- **GONINI National Land Monitoring System** (`gonini-suriname-land-monitoring`) — *Stichting voor Bosbeheer en Bostoezicht (SBB), Suriname*
+  - Coverage: Suriname | Kind: Explorer | Timeframe: Current layers vary; forest-change products include historical mapping | Resolution: 30 m (Landsat-based classification)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://gonini.sbb.sr/
+  - Documentation URL: https://sbb.sr/
+  - Access Evidence URL: https://sbb.sr/
+  - Description: GONINI is Suriname's national interactive land-monitoring geoportal, with current forest, land-cover, and land-use information assembled by SBB and partners.
+- **SEAS Guyane Satellite Data Platform** (`seas-guyane-satellite-data`) — *SEAS Guyane public-service program*
+  - Coverage: French Guiana | Kind: Data portal | Timeframe: Satellite archive includes products from 2015 onward; availability varies by sensor | Resolution: Multi-sensor satellite scenes (1.5 m SPOT to 10–30 m Sentinel/Landsat)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://www.seasguyane.org/en
+  - Documentation URL: https://www.seasguyane.org/en
+  - Access Evidence URL: https://www.seasguyane.org/en
+  - Description: SEAS Guyane catalogs satellite imagery and territorial information for environmental monitoring, land planning, and risk work; access conditions can vary by image and product.
+- **INCRA Certified Rural Property Geodata** (`incra-certified-rural-properties`) — *Instituto Nacional de Colonização e Reforma Agrária (INCRA)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: SIGEF certifications since 2013; download packages updated fortnightly | Resolution: Vector boundaries (polygon/point), not a fixed pixel resolution
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://acervofundiario.incra.gov.br/geodownload/geodados.php
+  - Documentation URL: https://www.gov.br/pt-br/servicos/obter-coordenadas-e-baixar-os-arquivos-dos-imoveis-ruras-certificados?id=11964&origem=servico
+  - Access Evidence URL: https://www.gov.br/pt-br/servicos/obter-coordenadas-e-baixar-os-arquivos-dos-imoveis-ruras-certificados?id=11964&origem=servico
+  - Description: INCRA's land archive allows users to search and download geospatial files for rural properties certified through the national land-survey systems, by layer and state.
+  - Responsible Use: Mapped boundaries and pressures are contextual layers, not proof of consent, ownership, illegality, or local impact.
+
+### Peoples, territories & culture (10 sources)
+
+- **FUNAI Indigenous Territories Geodata** (`funai-terras-indigenas`) — *Fundação Nacional dos Povos Indígenas (FUNAI)*
+  - Coverage: Brazil | Kind: Download | Timeframe: Updated monthly | Resolution: Vector boundaries (polygon/point), not a fixed pixel resolution
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://www.gov.br/funai/pt-br/atuacao/terras-indigenas/geoprocessamento-e-mapas
+  - Documentation URL: https://www.gov.br/funai/pt-br/atuacao/terras-indigenas/geoprocessamento-e-mapas/geoserver-funai
+  - Access Evidence URL: https://www.gov.br/funai/pt-br/atuacao/terras-indigenas/geoprocessamento-e-mapas
+  - Description: Monthly-updated geospatial boundaries for Brazil's indigenous territories, villages, and regional coordination areas, from the federal indigenous affairs agency's mapping unit.
+  - Responsible Use: A published boundary does not establish community consent, full tenure, or permission to use a territory. Confirm the local and legal context with the peoples and communities concerned.
+- **Terras Indígenas no Brasil** (`isa-terras-indigenas`) — *Instituto Socioambiental (ISA)*
+  - Coverage: Brazil | Kind: Explorer | Timeframe: 1983–present; updated continuously | Resolution: ISA territorial base: 1:100,000 in the Legal Amazon; 1:250,000 elsewhere in Brazil
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://ti.socioambiental.org/pt-br/
+  - Documentation URL: https://ti.socioambiental.org/pt-br/node/32
+  - Access Evidence URL: https://ti.socioambiental.org/pt-br/
+  - Description: An independent, long-running database profiling Indigenous territories across Brazil — legal status, location, population, and news — maintained by a civil-society organization since the 1980s.
+  - Responsible Use: A published boundary does not establish community consent, full tenure, or permission to use a territory. Confirm the local and legal context with the peoples and communities concerned.
+- **Povos Indígenas no Brasil (PIB)** (`isa-povos-indigenas-no-brasil`) — *Instituto Socioambiental (ISA)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Program work since the early 1970s; website since 1997; continuously maintained | Resolution: By people/ethnic group
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://pib.socioambiental.org/
+  - Documentation URL: https://pib.socioambiental.org/pt/Quem_somos
+  - Access Evidence URL: https://pib.socioambiental.org/pt/Perguntas_frequentes
+  - Description: An ISA encyclopedia of Brazil's Indigenous peoples, with articles on ways of life, languages, history, and rights. The program began in the early 1970s and the website launched in 1997. Unlike ISA's territorial portal, PIB focuses on peoples and cultures.
+  - Responsible Use: Public classifications and counts do not replace self-identification, local context, or community protocols.
+- **Censo Demográfico 2022 — Povos Indígenas** (`ibge-censo-indigena-2022`) — *Instituto Brasileiro de Geografia e Estatística (IBGE)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Systematic collection since 1991; latest round 2022, with continued table releases | Resolution: Municipality, Indigenous Land, Legal Amazon subregion
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html
+  - Documentation URL: https://biblioteca.ibge.gov.br/visualizacao/livros/liv102157.pdf
+  - Access Evidence URL: https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html
+  - Description: Official census results specific to Indigenous peoples, covering 391 ethnicities and 295 languages with demographic, territorial, and socioeconomic breakdowns by municipality, Indigenous Land, and Legal Amazon subregion, accessible through IBGE's SIDRA and Interactive Geographic Platform.
+  - Responsible Use: Public classifications and counts do not replace self-identification, local context, or community protocols.
+- **Glottolog — Catalogue of the World's Languages** (`glottolog-language-catalog`) — *Max Planck Institute for Evolutionary Anthropology*
+  - Coverage: Global — subsettable | Kind: Data portal | Timeframe: Continuously updated; version 5.3 as of 2026 | Resolution: Approximate point coordinates by language/dialect; not territorial boundaries
+  - Access: Dataset-specific license (Creative Commons Attribution 4.0 International (CC BY 4.0)) | Reviewed: 2026-08-24
+  - Source URL: https://glottolog.org/meta/downloads
+  - Documentation URL: https://glottolog.org/glottolog/glottologinformation
+  - Access Evidence URL: https://glottolog.org/meta/downloads
+  - Description: An open-access bibliographic and genealogical catalogue of the world's languages, including detailed classification and reference data for every documented Amazonian Indigenous language, built as a transparent, non-paywalled alternative to proprietary language databases.
+  - Responsible Use: Public classifications and counts do not replace self-identification, local context, or community protocols.
+- **Observatório da Violência contra os Povos Indígenas no Brasil** (`cimi-observatorio-violencia-indigena`) — *Conselho Indigenista Missionário (Cimi)*
+  - Coverage: Brazil | Kind: Dataset | Timeframe: Report data for 1994–1996 and 2003–present; annual from 2003 except two biennial editions | Resolution: Case records where available; otherwise state or DSEI aggregates; granularity varies by category/source
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://cimi.org.br/observatorio-da-violencia/edicoes-anteriores/
+  - Documentation URL: https://cimi.org.br/observatorio-da-violencia/o-relatorio/
+  - Access Evidence URL: https://cimi.org.br/observatorio-da-violencia/edicoes-anteriores/
+  - Description: Cimi's report series on violence and rights violations against Indigenous peoples in Brazil. It combines regional records, Indigenous reports, police and press records, and official data obtained through access-to-information requests; coverage is acknowledged as incomplete.
+  - Responsible Use: Public incident records are not a complete census or proof of local impact by themselves. Avoid using them to label communities or territories.
+- **Comunidades Quilombolas Certificadas** (`fcp-comunidades-quilombolas-certificadas`) — *Fundação Cultural Palmares*
+  - Coverage: Brazil | Kind: Dataset | Timeframe: 2003–present; registry updated monthly | Resolution: Community-level records
+  - Access: Dataset-specific license (Creative Commons Attribution) | Reviewed: 2026-08-24
+  - Source URL: https://www.gov.br/palmares/pt-br/departamentos/protecao-preservacao-e-articulacao/certificacao-quilombola
+  - Documentation URL: https://www.gov.br/palmares/pt-br/midias/arquivos-menu-departamentos/dpa/copy_of_manualcertificaoquilombola2024_ok2.pdf
+  - Access Evidence URL: https://dados.cultura.gov.br/dataset/comunidades-quilombolas-certificadas
+  - Description: The official national registry of certified remnant quilombo communities (Afro-descendant traditional communities), issued through a self-declaration process under ILO Convention 169, with continuous certification since 2003. A meaningful share of Brazil's quilombola territories are in the Amazon states of Pará, Maranhão, and Tocantins.
+  - Responsible Use: Public classifications and counts do not replace self-identification, local context, or community protocols.
+- **Legalized Indigenous Resguardos of Colombia** (`colombia-indigenous-resguardos`) — *Agencia Nacional de Tierras (ANT), via Colombia en Mapas*
+  - Coverage: Colombia | Kind: Download | Timeframe: Current published layer; update dates vary | Resolution: Vector boundaries (polygon/point), not a fixed pixel resolution
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://www.colombiaenmapas.gov.co/inicio/
+  - Documentation URL: https://sigi.igac.gov.co/colombia-mapas/preguntas-frecuentes-faq/index.html
+  - Access Evidence URL: https://sigi.igac.gov.co/colombia-mapas/preguntas-frecuentes-faq/index.html
+  - Description: A downloadable cartographic layer of legally recognized Indigenous resguardos, published by Colombia's land agency through the national mapping portal.
+  - Responsible Use: A published boundary does not establish community consent, full tenure, or permission to use a territory. Confirm the local and legal context with the peoples and communities concerned.
+- **Bolivia Indigenous Autonomous Territories Maps** (`bolivia-oep-indigenous-autonomy-maps`) — *Órgano Electoral Plurinacional (OEP), Bolivia*
+  - Coverage: Bolivia | Kind: Download | Timeframe: Published territory maps; update frequency varies | Resolution: Vector boundaries (polygon/point), not a fixed pixel resolution
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://web.oep.org.bo/aioc/via-territorio/mapas/
+  - Documentation URL: https://web.oep.org.bo/aioc/via-territorio/mapas/
+  - Access Evidence URL: https://web.oep.org.bo/aioc/via-territorio/mapas/
+  - Description: OEP publishes maps for Indigenous Native Peasant autonomous territories and processes, including several Amazonian TIOC areas. The maps document electoral and autonomy processes rather than a complete national land-tenure register.
+  - Responsible Use: A published boundary does not establish community consent, full tenure, or permission to use a territory. Confirm the local and legal context with the peoples and communities concerned.
+- **Indigenous Territories of Venezuela** (`provita-venezuela-indigenous-territories`) — *Provita and Wataniba*
+  - Coverage: Venezuela | Kind: Download | Timeframe: Layer dated August 2024 | Resolution: Vector boundaries (polygon/point), not a fixed pixel resolution
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://geoportalp-files.s3-us-east-2.amazonaws.com/files/shapefile/240808_TI_VEN_WGS84.zip
+  - Documentation URL: https://geoportal.provita.org.ve/en/faq/
+  - Access Evidence URL: https://geoportal.provita.org.ve/en/faq/
+  - Description: A downloadable map of Indigenous territories compiled by Provita and Wataniba, including areas described as formally recognized and areas without formal recognition.
+  - Responsible Use: A published boundary does not establish community consent, full tenure, or permission to use a territory. Confirm the local and legal context with the peoples and communities concerned.
+
+### Society, health & livelihoods (15 sources)
+
+- **IBGE Cidades** (`ibge-cidades`) — *Instituto Brasileiro de Geografia e Estatística (IBGE)*
+  - Coverage: Brazil | Kind: Explorer | Timeframe: Varies by indicator; many annual, some tied to Census years | Resolution: Municipality and state level
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://cidades.ibge.gov.br/
+  - Documentation URL: https://cidades.ibge.gov.br/pesquisas
+  - Access Evidence URL: https://cidades.ibge.gov.br/
+  - Description: Official municipal and state-level statistics for Brazil — population, economy, education, and health indicators — searchable by place, from the national statistics institute.
+- **DATASUS TABNET Health Information** (`datasus-tabnet`) — *DATASUS, Ministério da Saúde*
+  - Coverage: Brazil | Kind: Explorer | Timeframe: Varies by subsystem; e.g. SIM from 1979, SIA from July 1994, and SIH residence from 1995; ongoing | Resolution: Varies by subsystem; often municipality, health region/state, and sometimes facility/provider
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://tabnet.datasus.gov.br/
+  - Documentation URL: https://tabnet.datasus.gov.br/tabnet/tabdescr.htm
+  - Access Evidence URL: https://www.gov.br/saude/pt-br/acesso-a-informacao/faq/publicidade/como-posso-acessar-os-dados
+  - Description: An interactive tabulation tool for Brazil's public health system data — mortality, births, morbidity, and health-facility records — built by the Ministry of Health.
+- **Painel IDHM — Desenvolvimento Humano no Brasil** (`atlas-brasil-idhm`) — *PNUD Brasil, Fundação João Pinheiro, IBGE*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: 2012–2024; latest release published in 2026 | Resolution: Brazil, macroregions, states, metropolitan regions, and RIDE Grande Teresina
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://www.undp.org/pt/brazil/desenvolvimento-humano/painel-idhm
+  - Documentation URL: https://www.undp.org/pt/brazil/publications/radar-idhm-evolucao-do-idhm-e-de-seus-componentes-periodo-de-2012-2024
+  - Access Evidence URL: https://www.undp.org/copyright-terms-use
+  - Description: An official UNDP panel with downloadable data and interactive views of Brazil's Municipal Human Development Index (IDHM), including 2012–2024 trends, breakdowns by sex and race/color, inequality-adjusted estimates, and 2024 rankings for states and metropolitan regions.
+- **PNAD Contínua — Pesquisa Nacional por Amostra de Domicílios Contínua** (`ibge-pnad-continua`) — *Instituto Brasileiro de Geografia e Estatística (IBGE)*
+  - Coverage: Brazil | Kind: Dataset | Timeframe: Continuous since 2012 (predecessor annual survey since 1967) | Resolution: Household/person microdata; published estimates for Brazil, major regions, states, capital municipalities, selected metropolitan regions, and RIDE Grande Teresina
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://www.ibge.gov.br/estatisticas/sociais/trabalho/17270-pnad-continua.html
+  - Documentation URL: https://biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?id=2102269&view=detalhes
+  - Access Evidence URL: https://www.ibge.gov.br/estatisticas/sociais/trabalho/17270-pnad-continua.html
+  - Description: Brazil's ongoing quarterly household sample survey, providing detailed public microdata on employment, income, education, housing, and food security, disaggregatable to state and regional level including the Legal Amazon states.
+- **Cadastro Único para Programas Sociais (CadÚnico)** (`cadunico-familias-inscritas`) — *Ministério do Desenvolvimento e Assistência Social, Família e Combate à Fome (MDS)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Published monthly municipal records currently cover 2012–2025 | Resolution: Municipality level
+  - Access: Dataset-specific license (Creative Commons Attribution) | Reviewed: 2026-08-24
+  - Source URL: https://dados.gov.br/dados/conjuntos-dados/familias-inscritas-no-cadastro-unico
+  - Documentation URL: https://www.gov.br/mds/pt-br/acoes-e-programas/cadastro-unico
+  - Access Evidence URL: https://dados.gov.br/dados/conjuntos-dados/familias-inscritas-no-cadastro-unico
+  - Description: Monthly municipal counts of families registered in Cadastro Único, Brazil's federal registry for identifying and characterizing low-income households. This is an aggregate series, not individual-level registry data.
+- **VIGISAN — Inquérito Nacional sobre Insegurança Alimentar** (`rede-penssan-vigisan`) — *Rede Brasileira de Pesquisa em Soberania e Segurança Alimentar e Nutricional (Rede PENSSAN)*
+  - Coverage: Brazil | Kind: Dataset | Timeframe: Two survey rounds: 2020 and November 2021–April 2022 | Resolution: National and five macroregions, with urban/rural strata; II VIGISAN also provides state/DF estimates
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://redepenssan.org.br/olheparaafome/
+  - Documentation URL: https://redepenssan.org.br/olheparaafome/
+  - Access Evidence URL: https://redepenssan.org.br/olheparaafome/
+  - Description: Two national household surveys conducted by Rede PENSSAN during the COVID-19 period, measuring food insecurity with the Brazilian Food Insecurity Scale. The second round includes state and Federal District estimates.
+- **Data Zoom Amazônia** (`data-zoom-amazonia`) — *Departamento de Economia da PUC-Rio / Amazônia 2030*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Varies by underlying source; maintained package and visualizations | Resolution: Varies by underlying source; primarily the Brazilian Legal Amazon
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://datazoom.com.br/amazonia/pt/codigos-e-dados/
+  - Documentation URL: https://datazoom.com.br/datazoom.amazonia/
+  - Access Evidence URL: https://datazoom.com.br/amazonia/pt/codigos-e-dados/
+  - Description: Interactive visualizations and an open-source R package that download and prepare environmental, social, and economic data for the Brazilian Legal Amazon. The software is MIT-licensed; each underlying source keeps its own reuse terms.
+- **DANE Population Projections Data Viewer** (`dane-colombia-population-projections`) — *Departamento Administrativo Nacional de Estadística (DANE)*
+  - Coverage: Colombia | Kind: Explorer | Timeframe: Projection years and indicators vary by table | Resolution: Municipality level
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://sitios.dane.gov.co/visor-de-proyecciones-de-poblacion/
+  - Documentation URL: https://sitios.dane.gov.co/visor-de-proyecciones-de-poblacion/pdf/Manual_de_Usuario_Proyecciones_Poblacion.pdf
+  - Access Evidence URL: https://sitios.dane.gov.co/visor-de-proyecciones-de-poblacion/
+  - Description: DANE's interactive viewer presents demographic indicators and population, household, and housing projections at national, regional, departmental, and municipal levels.
+- **Peru National Censuses 2017 (REDATAM)** (`inei-peru-census-2017-redatam`) — *Instituto Nacional de Estadística e Informática (INEI)*
+  - Coverage: Peru | Kind: Explorer | Timeframe: Census reference year 2017 | Resolution: District and census-unit level
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://www.gob.pe/24120-consultar-base-de-datos-de-los-censos-nacionales-2017-redatam
+  - Documentation URL: https://censo2017.inei.gob.pe/
+  - Access Evidence URL: https://www.gob.pe/24120-consultar-base-de-datos-de-los-censos-nacionales-2017-redatam
+  - Description: INEI's 2017 population, housing, and Indigenous communities census can be queried online and exported as tables and charts, with results filterable to districts and Amazonian departments.
+  - Responsible Use: Public classifications and counts do not replace self-identification, local context, or community protocols.
+- **Bolivia Population and Housing Census 2024** (`bolivia-ine-census-2024`) — *Instituto Nacional de Estadística (INE) de Bolivia*
+  - Coverage: Bolivia | Kind: Data portal | Timeframe: Census reference year 2024 | Resolution: Municipality and TIOC level
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://anda.ine.gob.bo/index.php/catalog/132
+  - Documentation URL: https://anda.ine.gob.bo/index.php/catalog/132
+  - Access Evidence URL: https://cpv2024.ine.gob.bo/index.php/aviso-legal-y-terminos-de-uso/
+  - Description: INE's 2024 census portal provides results, documentation, REDATAM queries, and CSV downloads at municipal and Indigenous Native Peasant Territory (TIOC) levels.
+- **Ecuador Population and Housing Census 2022 Results** (`ecuador-census-2022-results`) — *Instituto Nacional de Estadística y Censos (INEC), Ecuador*
+  - Coverage: Ecuador | Kind: Data portal | Timeframe: Census reference year 2022 | Resolution: Province, canton, and parish tables vary by indicator
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://www.censoecuador.gob.ec/resultados-censo/
+  - Documentation URL: https://www.censoecuador.gob.ec/data-censo-ecuador/
+  - Access Evidence URL: https://www.censoecuador.gob.ec/data-censo-ecuador/
+  - Description: INEC's 2022 census results include downloadable tables on population, housing, education, work, ethnicity, Indigenous nationalities, languages, and household services.
+  - Responsible Use: Public classifications and counts do not replace self-identification, local context, or community protocols.
+- **Guyana Population and Housing Census Data Archive** (`guyana-census-2022`) — *Guyana Bureau of Statistics*
+  - Coverage: Guyana | Kind: Data portal | Timeframe: 2022 preliminary results; archive includes 2002 and 2012 village files | Resolution: National, regional, and village level
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://statisticsguyana.gov.gy/census/page/2/
+  - Documentation URL: https://statisticsguyana.gov.gy/census/page/2/
+  - Access Evidence URL: https://statisticsguyana.gov.gy/census/page/2/
+  - Description: The Bureau's census archive includes the 2022 preliminary population report, earlier census compendia, and downloadable village-level population and household files for prior census rounds.
+  - Responsible Use: Public classifications and counts do not replace self-identification, local context, or community protocols.
+- **Suriname Census 2012 Statistics** (`suriname-census-2012`) — *Algemeen Bureau voor de Statistiek (ABS), Suriname*
+  - Coverage: Suriname | Kind: Data portal | Timeframe: Census reference year 2012 | Resolution: District and ressort level, depending on table
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://statistics-suriname.org/census-statistics-2012/
+  - Documentation URL: https://statistics-suriname.org/census-statistics-2012/
+  - Access Evidence URL: https://statistics-suriname.org/census-statistics-2012/
+  - Description: ABS publishes the 2012 census tables and reports on population, households, education, employment, health, environment, and district and resort characteristics.
+- **Brazil School Census Microdata** (`inep-brazil-school-census-microdata`) — *Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: 1995–2025 (annual editions available) | Resolution: School, municipal, and state level
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar
+  - Documentation URL: https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-escolar
+  - Access Evidence URL: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar
+  - Description: Annual education microdata describe schools, classes, enrollments, and teaching staff across Brazil and can be filtered to Amazon states using published geographic identifiers.
+- **WorldPop Gridded Population Counts** (`worldpop-global-population`) — *WorldPop, University of Southampton*
+  - Coverage: Global — subsettable | Kind: Data portal | Timeframe: 2015–2030 (annual product series; release-specific estimates) | Resolution: 100 m country grids and 1 km global grids
+  - Access: Dataset-specific license (Creative Commons Attribution 4.0 International (CC BY 4.0)) | Reviewed: 2026-11-05
+  - Source URL: https://hub.worldpop.org/project/categories?id=3
+  - Documentation URL: https://www.worldpop.org/faq/
+  - Access Evidence URL: https://www.worldpop.org/faq/
+  - Description: WorldPop provides gridded population-count estimates at country and global scales, including annual 2015–2030 products that can be clipped to Amazonian countries and subregions.
+
+### Governance, rights & safeguards (18 sources)
+
+- **CNUC — National Register of Conservation Units** (`cnuc-unidades-conservacao`) — *Ministério do Meio Ambiente e Mudança do Clima (MMA)*
+  - Coverage: Brazil | Kind: Download | Timeframe: Registry snapshots from 2018 through July 2026; updated periodically | Resolution: Vector boundaries (protected-area polygons)
+  - Access: Dataset-specific license (Creative Commons Attribution (version not specified)) | Reviewed: 2026-08-24
+  - Source URL: https://dados.mma.gov.br/dataset/unidadesdeconservacao
+  - Documentation URL: https://dados.mma.gov.br/dataset/44b6dc8a-dc82-4a84-8d95-1b0da7c85dac/resource/71dc3c85-019f-4176-a43e-5aa41b3ec434/download/dicionario-de-dados-shapefile.pdf
+  - Access Evidence URL: https://dados.mma.gov.br/dataset/unidadesdeconservacao
+  - Description: Brazil's national register of conservation units, bringing together federal, state, municipal, and private protected-area records and published boundaries. Registry status and boundaries can lag legal acts; it is not Indigenous territorial or consent data.
+- **RAISG Amazon Maps** (`raisg-maps`) — *Red Amazónica de Información Socioambiental Georreferenciada (RAISG)*
+  - Coverage: Pan-Amazon | Kind: Explorer | Timeframe: Reference layers updated through June 2025; historical coverage varies by layer and source | Resolution: Vector boundaries (polygon/point), not a fixed pixel resolution
+  - Access: Provider terms apply | Reviewed: 2026-08-24
+  - Source URL: https://www.raisg.org/en/maps/
+  - Documentation URL: https://www.raisg.org/en/terms-of-use/
+  - Access Evidence URL: https://www.raisg.org/en/terms-of-use/
+  - Description: Pan-Amazon geospatial layers on Indigenous territories, protected areas, infrastructure and extractive concessions, compiled and harmonized from government, member-organization and other civil-society sources.
+  - Responsible Use: Mapped boundaries and pressures are contextual layers, not proof of consent, ownership, illegality, or local impact.
+- **Dados Abertos IBAMA — Fiscalização Ambiental** (`ibama-fiscalizacao-dados-abertos`) — *Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis (IBAMA)*
+  - Coverage: Brazil | Kind: Data portal | Timeframe: Infraction notices from 1980; embargo coverage includes all terms registered in the enforcement system; updated daily | Resolution: Infraction notices use reference points; embargo records include reference points and vector polygons
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://dadosabertos.ibama.gov.br/
+  - Documentation URL: https://www.gov.br/ibama/pt-br/servicos/consultas/autuacoes-e-embargos/areas-embargadas/2025-10-10_tutorial_autos_embargos_apreensoes_suspensoes_e_destruicoes_a_b.pdf
+  - Access Evidence URL: https://www.gov.br/ibama/pt-br/servicos/consultas/autuacoes-e-embargos/areas-embargadas/2025-10-10_tutorial_autos_embargos_apreensoes_suspensoes_e_destruicoes_a_b.pdf
+  - Description: Official IBAMA environmental-enforcement records, including infraction notices and embargo terms with related legal, geographic and administrative tables. The catalog resources are updated daily; reference coordinates are not necessarily exact offence locations.
+- **ORA — Observatório Regional Amazônico** (`otca-amazon-regional-observatory`) — *Organização do Tratado de Cooperação Amazônica (OTCA/ACTO)*
+  - Coverage: Pan-Amazon | Kind: Explorer | Timeframe: Varies by module and upstream source; monitoring products are updated on their own schedules | Resolution: Varies by module; national to basin-wide
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://www.oraotca.org/es
+  - Documentation URL: https://otca.org/el-observatorio-regional-amazonico-impulsa-la-conservacion-a-traves-de-datos-abiertos/
+  - Access Evidence URL: https://otca.org/el-observatorio-regional-amazonico-impulsa-la-conservacion-a-traves-de-datos-abiertos/
+  - Description: An intergovernmental open-data platform run by the Amazon Cooperation Treaty Organization, integrating over 20 million records from the eight Amazonian member countries on biodiversity, CITES-listed species, water resources, forests, fire, and indigenous peoples into shared dashboards and geographic viewers.
+  - Responsible Use: Mapped boundaries and pressures are contextual layers, not proof of consent, ownership, illegality, or local impact.
+- **LandMark — Global Platform of Indigenous and Community Lands** (`landmark-indigenous-community-lands`) — *World Resources Institute, in coalition with 12+ land rights organizations*
+  - Coverage: Global — subsettable | Kind: Explorer | Timeframe: Continuously updated; Indigenous and community land layers last updated June 2026 | Resolution: Community and territory polygons or points; source scale varies
+  - Access: Dataset-specific license (Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)) | Reviewed: 2026-08-24
+  - Source URL: https://www.landmarkmap.org/
+  - Documentation URL: https://landmarkmap.org/data-methods/methodology
+  - Access Evidence URL: https://landmarkmap.org/data-methods/access-data
+  - Description: An interactive global map of collectively-held Indigenous and community lands, layering legal recognition status, tenure security indicators, and pressures such as deforestation, dams, and resource concessions. Consolidates contributions from regional and national land-rights organizations rather than independently drawing boundaries.
+  - Responsible Use: A published boundary does not establish community consent, full tenure, or permission to use a territory. Confirm the local and legal context with the peoples and communities concerned.
+- **RRI Tenure Tool — Forest, Land & Resource Tenure Tracking** (`rri-tenure-tracking-tool`) — *Rights and Resources Initiative (RRI)*
+  - Coverage: Global — subsettable | Kind: Data portal | Timeframe: Varies by database: forest-area series 2002–2017; land-area series 2015–2020; current forest legal assessment through December 2024 | Resolution: Country- and community-based tenure-regime indicators; no boundary geodata
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://rightsandresources.org/rri-tenure-tool/
+  - Documentation URL: https://rightsandresources.org/tenure-tracking/
+  - Access Evidence URL: https://rightsandresources.org/rri-tenure-tool/
+  - Description: Interactive country and legal-regime tables on the statutory recognition of community forest, land and freshwater tenure rights across more than 75 countries. Coverage years and country samples differ by database.
+  - Responsible Use: Country-level tenure indicators are comparative context, not proof of a community's title, consent, or current territorial status.
+- **EcoCrime Data — Amazon Environmental Crime Platform** (`igarape-ecocrime-data`) — *Instituto Igarapé*
+  - Coverage: Pan-Amazon | Kind: Explorer | Timeframe: Platform launched in 2021; documented content updates through 2022 | Resolution: Selected mapped locations; Brazilian operation points may represent a municipality or protected area rather than exact crime coordinates
+  - Access: Publicly available | Reviewed: 2026-08-24
+  - Source URL: https://ecocrime.igarape.org.br/
+  - Documentation URL: https://igarape.org.br/en/ecocrime-data/
+  - Access Evidence URL: https://igarape.org.br/en/ecocrime-data/
+  - Description: An interactive visual narrative on environmental crime in Amazonian countries and territories, covering land grabbing, illegal logging, wildcat mining and wildlife trafficking through mapped examples and investigative stories. It is not a comprehensive incident register.
+  - Responsible Use: Public incident records are not a complete census or proof of local impact by themselves. Avoid using them to label communities or territories.
+- **SIGMINE — Mining Process Registry** (`anm-sigmine`) — *Agência Nacional de Mineração (ANM)*
+  - Coverage: Brazil | Kind: Explorer | Timeframe: Updated daily | Resolution: Mining-process polygons (SIRGAS 2000)
+  - Access: Dataset-specific license (Creative Commons Attribution (version not specified)) | Reviewed: 2026-08-24
+  - Source URL: https://geo.anm.gov.br/portal/home/index.html
+  - Documentation URL: https://dadosabertos.anm.gov.br/SIGMINE/metadados-sigmine.ods
+  - Access Evidence URL: https://dados.gov.br/dados/conjuntos-dados/sistema-de-informacoes-geograficas-da-mineracao-sigmine
+  - Description: Official registry of Brazilian mining-process polygons, status, and administrative data. A process boundary is informational, not proof of active extraction, legal authorization, or illegality.
+- **SIAT-AC Colombian Amazon Environmental Information System** (`siatac-amazonia-colombia`) — *Instituto Amazónico de Investigaciones Científicas SINCHI*
+  - Coverage: Colombia | Kind: Data portal | Timeframe: Varies by layer; includes multitemporal monitoring products | Resolution: Varies by layer; vector boundaries and raster monitoring products
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://siatac.co/
+  - Documentation URL: https://siatac.co/
+  - Access Evidence URL: https://siatac.co/
+  - Description: SIAT-AC organizes environmental monitoring, land-cover, fire, restoration, territorial-planning, and indicator resources for the Colombian Amazon, with a geospatial viewer and downloads.
+- **ANLA Information Assets Catalog** (`anla-information-assets`) — *Autoridad Nacional de Licencias Ambientales (ANLA)*
+  - Coverage: Colombia | Kind: Dataset | Timeframe: Catalog metadata updated periodically; listed assets vary | Resolution: Project and administrative-unit level (national registry)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://www.datos.gov.co/en/en/Environment-and-Sustainable-Development/Activos-de-Informaci-n-de-la-ANLA/s2my-4tjy
+  - Documentation URL: https://www.datos.gov.co/en/en/Environment-and-Sustainable-Development/Activos-de-Informaci-n-de-la-ANLA/s2my-4tjy
+  - Access Evidence URL: https://www.datos.gov.co/en/en/Environment-and-Sustainable-Development/Activos-de-Informaci-n-de-la-ANLA/s2my-4tjy
+  - Description: A catalog of information assets held by Colombia's environmental licensing authority, published through the national open-data platform with an OData endpoint.
+- **Colombia National Register of Protected Areas (RUNAP)** (`colombia-runap-protected-areas`) — *Parques Nacionales Naturales de Colombia*
+  - Coverage: Colombia | Kind: Data portal | Timeframe: Continuously synchronized; consult the published update date | Resolution: Vector boundaries (protected-area polygons)
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://mapas.parquesnacionales.gov.co/arcgis/rest/services/pnn/runap/FeatureServer/0
+  - Documentation URL: https://sites.google.com/parquesnacionales.gov.co/manual-usuario-externo-runap/informaci%C3%B3n-general
+  - Access Evidence URL: https://sites.google.com/parquesnacionales.gov.co/manual-usuario-externo-runap/informaci%C3%B3n-general
+  - Description: RUNAP provides public records and mapped boundaries for protected areas registered in Colombia's national protected-area system, with consolidated map downloads and feature-service access.
+- **SINIA Environmental Open Data Catalog** (`sinia-peru-open-data`) — *Ministerio del Ambiente del Perú (MINAM)*
+  - Coverage: Peru | Kind: Data portal | Timeframe: Varies by dataset; catalog content is maintained over time | Resolution: National, departmental, and district level
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://sinia.minam.gob.pe/portal/datos-abiertos/
+  - Documentation URL: https://sinia.minam.gob.pe/portal/datos-abiertos/
+  - Access Evidence URL: https://sinia.minam.gob.pe/portal/datos-abiertos/
+  - Description: SINIA is MINAM's environmental open-data catalog, linking datasets from the ministry and participating agencies on topics such as water, air, soils, biodiversity, and protected areas.
+- **Deforestation Monitoring Records in Peru's Protected Areas** (`sernanp-protected-area-deforestation`) — *Servicio Nacional de Áreas Naturales Protegidas por el Estado (SERNANP)*
+  - Coverage: Peru | Kind: Dataset | Timeframe: Published monitoring records include 2022–2023 observations | Resolution: Vector boundaries (polygon/point), not a fixed pixel resolution
+  - Access: Dataset-specific license (Open Data Commons Attribution License (ODC-BY)) | Reviewed: 2026-11-05
+  - Source URL: https://www.datosabiertos.gob.pe/dataset/registro-de-monitoreo-de-la-deforestaci%C3%B3n-en-el-%C3%A1mbito-de-las-%C3%A1reas-naturales-protegidas-%E2%80%93-0
+  - Documentation URL: https://www.datosabiertos.gob.pe/dataset/registro-de-monitoreo-de-la-deforestaci%C3%B3n-en-el-%C3%A1mbito-de-las-%C3%A1reas-naturales-protegidas-%E2%80%93-0
+  - Access Evidence URL: https://www.datosabiertos.gob.pe/dataset/registro-de-monitoreo-de-la-deforestaci%C3%B3n-en-el-%C3%A1mbito-de-las-%C3%A1reas-naturales-protegidas-%E2%80%93-0
+  - Description: Annual photo-interpreted records describe deforested areas inside Peru's national protected areas, with reporting year, image source, estimated cause, confidence, and area.
+- **GeoBolivia Spatial Data Infrastructure** (`geobolivia-national-geospatial-portal`) — *Ministerio de Planificación del Desarrollo y Medio Ambiente de Bolivia*
+  - Coverage: Bolivia | Kind: Data portal | Timeframe: Varies by contributing dataset and layer | Resolution: Varies by layer; vector boundaries and raster monitoring products
+  - Access: Publicly available | Reviewed: 2026-11-05
+  - Source URL: https://geobolivia.planificacion.gob.bo/ide-epb/
+  - Documentation URL: https://geobolivia.planificacion.gob.bo/ide-epb/
+  - Access Evidence URL: https://geobolivia.planificacion.gob.bo/ide-epb/
+  - Description: GeoBolivia's national spatial data infrastructure provides a searchable catalog, metadata, base layers, maps, and downloads from participating public institutions.
+- **Ecuador National Protected Areas Layer** (`ecuador-snap-protected-areas`) — *Ministerio del Ambiente, Agua y Transición Ecológica (MAATE), Ecuador*
+  - Coverage: Ecuador | Kind: Dataset | Timeframe: Current service snapshot; source update date is not stated on the layer page | Resolution: Vector boundaries (protected-area polygons)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://geovisorm.controlrecursosyenergia.gob.ec/arcgis/rest/services/MAAE_WGS84_17S/MapServer/0
+  - Documentation URL: https://geovisorm.controlrecursosyenergia.gob.ec/arcgis/rest/services/MAAE_WGS84_17S/MapServer/0
+  - Access Evidence URL: https://geovisorm.controlrecursosyenergia.gob.ec/arcgis/rest/services/MAAE_WGS84_17S/MapServer/0
+  - Description: A MAATE geospatial feature layer maps Ecuador's national protected areas as polygons for viewing and GIS queries.
+- **Protected Natural Areas of Venezuela** (`provita-venezuela-protected-areas`) — *Provita, using source information from Venezuelan environmental authorities*
+  - Coverage: Venezuela | Kind: Download | Timeframe: Layer dated 2023; update frequency is not stated | Resolution: Vector boundaries (protected-area polygons)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://geoportalp-files.s3-us-east-2.amazonaws.com/files/shapefile/230729_ANP_VEN_WGS84.zip
+  - Documentation URL: https://geoportal.provita.org.ve/en/faq/
+  - Access Evidence URL: https://geoportal.provita.org.ve/en/faq/
+  - Description: A downloadable shapefile of Venezuela's mapped protected-area boundaries, including national parks, natural monuments, wildlife reserves, biosphere reserves, and forest reserves.
+- **Guyana REDD+ Safeguard Information System** (`guyana-redd-safeguard-information-system`) — *Guyana Forestry Commission (GFC)*
+  - Coverage: Guyana | Kind: Data portal | Timeframe: Annual reporting cycle; published summaries vary by year | Resolution: National and regional safeguard indicators
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://forestry.gov.gy/overview-of-the-safeguard-information-system/
+  - Documentation URL: https://forestry.gov.gy/what-is-the-safeguard-information-system/
+  - Access Evidence URL: https://forestry.gov.gy/what-is-the-safeguard-information-system/
+  - Description: Guyana's REDD+ safeguard system organizes periodic public reporting on how environmental and social safeguards are addressed, including indicators, agency roles, and review procedures.
+- **World Database on Protected and Conserved Areas (WDPA)** (`protected-planet-wdpa`) — *UNEP-WCMC and the International Union for Conservation of Nature (IUCN)*
+  - Coverage: Global — subsettable | Kind: Data portal | Timeframe: Monthly releases; historical legal dates vary by protected area | Resolution: Vector boundaries (protected-area polygons)
+  - Access: Provider terms apply | Reviewed: 2026-11-05
+  - Source URL: https://www.protectedplanet.net/en
+  - Documentation URL: https://www.protectedplanet.net/en/news-and-stories/why-do-we-have-different-versions-of-the-wdpa
+  - Access Evidence URL: https://www.protectedplanet.net/en/news-and-stories/why-do-we-have-different-versions-of-the-wdpa
+  - Description: A global database of terrestrial and marine protected areas, aggregated from national and other data providers and released in public and licensed versions with source-specific restrictions.
+

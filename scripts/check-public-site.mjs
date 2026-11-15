@@ -14,6 +14,10 @@ const required = [
   "theme.js",
   "styles.css",
   "favicon.svg",
+  "manifest.webmanifest",
+  "sw.js",
+  "llms.txt",
+  "CITATION.cff",
   "og-image.png",
   "robots.txt",
   "sitemap.xml",
@@ -24,6 +28,7 @@ const required = [
   "data/catalog.js",
   "data/catalog.schema.json",
   "api/v1/catalog.json",
+  "api/v1/research-paths.json",
   "en/index.html",
   "es/index.html",
   "pt-br/index.html"

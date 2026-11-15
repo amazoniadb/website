@@ -2,6 +2,17 @@
 
 All notable changes to AmazoniaDB are documented here. Loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.12.0] — 2026-11-15
+
+### Added
+- Methodological comparability briefs (`comparability.points` and `comparability.synthesis`) across all 8 Guided Research Paths in Portuguese, English, and Spanish, rendered as a clean collapsible disclosure inside `#research-path-panel` without adding card clutter
+- One-click BibTeX citation and provenance export (`#download-source-set-bibtex`) in the Source Set panel (`#source-set-panel`) alongside CSV and share-link exports
+- Versioned JSON API mirror for Guided Research Paths at `api/v1/research-paths.json`
+- Canonical machine-readable index at `/llms.txt` documenting all 100 verified sources, all 8 Guided Research Paths, methodological comparability syntheses, and responsible-use rules for researchers and AI systems
+- Standard `CITATION.cff` (Citation File Format 1.2.0) at `/CITATION.cff` for academic software/dataset citation tools and reference managers
+- Offline-first Progressive Web App resilience (`/manifest.webmanifest` and network-first `/sw.js` service worker) caching the localized explorer pages, catalog, and JSON APIs for intermittent field connectivity
+- Internet Archive Wayback Machine fallback links in the automated weekly link monitor (`scripts/check-links.mjs`) whenever a provider URL fails or requires manual verification
+
 ## [1.11.0] — 2026-11-10
 
 ### Added
