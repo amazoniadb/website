@@ -65,28 +65,35 @@
         <p class="hero-copy">Um índice enxuto de dados socioambientais da Amazônia — para pesquisa, políticas públicas e uso comunitário.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#catalog">Explorar o diretório</a>
+          <a class="button button-secondary" href="#research-starter-title">Roteiros de investigação</a>
+          <a class="button button-secondary" href="?view=matrix#catalog" data-open-matrix-hero>Matriz Escala × Tempo</a>
         </div>
         <dl class="site-stats" aria-label="Resumo do diretório">
           <div><dt id="dataset-count">100</dt><dd>fontes selecionadas</dd></div>
+          <div><dt>9</dt><dd>países e territórios</dd></div>
+          <div><dt>8</dt><dd>caminhos comparativos</dd></div>
           <div><dt>6</dt><dd>áreas de conhecimento</dd></div>
         </dl>
       </section>
 
       <section class="research-starter container" aria-labelledby="research-starter-title">
-        <div>
-          <p class="eyebrow">Caminhos orientados</p>
-          <h2 id="research-starter-title">Comece pelo que você quer entender.</h2>
-        </div>
-        <div class="research-starter-copy">
-          <label class="research-question-label" for="research-path-choice">Escolha um caminho</label>
-          <select id="research-path-choice" aria-describedby="research-path-summary research-path-position"></select>
-          <p id="research-path-summary">Escolha um caminho para ver as fontes incluídas.</p>
-          <div class="research-starter-actions">
-            <button id="open-research-path" class="button button-secondary" type="button">Abrir caminho</button>
-            <button id="next-research-path" class="text-button" type="button">Próximo caminho</button>
+        <div class="research-starter-header">
+          <div>
+            <p class="eyebrow">Caminhos orientados · Síntese metodológica</p>
+            <h2 id="research-starter-title">Comece pelo que você quer entender.</h2>
           </div>
-          <p id="research-path-position" class="research-path-position" role="status"></p>
+          <div class="research-starter-copy">
+            <label class="research-question-label" for="research-path-choice">Escolha um caminho</label>
+            <select id="research-path-choice" aria-describedby="research-path-summary research-path-position"></select>
+            <p id="research-path-summary">Escolha um caminho para ver as fontes incluídas.</p>
+            <div class="research-starter-actions">
+              <button id="open-research-path" class="button button-secondary" type="button">Abrir caminho</button>
+              <button id="next-research-path" class="text-button" type="button">Próximo caminho</button>
+            </div>
+            <p id="research-path-position" class="research-path-position" role="status"></p>
+          </div>
         </div>
+        <div id="research-blueprint" class="research-blueprint"></div>
       </section>
 
       <section class="domain-section" aria-labelledby="domains-title">
@@ -113,6 +120,10 @@
             <h2 id="catalog-title">Diretório de conjuntos de dados</h2>
           </div>
           <div class="catalog-heading-meta">
+            <div id="view-toggle" class="view-toggle" role="group" aria-label="Modo de visualização do diretório">
+              <button class="view-toggle-btn" type="button" data-view-mode="cards" aria-pressed="true">Grade de cartões</button>
+              <button class="view-toggle-btn" type="button" data-view-mode="matrix" aria-pressed="false">Matriz Escala × Tempo</button>
+            </div>
             <p id="result-count" class="result-count" aria-live="polite"></p>
             <button id="copy-view-link" class="text-button copy-link-button" type="button">Copiar link desta visualização</button>
           </div>
@@ -216,6 +227,7 @@
         <p id="source-set-status" class="sr-only" role="status" aria-live="polite"></p>
         <div id="active-filters" class="active-filters" hidden></div>
 
+        <div id="observatory-matrix" class="observatory-matrix" hidden></div>
         <div id="dataset-grid" class="dataset-grid"></div>
         <div id="catalog-more" class="catalog-more" hidden>
           <button id="show-more-sources" class="button button-secondary" type="button" aria-controls="dataset-grid"></button>

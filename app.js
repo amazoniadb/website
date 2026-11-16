@@ -163,6 +163,52 @@
         checked: "Revisão mais recente",
         title: "Título (A–Z)",
         provider: "Provedor (A–Z)"
+      },
+      blueprintLabels: {
+        tabGroupLabel: "Roteiros de investigação",
+        pipelineHeading: "Circuito de investigação em fontes complementares",
+        rosettaHeading: "Pedra de Roseta metodológica — como comparar sem distorcer",
+        synthesisLabel: "Regra de síntese",
+        openInDirectory: "Filtrar diretório por este roteiro",
+        stagePathSources: "Adicionar roteiro à seleção",
+        downloadPathBibtex: "Baixar BibTeX do roteiro",
+        sourcesCount: (n) => `${n} fontes`
+      },
+      mapLabels: {
+        eyebrow: "Cartografia Pan-Amazônica",
+        title: "Explore a bacia e as 9 jurisdições no mapa",
+        clickMapHint: "Clique em um país no mapa ou nos filtros abaixo para recortar o diretório.",
+        clearTerritory: "Ver toda a bacia",
+        basinOverviewTitle: "Visão Pan-Amazônica integrada",
+        basinOverviewNote: "100 fontes auditadas distribuídas pelos 9 países e territórios da bacia, camadas regionais pan-amazônicas e bases globais recortáveis.",
+        jurisdictionSources: (n) => `${n} ${n === 1 ? "fonte nacional específica" : "fontes nacionais específicas"}`,
+        plusBasinAndGlobal: (pan, glob) => `+ ${pan} fontes Pan-Amazônia e ${glob} Globais recortáveis aplicáveis ao território`,
+        domainBreakdown: "Distribuição por área de conhecimento",
+        primaryInstitutions: "Principais instituições e publicadores indexados",
+        basinContourLabel: "Limite da Bacia / Pan-Amazônia"
+      },
+      matrixLabels: {
+        eyebrow: "Arquitetura de observação socioambiental",
+        title: "Matriz Escala × Tempo",
+        subtitle: "Cruzamento entre a frequência temporal de atualização e o modo de observação das fontes visíveis. Células vazias revelam lacunas observacionais no recorte atual.",
+        axisCorner: "Cadência \\ Modo",
+        coverageStat: (filled, total, count) => `${count} ${count === 1 ? "fonte plotada" : "fontes plotadas"} · ${filled} de ${total} células Escala × Tempo preenchidas (${total - filled} lacunas neste recorte)`,
+        emptyCell: "Sem fonte neste cruzamento",
+        switchBackToCards: "Voltar para a grade de cartões",
+        rows: [
+          { key: "near-real-time", label: "Tempo quase real e alertas", sub: "Diário / semanal / orbital" },
+          { key: "annual", label: "Séries anuais", sub: "Consolidação anual" },
+          { key: "historical-series", label: "Séries históricas", sub: "Multidecadal / contínua" },
+          { key: "periodic-census", label: "Censos e levantamentos", sub: "Decenal / periódico" },
+          { key: "current-reference", label: "Referência cadastral atual", sub: "Limites e malhas vigentes" }
+        ],
+        cols: [
+          { key: "remote-sensing", keys: ["remote-sensing"], label: "Satélite e sensoriamento" },
+          { key: "field-monitoring", keys: ["field-monitoring"], label: "Estações e parcelas de campo" },
+          { key: "territorial-boundary", keys: ["territorial-boundary"], label: "Limites territoriais e fundiários" },
+          { key: "census-survey", keys: ["census-survey"], label: "Censos e indicadores" },
+          { key: "registry-archive", keys: ["administrative-registry", "document-archive"], label: "Registros públicos e acervos" }
+        ]
       }
     },
     en: {
@@ -288,6 +334,52 @@
         checked: "Recently reviewed",
         title: "Title (A–Z)",
         provider: "Provider (A–Z)"
+      },
+      blueprintLabels: {
+        tabGroupLabel: "Investigation blueprints",
+        pipelineHeading: "Complementary multi-source investigation circuit",
+        rosettaHeading: "Methodological Rosetta Stone — how to compare without conflating",
+        synthesisLabel: "Synthesis rule",
+        openInDirectory: "Filter directory to this blueprint",
+        stagePathSources: "Add blueprint to selection",
+        downloadPathBibtex: "Download blueprint BibTeX",
+        sourcesCount: (n) => `${n} sources`
+      },
+      mapLabels: {
+        eyebrow: "Pan-Amazon Cartography",
+        title: "Explore the basin and all 9 jurisdictions on the map",
+        clickMapHint: "Click any jurisdiction on the map or a pill below to filter the directory.",
+        clearTerritory: "Show full basin",
+        basinOverviewTitle: "Integrated Pan-Amazon overview",
+        basinOverviewNote: "100 audited sources spanning all 9 Amazonian jurisdictions, basin-wide pan-Amazon layers, and subsettable global baselines.",
+        jurisdictionSources: (n) => `${n} jurisdiction-specific ${n === 1 ? "source" : "sources"}`,
+        plusBasinAndGlobal: (pan, glob) => `+ ${pan} Pan-Amazon and ${glob} subsettable Global sources applicable here`,
+        domainBreakdown: "Breakdown by area of knowledge",
+        primaryInstitutions: "Primary indexed institutions & publishers",
+        basinContourLabel: "Basin boundary / Pan-Amazon"
+      },
+      matrixLabels: {
+        eyebrow: "Socioenvironmental observation architecture",
+        title: "Scale × Time Observatory Matrix",
+        subtitle: "Cross-tabulation of update cadence against observation mode for the active filter. Empty cells reveal observational blind spots in the current slice.",
+        axisCorner: "Cadence \\ Mode",
+        coverageStat: (filled, total, count) => `${count} ${count === 1 ? "source plotted" : "sources plotted"} · ${filled} of ${total} Scale × Time cells covered (${total - filled} blind spots in this view)`,
+        emptyCell: "No source in this intersection",
+        switchBackToCards: "Return to card grid",
+        rows: [
+          { key: "near-real-time", label: "Near-real-time & alerts", sub: "Daily / weekly / orbital" },
+          { key: "annual", label: "Annual series", sub: "Yearly consolidation" },
+          { key: "historical-series", label: "Historical series", sub: "Multi-decade / continuous" },
+          { key: "periodic-census", label: "Periodic censuses & surveys", sub: "Decennial / multi-year" },
+          { key: "current-reference", label: "Current reference baselines", sub: "Active boundaries & registries" }
+        ],
+        cols: [
+          { key: "remote-sensing", keys: ["remote-sensing"], label: "Satellite & remote sensing" },
+          { key: "field-monitoring", keys: ["field-monitoring"], label: "Stations & field plots" },
+          { key: "territorial-boundary", keys: ["territorial-boundary"], label: "Territorial & tenure boundaries" },
+          { key: "census-survey", keys: ["census-survey"], label: "Censuses & indicators" },
+          { key: "registry-archive", keys: ["administrative-registry", "document-archive"], label: "Public registries & archives" }
+        ]
       }
     },
     es: {
@@ -422,6 +514,52 @@
         checked: "Revisión más reciente",
         title: "Título (A–Z)",
         provider: "Proveedor (A–Z)"
+      },
+      blueprintLabels: {
+        tabGroupLabel: "Rutas de investigación",
+        pipelineHeading: "Circuito de investigación con fuentes complementarias",
+        rosettaHeading: "Piedra Rosetta metodológica — cómo comparar sin distorsionar",
+        synthesisLabel: "Regla de síntesis",
+        openInDirectory: "Filtrar directorio por esta ruta",
+        stagePathSources: "Añadir ruta a la selección",
+        downloadPathBibtex: "Descargar BibTeX de la ruta",
+        sourcesCount: (n) => `${n} fuentes`
+      },
+      mapLabels: {
+        eyebrow: "Cartografía Panamazónica",
+        title: "Explora la cuenca y las 9 jurisdicciones en el mapa",
+        clickMapHint: "Haz clic en un país del mapa o en los filtros inferiores para recortar el directorio.",
+        clearTerritory: "Ver toda la cuenca",
+        basinOverviewTitle: "Visión Panamazónica integrada",
+        basinOverviewNote: "100 fuentes auditadas distribuidas en los 9 países y territorios de la cuenca, capas regionales panamazónicas y bases globales recortables.",
+        jurisdictionSources: (n) => `${n} ${n === 1 ? "fuente nacional específica" : "fuentes nacionales específicas"}`,
+        plusBasinAndGlobal: (pan, glob) => `+ ${pan} fuentes de Panamazonía y ${glob} Globales recortables aplicables al territorio`,
+        domainBreakdown: "Distribución por área de conocimiento",
+        primaryInstitutions: "Principales instituciones y proveedores indexados",
+        basinContourLabel: "Límite de la cuenca / Panamazonía"
+      },
+      matrixLabels: {
+        eyebrow: "Arquitectura de observación socioambiental",
+        title: "Matriz Escala × Tiempo",
+        subtitle: "Cruce entre la frecuencia temporal de actualización y el modo de observación de las fuentes visibles. Las celdas vacías revelan vacíos de observación en el recorte actual.",
+        axisCorner: "Cadencia \\ Modo",
+        coverageStat: (filled, total, count) => `${count} ${count === 1 ? "fuente trazada" : "fuentes trazadas"} · ${filled} de ${total} celdas Escala × Tiempo cubiertas (${total - filled} vacíos en este recorte)`,
+        emptyCell: "Sin fuente en esta intersección",
+        switchBackToCards: "Volver a la cuadrícula de tarjetas",
+        rows: [
+          { key: "near-real-time", label: "Tiempo casi real y alertas", sub: "Diario / semanal / orbital" },
+          { key: "annual", label: "Series anuales", sub: "Consolidación anual" },
+          { key: "historical-series", label: "Series históricas", sub: "Multidecadal / continua" },
+          { key: "periodic-census", label: "Censos y encuestas periódicas", sub: "Decenal / periódico" },
+          { key: "current-reference", label: "Referencia catastral vigente", sub: "Límites y registros actuales" }
+        ],
+        cols: [
+          { key: "remote-sensing", keys: ["remote-sensing"], label: "Satélite y teledetección" },
+          { key: "field-monitoring", keys: ["field-monitoring"], label: "Estaciones y parcelas de campo" },
+          { key: "territorial-boundary", keys: ["territorial-boundary"], label: "Límites territoriales y tenencia" },
+          { key: "census-survey", keys: ["census-survey"], label: "Censos e indicadores" },
+          { key: "registry-archive", keys: ["administrative-registry", "document-archive"], label: "Registros públicos y archivos" }
+        ]
       }
     }
   };
@@ -435,7 +573,10 @@
     formatLabels,
     detailLabels,
     researchLabels,
-    sourceSetLabels
+    sourceSetLabels,
+    blueprintLabels,
+    mapLabels,
+    matrixLabels
   } = ui;
 
   const compactLicenseLabels = {
@@ -504,12 +645,16 @@
     sort: "",
     source: "",
     path: "",
+    view: "cards",
     selectedIds: [],
     visibleLimit: CATALOG_PAGE_SIZE
   };
 
   const domainNav = document.getElementById("domain-nav");
   const coverageStrip = document.getElementById("coverage-strip");
+  const researchBlueprint = document.getElementById("research-blueprint");
+  const viewToggle = document.getElementById("view-toggle");
+  const observatoryMatrix = document.getElementById("observatory-matrix");
   const grid = document.getElementById("dataset-grid");
   const emptyState = document.getElementById("empty-state");
   const resultCount = document.getElementById("result-count");
@@ -573,6 +718,7 @@
   const validModes = new Set(modeValues);
   const validTime = new Set(timeValues);
   const validSort = new Set(["checked", "title", "provider"]);
+  const validView = new Set(["cards", "matrix"]);
   const pathsById = new Map(researchPaths.map((path) => [path.id, path]));
   const validParam = (value, allowed) => allowed.has(value) ? value : "";
 
@@ -585,6 +731,7 @@
   state.mode = validParam(initialParams.get("mode") || "", validModes);
   state.time = validParam(initialParams.get("time") || "", validTime);
   state.sort = validParam(initialParams.get("sort") || "", validSort);
+  state.view = validParam(initialParams.get("view") || "", validView) || "cards";
   state.source = initialParams.get("source") || "";
   state.path = pathsById.has(initialParams.get("path")) ? initialParams.get("path") : "";
   state.selectedIds = [...new Set((initialParams.get("set") || "").split(",").filter((id) => catalog.some((record) => record.id === id)))].slice(0, SOURCE_SET_LIMIT);
@@ -632,6 +779,7 @@
     if (state.mode) params.set("mode", state.mode);
     if (state.time) params.set("time", state.time);
     if (state.sort) params.set("sort", state.sort);
+    if (state.view === "matrix") params.set("view", "matrix");
     if (state.source) params.set("source", state.source);
     if (state.path) params.set("path", state.path);
     if (state.selectedIds.length) params.set("set", state.selectedIds.join(","));
@@ -712,6 +860,72 @@
     if (activeCount && moreFilters) moreFilters.open = true;
   };
 
+  const MAP_TERRITORIES = Object.freeze([
+    {
+      key: "Venezuela",
+      code: "VE",
+      labelX: 264,
+      labelY: 78,
+      d: "M 154,28 L 235,32 L 325,44 L 356,74 L 332,108 L 308,136 L 268,148 L 252,145 L 246,105 L 192,66 Z"
+    },
+    {
+      key: "Colombia",
+      code: "CO",
+      labelX: 158,
+      labelY: 118,
+      d: "M 92,140 L 82,92 L 106,38 L 154,28 L 192,66 L 246,105 L 252,145 L 222,162 L 198,206 L 178,204 L 132,156 Z"
+    },
+    {
+      key: "Ecuador",
+      code: "EC",
+      labelX: 92,
+      labelY: 178,
+      d: "M 64,145 L 92,140 L 132,156 L 126,184 L 96,216 L 68,205 L 58,172 Z"
+    },
+    {
+      key: "Peru",
+      code: "PE",
+      labelX: 145,
+      labelY: 274,
+      d: "M 68,205 L 96,216 L 126,184 L 132,156 L 178,204 L 198,206 L 188,248 L 222,295 L 226,338 L 196,380 L 142,342 L 88,274 L 52,226 Z"
+    },
+    {
+      key: "Bolivia",
+      code: "BO",
+      labelX: 298,
+      labelY: 354,
+      d: "M 222,295 L 266,278 L 324,306 L 372,334 L 388,378 L 342,414 L 254,418 L 226,338 Z"
+    },
+    {
+      key: "Guyana",
+      code: "GY",
+      labelX: 372,
+      labelY: 102,
+      d: "M 356,74 L 386,62 L 404,95 L 398,138 L 366,142 L 348,118 L 332,108 Z"
+    },
+    {
+      key: "Suriname",
+      code: "SR",
+      labelX: 424,
+      labelY: 112,
+      d: "M 404,95 L 444,88 L 448,128 L 398,138 Z"
+    },
+    {
+      key: "French Guiana",
+      code: "GF",
+      labelX: 468,
+      labelY: 108,
+      d: "M 444,88 L 478,94 L 484,126 L 448,128 Z"
+    },
+    {
+      key: "Brazil",
+      code: "BR",
+      labelX: 398,
+      labelY: 234,
+      d: "M 484,126 L 524,148 L 588,176 L 596,245 L 552,324 L 468,368 L 388,378 L 372,334 L 324,306 L 266,278 L 222,295 L 188,248 L 198,206 L 222,162 L 252,145 L 268,148 L 308,136 L 332,108 L 348,118 L 366,142 L 398,138 L 448,128 Z"
+    }
+  ]);
+
   const renderCoverageStrip = () => {
     if (!coverageStrip) return;
     const counts = new Map();
@@ -720,11 +934,136 @@
       counts.set(record.coverage, (counts.get(record.coverage) || 0) + 1);
     }
     const orderedCoverage = [...validCoverage].sort((a, b) => (counts.get(b) || 0) - (counts.get(a) || 0));
-    coverageStrip.innerHTML = orderedCoverage.map((cov) => {
+    const pillsMarkup = orderedCoverage.map((cov) => {
       const count = counts.get(cov) || 0;
       const label = coverageLabels[cov] || cov;
       return `<button class="coverage-pill" type="button" data-coverage-pill="${escapeHtml(cov)}" aria-pressed="${state.coverage === cov}"><span>${escapeHtml(label)}</span><span class="coverage-pill-count">${count}</span></button>`;
     }).join("");
+
+    const mapPathsMarkup = MAP_TERRITORIES.map((territory) => {
+      const count = counts.get(territory.key) || 0;
+      const isSelected = state.coverage === territory.key;
+      const density = count >= 15 ? "high" : count >= 6 ? "medium" : "base";
+      const label = coverageLabels[territory.key] || territory.key;
+      return `
+        <g class="map-jurisdiction${isSelected ? " is-selected" : ""}" data-map-territory="${escapeHtml(territory.key)}" data-density="${density}" role="button" tabindex="0" aria-pressed="${isSelected}" aria-label="${escapeHtml(`${label}: ${count}`)}">
+          <path class="map-polygon" d="${territory.d}"/>
+          <g class="map-badge" transform="translate(${territory.labelX}, ${territory.labelY})">
+            <rect x="-24" y="-11" width="48" height="22" rx="6"/>
+            <text x="0" y="4" text-anchor="middle">${escapeHtml(territory.code)} · ${count}</text>
+          </g>
+        </g>`;
+    }).join("");
+
+    const panCount = counts.get("Pan-Amazon") || 0;
+    const globalCount = counts.get("Global — subsettable") || 0;
+
+    const buildDossierMarkup = (activeGov) => {
+      const dossierRecords = activeGov
+        ? catalog.filter((record) => record.coverage === activeGov)
+        : catalog;
+      const isCountrySelected = activeGov && activeGov !== "Pan-Amazon" && activeGov !== "Global — subsettable";
+      const domainBreakdownMarkup = categories.map((cat) => {
+        const catCount = dossierRecords.filter((r) => r.category === cat.key).length;
+        const pct = dossierRecords.length ? Math.round((catCount / dossierRecords.length) * 100) : 0;
+        return `
+          <div class="dossier-domain-row" data-domain="${escapeHtml(cat.id)}">
+            <div class="dossier-domain-label">
+              <span class="dossier-domain-dot" data-domain="${escapeHtml(cat.id)}"></span>
+              <span>${escapeHtml(cat.label)}</span>
+              <strong>${catCount}</strong>
+            </div>
+            <svg class="dossier-domain-bar" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true">
+              <rect class="bar-track" width="100" height="6" rx="3"/>
+              <rect class="bar-fill" width="${pct}" height="6" rx="3"/>
+            </svg>
+          </div>`;
+      }).join("");
+
+      const uniqueProviders = [...new Set(dossierRecords.map((r) => {
+        const short = r.provider.match(/\(([A-Z0-9/-]{2,14})\)/)?.[1] || r.provider.split(/[—–/]/)[0].trim();
+        return short.length > 34 ? `${short.slice(0, 32)}…` : short;
+      }))].slice(0, 7);
+      const providerPills = uniqueProviders.map((p) => `<span class="dossier-provider-chip">${escapeHtml(p)}</span>`).join("");
+
+      const dossierTitle = activeGov ? (coverageLabels[activeGov] || activeGov) : mapLabels.basinOverviewTitle;
+      const dossierSub = activeGov
+        ? `${mapLabels.jurisdictionSources(dossierRecords.length)}${isCountrySelected ? ` · ${mapLabels.plusBasinAndGlobal(panCount, globalCount)}` : ""}`
+        : mapLabels.basinOverviewNote;
+
+      return `
+        <div class="dossier-header">
+          <span class="dossier-badge">${escapeHtml(activeGov ? (coverageLabels[activeGov] || activeGov) : coverageLabels["Pan-Amazon"])}</span>
+          <h4>${escapeHtml(dossierTitle)}</h4>
+          <p>${escapeHtml(dossierSub)}</p>
+        </div>
+        <div class="dossier-section">
+          <p class="dossier-section-title">${escapeHtml(mapLabels.domainBreakdown)}</p>
+          <div class="dossier-domains">${domainBreakdownMarkup}</div>
+        </div>
+        <div class="dossier-section">
+          <p class="dossier-section-title">${escapeHtml(mapLabels.primaryInstitutions)}</p>
+          <div class="dossier-providers">${providerPills}</div>
+        </div>`;
+    };
+    coverageStrip._buildDossierMarkup = buildDossierMarkup;
+
+    coverageStrip.innerHTML = `
+      <div class="basin-explorer-grid">
+        <div class="basin-map-card">
+          <div class="basin-map-header">
+            <div>
+              <p class="eyebrow">${escapeHtml(mapLabels.eyebrow)}</p>
+              <h3 class="basin-map-title">${escapeHtml(mapLabels.title)}</h3>
+              <p class="basin-map-sub">${escapeHtml(mapLabels.clickMapHint)}</p>
+            </div>
+            ${state.coverage ? `<button class="text-button" type="button" data-map-territory="">${escapeHtml(mapLabels.clearTerritory)}</button>` : ""}
+          </div>
+          <div class="basin-svg-wrap">
+            <svg class="basin-svg" viewBox="0 0 620 430" role="img" aria-label="${escapeHtml(mapLabels.title)}">
+              <g class="map-graticule" aria-hidden="true">
+                <line x1="20" y1="158" x2="600" y2="158" class="map-equator"/>
+                <line x1="20" y1="283" x2="600" y2="283"/>
+                <line x1="210" y1="15" x2="210" y2="420"/>
+                <line x1="360" y1="15" x2="360" y2="420"/>
+                <line x1="510" y1="15" x2="510" y2="420"/>
+                <text x="26" y="152">0° EQ</text>
+                <text x="26" y="277">10°S</text>
+                <text x="214" y="28">70°W</text>
+                <text x="364" y="28">60°W</text>
+                <text x="514" y="28">50°W</text>
+              </g>
+              <g class="map-jurisdictions">
+                ${mapPathsMarkup}
+              </g>
+              <g class="map-rivers" aria-hidden="true">
+                <path d="M 98,238 Q 146,214 205,204 T 330,192 T 445,174 L 512,152" class="river-mainstem"/>
+                <path d="M 225,134 Q 275,162 330,192" class="river-tributary"/>
+                <path d="M 278,334 Q 312,268 352,202" class="river-tributary"/>
+                <path d="M 164,312 Q 178,256 205,204" class="river-tributary"/>
+                <path d="M 392,310 Q 402,245 412,184" class="river-tributary"/>
+                <path d="M 442,316 Q 446,248 452,178" class="river-tributary"/>
+              </g>
+              <path class="map-basin-contour${state.coverage === "Pan-Amazon" ? " is-selected" : ""}" d="M 96,152 C 118,86 196,48 286,46 C 368,44 446,72 494,122 C 538,168 548,236 502,296 C 454,352 372,368 294,362 C 218,356 154,316 116,258 C 86,214 82,182 96,152 Z" aria-hidden="true"/>
+            </svg>
+            <div class="basin-map-legend">
+              <button type="button" class="basin-contour-toggle${state.coverage === "Pan-Amazon" ? " is-active" : ""}" data-map-territory="Pan-Amazon">
+                <span class="contour-swatch" aria-hidden="true"></span>
+                <span>${escapeHtml(mapLabels.basinContourLabel)} (${panCount})</span>
+              </button>
+              <button type="button" class="basin-contour-toggle${state.coverage === "Global — subsettable" ? " is-active" : ""}" data-map-territory="Global — subsettable">
+                <span>${escapeHtml(coverageLabels["Global — subsettable"])} (${globalCount})</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="basin-dossier-card" data-dossier-card>
+          ${buildDossierMarkup(state.coverage)}
+        </div>
+      </div>
+      <div class="coverage-pills-row">
+        ${pillsMarkup}
+      </div>`;
   };
 
   const renderActiveFilters = () => {
@@ -837,8 +1176,7 @@
   };
 
   const escapeBibtex = (value) => String(value ?? "").replaceAll("\\", "\\\\").replaceAll("{", "\\{").replaceAll("}", "\\}");
-  const downloadSourceSetBibtex = () => {
-    const records = getSelectedRecords();
+  const exportRecordsBibtex = (records, filename = ui.bibtexFilename) => {
     if (!records.length) return;
     const exportedDate = new Date().toISOString().slice(0, 10);
     const setUrl = sourceSetUrl();
@@ -881,12 +1219,13 @@
     const href = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = href;
-    link.download = ui.bibtexFilename;
+    link.download = filename;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     window.setTimeout(() => URL.revokeObjectURL(href), 0);
   };
+  const downloadSourceSetBibtex = () => exportRecordsBibtex(getSelectedRecords(), ui.bibtexFilename);
 
   const renderResearchStarter = () => {
     if (!researchPathChoice || !researchPathButton) return;
@@ -895,6 +1234,7 @@
       researchPathChoice.disabled = true;
       researchPathButton.disabled = true;
       nextResearchPathButton?.setAttribute("hidden", "");
+      if (researchBlueprint) researchBlueprint.innerHTML = "";
       return;
     }
     researchPathChoice.innerHTML = researchPaths.map((path) => `<option value="${escapeHtml(path.id)}">${escapeHtml(localized(path.locales?.shortTitle) || localized(path.locales?.title))}</option>`).join("");
@@ -907,6 +1247,85 @@
     if (nextResearchPathButton) {
       nextResearchPathButton.disabled = researchPaths.length < 2;
       nextResearchPathButton.hidden = researchPaths.length < 2;
+    }
+
+    if (researchBlueprint) {
+      const tabsMarkup = researchPaths.map((path, index) => {
+        const summaryText = localized(path.locales?.selectorSummary) || "";
+        const scopeBadge = summaryText.split(" · ")[0] || "";
+        const shortTitle = localized(path.locales?.shortTitle) || localized(path.locales?.title);
+        const isCurrent = index === starterPathIndex;
+        return `
+          <button type="button" class="blueprint-tab" data-blueprint-index="${index}" aria-pressed="${isCurrent}">
+            <span class="blueprint-tab-meta"><span>${escapeHtml(scopeBadge)}</span><span>${escapeHtml(blueprintLabels.sourcesCount(path.records.length))}</span></span>
+            <strong>${escapeHtml(shortTitle)}</strong>
+          </button>`;
+      }).join("");
+
+      const stepsMarkup = activePath.records.map((entry, idx) => {
+        const record = catalog.find((r) => r.id === entry.id);
+        if (!record) return "";
+        const stepNum = String(idx + 1).padStart(2, "0");
+        const resVal = record.spatialResolution ? compactFactValue(spatialResolutionLabels[record.id] || spatialResolutionLabels[record.spatialResolution] || record.spatialResolution, 28) : "";
+        const timeVal = record.temporalCoverage ? compactFactValue(temporalCoverageLabels[record.id] || record.temporalCoverage, 28) : "";
+        const covVal = coverageLabels[record.coverage] || record.coverage;
+        return `
+          <div class="blueprint-step">
+            <div class="blueprint-step-top">
+              <span class="blueprint-step-num">${stepNum}</span>
+              <span class="blueprint-step-role">${escapeHtml(localized(entry.role))}</span>
+            </div>
+            <button type="button" class="blueprint-step-title" data-focus-source="${escapeHtml(record.id)}">${escapeHtml(record.title)} ↗</button>
+            <p class="blueprint-step-provider">${escapeHtml(record.provider)}</p>
+            <p class="blueprint-step-reason">${escapeHtml(localized(entry.reason))}</p>
+            <div class="blueprint-step-badges">
+              ${resVal ? `<span>${escapeHtml(resVal)}</span>` : ""}
+              ${timeVal ? `<span>${escapeHtml(timeVal)}</span>` : ""}
+              <span>${escapeHtml(covVal)}</span>
+            </div>
+          </div>`;
+      }).join("");
+
+      const comp = activePath.locales?.comparability;
+      const compCards = Array.isArray(comp?.points)
+        ? comp.points.map((point, idx) => `
+          <div class="rosetta-point">
+            <span class="rosetta-point-num">0${idx + 1}</span>
+            <p>${escapeHtml(localized(point))}</p>
+          </div>`).join("")
+        : "";
+      const compSynthesis = comp?.synthesis ? localized(comp.synthesis) : "";
+
+      researchBlueprint.innerHTML = `
+        <div class="blueprint-tabs" role="group" aria-label="${escapeHtml(blueprintLabels.tabGroupLabel)}">
+          ${tabsMarkup}
+        </div>
+        <div class="blueprint-stage">
+          <div class="blueprint-stage-header">
+            <div>
+              <p class="eyebrow">${escapeHtml(blueprintLabels.pipelineHeading)}</p>
+              <h3>${escapeHtml(localized(activePath.locales?.title))}</h3>
+              <p>${escapeHtml(localized(activePath.locales?.selectorSummary) || localized(activePath.locales?.summary))}</p>
+            </div>
+            <div class="blueprint-stage-actions">
+              <button type="button" class="button button-primary" data-open-blueprint="${escapeHtml(activePath.id)}">${escapeHtml(blueprintLabels.openInDirectory)}</button>
+              <button type="button" class="button button-secondary" data-stage-blueprint="${escapeHtml(activePath.id)}">${escapeHtml(blueprintLabels.stagePathSources)}</button>
+              <button type="button" class="button button-secondary" data-bibtex-blueprint="${escapeHtml(activePath.id)}">${escapeHtml(blueprintLabels.downloadPathBibtex)}</button>
+            </div>
+          </div>
+          <div class="blueprint-pipeline">
+            ${stepsMarkup}
+          </div>
+          <div class="blueprint-rosetta">
+            <div class="rosetta-header">
+              <p class="eyebrow">${escapeHtml(blueprintLabels.rosettaHeading)}</p>
+            </div>
+            <div class="rosetta-grid">
+              ${compCards}
+            </div>
+            ${compSynthesis ? `<div class="rosetta-synthesis"><strong>${escapeHtml(blueprintLabels.synthesisLabel)}:</strong> <span>${escapeHtml(compSynthesis)}</span></div>` : ""}
+          </div>
+        </div>`;
     }
   };
 
@@ -995,12 +1414,96 @@
     return records;
   };
 
+  const categoryDomainId = Object.fromEntries(categories.map((c) => [c.key, c.id]));
+
+  const renderObservatoryMatrix = (allRecords) => {
+    if (!observatoryMatrix) return;
+    const isMatrix = state.view === "matrix";
+    observatoryMatrix.hidden = !isMatrix;
+    grid.hidden = isMatrix;
+    if (viewToggle) {
+      viewToggle.querySelectorAll?.("button[data-view-mode]")?.forEach((btn) => {
+        btn.setAttribute("aria-pressed", String(btn.dataset.viewMode === state.view));
+      });
+    }
+    if (!isMatrix) return;
+
+    const totalCells = matrixLabels.rows.length * matrixLabels.cols.length;
+    let filledCells = 0;
+
+    const colHeaders = matrixLabels.cols.map((col) => `<th scope="col">${escapeHtml(col.label)}</th>`).join("");
+    const bodyRows = matrixLabels.rows.map((row) => {
+      const cells = matrixLabels.cols.map((col) => {
+        const cellRecords = allRecords.filter((record) =>
+          record.tags?.time?.includes(row.key)
+          && col.keys.some((k) => record.tags?.modes?.includes(k))
+        );
+        if (cellRecords.length > 0) filledCells += 1;
+        if (!cellRecords.length) {
+          return `<td class="matrix-cell is-empty"><span class="matrix-empty-label">${escapeHtml(matrixLabels.emptyCell)}</span></td>`;
+        }
+        const chips = cellRecords.map((record) => {
+          const domId = categoryDomainId[record.category] || "life";
+          const resShort = record.spatialResolution
+            ? compactFactValue(spatialResolutionLabels[record.id] || spatialResolutionLabels[record.spatialResolution] || record.spatialResolution, 18)
+            : "";
+          return `
+            <button type="button" class="matrix-chip" data-domain="${escapeHtml(domId)}" data-matrix-source="${escapeHtml(record.id)}" title="${escapeHtml(`${record.title} — ${record.provider}`)}">
+              <span class="matrix-chip-dot" data-domain="${escapeHtml(domId)}"></span>
+              <span class="matrix-chip-title">${escapeHtml(record.title)}</span>
+              ${resShort ? `<span class="matrix-chip-res">${escapeHtml(resShort)}</span>` : ""}
+            </button>`;
+        }).join("");
+        return `<td class="matrix-cell"><div class="matrix-cell-items">${chips}</div></td>`;
+      }).join("");
+      return `
+        <tr>
+          <th scope="row">
+            <strong>${escapeHtml(row.label)}</strong>
+            <span>${escapeHtml(row.sub)}</span>
+          </th>
+          ${cells}
+        </tr>`;
+    }).join("");
+
+    const legendItems = categories.map((cat) => `
+      <span class="matrix-legend-item">
+        <span class="dossier-domain-dot" data-domain="${escapeHtml(cat.id)}"></span>
+        <span>${escapeHtml(cat.label)}</span>
+      </span>`).join("");
+
+    observatoryMatrix.innerHTML = `
+      <div class="matrix-header">
+        <div>
+          <p class="eyebrow">${escapeHtml(matrixLabels.eyebrow)}</p>
+          <h3>${escapeHtml(matrixLabels.title)}</h3>
+          <p class="matrix-subtitle">${escapeHtml(matrixLabels.subtitle)}</p>
+          <p class="matrix-stat">${escapeHtml(matrixLabels.coverageStat(filledCells, totalCells, allRecords.length))}</p>
+        </div>
+        <button type="button" class="button button-secondary" data-view-mode="cards">${escapeHtml(matrixLabels.switchBackToCards)}</button>
+      </div>
+      <div class="matrix-legend">${legendItems}</div>
+      <div class="matrix-scroll">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th scope="col" class="matrix-corner">${escapeHtml(matrixLabels.axisCorner)}</th>
+              ${colHeaders}
+            </tr>
+          </thead>
+          <tbody>
+            ${bodyRows}
+          </tbody>
+        </table>
+      </div>`;
+  };
+
   const renderCatalog = () => {
     const activePath = getActivePath();
     const allRecords = getVisibleRecords();
     const isUnfiltered = !activePath && !state.category && !state.search.trim() && !state.coverage && !state.topic && !state.role && !state.access && !state.mode && !state.time && !state.sort && !state.source;
     const records = isUnfiltered ? allRecords.slice(0, state.visibleLimit) : allRecords;
-    resultCount.textContent = isUnfiltered && records.length < allRecords.length
+    resultCount.textContent = isUnfiltered && records.length < allRecords.length && state.view !== "matrix"
       ? ui.resultCountPartial(records.length, allRecords.length)
       : ui.resultCountTotal(allRecords.length);
     emptyState.hidden = allRecords.length !== 0;
@@ -1009,11 +1512,12 @@
     }
     if (showMorePanel && showMoreButton) {
       const remaining = allRecords.length - records.length;
-      showMorePanel.hidden = remaining <= 0;
+      showMorePanel.hidden = state.view === "matrix" || remaining <= 0;
       showMoreButton.textContent = ui.showMoreText(Math.min(CATALOG_PAGE_SIZE, remaining));
     }
     renderCoverageStrip();
     renderActiveFilters();
+    renderObservatoryMatrix(allRecords);
     grid.innerHTML = records.map((record) => {
       const detailItem = (icon, label, value, visibleValue = value, href = "", linkLabel = "") => `<li data-fact="${escapeHtml(icon)}" aria-label="${escapeHtml(`${label}: ${value}`)}"><span class="detail-icon" aria-hidden="true">${detailIcons[icon]}</span><span${visibleValue !== value ? ` title="${escapeHtml(value)}"` : ""}>${href ? `<a class="fact-evidence-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${label}: ${value}. ${linkLabel}`)}">${escapeHtml(visibleValue)}</a>` : escapeHtml(visibleValue)}</span></li>`;
       const reviewDate = formatDate(record.checked);
@@ -1088,7 +1592,7 @@
       : "";
     const compSynthesis = comp?.synthesis ? `<p class="research-comparability-synthesis">${escapeHtml(localized(comp.synthesis))}</p>` : "";
     const compMarkup = compPoints
-      ? `<details class="research-comparability"><summary>${escapeHtml(researchLabels.comparabilitySummary)}</summary><div class="research-comparability-body"><ul>${compPoints}</ul>${compSynthesis}</div></details>`
+      ? `<details class="research-comparability" open><summary>${escapeHtml(researchLabels.comparabilitySummary)}</summary><div class="research-comparability-body"><ul>${compPoints}</ul>${compSynthesis}</div></details>`
       : "";
     researchPathPanel.setAttribute("aria-label", researchLabels.heading);
     researchPathPanel.innerHTML = `
@@ -1174,10 +1678,11 @@
   });
 
   coverageStrip?.addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-coverage-pill]");
-    if (!button) return;
-    const cov = button.dataset.coveragePill;
-    state.coverage = state.coverage === cov ? "" : cov;
+    const pillButton = event.target.closest("button[data-coverage-pill]");
+    const mapTarget = event.target.closest("[data-map-territory]");
+    if (!pillButton && !mapTarget) return;
+    const cov = pillButton ? pillButton.dataset.coveragePill : mapTarget.dataset.mapTerritory;
+    state.coverage = cov && state.coverage === cov ? "" : cov;
     coverage.value = state.coverage;
     state.source = "";
     state.path = "";
@@ -1186,6 +1691,163 @@
     renderDiscovery();
     updateDiscoverControl();
     syncUrl();
+  });
+
+  coverageStrip?.addEventListener("mouseover", (event) => {
+    const mapTarget = event.target.closest?.(".map-jurisdiction[data-map-territory]");
+    if (!mapTarget || !coverageStrip._buildDossierMarkup) return;
+    const dossierEl = coverageStrip.querySelector?.("[data-dossier-card]");
+    if (dossierEl) dossierEl.innerHTML = coverageStrip._buildDossierMarkup(mapTarget.dataset.mapTerritory);
+  });
+
+  coverageStrip?.addEventListener("mouseleave", () => {
+    if (!coverageStrip._buildDossierMarkup) return;
+    const dossierEl = coverageStrip.querySelector?.("[data-dossier-card]");
+    if (dossierEl) dossierEl.innerHTML = coverageStrip._buildDossierMarkup(state.coverage);
+  });
+
+  coverageStrip?.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const mapTarget = event.target.closest(".map-jurisdiction[data-map-territory]");
+    if (!mapTarget) return;
+    event.preventDefault();
+    const cov = mapTarget.dataset.mapTerritory;
+    state.coverage = cov && state.coverage === cov ? "" : cov;
+    coverage.value = state.coverage;
+    state.source = "";
+    state.path = "";
+    renderCatalog();
+    renderResearchPath();
+    renderDiscovery();
+    updateDiscoverControl();
+    syncUrl();
+  });
+
+  researchBlueprint?.addEventListener("click", (event) => {
+    const tabBtn = event.target.closest("button[data-blueprint-index]");
+    if (tabBtn) {
+      starterPathIndex = Number(tabBtn.dataset.blueprintIndex) || 0;
+      renderResearchStarter();
+      return;
+    }
+    const openBtn = event.target.closest("button[data-open-blueprint]");
+    if (openBtn) {
+      openResearchPath(openBtn.dataset.openBlueprint);
+      return;
+    }
+    const stageBtn = event.target.closest("button[data-stage-blueprint]");
+    if (stageBtn) {
+      const pathObj = pathsById.get(stageBtn.dataset.stageBlueprint);
+      if (!pathObj) return;
+      const missingIds = pathObj.records.map((entry) => entry.id).filter((id) => !state.selectedIds.includes(id));
+      const addedIds = missingIds.slice(0, Math.max(0, SOURCE_SET_LIMIT - state.selectedIds.length));
+      state.selectedIds = [...state.selectedIds, ...addedIds];
+      renderCatalog();
+      renderSourceSet();
+      syncUrl();
+      sourceSetPanel?.scrollIntoView({ behavior: getScrollBehavior(), block: "center" });
+      return;
+    }
+    const bibtexBtn = event.target.closest("button[data-bibtex-blueprint]");
+    if (bibtexBtn) {
+      const pathObj = pathsById.get(bibtexBtn.dataset.bibtexBlueprint);
+      if (!pathObj) return;
+      const pathRecords = pathObj.records.map((e) => catalog.find((r) => r.id === e.id)).filter(Boolean);
+      exportRecordsBibtex(pathRecords, `amazoniadb-${pathObj.id}.bib`);
+      return;
+    }
+    const focusSourceBtn = event.target.closest("button[data-focus-source]");
+    if (focusSourceBtn) {
+      const id = focusSourceBtn.dataset.focusSource;
+      state.source = id;
+      state.view = "cards";
+      state.category = "";
+      state.search = "";
+      state.coverage = "";
+      state.topic = "";
+      state.role = "";
+      state.access = "";
+      state.mode = "";
+      state.time = "";
+      state.sort = "";
+      state.path = "";
+      search.value = "";
+      coverage.value = "";
+      if (topic) topic.value = "";
+      if (role) role.value = "";
+      access.value = "";
+      if (mode) mode.value = "";
+      if (timeProfile) timeProfile.value = "";
+      if (sortBy) sortBy.value = "";
+      renderDomains();
+      renderCatalog();
+      renderResearchPath();
+      renderDiscovery();
+      updateDiscoverControl();
+      updateMoreFilterSummary();
+      syncUrl();
+      const card = grid.querySelector(`[data-record-id="${id}"]`);
+      (card || document.getElementById("catalog"))?.scrollIntoView({ behavior: getScrollBehavior(), block: "center" });
+    }
+  });
+
+  const setViewMode = (nextView) => {
+    state.view = nextView === "matrix" ? "matrix" : "cards";
+    renderCatalog();
+    syncUrl();
+  };
+
+  viewToggle?.addEventListener("click", (event) => {
+    const btn = event.target.closest("button[data-view-mode]");
+    if (!btn) return;
+    setViewMode(btn.dataset.viewMode);
+  });
+
+  document.querySelector("[data-open-matrix-hero]")?.addEventListener("click", (event) => {
+    event.preventDefault();
+    setViewMode("matrix");
+    document.getElementById("catalog")?.scrollIntoView({ behavior: getScrollBehavior(), block: "start" });
+  });
+
+  observatoryMatrix?.addEventListener("click", (event) => {
+    const modeBtn = event.target.closest("button[data-view-mode]");
+    if (modeBtn) {
+      setViewMode(modeBtn.dataset.viewMode);
+      return;
+    }
+    const chipBtn = event.target.closest("button[data-matrix-source]");
+    if (chipBtn) {
+      const id = chipBtn.dataset.matrixSource;
+      state.source = id;
+      state.view = "cards";
+      state.category = "";
+      state.search = "";
+      state.coverage = "";
+      state.topic = "";
+      state.role = "";
+      state.access = "";
+      state.mode = "";
+      state.time = "";
+      state.sort = "";
+      state.path = "";
+      search.value = "";
+      coverage.value = "";
+      if (topic) topic.value = "";
+      if (role) role.value = "";
+      access.value = "";
+      if (mode) mode.value = "";
+      if (timeProfile) timeProfile.value = "";
+      if (sortBy) sortBy.value = "";
+      renderDomains();
+      renderCatalog();
+      renderResearchPath();
+      renderDiscovery();
+      updateDiscoverControl();
+      updateMoreFilterSummary();
+      syncUrl();
+      const card = grid.querySelector(`[data-record-id="${id}"]`);
+      card?.scrollIntoView({ behavior: getScrollBehavior(), block: "center" });
+    }
   });
 
   activeFiltersBar?.addEventListener("click", (event) => {

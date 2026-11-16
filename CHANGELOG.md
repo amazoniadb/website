@@ -2,6 +2,14 @@
 
 All notable changes to AmazoniaDB are documented here. Loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.13.0] — 2026-11-16
+
+### Added
+- Interactive Cartographic Basin Explorer in `#coverage-strip`, pairing an inline SVG map of the Pan-Amazon basin, mainstem/tributary rivers, and all 9 Amazonian jurisdictions (`Brazil`, `Peru`, `Colombia`, `Bolivia`, `Ecuador`, `Venezuela`, `Guyana`, `Suriname`, `French Guiana`) with a live Jurisdiction Dossier showing domain distribution bars and indexed primary institutions
+- Visual Investigation Blueprints (`#research-blueprint`) on the homepage, exposing all 8 pathway tabs, a connected 4-step investigation circuit with spatial/temporal badges, and an always-visible Methodological Rosetta Stone comparability synthesis
+- Scale × Time Observatory Matrix view (`?view=matrix` / `#observatory-matrix`), cross-tabulating update cadence (`near-real-time`, `annual`, `historical-series`, `periodic-census`, `current-reference`) against observation mode (`remote-sensing`, `field-monitoring`, `territorial-boundary`, `census-survey`, `administrative-registry`/`document-archive`) to reveal coverage density and observational blind spots
+- Expanded hero directory statistics (`100` curated sources, `9` countries & territories, `8` comparative paths, `6` areas of knowledge) and direct hero navigation to the Investigation Blueprints and Scale × Time Matrix
+
 ## [1.12.0] — 2026-11-15
 
 ### Added

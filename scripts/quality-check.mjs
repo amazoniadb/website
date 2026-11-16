@@ -107,7 +107,8 @@ const makeElement = () => {
     click() { listeners.get("click")?.({ target: this, preventDefault() {} }); },
     focus() {},
     scrollIntoView() {},
-    querySelector() { return { focus() {}, scrollIntoView() {} }; }
+    querySelector() { return { focus() {}, scrollIntoView() {} }; },
+    querySelectorAll() { return []; }
   };
 };
 
@@ -124,7 +125,7 @@ const runExplorerSmokeTest = async (page, browserData) => {
     "catalog", "copy-view-link", "catalog-more", "show-more-sources", "research-path-panel", "open-research-path", "research-path-choice",
     "next-research-path", "research-path-summary", "research-path-position", "source-set-panel", "source-set-summary", "source-set-items",
     "source-set-caution", "source-set-status", "copy-source-set", "download-source-set", "download-source-set-bibtex", "clear-source-set",
-    "active-filters", "coverage-strip"
+    "active-filters", "coverage-strip", "research-blueprint", "view-toggle", "observatory-matrix"
   ];
   const elements = Object.fromEntries(ids.map((id) => [id, makeElement()]));
   elements.coverage.options = controlledFilterValues.coverage.map((value) => ({ value }));
@@ -146,6 +147,7 @@ const runExplorerSmokeTest = async (page, browserData) => {
     documentElement: { lang: page.locale },
     activeElement: null,
     getElementById(id) { return elements[id] || makeElement(); },
+    querySelector() { return makeElement(); },
     querySelectorAll(selector) { return selector === ".lang-switch a" ? languageLinks : []; },
     createElement() { return makeElement(); },
     addEventListener() {},
@@ -451,6 +453,23 @@ const runExplorerSmokeTest = async (page, browserData) => {
   if (renderedCoveragePills !== controlledFilterValues.coverage.length - 1) {
     fail(`${page.file}: coverage strip must expose all pan-Amazon geographies.`);
   }
+  const renderedMapJurisdictions = (elements["coverage-strip"].innerHTML.match(/class="map-polygon"/g) || []).length;
+  if (renderedMapJurisdictions !== 9 || !elements["coverage-strip"].innerHTML.includes('class="basin-svg"')) {
+    fail(`${page.file}: cartographic basin explorer must render all nine Amazonian jurisdictions in the SVG map.`);
+  }
+  const renderedBlueprintTabs = (elements["research-blueprint"].innerHTML.match(/data-blueprint-index="/g) || []).length;
+  if (renderedBlueprintTabs !== reviewedPaths.length || !elements["research-blueprint"].innerHTML.includes('class="blueprint-rosetta"')) {
+    fail(`${page.file}: research blueprint must render all pathway tabs and the visible Rosetta comparability synthesis.`);
+  }
+
+  // Scale x Time Observatory Matrix view (?view=matrix) must render the 5x5 matrix and hide the card grid.
+  location.search = "?view=matrix";
+  location.hash = "";
+  history.replacements = [];
+  vm.runInNewContext(await read(page.app), context, { filename: `${page.app}:matrix-view` });
+  if (elements["observatory-matrix"].hidden || !elements["dataset-grid"].hidden || !elements["observatory-matrix"].innerHTML.includes('class="matrix-table"')) {
+    fail(`${page.file}: ?view=matrix must display the Scale x Time Observatory Matrix and hide the card grid.`);
+  }
 
   // Diacritic-insensitive search must match accented terms with unaccented queries.
   location.search = "?q=indigena";
@@ -577,7 +596,7 @@ for (const page of homePages) {
   if (/how-it-works|principles-section|We index|Nós indexamos|Indexamos\./i.test(html)) {
     fail(`${page.file}: the removed self-explainer section or one of its links has returned.`);
   }
-  for (const id of ["domain-nav", "discover-source", "dataset-grid", "catalog-more", "show-more-sources", "topic", "role", "access", "mode", "time-profile", "more-filters", "more-filter-count", "research-path-panel", "open-research-path", "research-path-choice", "next-research-path", "research-path-summary", "research-path-position", "source-set-panel", "source-set-summary", "source-set-items", "source-set-caution", "source-set-status", "copy-source-set", "download-source-set", "download-source-set-bibtex", "clear-source-set"]) {
+  for (const id of ["domain-nav", "discover-source", "dataset-grid", "catalog-more", "show-more-sources", "topic", "role", "access", "mode", "time-profile", "more-filters", "more-filter-count", "research-path-panel", "open-research-path", "research-path-choice", "next-research-path", "research-path-summary", "research-path-position", "research-blueprint", "view-toggle", "observatory-matrix", "source-set-panel", "source-set-summary", "source-set-items", "source-set-caution", "source-set-status", "copy-source-set", "download-source-set", "download-source-set-bibtex", "clear-source-set"]) {
     if (!new RegExp(`id=["']${id}["']`).test(html)) fail(`${page.file}: missing #${id}.`);
   }
   const prefix = page.file.includes("/") ? "../" : "";
