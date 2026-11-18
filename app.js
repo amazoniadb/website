@@ -187,6 +187,22 @@
         primaryInstitutions: "Principais instituições e publicadores indexados",
         basinContourLabel: "Limite da Bacia / Pan-Amazônia"
       },
+      subsetLabels: {
+        bboxExtent: "Recorte espacial (WGS 84)",
+        copyBbox: "Copiar bbox",
+        copied: "Copiado",
+        basinName: "Bacia Pan-Amazônica",
+        targetArea: "Área de recorte",
+        summary: (areaName) => `Recortar para ${areaName}`,
+        copySnippet: "Copiar recorte",
+        notes: {
+          api: (title) => `${title} permite filtragem espacial na origem via API ou portal antes do download — evite baixar o globo inteiro.`,
+          netcdf: "Base global em grade (NetCDF / GeoTIFF). Recorte para a área alvo no seu fluxo com CDO ou GDAL:",
+          raster: "Blocos globais (GeoTIFF / HDF5). Baixe apenas as cenas sobrepostas ou recorte pela extensão abaixo com GDAL:",
+          vector: "Acervo vetorial global. Recorte espacialmente pela caixa delimitadora abaixo antes de cruzar com camadas da bacia:",
+          table: "Consulta global via portal ou tabelas. Aplique os limites geográficos abaixo ao filtrar ou exportar:"
+        }
+      },
       matrixLabels: {
         eyebrow: "Arquitetura de observação socioambiental",
         title: "Matriz Escala × Tempo",
@@ -357,6 +373,22 @@
         domainBreakdown: "Breakdown by area of knowledge",
         primaryInstitutions: "Primary indexed institutions & publishers",
         basinContourLabel: "Basin boundary / Pan-Amazon"
+      },
+      subsetLabels: {
+        bboxExtent: "Spatial extent (WGS 84)",
+        copyBbox: "Copy bbox",
+        copied: "Copied",
+        basinName: "Pan-Amazon basin",
+        targetArea: "Target area",
+        summary: (areaName) => `Subset to ${areaName}`,
+        copySnippet: "Copy snippet",
+        notes: {
+          api: (title) => `${title} supports server-side spatial filtering via its API or portal — apply this bounding box before downloading.`,
+          netcdf: "Global gridded archive (NetCDF / GeoTIFF). Crop cleanly to the target extent with CDO or GDAL:",
+          raster: "Global GeoTIFF / HDF5 tiles. Fetch overlapping tiles only or crop to this extent locally with GDAL:",
+          vector: "Global vector archive. Clip spatially to the bounding box below before joining with Amazon layers:",
+          table: "Global portal or tabular source. Apply the active bounding box when filtering or exporting:"
+        }
       },
       matrixLabels: {
         eyebrow: "Socioenvironmental observation architecture",
@@ -538,6 +570,22 @@
         primaryInstitutions: "Principales instituciones y proveedores indexados",
         basinContourLabel: "Límite de la cuenca / Panamazonía"
       },
+      subsetLabels: {
+        bboxExtent: "Extensión espacial (WGS 84)",
+        copyBbox: "Copiar bbox",
+        copied: "Copiado",
+        basinName: "Cuenca Panamazónica",
+        targetArea: "Área de recorte",
+        summary: (areaName) => `Recortar para ${areaName}`,
+        copySnippet: "Copiar recorte",
+        notes: {
+          api: (title) => `${title} permite filtrado espacial en origen vía API o portal — aplica esta caja delimitadora antes de descargar.`,
+          netcdf: "Base global en cuadrícula (NetCDF / GeoTIFF). Recorta al área objetivo en tu flujo con CDO o GDAL:",
+          raster: "Teselas globales (GeoTIFF / HDF5). Descarga solo los bloques superpuestos o recorta localmente con GDAL:",
+          vector: "Archivo vectorial global. Recorta espacialmente con la caja delimitadora antes de cruzar con capas de la cuenca:",
+          table: "Portal o tabla global. Aplica estos límites geográficos al filtrar o exportar:"
+        }
+      },
       matrixLabels: {
         eyebrow: "Arquitectura de observación socioambiental",
         title: "Matriz Escala × Tiempo",
@@ -576,7 +624,8 @@
     sourceSetLabels,
     blueprintLabels,
     mapLabels,
-    matrixLabels
+    matrixLabels,
+    subsetLabels
   } = ui;
 
   const compactLicenseLabels = {
@@ -637,6 +686,7 @@
     category: "",
     search: "",
     coverage: "",
+    subsetArea: "",
     topic: "",
     role: "",
     access: "",
@@ -860,71 +910,115 @@
     if (activeCount && moreFilters) moreFilters.open = true;
   };
 
+  const PAN_AMAZON_BBOX = Object.freeze([-79.6, -20.5, -44.0, 8.6]);
+  const MAP_CONTEXT_PATH = "M311.5,385.9L309.4,392.7L307.1,401.4L307.2,409.8L305.4,411.7L304.8,417.1L304.2,421.6L314.8,428.8L313.7,434.6L318.9,438.3L318.8,439.0L200.1,439.0L204.9,434.9L204.7,427.8L209.4,419.5L209.5,411.8L207.3,410.2L203.4,395.6L208.6,387.0L207.8,378.8L210.8,371.1L216.3,363.2L222.2,357.9L219.7,354.6L221.4,351.9L221.2,337.8L230.3,333.6L233.1,324.8L232.1,322.7L239.1,315.1L250.0,317.2L255.0,323.3L258.2,316.5L267.8,316.8L269.1,318.6L284.5,332.4L291.3,333.7L301.6,339.9L310.2,343.2L311.4,347.0L303.2,359.8L311.6,362.1L321.0,363.4L327.6,362.0L335.2,355.6L336.6,348.1L340.7,346.5L344.9,351.4L344.7,358.1L337.7,362.8L332.1,366.2L322.6,374.4L311.5,385.9ZM211.3,279.2L215.4,284.9L216.6,291.0L220.9,294.6L218.3,302.8L222.8,312.2L226.1,323.9L232.1,322.7L233.1,324.8L230.3,333.6L221.2,337.8L221.4,351.9L219.7,354.6L222.2,357.9L216.3,363.2L210.8,371.1L207.8,378.8L208.6,387.0L203.4,395.6L207.3,410.2L209.5,411.8L209.4,419.5L204.7,427.8L204.9,434.9L200.1,439.0L183.4,439.0L186.5,430.7L192.3,417.1L195.9,404.5L193.9,391.9L196.4,384.9L195.4,374.5L200.3,364.2L201.8,347.8L204.5,330.3L207.1,311.4L206.5,297.6L204.8,285.7L209.1,283.5L211.3,279.2ZM311.5,385.9L316.9,385.0L325.3,391.6L328.4,391.3L337.0,396.7L343.6,401.4L348.4,407.2L344.7,411.2L347.0,416.0L343.4,421.3L334.0,426.0L327.8,424.3L323.3,425.2L315.5,421.5L309.9,421.8L304.8,417.1L305.4,411.7L307.2,409.8L307.1,401.4L309.4,392.7L311.5,385.9ZM146.4,57.3L145.4,58.6L147.3,63.6L145.7,66.1L143.0,65.5L142.0,69.6L139.2,67.1L137.4,62.6L139.4,60.3L137.3,59.7L135.8,56.9L131.6,54.6L127.9,55.1L126.2,58.1L122.9,60.2L121.0,60.5L120.2,62.2L124.2,66.8L121.9,67.9L120.7,69.2L116.8,69.6L115.4,64.5L114.3,66.0L111.5,65.5L109.8,62.1L106.4,61.5L104.2,60.5L100.6,60.6L100.4,62.4L99.4,61.1L99.9,59.4L100.6,57.7L100.2,56.2L101.5,55.2L99.7,53.9L99.7,50.5L102.9,49.8L105.9,52.8L105.8,54.6L109.1,55.0L109.9,54.3L112.2,56.4L116.3,55.8L119.9,53.6L125.0,51.9L127.8,49.4L132.4,49.9L132.1,50.7L136.8,51.0L140.5,52.5L143.2,55.0L146.4,57.3ZM102.9,49.8L99.7,50.5L99.7,53.9L101.5,55.2L100.2,56.2L100.6,57.7L99.9,59.4L99.4,61.1L94.9,59.2L93.2,57.5L94.1,56.0L93.8,54.1L91.5,52.1L88.2,50.4L85.3,49.4L84.8,46.9L82.6,45.4L83.1,47.8L81.5,49.9L79.6,47.5L76.9,46.7L75.7,45.0L75.8,42.4L76.9,39.7L74.5,38.5L76.4,36.9L77.7,35.8L83.2,38.1L85.1,37.0L87.8,37.7L89.2,39.4L91.6,40.0L93.6,38.2L95.8,42.8L99.0,46.2L102.9,49.8ZM306.9,301.1L309.4,305.8L308.9,317.3L317.7,318.9L321.1,317.2L326.8,319.5L328.3,322.0L329.1,329.8L330.1,333.0L333.2,333.4L336.3,332.1L339.3,333.6L339.3,338.2L338.2,343.2L336.6,348.1L335.2,355.6L327.6,362.0L321.0,363.4L311.6,362.1L303.2,359.8L311.4,347.0L310.2,343.2L301.6,339.9L291.3,333.7L284.5,332.4L269.1,318.6L272.4,308.5L272.6,304.0L276.6,296.5L291.2,294.1L299.0,294.2L306.8,298.5L306.9,301.1ZM277.5,39.7L282.3,38.6L284.1,38.9L283.8,45.2L276.8,46.1L275.3,45.3L277.7,43.0L277.5,39.7Z";
   const MAP_TERRITORIES = Object.freeze([
     {
       key: "Venezuela",
       code: "VE",
-      labelX: 264,
-      labelY: 78,
-      d: "M 154,28 L 235,32 L 325,44 L 356,74 L 332,108 L 308,136 L 268,148 L 252,145 L 246,105 L 192,66 Z"
+      labelX: 237.2,
+      labelY: 66.4,
+      bbox: [-73.3, 0.7, -59.8, 12.2],
+      d: "M285.5,86.7L286.6,89.1L283.5,92.3L274.1,95.4L268.1,96.8L265.7,98.7L259.1,96.6L252.9,95.6L251.3,96.3L255.0,98.5L254.7,104.2L255.9,109.5L262.9,110.2L263.4,112.0L257.4,114.4L256.5,118.0L253.0,119.4L246.8,121.4L245.2,123.9L238.7,124.5L234.1,120.0L231.5,111.6L229.3,108.6L226.2,106.8L230.5,102.6L230.2,100.7L227.8,98.2L226.1,92.6L226.8,86.5L228.7,83.7L230.2,79.1L227.2,77.7L222.4,78.6L216.4,78.2L213.0,79.1L207.1,71.8L202.3,70.7L191.5,71.5L189.5,68.6L187.5,67.9L187.2,66.1L188.2,63.0L187.5,59.6L185.7,57.7L184.6,53.8L180.3,53.3L182.6,48.3L183.6,42.3L186.0,39.2L189.3,36.7L191.4,32.5L196.8,31.1L196.5,33.1L191.6,34.1L194.4,37.9L194.2,42.3L190.6,47.2L193.7,53.9L197.3,53.4L199.2,47.3L196.6,44.3L196.2,37.9L206.6,34.5L205.5,30.5L208.4,27.8L211.4,33.8L217.3,33.9L222.7,38.6L223.0,41.4L230.5,41.5L239.5,40.6L244.3,44.4L250.7,45.5L255.4,42.8L255.5,40.7L265.8,40.2L275.9,40.1L268.7,42.6L271.6,46.5L278.3,47.2L284.6,51.3L286.0,58.1L290.3,57.9L293.6,59.9L287.0,64.9L286.3,68.0L289.1,71.1L287.0,72.7L281.9,74.0L282.1,77.9L279.8,80.3L285.5,86.7Z"
     },
     {
       key: "Colombia",
       code: "CO",
-      labelX: 158,
-      labelY: 118,
-      d: "M 92,140 L 82,92 L 106,38 L 154,28 L 192,66 L 246,105 L 252,145 L 222,162 L 198,206 L 178,204 L 132,156 Z"
+      labelX: 178.6,
+      labelY: 95.1,
+      bbox: [-79, -4.3, -66.9, 12.4],
+      d: "M234.1,120.0L232.5,121.1L230.8,116.1L228.5,113.4L225.7,116.3L209.4,116.1L209.5,121.4L214.5,122.3L214.2,125.5L212.5,124.6L207.8,126.0L207.7,132.2L211.5,135.3L212.8,140.1L212.6,143.8L208.8,166.9L204.6,162.4L202.1,162.2L207.5,153.6L201.1,149.7L196.1,150.4L193.1,148.9L188.5,151.2L182.2,150.1L177.3,141.3L173.4,139.1L170.7,135.1L165.2,131.1L163.0,131.9L159.4,129.9L155.3,127.1L152.9,128.4L145.8,127.3L143.7,123.6L142.2,123.8L133.8,118.9L132.7,116.3L135.8,115.7L135.4,111.5L137.4,108.4L141.5,107.8L145.1,102.5L148.3,98.1L145.2,96.1L146.8,91.2L144.9,83.4L146.7,81.2L145.4,74.1L142.0,69.6L143.0,65.5L145.7,66.1L147.3,63.6L145.4,58.6L146.4,57.3L150.7,57.6L157.0,51.7L160.4,50.8L160.5,48.0L162.1,40.9L166.9,37.0L172.1,36.8L172.8,35.0L179.3,35.7L185.9,31.5L189.2,29.6L193.2,25.5L196.2,26.0L198.4,28.3L196.8,31.1L191.4,32.5L189.3,36.7L186.0,39.2L183.6,42.3L182.6,48.3L180.3,53.3L184.6,53.8L185.7,57.7L187.5,59.6L188.2,63.0L187.2,66.1L187.5,67.9L189.5,68.6L191.5,71.5L202.3,70.7L207.1,71.8L213.0,79.1L216.4,78.2L222.4,78.6L227.2,77.7L230.2,79.1L228.7,83.7L226.8,86.5L226.1,92.6L227.8,98.2L230.2,100.7L230.5,102.6L226.2,106.8L229.3,108.6L231.5,111.6L234.1,120.0Z"
     },
     {
       key: "Ecuador",
       code: "EC",
-      labelX: 92,
-      labelY: 178,
-      d: "M 64,145 L 92,140 L 132,156 L 126,184 L 96,216 L 68,205 L 58,172 Z"
+      labelX: 89.1,
+      labelY: 144.1,
+      anchorX: 137.6,
+      anchorY: 144.1,
+      bbox: [-81, -5, -75.2, 1.4],
+      d: "M163.0,131.9L164.1,138.3L161.5,143.8L152.4,152.7L142.3,156.0L137.2,163.3L135.6,169.0L130.9,172.5L127.4,168.2L124.0,167.3L120.5,168.0L120.3,164.9L122.7,162.9L121.7,159.4L126.2,153.1L124.3,149.4L121.1,153.3L116.1,149.6L117.8,147.2L116.4,139.5L119.4,138.3L120.9,133.0L124.1,127.6L123.5,124.1L128.1,122.3L133.8,118.9L142.2,123.8L143.7,123.6L145.8,127.3L152.9,128.4L155.3,127.1L159.4,129.9L163.0,131.9Z"
     },
     {
       key: "Peru",
       code: "PE",
-      labelX: 145,
-      labelY: 274,
-      d: "M 68,205 L 96,216 L 126,184 L 132,156 L 178,204 L 198,206 L 188,248 L 222,295 L 226,338 L 196,380 L 142,342 L 88,274 L 52,226 Z"
+      labelX: 161.9,
+      labelY: 215.1,
+      bbox: [-81.4, -18.3, -68.7, -0.1],
+      d: "M208.8,166.9L201.3,166.5L200.1,167.8L193.3,169.4L183.7,175.2L183.1,179.1L181.0,182.1L181.8,186.6L176.7,189.1L176.8,192.6L174.5,194.2L178.0,201.8L182.7,206.9L180.9,210.6L186.5,211.1L189.6,215.6L197.0,215.8L203.9,210.8L203.3,223.6L207.1,224.6L211.8,223.2L219.1,236.8L217.3,239.6L216.9,245.6L216.7,252.7L213.4,257.0L214.9,260.1L213.0,262.9L216.6,270.0L211.3,279.2L209.1,283.5L204.8,285.7L196.4,280.8L195.7,277.3L179.1,268.8L164.1,259.6L157.6,254.4L154.2,247.4L155.5,245.0L148.5,233.9L140.2,218.3L132.3,201.5L128.9,197.6L126.2,191.4L119.7,185.9L113.8,182.5L116.5,178.7L112.4,170.6L115.0,164.7L121.7,159.4L122.7,162.9L120.3,164.9L120.5,168.0L124.0,167.3L127.4,168.2L130.9,172.5L135.6,169.0L137.2,163.3L142.3,156.0L152.4,152.7L161.5,143.8L164.1,138.3L163.0,131.9L165.2,131.1L170.7,135.1L173.4,139.1L177.3,141.3L182.2,150.1L188.5,151.2L193.1,148.9L196.1,150.4L201.1,149.7L207.5,153.6L202.1,162.2L204.6,162.4L208.8,166.9Z"
     },
     {
       key: "Bolivia",
       code: "BO",
-      labelX: 298,
-      labelY: 354,
-      d: "M 222,295 L 266,278 L 324,306 L 372,334 L 388,378 L 342,414 L 254,418 L 226,338 Z"
+      labelX: 253.9,
+      labelY: 272.6,
+      bbox: [-69.6, -22.9, -57.5, -9.8],
+      d: "M211.8,223.2L218.1,223.9L222.4,223.7L224.2,221.1L231.6,217.7L236.0,214.5L246.9,213.1L246.0,219.4L247.1,222.7L246.4,228.3L255.5,235.9L264.8,237.3L268.1,240.5L273.8,242.1L277.3,244.6L282.5,244.5L287.4,247.0L287.7,251.9L289.4,254.4L289.5,258.0L287.0,258.2L290.3,268.0L306.3,268.3L305.1,273.2L306.0,276.6L310.5,278.9L312.5,284.2L311.0,290.8L308.7,294.5L309.5,299.4L306.9,301.1L306.8,298.5L299.0,294.2L291.2,294.1L276.6,296.5L272.6,304.0L272.4,308.5L269.1,318.6L267.8,316.8L258.2,316.5L255.0,323.3L250.0,317.2L239.1,315.1L232.1,322.7L226.1,323.9L222.8,312.2L218.3,302.8L220.9,294.6L216.6,291.0L215.4,284.9L211.3,279.2L216.6,270.0L213.0,262.9L214.9,260.1L213.4,257.0L216.7,252.7L216.9,245.6L217.3,239.6L219.1,236.8L211.8,223.2Z"
     },
     {
       key: "Guyana",
       code: "GY",
-      labelX: 372,
-      labelY: 102,
-      d: "M 356,74 L 386,62 L 404,95 L 398,138 L 366,142 L 348,118 L 332,108 Z"
+      labelX: 305,
+      labelY: 41,
+      anchorX: 300,
+      anchorY: 85,
+      bbox: [-61.4, 1.3, -56.5, 8.4],
+      d: "M320.5,114.6L318.5,114.9L313.9,114.1L311.2,116.4L307.4,117.9L304.7,118.2L303.8,119.9L299.7,119.5L294.6,115.5L293.9,111.6L291.8,107.3L293.1,100.1L295.5,97.2L293.5,93.2L290.7,92.0L291.8,88.2L289.8,86.3L285.5,86.7L279.8,80.3L282.1,77.9L281.9,74.0L287.0,72.7L289.1,71.1L286.3,68.0L287.0,64.9L293.6,59.9L299.1,63.0L304.3,68.5L304.5,72.9L307.7,73.1L312.2,77.2L315.5,80.1L314.1,87.7L309.0,89.9L309.5,91.9L308.0,96.3L311.7,102.4L314.3,102.4L315.4,107.2L320.5,114.6Z"
     },
     {
       key: "Suriname",
       code: "SR",
-      labelX: 424,
-      labelY: 112,
-      d: "M 404,95 L 444,88 L 448,128 L 398,138 Z"
+      labelX: 360.2,
+      labelY: 52.9,
+      anchorX: 325.9,
+      anchorY: 92.6,
+      bbox: [-58, 1.8, -54, 6],
+      d: "M337.4,111.1L332.6,109.3L328.7,110.1L325.3,109.4L324.4,111.8L325.9,113.5L325.1,115.3L320.5,114.6L315.4,107.2L314.3,102.4L311.7,102.4L308.0,96.3L309.5,91.9L309.0,89.9L314.1,87.7L315.5,80.1L325.5,81.8L326.4,80.3L333.2,79.7L342.1,82.0L337.8,89.2L338.5,95.0L341.7,100.0L340.3,103.7L339.5,107.5L337.4,111.1Z"
     },
     {
       key: "French Guiana",
       code: "GF",
-      labelX: 468,
-      labelY: 108,
-      d: "M 444,88 L 478,94 L 484,126 L 448,128 Z"
+      labelX: 388.7,
+      labelY: 86.7,
+      anchorX: 349.3,
+      anchorY: 96.8,
+      bbox: [-54.5, 2.1, -51.7, 5.8],
+      d: "M361.4,95.5L356.4,103.2L353.9,109.4L350.7,112.7L346.7,113.3L345.5,110.9L343.7,110.5L341.1,112.8L337.4,111.1L339.5,107.5L340.3,103.7L341.7,100.0L338.5,95.0L337.8,89.2L342.1,82.0L345.0,82.9L351.2,84.9L360.0,92.0L361.4,95.5Z"
     },
     {
       key: "Brazil",
       code: "BR",
-      labelX: 398,
-      labelY: 234,
-      d: "M 484,126 L 524,148 L 588,176 L 596,245 L 552,324 L 468,368 L 388,378 L 372,334 L 324,306 L 266,278 L 222,295 L 188,248 L 198,206 L 222,162 L 252,145 L 268,148 L 308,136 L 332,108 L 348,118 L 366,142 L 398,138 L 448,128 Z"
+      labelX: 387.8,
+      labelY: 253.1,
+      bbox: [-74, -33.8, -34.7, 5.2],
+      d: "M347.0,416.0L344.7,411.2L348.4,407.2L343.6,401.4L337.0,396.7L328.4,391.3L325.3,391.6L316.9,385.0L311.5,385.9L322.6,374.4L332.1,366.2L337.7,362.8L344.7,358.1L344.9,351.4L340.7,346.5L336.6,348.1L338.2,343.2L339.3,338.2L339.3,333.6L336.3,332.1L333.2,333.4L330.1,333.0L329.1,329.8L328.3,322.0L326.8,319.5L321.1,317.2L317.7,318.9L308.9,317.3L309.4,305.8L306.9,301.1L309.5,299.4L308.7,294.5L311.0,290.8L312.5,284.2L310.5,278.9L306.0,276.6L305.1,273.2L306.3,268.3L290.3,268.0L287.0,258.2L289.5,258.0L289.4,254.4L287.7,251.9L287.4,247.0L282.5,244.5L277.3,244.6L273.8,242.1L268.1,240.5L264.8,237.3L255.5,235.9L246.4,228.3L247.1,222.7L246.0,219.4L246.9,213.1L236.0,214.5L231.6,217.7L224.2,221.1L222.4,223.7L218.1,223.9L211.8,223.2L207.1,224.6L203.3,223.6L203.9,210.8L197.0,215.8L189.6,215.6L186.5,211.1L180.9,210.6L182.7,206.9L178.0,201.8L174.5,194.2L176.8,192.6L176.7,189.1L181.8,186.6L181.0,182.1L183.1,179.1L183.7,175.2L193.3,169.4L200.1,167.8L201.3,166.5L208.8,166.9L212.6,143.8L212.8,140.1L211.5,135.3L207.7,132.2L207.8,126.0L212.5,124.6L214.2,125.5L214.5,122.3L209.5,121.4L209.4,116.1L225.7,116.3L228.5,113.4L230.8,116.1L232.5,121.1L234.1,120.0L238.7,124.5L245.2,123.9L246.8,121.4L253.0,119.4L256.5,118.0L257.4,114.4L263.4,112.0L262.9,110.2L255.9,109.5L254.7,104.2L255.0,98.5L251.3,96.3L252.9,95.6L259.1,96.6L265.7,98.7L268.1,96.8L274.1,95.4L283.5,92.3L286.6,89.1L285.5,86.7L289.8,86.3L291.8,88.2L290.7,92.0L293.5,93.2L295.5,97.2L293.1,100.1L291.8,107.3L293.9,111.6L294.6,115.5L299.7,119.5L303.8,119.9L304.7,118.2L307.4,117.9L311.2,116.4L313.9,114.1L318.5,114.9L320.5,114.6L325.1,115.3L325.9,113.5L324.4,111.8L325.3,109.4L328.7,110.1L332.6,109.3L337.4,111.1L341.1,112.8L343.7,110.5L345.5,110.9L346.7,113.3L350.7,112.7L353.9,109.4L356.4,103.2L361.4,95.5L364.2,95.1L366.3,99.8L371.0,114.5L375.5,115.9L375.7,121.8L369.4,128.7L372.0,131.3L386.8,132.6L387.1,141.1L393.5,135.5L404.0,138.6L417.9,143.7L422.0,148.7L420.6,153.4L430.3,150.7L446.6,155.2L459.1,154.9L471.5,161.9L482.2,171.3L488.6,173.8L495.8,174.1L498.8,176.8L501.7,187.5L503.0,192.7L499.7,206.6L495.5,212.1L483.7,223.9L478.3,233.5L472.1,240.8L470.0,240.9L467.7,247.2L468.3,263.0L466.0,276.0L465.1,281.6L462.4,284.9L460.9,296.2L452.5,307.3L451.0,316.0L444.3,319.6L442.3,324.7L433.2,324.7L420.1,327.9L414.2,331.7L404.8,334.2L394.9,340.9L387.9,349.3L386.6,355.6L388.0,360.2L386.5,368.8L384.6,372.9L378.7,377.6L369.4,392.4L362.1,399.1L356.4,403.1L352.6,411.1L347.0,416.0Z"
     }
   ]);
+  const MAP_BBOX_BY_KEY = new Map(MAP_TERRITORIES.map((territory) => [territory.key, territory.bbox]));
+  if (MAP_BBOX_BY_KEY.has(state.coverage)) state.subsetArea = state.coverage;
+
+  const syncSubsetAreaFromCoverage = (nextCoverage) => {
+    if (MAP_BBOX_BY_KEY.has(nextCoverage)) {
+      state.subsetArea = nextCoverage;
+    } else if (nextCoverage !== "Global — subsettable") {
+      state.subsetArea = "";
+    }
+  };
+
+  const getSubsetTarget = (areaKey = state.subsetArea) => {
+    if (MAP_BBOX_BY_KEY.has(areaKey)) {
+      return {
+        key: areaKey,
+        label: coverageLabels[areaKey] || areaKey,
+        bbox: MAP_BBOX_BY_KEY.get(areaKey)
+      };
+    }
+    return {
+      key: "",
+      label: subsetLabels.basinName,
+      bbox: PAN_AMAZON_BBOX
+    };
+  };
 
   const renderCoverageStrip = () => {
     if (!coverageStrip) return;
@@ -945,9 +1039,13 @@
       const isSelected = state.coverage === territory.key;
       const density = count >= 15 ? "high" : count >= 6 ? "medium" : "base";
       const label = coverageLabels[territory.key] || territory.key;
+      const leaderLine = territory.anchorX !== undefined
+        ? `<line class="map-leader" x1="${territory.anchorX}" y1="${territory.anchorY}" x2="${territory.labelX}" y2="${territory.labelY}"/>`
+        : "";
       return `
         <g class="map-jurisdiction${isSelected ? " is-selected" : ""}" data-map-territory="${escapeHtml(territory.key)}" data-density="${density}" role="button" tabindex="0" aria-pressed="${isSelected}" aria-label="${escapeHtml(`${label}: ${count}`)}">
           <path class="map-polygon" d="${territory.d}"/>
+          ${leaderLine}
           <g class="map-badge" transform="translate(${territory.labelX}, ${territory.labelY})">
             <rect x="-24" y="-11" width="48" height="22" rx="6"/>
             <text x="0" y="4" text-anchor="middle">${escapeHtml(territory.code)} · ${count}</text>
@@ -963,6 +1061,7 @@
         ? catalog.filter((record) => record.coverage === activeGov)
         : catalog;
       const isCountrySelected = activeGov && activeGov !== "Pan-Amazon" && activeGov !== "Global — subsettable";
+      const [bw, bs, be, bn] = MAP_BBOX_BY_KEY.get(activeGov) || PAN_AMAZON_BBOX;
       const domainBreakdownMarkup = categories.map((cat) => {
         const catCount = dossierRecords.filter((r) => r.category === cat.key).length;
         const pct = dossierRecords.length ? Math.round((catCount / dossierRecords.length) * 100) : 0;
@@ -996,6 +1095,10 @@
           <span class="dossier-badge">${escapeHtml(activeGov ? (coverageLabels[activeGov] || activeGov) : coverageLabels["Pan-Amazon"])}</span>
           <h4>${escapeHtml(dossierTitle)}</h4>
           <p>${escapeHtml(dossierSub)}</p>
+          <div class="dossier-bbox-row">
+            <span>${escapeHtml(subsetLabels.bboxExtent)}: <code class="dossier-bbox-code">${bw}, ${bs}, ${be}, ${bn}</code></span>
+            <button class="dossier-bbox-copy" type="button" data-copy-bbox="${bw},${bs},${be},${bn}">${escapeHtml(subsetLabels.copyBbox)}</button>
+          </div>
         </div>
         <div class="dossier-section">
           <p class="dossier-section-title">${escapeHtml(mapLabels.domainBreakdown)}</p>
@@ -1022,29 +1125,38 @@
           <div class="basin-svg-wrap">
             <svg class="basin-svg" viewBox="0 0 620 430" role="img" aria-label="${escapeHtml(mapLabels.title)}">
               <g class="map-graticule" aria-hidden="true">
-                <line x1="20" y1="158" x2="600" y2="158" class="map-equator"/>
-                <line x1="20" y1="283" x2="600" y2="283"/>
-                <line x1="210" y1="15" x2="210" y2="420"/>
-                <line x1="360" y1="15" x2="360" y2="420"/>
-                <line x1="510" y1="15" x2="510" y2="420"/>
-                <text x="26" y="152">0° EQ</text>
-                <text x="26" y="277">10°S</text>
-                <text x="214" y="28">70°W</text>
-                <text x="364" y="28">60°W</text>
-                <text x="514" y="28">50°W</text>
+                <line x1="16" y1="130.6" x2="604" y2="130.6" class="map-equator"/>
+                <line x1="16" y1="215.1" x2="604" y2="215.1"/>
+                <line x1="16" y1="299.6" x2="604" y2="299.6"/>
+                <line x1="16" y1="384.1" x2="604" y2="384.1"/>
+                <line x1="207.9" y1="14" x2="207.9" y2="416"/>
+                <line x1="291.6" y1="14" x2="291.6" y2="416"/>
+                <line x1="375.3" y1="14" x2="375.3" y2="416"/>
+                <line x1="458.9" y1="14" x2="458.9" y2="416"/>
+                <text x="20" y="125.6">0° EQ</text>
+                <text x="20" y="210.1">10°S</text>
+                <text x="20" y="294.6">20°S</text>
+                <text x="20" y="379.1">30°S</text>
+                <text x="211.9" y="24">70°W</text>
+                <text x="295.6" y="24">60°W</text>
+                <text x="379.3" y="24">50°W</text>
+                <text x="462.9" y="24">40°W</text>
               </g>
+              <path class="map-context-land" d="${MAP_CONTEXT_PATH}" aria-hidden="true"/>
               <g class="map-jurisdictions">
                 ${mapPathsMarkup}
               </g>
               <g class="map-rivers" aria-hidden="true">
-                <path d="M 98,238 Q 146,214 205,204 T 330,192 T 445,174 L 512,152" class="river-mainstem"/>
-                <path d="M 225,134 Q 275,162 330,192" class="river-tributary"/>
-                <path d="M 278,334 Q 312,268 352,202" class="river-tributary"/>
-                <path d="M 164,312 Q 178,256 205,204" class="river-tributary"/>
-                <path d="M 392,310 Q 402,245 412,184" class="river-tributary"/>
-                <path d="M 442,316 Q 446,248 452,178" class="river-tributary"/>
+                <path d="M178.6,168.6 L207.9,166.1 L240.5,151.7 L265.7,164.4 L291.6,156.8 L333.4,150.9 L360.2,140.8 L381.1,133.1" class="river-mainstem"/>
+                <path d="M169.4,219.3 L167.7,196.5 L178.6,168.6" class="river-tributary"/>
+                <path d="M141.0,179.6 L156.0,169.5 L178.6,168.6" class="river-tributary"/>
+                <path d="M231.3,115.4 L233.9,132.3 L266.5,139.1 L291.6,156.8" class="river-tributary"/>
+                <path d="M237.2,226.9 L247.2,218.5 L259.0,205.0 L281.5,179.6 L301.6,159.3" class="river-tributary"/>
+                <path d="M311.7,205.0 L325.1,168.6 L335.9,150.9" class="river-tributary"/>
+                <path d="M345.1,227.8 L356.0,185.5 L356.9,157.6 L359.4,144.1" class="river-tributary"/>
+                <path d="M383.6,225.2 L379.5,185.5 L378.6,162.7 L387.0,143.3" class="river-tributary"/>
               </g>
-              <path class="map-basin-contour${state.coverage === "Pan-Amazon" ? " is-selected" : ""}" d="M 96,152 C 118,86 196,48 286,46 C 368,44 446,72 494,122 C 538,168 548,236 502,296 C 454,352 372,368 294,362 C 218,356 154,316 116,258 C 86,214 82,182 96,152 Z" aria-hidden="true"/>
+              <path class="map-basin-contour${state.coverage === "Pan-Amazon" ? " is-selected" : ""}" d="M137.6,123.0 C141.8,116.8 148.2,114.1 156.0,110.3 C163.8,106.5 173.0,104.1 184.5,100.2 C195.9,96.2 211.7,90.3 224.6,86.7 C237.6,83.0 249.5,79.9 262.3,78.2 C275.1,76.5 288.9,75.3 301.6,76.5 C314.3,77.8 328.7,82.2 338.5,85.8 C348.2,89.5 353.4,93.0 360.2,98.5 C367.0,104.0 373.9,111.5 379.5,118.8 C385.0,126.1 389.4,135.1 393.7,142.4 C398.0,149.8 405.4,152.6 405.4,162.7 C405.4,172.9 398.4,190.9 393.7,203.3 C388.9,215.7 386.3,228.3 376.9,237.1 C367.6,245.8 351.1,250.3 337.6,255.7 C324.1,261.0 308.3,264.4 295.8,269.2 C283.2,274.0 273.9,284.1 262.3,284.4 C250.7,284.7 236.5,276.5 226.3,270.9 C216.1,265.2 209.3,256.8 201.2,250.6 C193.1,244.4 185.0,241.3 177.8,233.7 C170.5,226.1 164.5,214.8 157.7,205.0 C150.9,195.1 141.3,184.1 136.8,174.5 C132.3,165.0 130.8,156.1 130.9,147.5 C131.1,138.9 133.4,129.2 137.6,123.0 Z" aria-hidden="true"/>
             </svg>
             <div class="basin-map-legend">
               <button type="button" class="basin-contour-toggle${state.coverage === "Pan-Amazon" ? " is-active" : ""}" data-map-territory="Pan-Amazon">
@@ -1498,6 +1610,73 @@
       </div>`;
   };
 
+  const buildSubsetPayload = (record, areaKey = state.subsetArea) => {
+    const target = getSubsetTarget(areaKey);
+    const [w, s, e, n] = target.bbox;
+    const formats = record.formats || [];
+    const wkt = `POLYGON((${w} ${s}, ${e} ${s}, ${e} ${n}, ${w} ${n}, ${w} ${s}))`;
+    if (record.id === "gbif-species-occurrences") {
+      return {
+        target,
+        note: subsetLabels.notes.api(record.title),
+        snippet: `# GBIF API WKT geometry (${target.label})\ngeometry=${wkt}`
+      };
+    }
+    if (record.id === "nasa-firms-active-fire") {
+      return {
+        target,
+        note: subsetLabels.notes.api(record.title),
+        snippet: `# NASA FIRMS Area API / W,S,E,N (${target.label})\nAREA=${w},${s},${e},${n}`
+      };
+    }
+    if (formats.includes("NetCDF")) {
+      return {
+        target,
+        note: subsetLabels.notes.netcdf,
+        snippet: `cdo sellonlatbox,${w},${e},${s},${n} input.nc amazon_subset.nc\n# ${target.label} (WGS 84: W=${w}, S=${s}, E=${e}, N=${n})`
+      };
+    }
+    if (formats.includes("Cloud-Optimized GeoTIFF")) {
+      return {
+        target,
+        note: subsetLabels.notes.raster,
+        snippet: `gdalwarp -te ${w} ${s} ${e} ${n} -te_srs EPSG:4326 \\\n  /vsicurl/SOURCE_COG_URL amazon_subset.tif\n# GEE: ee.Geometry.Rectangle([${w}, ${s}, ${e}, ${n}])`
+      };
+    }
+    if (formats.some((fmt) => ["GeoTIFF", "HDF5"].includes(fmt))) {
+      const geeHint = formats.includes("Google Earth Engine")
+        ? `\n# GEE: ee.Geometry.Rectangle([${w}, ${s}, ${e}, ${n}])`
+        : "";
+      return {
+        target,
+        note: subsetLabels.notes.raster,
+        snippet: `gdalwarp -te ${w} ${s} ${e} ${n} -te_srs EPSG:4326 input.tif amazon_subset.tif${geeHint}`
+      };
+    }
+    if (formats.some((fmt) => ["Shapefile", "GeoJSON", "GeoPackage", "File Geodatabase", "KML"].includes(fmt))) {
+      return {
+        target,
+        note: subsetLabels.notes.vector,
+        snippet: `ogr2ogr -spat ${w} ${s} ${e} ${n} -clipsrc ${w} ${s} ${e} ${n} \\\n  amazon_subset.gpkg input.shp`
+      };
+    }
+    return {
+      target,
+      note: subsetLabels.notes.table,
+      snippet: `# ${target.label} · WGS 84 (EPSG:4326) [W, S, E, N]\nbbox=${w},${s},${e},${n}`
+    };
+  };
+
+  const buildSubsetGuide = (record) => {
+    if (record.coverage !== "Global — subsettable") return "";
+    const { target, note, snippet } = buildSubsetPayload(record, state.subsetArea);
+    const options = [
+      `<option value=""${target.key === "" ? " selected" : ""}>${escapeHtml(subsetLabels.basinName)}</option>`,
+      ...MAP_TERRITORIES.map((territory) => `<option value="${escapeHtml(territory.key)}"${target.key === territory.key ? " selected" : ""}>${escapeHtml(coverageLabels[territory.key] || territory.key)}</option>`)
+    ].join("");
+    return `<details class="subset-guide"><summary><span class="subset-summary-label">${escapeHtml(subsetLabels.summary(target.label))}</span></summary><div class="subset-guide-body"><p>${escapeHtml(note)}</p><div class="subset-guide-controls"><label class="subset-area-label"><span>${escapeHtml(subsetLabels.targetArea)}</span><select class="subset-area-picker" data-subset-area aria-label="${escapeHtml(subsetLabels.targetArea)}">${options}</select></label><button class="subset-copy-btn" type="button" data-copy-snippet="${escapeHtml(snippet)}">${escapeHtml(subsetLabels.copySnippet)}</button></div><pre class="subset-snippet"><code data-subset-code="${escapeHtml(record.id)}">${escapeHtml(snippet)}</code></pre></div></details>`;
+  };
+
   const renderCatalog = () => {
     const activePath = getActivePath();
     const allRecords = getVisibleRecords();
@@ -1546,6 +1725,7 @@
         record.responsibleUse?.communityAuthorityUrl ? `<a href="${escapeHtml(record.responsibleUse.communityAuthorityUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceSetLabels.communityAuthority)} <span aria-hidden="true">↗</span></a>` : ""
       ].filter(Boolean).join("");
       const responsibleUse = record.responsibleUse ? `<details class="responsible-use"><summary>${escapeHtml(sourceSetLabels.responsibleLabel)}</summary><div class="responsible-use-body"><p>${escapeHtml(localized(record.responsibleUse.note))}</p>${responsibleLinks ? `<div class="responsible-links">${responsibleLinks}</div>` : ""}</div></details>` : "";
+      const subsetGuide = buildSubsetGuide(record);
       const selected = state.selectedIds.includes(record.id);
       const selectionFull = state.selectedIds.length >= SOURCE_SET_LIMIT && !selected;
       const selectionLabel = selectionFull ? `${sourceSetLabels.add}: ${record.title}. ${sourceSetLabels.full}` : `${selected ? sourceSetLabels.remove : sourceSetLabels.add}: ${record.title}`;
@@ -1563,6 +1743,7 @@
         ${formats}
         <ul class="dataset-facts" aria-label="${escapeHtml(sourceSetLabels.facts)}">${factItems}</ul>
         ${responsibleUse}
+        ${subsetGuide}
         <div class="card-actions">
           <div class="card-links">
             <a class="dataset-link" href="${escapeHtml(record.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(ui.openSourceText)} <span class="sr-only">${escapeHtml(ui.openNewTabSr)}</span></a>
@@ -1677,13 +1858,10 @@
     document.getElementById("catalog").scrollIntoView({ behavior: getScrollBehavior(), block: "start" });
   });
 
-  coverageStrip?.addEventListener("click", (event) => {
-    const pillButton = event.target.closest("button[data-coverage-pill]");
-    const mapTarget = event.target.closest("[data-map-territory]");
-    if (!pillButton && !mapTarget) return;
-    const cov = pillButton ? pillButton.dataset.coveragePill : mapTarget.dataset.mapTerritory;
-    state.coverage = cov && state.coverage === cov ? "" : cov;
+  const applyCoverageSelection = (nextCoverage) => {
+    state.coverage = nextCoverage;
     coverage.value = state.coverage;
+    syncSubsetAreaFromCoverage(state.coverage);
     state.source = "";
     state.path = "";
     renderCatalog();
@@ -1691,6 +1869,20 @@
     renderDiscovery();
     updateDiscoverControl();
     syncUrl();
+  };
+
+  coverageStrip?.addEventListener("click", async (event) => {
+    const copyBboxBtn = event.target.closest("button[data-copy-bbox]");
+    if (copyBboxBtn) {
+      const ok = await copyToClipboard(copyBboxBtn.dataset.copyBbox || "");
+      flashConfirmation(copyBboxBtn, ok ? subsetLabels.copied : ui.copyLinkFailure, subsetLabels.copyBbox);
+      return;
+    }
+    const pillButton = event.target.closest("button[data-coverage-pill]");
+    const mapTarget = event.target.closest("[data-map-territory]");
+    if (!pillButton && !mapTarget) return;
+    const cov = pillButton ? pillButton.dataset.coveragePill : mapTarget.dataset.mapTerritory;
+    applyCoverageSelection(cov && state.coverage === cov ? "" : cov);
   });
 
   coverageStrip?.addEventListener("mouseover", (event) => {
@@ -1712,15 +1904,7 @@
     if (!mapTarget) return;
     event.preventDefault();
     const cov = mapTarget.dataset.mapTerritory;
-    state.coverage = cov && state.coverage === cov ? "" : cov;
-    coverage.value = state.coverage;
-    state.source = "";
-    state.path = "";
-    renderCatalog();
-    renderResearchPath();
-    renderDiscovery();
-    updateDiscoverControl();
-    syncUrl();
+    applyCoverageSelection(cov && state.coverage === cov ? "" : cov);
   });
 
   researchBlueprint?.addEventListener("click", (event) => {
@@ -1855,7 +2039,7 @@
     if (clearFacetButton) {
       const facet = clearFacetButton.dataset.clearFacet;
       if (facet === "category") state.category = "";
-      else if (facet === "coverage") { state.coverage = ""; coverage.value = ""; }
+      else if (facet === "coverage") { state.coverage = ""; coverage.value = ""; syncSubsetAreaFromCoverage(""); }
       else if (facet === "topic") { state.topic = ""; if (topic) topic.value = ""; }
       else if (facet === "role") { state.role = ""; if (role) role.value = ""; }
       else if (facet === "access") { state.access = ""; access.value = ""; }
@@ -1892,6 +2076,7 @@
 
   coverage.addEventListener("change", () => {
     state.coverage = coverage.value;
+    syncSubsetAreaFromCoverage(state.coverage);
     state.source = "";
     state.path = "";
     renderCatalog();
@@ -1979,6 +2164,7 @@
     window.setTimeout(() => {
       state.search = "";
       state.coverage = "";
+      state.subsetArea = "";
       state.topic = "";
       state.role = "";
       state.access = "";
@@ -2153,7 +2339,36 @@
     flashConfirmation(copyLinkButton, ok ? ui.copyLinkSuccess : ui.copyLinkFailure, original);
   });
 
+  grid.addEventListener("change", (event) => {
+    const picker = event.target.closest("select[data-subset-area]");
+    if (!picker) return;
+    state.subsetArea = picker.value;
+    grid.querySelectorAll(".subset-guide").forEach((guide) => {
+      const card = guide.closest("article[data-record-id]");
+      const record = card && catalog.find((entry) => entry.id === card.dataset.recordId);
+      if (!record) return;
+      const { target, note, snippet } = buildSubsetPayload(record, state.subsetArea);
+      const summarySpan = guide.querySelector(".subset-summary-label");
+      const noteEl = guide.querySelector(".subset-guide-body p");
+      const areaSelect = guide.querySelector("select[data-subset-area]");
+      const codeEl = guide.querySelector("code[data-subset-code]");
+      const copyBtn = guide.querySelector("button[data-copy-snippet]");
+      if (summarySpan) summarySpan.textContent = subsetLabels.summary(target.label);
+      if (noteEl) noteEl.textContent = note;
+      if (areaSelect) areaSelect.value = state.subsetArea;
+      if (codeEl) codeEl.textContent = snippet;
+      if (copyBtn) copyBtn.dataset.copySnippet = snippet;
+    });
+  });
+
   grid.addEventListener("click", async (event) => {
+    const copySnippetButton = event.target.closest("button[data-copy-snippet]");
+    if (copySnippetButton) {
+      const ok = await copyToClipboard(copySnippetButton.dataset.copySnippet || "");
+      flashConfirmation(copySnippetButton, ok ? subsetLabels.copied : ui.copyLinkFailure, subsetLabels.copySnippet);
+      return;
+    }
+
     const selectionButton = event.target.closest("button[data-select-id]");
     if (selectionButton) {
       const id = selectionButton.dataset.selectId;
