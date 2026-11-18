@@ -3,7 +3,7 @@
 // localized explorer pages, and JSON APIs using a network-first strategy with
 // transparent cache fallback.
 (() => {
-  const CACHE_NAME = "amazoniadb-v1.13.0";
+  const CACHE_NAME = "amazoniadb-v1.13.1";
   const CORE_ASSETS = [
     "/",
     "/en/",
